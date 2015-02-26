@@ -12,9 +12,10 @@ gem 'haml-rails'                                          # HTML Abstraction Mar
 gem 'uglifier',         '>= 1.3.0'                        # Ruby wrapper for UglifyJS JavaScript compressor.
 gem 'jbuilder',         '~> 2.0'                          # Create JSON structures via a Builder-style DSL
 gem 'puma'                                                # A ruby web server built for concurrency http://puma.io
+gem 'dotenv'                                              # Loads environment variables from `.env`.
 
 group :production do
-  gem 'rails_12factor'                                     # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
+  gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
 end
 
 # Use Capistrano for deployment
