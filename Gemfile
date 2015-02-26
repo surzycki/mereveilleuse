@@ -35,3 +35,5 @@ end
 group :test do
   gem 'rspec'                                             # RSpec for Rails-3+
 end
+
+ruby '2.2.0'
