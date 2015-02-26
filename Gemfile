@@ -31,6 +31,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'                                # A library for setting up Ruby objects as test data.
+  gem 'lograge'                                           # An attempt to tame Rails' default policy to log everything.
 end
 
 group :test do
