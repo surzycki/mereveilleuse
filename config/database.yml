@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  reconnect: true
+  pool: 5
+  template: template0
+  username: <%= ENV['MEREVEILEUSE_DATABASE_USER'] %>
+  host: <%= ENV['MEREVEILEUSE_DATABASE_HOST'] %>
+  password: <%= ENV['MEREVEILEUSE_DATABASE_PASSWORD'] %>
+  
+test:
+  <<: *default
+  database: app_web_test
+
+development:
+  <<: *default
+  database: app_web_development
+
+staging:
+  <<: *default
+  database: app_web_staging
+
+production:
+  <<: *default
+  database: app_web_production
