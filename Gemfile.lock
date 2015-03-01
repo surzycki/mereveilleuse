@@ -56,6 +56,9 @@ GEM
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-stats (1.1.1)
+    capistrano3-puma (0.8.5)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
@@ -268,6 +271,7 @@ DEPENDENCIES
   byebug
   capistrano
   capistrano-rails
+  capistrano3-puma
   coffee-rails (~> 4.1.0)
   dotenv
   factory_girl_rails
