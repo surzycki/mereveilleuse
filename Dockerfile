@@ -42,7 +42,7 @@ RUN bundle install
 # send deploy key to container for capistrano tasks
 COPY deploy_id_rsa /root/.ssh/id_rsa
 RUN chmod 700 /root/.ssh/id_rsa
-RUN echo "Host staging.therapeutes.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
+RUN echo "Host staging.therapeutes.com\n\tStrictHostKeyChecking no\n\tForwardAgent yes\n" >> /root/.ssh/config
 RUN echo "IdentityFile /root/.ssh/id_rsa\n" >> /root/.ssh/config
 
 # hook up source files
