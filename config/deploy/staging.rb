@@ -7,7 +7,7 @@ set :migrate_target, :latest
 set :puma_env,      'staging'
 
 set :ssh_options, {
-    keys: %w(/var/lib/jenkins/.ssh/id_rsa),
+    keys: %w(/root/.ssh/id_rsa),
     forward_agent: true
 }
 

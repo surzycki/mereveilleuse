@@ -21,6 +21,7 @@ end
 group :staging, :development, :test do
   gem 'capistrano'                                        # Remote multi-server automation tool
   gem 'capistrano-rails'                                  # Rails support for Capistrano 3.x
+  gem 'capistrano3-puma'                                  # Puma integration for Capistrano 3
   gem 'byebug'
   gem 'web-console',    '~> 2.0'
 end
