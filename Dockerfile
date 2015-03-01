@@ -13,7 +13,12 @@ RUN apt-get install -y libxml2-dev libxslt1-dev
 RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
 
 # for a JS runtime
-RUN apt-get install -y nodejs
+RUN apt-get install -y nodejs 
+
+# utilities
+RUN apt-get install -y nano
+
+COPY /Users/stefan/.ssh/deploy/id_rsa /root/.ssh/
 
 ENV APP_HOME /var/www/app_facebook
 ENV COMPOSE_PROJECT_NAME mereveilleuse
