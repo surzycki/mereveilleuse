@@ -10,16 +10,16 @@ default: &default
   
 test:
   <<: *default
-  database: app_web_test
+  database: app_facebook_test
 
 development:
   <<: *default
-  database: app_web_development
-
+  database: app_facebook_development
+ 
 staging:
   <<: *default
-  database: app_web_staging
+  database: app_facebook_staging
 
 production:
   <<: *default
-  database: app_web_production
+  database: app_facebook_production

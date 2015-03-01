@@ -18,24 +18,25 @@ group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
 end
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :staging, :development, :test do
   gem 'capistrano'                                        # Remote multi-server automation tool
   gem 'capistrano-rails'                                  # Rails support for Capistrano 3.x
   gem 'byebug'
   gem 'web-console',    '~> 2.0'
-  gem 'spring'
 end
 
 group :development, :test do
-  gem 'factory_girl_rails'                                # A library for setting up Ruby objects as test data.
+  gem 'factory_girl_rails'                                # A library for setting up Ruby objects as test data
   gem 'lograge'                                           # An attempt to tame Rails' default policy to log everything.
 end
 
 group :test do
+  gem 'guard'                                             # Guard is a command line tool to easily handle events on file system modifications
+  gem 'guard-rspec', require: false                       # Guard::RSpec automatically run your specs (much like autotest)
   gem 'rspec'                                             # RSpec for Rails-3+
+  gem 'rspec-rails'                                       # RSpec for Rails-3+
+  gem 'spring-commands-rspec'
+  gem 'spring' 
 end
 
 ruby '2.2.0'

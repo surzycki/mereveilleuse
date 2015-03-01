@@ -1,0 +1,30 @@
+web:
+  build: .
+  command: bin/rails server --port 3000 --binding 0.0.0.0
+  ports:
+    - '80:3000'
+  volumes:
+    - .:/var/www/app_facebook
+  links:
+    - db
+  environment:
+    RAILS_ENV: development
+  
+test: 
+  build: .
+  command: bin/rspec
+  volumes:
+    - .:/var/www/app_facebook
+  links:
+    - db
+  environment:
+    RAILS_ENV: test
+
+db:
+  image: postgres:9.4
+  environment:
+    POSTGRES_USER: 'mereveilleuse'
+    POSTGRES_PASSWORD: 'mereveilleuse'
+
+
+
