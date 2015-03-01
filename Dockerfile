@@ -18,7 +18,8 @@ RUN apt-get install -y nodejs
 # utilities
 RUN apt-get install -y nano
 
-COPY /Users/stefan/.ssh/deploy/id_rsa /root/.ssh/
+# send deploy key to container for capistrano tasks
+COPY deploy_id_rsa /root/.ssh/id_rsa
 
 ENV APP_HOME /var/www/app_facebook
 ENV COMPOSE_PROJECT_NAME mereveilleuse
