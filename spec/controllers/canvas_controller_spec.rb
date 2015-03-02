@@ -1,0 +1,3 @@
+describe CanvasController do
+
+end

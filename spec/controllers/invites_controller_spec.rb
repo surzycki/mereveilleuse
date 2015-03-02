@@ -1,5 +1,3 @@
-require 'rails_helper'
-
-RSpec.describe InvitesController, type: :controller do
+describe InvitesController do
 
 end
