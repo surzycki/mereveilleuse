@@ -1,0 +1,3 @@
+describe SessionsController do
+
+end

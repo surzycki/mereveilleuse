@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  match 'canvas',   to: 'canvas#index', via: [:get, :post]
-  match 'referral', to: 'referral#index', via: [:get, :post]
-  
-  root 'referral#index'
+  match 'session',    to: 'sessions#index', via: [:get, :post] 
+  get   'referral',   to: 'referrals#index'
+  get   'assessment', to: 'assessments#index'
+
+  root 'sessions#index'
 end
