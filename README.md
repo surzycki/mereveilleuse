@@ -1,30 +1,44 @@
-APP-WEB
+APP-FACEBOOK
 =======
 
 ##Getting Started##
 
 ###System dependencies
 
-* docker / boot2docker (osx)
-* docker-composer
+* [docker](https://www.docker.com) / [boot2docker (osx)](https://github.com/boot2docker/boot2docker)
+* [docker-composer](https://github.com/docker/compose)
+* [ngrok](https://ngrok.com/) 
+
+**Facebook applications**
+
+* [https://apps.facebook.com/mereveilleuse-dev](https://apps.facebook.com/mereveilleuse-dev)
+* [https://apps.facebook.com/mereveilleuse-stage](https://apps.facebook.com/mereveilleuse-stage)
+* [https://apps.facebook.com/mereveilleuse](https://apps.facebook.com/mereveilleuse)
 
 
 
-###How to run with docker
+###Development Environment
 
 * Bring up boot2docker
 * Start docker containers with docker-compose
-
+* Open ngrok tunnel (for facebook frame)
+  
 **Non Interactive(no debug)**
 
     boot2docker start
-    docker-compose up web
+    docker-compose up dev
+    ngrok -subdomain=mereveilleuse `boot2docker ip`:80
 
 **Interactive(for debug)**
     
     boot2docker start
     docker-compose up -d db
-    docker-compose run --service-ports web rails s
+    docker-compose run --service-ports dev rails s
+    ngrok -subdomain=mereveilleuse `boot2docker ip`:80
+
+
+
+
 
 **Helpful Commands**
 
@@ -34,7 +48,7 @@ Get docker ip address
 
 Run bundler (rebuild container)
     
-    docker-compose web build
+    docker-compose dev build
 
 List all terminated containers
 
@@ -43,6 +57,8 @@ List all terminated containers
 Remove all terminated containers
 
     docker rm `docker ps --no-trunc -aq`
+
+
 
 ###Configuration
 
@@ -61,7 +77,7 @@ Configuration for application environment is located in ENV variables
 
 **Create Database**
 
-    docker-compose run web rake db:create
+    docker-compose run dev rake db:create
 
 ###Database tasks
 
@@ -82,12 +98,20 @@ You can use the test container to run the tests
     docker-compose run test guard -p -l 2
 
 
+
+
 ###Services (job queues, cache servers, search engines, etc.)
 
 
 
 
 ###Deployment instructions
+
+Deployment is done through circleci to staging.mereveilleuse.com via capistrano
+
+
+
+
 
 
 ### DEPRECIATED ###
