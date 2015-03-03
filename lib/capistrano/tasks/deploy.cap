@@ -1,0 +1,19 @@
+namespace :deploy do
+  desc 'Ensures that the app is alive'
+  namespace :app do
+    task :alive do
+      on roles(:app) do |host|
+        run_locally do
+          info "Pinging #{host}"
+          code = capture "curl -s -o /dev/null -w '%{http_code}' http://#{host}"
+        
+          if (code == '200') || (code == '301')
+            info "#{host} responded alive #{code}"
+          else
+            error "#{host} is dead #{code}"
+          end
+        end
+      end
+    end
+  end
+end
