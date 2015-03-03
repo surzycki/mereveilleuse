@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<POLICIES xmlns="http://www.w3.org/2002/01/P3Pv1">
+    <EXPIRY max-age="604800"/>
+    <POLICY name="public" discuri="https://staging.mereveilleuse.com/about">
+        <ENTITY>
+            <DATA-GROUP>
+                <DATA ref="#business.name">Mereveilleuse</DATA>
+                <DATA ref="#business.contact-info.postal.name">Mereveilleuse</DATA>
+                <DATA ref="#business.contact-info.postal.street">6 Ave Illena</DATA>
+                <DATA ref="#business.contact-info.postal.postalcode">75001</DATA>
+                <DATA ref="#business.contact-info.postal.city">Ile de France</DATA>
+                <DATA ref="#business.contact-info.postal.country">FR</DATA>
+                <DATA ref="#business.contact-info.online.email">postmaster@mereveilleuse.com</DATA>
+                <DATA ref="#business.contact-info.telecom.telephone.intcode">33</DATA>
+                <DATA ref="#business.contact-info.telecom.telephone.loccode">6</DATA>
+                <DATA ref="#business.contact-info.telecom.telephone.number">88426080</DATA>
+                <DATA ref="#business.contact-info.online.uri">https://staging.mereveilleuse.com/contact</DATA>
+            </DATA-GROUP>
+        </ENTITY>
+        <ACCESS>
+            <nonident/>
+        </ACCESS>
+        <DISPUTES-GROUP>
+            <DISPUTES resolution-type="service" service="https://staging.mereveilleuse.com" short-description="postmaster@mereveilleuse.com">
+                <LONG-DESCRIPTION>The Webmaster and our Communications Team will carefully consider the input and correct errors. If you discover privacy invasive behavior, please don't hesitate to contact us.</LONG-DESCRIPTION>
+                <IMG src="http://www.askapache.com/logo.jpg" width="148" height="148" alt="Logo Mereveilleuse" />
+                <REMEDIES>
+                    <correct/>
+                </REMEDIES>
+            </DISPUTES>
+        </DISPUTES-GROUP>
+        <STATEMENT>
+            <CONSEQUENCE>We collect normal Web-Logs. They are used for Server administration, Web protocol research, Statistics of usage and security. Those logs are anonymized after one year.</CONSEQUENCE>
+            <PURPOSE>
+                <current/>
+                <admin/>
+                <develop/>
+            </PURPOSE>
+            <RECIPIENT>
+                <ours>
+                    <recipient-description>The logs and other information go to our system-team. They keep logs confidential so they are not accessible for all staff</recipient-description>
+                </ours>
+            </RECIPIENT>
+            <RETENTION>
+                <business-practices/>
+            </RETENTION>
+            <DATA-GROUP>
+                <DATA ref="#dynamic.clickstream" />
+                <DATA ref="#dynamic.http.useragent"/>
+                <DATA ref="#dynamic.http.referer" />
+            </DATA-GROUP>
+        </STATEMENT>
+    </POLICY>
+</POLICIES>

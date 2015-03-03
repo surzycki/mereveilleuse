@@ -1,0 +1,12 @@
+<META xmlns="http://www.w3.org/2002/01/P3Pv1">
+  <POLICY-REFERENCES>
+    <EXPIRY max-age="172800"/>
+    <POLICY-REF about="https://staging.mereveilleuse.com/public.xml#public">
+      <INCLUDE>/*</INCLUDE>
+      <METHOD>GET</METHOD>
+      <METHOD>HEAD</METHOD>
+      <METHOD>PUT</METHOD>
+      <METHOD>POST</METHOD>
+    </POLICY-REF>
+  </POLICY-REFERENCES>
+</META>

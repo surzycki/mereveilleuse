@@ -2,9 +2,8 @@
 #
 # VERSION               0.0.1
 
-FROM ruby:2.2.0
+FROM appfacebook_dev
 MAINTAINER Stefan Surzycki <stefan.surzycki@gmail.com>
-
 
 # update
 RUN apt-get update -qq && apt-get install -y build-essential
