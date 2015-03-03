@@ -15,12 +15,15 @@ set :keep_releases,   5
 set :log_directory,               '/var/log/mereveilleuse/app_facebook'
 set :normalize_asset_timestamps,  %{public/images public/javascripts public/stylesheets}
 
+
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
-    invoke 'puma:stop'
-    invoke 'puma:start'
+    invoke 'puma:phased-restart'
   end
 
-  after :finishing, 'deploy:cleanup'
+  after :publishing, :restart
+  after :finishing,  :cleanup
+  after :finishing,  'deploy:app:alive'
 end
