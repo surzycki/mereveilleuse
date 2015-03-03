@@ -7,6 +7,7 @@ dev:
     - .:/var/www/app_facebook
   links:
     - db
+    - memcached
   environment:
     RAILS_ENV: development
   
@@ -17,6 +18,7 @@ test:
     - .:/var/www/app_facebook
   links:
     - db
+    - memcached
   environment:
     RAILS_ENV: test
 
@@ -26,5 +28,9 @@ db:
     POSTGRES_USER: 'mereveilleuse'
     POSTGRES_PASSWORD: 'mereveilleuse'
 
+memcached:
+  image: sameersbn/memcached:latest
+  environment:
+    CACHE_SIZE: '64'
 
 
