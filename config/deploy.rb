@@ -9,7 +9,7 @@ set :scm,             :git
 set :log_level,       :debug
 
 set :linked_files,    %w{}
-set :linked_dirs,     %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs,     %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :keep_releases,   5
 
 set :log_directory,               '/var/log/mereveilleuse/app_facebook'
