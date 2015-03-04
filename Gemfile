@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails',            '4.2.0'
 gem 'coffee-rails',     '~> 4.1.0'
 gem 'sass-rails',       '~> 5.0'
@@ -14,7 +12,6 @@ gem 'jbuilder',         '~> 2.0'                          # Create JSON structur
 gem 'puma'                                                # A ruby web server built for concurrency http://puma.io
 gem 'dotenv'                                              # Loads environment variables from `.env`.
 gem 'dalli'                                               # High performance memcached client for Ruby
-#gem 'rack-p3p'                                            # Insert a P3P header into your Rack webapp
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
