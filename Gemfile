@@ -12,6 +12,7 @@ gem 'jbuilder',         '~> 2.0'                          # Create JSON structur
 gem 'puma'                                                # A ruby web server built for concurrency http://puma.io
 gem 'dotenv'                                              # Loads environment variables from `.env`.
 gem 'dalli'                                               # High performance memcached client for Ruby
+gem 'guard-livereload'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
