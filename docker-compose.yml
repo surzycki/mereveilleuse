@@ -4,7 +4,7 @@ dev:
   ports:
     - '80:3000'
   volumes:
-    - .:/var/www/app_facebook
+    - .:/var/www
   links:
     - db
     - memcached
@@ -15,7 +15,7 @@ test:
   build: .
   command: bin/rspec
   volumes:
-    - .:/var/www/app_facebook
+    - .:/var/www
   links:
     - db
     - memcached
