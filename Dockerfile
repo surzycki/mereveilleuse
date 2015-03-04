@@ -1,7 +1,6 @@
 # Mereveilleuse development
 #
 # VERSION               0.0.1
-
 FROM appfacebook_dev
 MAINTAINER Stefan Surzycki <stefan.surzycki@gmail.com>
 
