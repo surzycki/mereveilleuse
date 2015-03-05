@@ -39,4 +39,5 @@ Rails.application.configure do
   config.cache_store = :dalli_store, nil, { namespace: 'mereveilleuse-dev', compress: true }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.web_console.whitelisted_ips = '192.168.59.0/16'
 end

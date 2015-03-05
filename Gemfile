@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails',            '4.2.0'
 gem 'coffee-rails',     '~> 4.1.0'
 gem 'sass-rails',       '~> 5.0'
-gem 'therubyracer'
 gem 'jquery-rails'
 gem 'pg'                                                  # Pg is the Ruby interface to the PostgreSQL RDBMS.
 gem 'haml-rails'                                          # HTML Abstraction Markup Language - A Markup Haiku http://haml.info
@@ -12,7 +11,6 @@ gem 'jbuilder',         '~> 2.0'                          # Create JSON structur
 gem 'puma'                                                # A ruby web server built for concurrency http://puma.io
 gem 'dotenv'                                              # Loads environment variables from `.env`.
 gem 'dalli'                                               # High performance memcached client for Ruby
-gem 'guard-livereload'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
@@ -39,6 +37,6 @@ group :test do
   gem 'spring-commands-rspec'
   gem 'spring' 
 end
-# hello
+
 
 ruby '2.2.0'

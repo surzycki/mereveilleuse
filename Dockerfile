@@ -11,12 +11,12 @@ ENV HOSTNAME app_facebook
 
 RUN mkdir -p $APP_HOME
 
-#WORKDIR $APP_HOME
-#
-## update gems
-#ADD Gemfile $APP_HOME/Gemfile
-#ADD Gemfile.lock $APP_HOME/Gemfile.lock
-#RUN bundle update 
-#
-## hook up source files
-#ADD . $APP_HOME#
+WORKDIR $APP_HOME
+
+# update gems
+ADD Gemfile $APP_HOME/Gemfile
+ADD Gemfile.lock $APP_HOME/Gemfile.lock
+RUN bundle update 
+
+# hook up source files
+ADD . $APP_HOME#
