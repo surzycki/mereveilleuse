@@ -1,3 +1,4 @@
 class Occupation < ActiveRecord::Base
-  belongs_to :practitioner, inverse_of: :occupations
+  belongs_to :profession
+  belongs_to :practitioner
 end

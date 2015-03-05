@@ -14,7 +14,10 @@ describe Occupation do
   describe 'associations' do
     it 'belongs to practitioner' do
       expect(subject).to belong_to(:practitioner)
-        .inverse_of(:occupations)
+    end
+
+    it 'belongs to profession' do
+      expect(subject).to belong_to(:profession)
     end
   end
 end

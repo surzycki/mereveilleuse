@@ -38,5 +38,15 @@ describe User do
         .through(:recommendations)
         .source(:practitioner)
     end
+
+    it 'has many recommendations' do
+      expect(subject).to have_many(:recommendations)
+        .dependent(:destroy)
+    end
+
+    it 'has one location' do
+      expect(subject).to have_one(:location)
+        .dependent(:destroy)
+    end
   end
 end

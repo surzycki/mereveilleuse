@@ -22,4 +22,10 @@ describe Location do
       expect(subject).to respond_to :country
     end
   end
+
+  describe 'associations' do
+    it 'belongs to' do
+      expect(subject).to belong_to(:locatable)
+    end
+  end
 end

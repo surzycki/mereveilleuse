@@ -10,4 +10,15 @@ describe Profession do
       expect(subject).to respond_to :name
     end
   end
+
+  describe 'associations' do
+    it 'has many occupations' do
+      expect(subject).to have_many(:occupations)
+    end 
+
+    it 'has many practitioners' do
+      expect(subject).to have_many(:practitioners)
+        .through(:occupations)
+    end 
+  end
 end
