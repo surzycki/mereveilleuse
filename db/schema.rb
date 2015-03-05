@@ -11,34 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305131504) do
+ActiveRecord::Schema.define(version: 20150305144235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "locations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "street"
+    t.string   "city"
+    t.string   "postal_code"
+    t.string   "country"
   end
 
   create_table "occupations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "experience"
   end
 
   create_table "practitioners", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "mobile_phone"
   end
 
   create_table "professions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "wait_time"
+    t.integer  "availability"
+    t.integer  "bedside_manner"
+    t.integer  "efficacy"
+    t.text     "comment"
   end
 
   create_table "users", force: :cascade do |t|

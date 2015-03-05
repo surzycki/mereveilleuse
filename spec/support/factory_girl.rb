@@ -20,7 +20,7 @@ RSpec.configure do |config|
       v[:name] = k
       OpenStruct.new v
     end
-    
+
     totals = OpenStruct.new(name: 'TOTALS')
     [:create, :build, :build_stubbed, :attributes_for].collect do |key|
       value = x.inject(0){|sum,e| sum += (e.send(key)).to_i }
@@ -28,6 +28,8 @@ RSpec.configure do |config|
     end    
 
     all = x + [totals]
+
+    puts "\n"
 
     table [*all], :fields=>[:name, :create, :build, :build_stubbed, :attributes_for]
   end
