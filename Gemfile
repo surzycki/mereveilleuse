@@ -37,7 +37,8 @@ group :test do
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+
   gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
-   gem 'spring-commands-rspec'
+  gem 'shoulda-matchers'           , require: false       # Makes tests easy on the fingers and the eyes
+  gem 'spring-commands-rspec'
   gem 'spring' 
 end
 
