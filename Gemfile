@@ -27,6 +27,8 @@ end
 group :development, :test do
   gem 'factory_girl_rails'                                # A library for setting up Ruby objects as test data
   gem 'lograge'                                           # An attempt to tame Rails' default policy to log everything.
+  gem 'hirb'                                              # A mini view framework for console/irb that's easy to use, even while under its influence.
+  gem 'awesome_print'                                     # Pretty print your Ruby objects with style -- in full color and with proper indentation
 end
 
 group :test do
@@ -34,7 +36,8 @@ group :test do
   gem 'guard-rspec', require: false                       # Guard::RSpec automatically run your specs (much like autotest)
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+
-  gem 'spring-commands-rspec'
+  gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
+   gem 'spring-commands-rspec'
   gem 'spring' 
 end
 
