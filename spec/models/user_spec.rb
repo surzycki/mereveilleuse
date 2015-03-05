@@ -26,4 +26,17 @@ describe User do
       expect(subject).to respond_to :has_invited
     end
   end
+
+  describe 'associations' do
+    it 'has many recommendations' do
+      expect(subject).to have_many(:recommendations)
+        .dependent(:destroy)
+    end
+
+    it 'has many referals through recommendations' do
+      expect(subject).to have_many(:referals)
+        .through(:recommendations)
+        .source(:practitioner)
+    end
+  end
 end

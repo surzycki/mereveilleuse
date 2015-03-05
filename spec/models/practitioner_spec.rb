@@ -26,4 +26,24 @@ describe Practitioner do
       expect(subject).to respond_to :mobile_phone
     end
   end
+
+  describe 'associations' do
+    it 'has many occupations' do
+      expect(subject).to have_many(:occupations)
+        .inverse_of(:practitioner)
+        .dependent(:destroy)
+        .autosave(true)
+    end
+
+    it 'has many recommendations' do
+      expect(subject).to have_many(:recommendations)
+        .dependent(:destroy)
+    end
+
+    it 'has many references through recommendations' do
+      expect(subject).to have_many(:references)
+        .through(:recommendations)
+        .source(:user)
+    end
+  end
 end

@@ -10,4 +10,11 @@ describe Occupation do
       expect(subject).to respond_to :experience
     end
   end
+
+  describe 'associations' do
+    it 'belongs to practitioner' do
+      expect(subject).to belong_to(:practitioner)
+        .inverse_of(:occupations)
+    end
+  end
 end

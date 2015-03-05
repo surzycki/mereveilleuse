@@ -26,4 +26,14 @@ describe Recommendation do
       expect(subject).to respond_to :comment
     end
   end
+
+  describe 'associations' do
+    it 'belongs to user' do
+      expect(subject).to belong_to(:user)
+    end
+
+    it 'belongs to practitioner' do
+      expect(subject).to belong_to(:practitioner)
+    end
+  end
 end
