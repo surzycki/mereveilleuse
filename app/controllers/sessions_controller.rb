@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :index
 
   def index 
-    session[:hello] = rand(100)
+    
+    i = 10
   end
 end
