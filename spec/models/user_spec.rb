@@ -27,6 +27,7 @@ describe User do
     end
   end
 
+
   describe 'associations' do
     it 'has many recommendations' do
       expect(subject).to have_many(:recommendations)
