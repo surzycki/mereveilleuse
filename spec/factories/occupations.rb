@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :occupation do
-    
-  end
+    experience      10
 
+    profession
+  end
 end

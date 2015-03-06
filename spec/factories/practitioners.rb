@@ -1,6 +1,15 @@
 FactoryGirl.define do
   factory :practitioner do
-    
-  end
+    firstname       'Mister'
+    lastname        'Practitioner'
+    email           'practitioner@example.com'
+    phone           '0122334455'
+    mobile_phone    '0611223344'
 
+    location
+
+    occupations do |practitioner|
+      Array.new(1) { practitioner.association :occupation }
+    end
+  end
 end

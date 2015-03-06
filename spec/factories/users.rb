@@ -5,5 +5,7 @@ FactoryGirl.define do
     email        'user.person@example.com'
     facebook_id  '1111111'
     has_invited  false
+
+    location
   end
 end
