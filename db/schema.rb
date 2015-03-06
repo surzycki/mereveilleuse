@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305213002) do
+ActiveRecord::Schema.define(version: 20150306072132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,13 +86,13 @@ ActiveRecord::Schema.define(version: 20150305213002) do
   add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "facebook_id"
     t.string   "firstname"
     t.string   "lastname"
     t.string   "email"
-    t.boolean  "has_invited"
+    t.boolean  "has_invited", default: false
   end
 
 end
