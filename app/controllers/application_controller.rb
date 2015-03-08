@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  force_ssl
   # TODO: Facebook canvas apps can't retrieve signed cookie (iframe), not super secure
   # just a whole lot easier
   protect_from_forgery with: :exception
