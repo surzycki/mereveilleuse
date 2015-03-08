@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # TODO: Facebook canvas apps can't retrieve signed cookie (iframe), not super secure
   # just a whole lot easier
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception
   
   before_filter :set_p3p
   after_filter :allow_iframe
@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def warden
-    #env['warden']
+    env['warden']
   end
 
   def current_user
-    #warden.user
+    warden.user
   end
 
   private

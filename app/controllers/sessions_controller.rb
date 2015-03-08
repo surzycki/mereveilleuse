@@ -1,21 +1,21 @@
 class SessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: :index
   around_filter :catch_exceptions
 
   # GET /session
   # POST /session
   def index 
     session[:test] = "ho"
-    #Authentication.new(self).tap do |auth|
-    #  auth.with facebook_authentication
-    #end
-    #on_authentication_success User.first
+    Authentication.new(self).tap do |auth|
+      auth.with facebook_authentication
+    end
   end
 
   def on_authentication_success(account)
     # set user_id in env for the authentication since we
     # aren't passing these during a via parmas in a post
     #env['user_id'] = account.id
-    #warden.set_user account
+    warden.set_user account
     #warden.authenticate!
     #on_registration_success
   end
@@ -30,11 +30,11 @@ class SessionsController < ApplicationController
   end
 
   def on_registration_success 
-    #redirect_to referral_path
+    redirect_to referral_path
   end
 
   def on_login_success
-    #redirect_to search_path
+    redirect_to search_path
   end
  
   private
