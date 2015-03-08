@@ -5,19 +5,16 @@ end
 
 # Setup Session Serialization
 Warden::Manager.serialize_into_session do |account|
-  byebug
   account.id
 end
 
 Warden::Manager.serialize_from_session do |id|
-  byebug
   User.find_by_id id
 end
 
 # Declare your strategies here
 Warden::Strategies.add(:facebook_canvas) do
   def authenticate!
-    byebug
     account = User.find_by_id env['user_id']
     
     if account 

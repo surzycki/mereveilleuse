@@ -4,19 +4,19 @@ class SessionsController < ApplicationController
   # GET /session
   # POST /session
   def index 
-    #Authentication.new(self).tap do |auth|
-    #  auth.with facebook_authentication
-    #end
-    on_authentication_success User.first
+    Authentication.new(self).tap do |auth|
+      auth.with facebook_authentication
+    end
+    #on_authentication_success User.first
   end
 
   def on_authentication_success(account)
     # set user_id in env for the authentication since we
     # aren't passing these during a via parmas in a post
-    env['user_id'] = account.id
+    #env['user_id'] = account.id
     warden.set_user account
     #warden.authenticate!
-    on_registration_success
+    #on_registration_success
   end
 
   def on_authentication_fail(exception = nil )
@@ -29,10 +29,12 @@ class SessionsController < ApplicationController
   end
 
   def on_registration_success 
+    session['test'] = 'hello'
     redirect_to referral_path
   end
 
   def on_login_success
+    session['test'] = 'hello'
     redirect_to search_path
   end
  
