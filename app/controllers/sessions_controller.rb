@@ -14,10 +14,7 @@ class SessionsController < ApplicationController
   def on_authentication_success(account)
     # set user_id in env for the authentication since we
     # aren't passing these during a via parmas in a post
-    #env['user_id'] = account.id
     warden.set_user account
-    #warden.authenticate!
-    #on_registration_success
   end
 
   def on_authentication_fail(exception = nil )
