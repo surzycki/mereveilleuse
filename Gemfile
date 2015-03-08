@@ -6,11 +6,13 @@ gem 'sass-rails',               '~> 5.0'
 gem 'jquery-rails'
 gem 'pg'                                                  # Pg is the Ruby interface to the PostgreSQL RDBMS.
 gem 'haml-rails'                                          # HTML Abstraction Markup Language - A Markup Haiku http://haml.info
-gem 'uglifier',                 '>= 1.3.0'                 # Ruby wrapper for UglifyJS JavaScript compressor.
-gem 'jbuilder',                 '~> 2.0'                   # Create JSON structures via a Builder-style DSL
+gem 'uglifier',                 '>= 1.3.0'                # Ruby wrapper for UglifyJS JavaScript compressor.
+gem 'jbuilder',                 '~> 2.0'                  # Create JSON structures via a Builder-style DSL
 gem 'puma'                                                # A ruby web server built for concurrency http://puma.io
 gem 'dotenv'                                              # Loads environment variables from `.env`.
 gem 'dalli'                                               # High performance memcached client for Ruby
+gem 'raygun4ruby'                                         # Find bugs before your users do
+gem 'koala',                    '~> 1.11.0rc'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
@@ -33,14 +35,13 @@ end
 
 group :test do
   gem 'guard'                                             # Guard is a command line tool to easily handle events on file system modifications
-  gem 'guard-rspec', require: false                       # Guard::RSpec automatically run your specs (much like autotest)
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+
-  gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
-  gem 'shoulda-matchers'           , require: false       # Makes tests easy on the fingers and the eyes
+  gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
   gem 'spring-commands-rspec'
   gem 'spring' 
+  gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes
+  gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)
 end
-
 
 ruby '2.2.0'

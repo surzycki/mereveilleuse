@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  # Facebook canvas apps can't retrieve signed cookie (iframe)
-  protect_from_forgery with: :exception
+  # TODO: Facebook canvas apps can't retrieve signed cookie (iframe), not super secure
+  # just a whole lot easier
+  protect_from_forgery with: :null_session
   
   before_filter :set_p3p
   after_filter :allow_iframe

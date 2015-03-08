@@ -35,5 +35,8 @@ module AppFacebook
 
     # set cache store using dalli driver
     config.cache_store = :dalli_store
+
+    # for custom error pages
+    config.exceptions_app = self.routes
   end
 end
