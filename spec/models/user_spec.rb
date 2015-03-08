@@ -25,6 +25,15 @@ describe User do
     it 'has has_invited' do
       expect(subject).to respond_to :has_invited
     end
+
+    it 'has state' do
+      expect(subject).to respond_to :state
+    end
+
+    it 'defines enum for state' do
+      expect(subject).to define_enum_for(:state)
+        .with [ :unregistered, :registered ]
+    end
   end
 
 

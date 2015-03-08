@@ -1,14 +1,11 @@
 class SessionsController < ApplicationController
-  before_action :oauth_facebook_authentication
-  
+  around_filter :catch_exceptions
+
   # GET /session
   # POST /session
   def index 
-    # authenticate/register with local app
-    
     Authentication.new(self).tap do |auth|
-      args = Koala::Facebook::API.new(@signed_request['oauth_token']).get_object('me')
-      auth.with args
+      auth.with facebook_authentication
     end
   end
 
@@ -25,18 +22,22 @@ class SessionsController < ApplicationController
   end
 
   def on_authentication_fail(exception)
-    logger.error("EXCEPTION CAUGHT: #{exception}")
+    Raygun.track_exception(error)
+    logger.error("EXCEPTION CAUGHT: #{error}")
     redirect_to not_found_path
   end
    
   private
   # Facebook posts a signed_request to upon arriving to the canvas
-  def oauth_facebook_authentication
-    begin
-      oauth = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
-      @signed_request = oauth.parse_signed_request(params[:signed_request])
-    rescue 
-      redirect_to not_found_path 
-    end
+  def facebook_authentication
+    @facebook_authentication ||= FacebookAuthentication.new(params[:signed_request])
+  end
+
+  def catch_exceptions
+    yield
+  rescue => error  
+    Raygun.track_exception(error)
+    logger.error("EXCEPTION CAUGHT: #{error}")
+    redirect_to not_found_path
   end
 end

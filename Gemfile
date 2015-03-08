@@ -12,7 +12,8 @@ gem 'puma'                                                # A ruby web server bu
 gem 'dotenv'                                              # Loads environment variables from `.env`.
 gem 'dalli'                                               # High performance memcached client for Ruby
 gem 'raygun4ruby'                                         # Find bugs before your users do
-gem 'koala',                    '~> 1.11.0rc'
+gem 'koala',                    '~> 1.11.0rc'             # A lightweight, flexible library for Facebook with support for OAuth authentication
+gem 'rails_warden'                                        # A thin rails plugin on top of Warden for Authentication
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
