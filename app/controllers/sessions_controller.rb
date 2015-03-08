@@ -29,12 +29,10 @@ class SessionsController < ApplicationController
   end
 
   def on_registration_success 
-    session['test'] = 'hello'
     redirect_to referral_path
   end
 
   def on_login_success
-    session['test'] = 'hello'
     redirect_to search_path
   end
  
