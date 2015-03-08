@@ -6,6 +6,16 @@ class ApplicationController < ActionController::Base
   before_filter :set_p3p
   after_filter :allow_iframe
   
+  helper_method :current_user
+
+  def warden
+    env['warden']
+  end
+
+  def current_user
+    warden.user
+  end
+
   private
   # Rails 4 has a problem with iframes, this allows it to display content in an iframe
   def allow_iframe
