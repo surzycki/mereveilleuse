@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def warden
-    env['warden']
+    #env['warden']
   end
 
   def current_user
-    warden.user
+    #warden.user
   end
 
   private
