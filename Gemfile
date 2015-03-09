@@ -47,6 +47,7 @@ group :test do
   gem 'spring' 
   gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes
   gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)
+  gem 'therubyracer'
 end
 
 ruby '2.2.0'
