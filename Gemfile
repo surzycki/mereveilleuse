@@ -15,6 +15,9 @@ gem 'raygun4ruby'                                         # Find bugs before you
 gem 'koala',                    '~> 1.11.0rc'             # A lightweight, flexible library for Facebook with support for OAuth authentication
 gem 'warden'                                              # General Rack Authentication Framework
 gem 'state_machine'                                       # Adds support for creating state machines for attributes on any Ruby class
+gem 'bootstrap-sass'              
+gem 'hologram'                                            # A markdown based documentation system for style guides.
+gem 'bourbon'                                             # A lightweight mixin library for Sass. 
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
