@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
   end
 
   def on_registration_success 
-    redirect_to 'https://staging.mereveilleuse.com/referral'#referral_path
+    redirect_to referral_path
   end
 
   def on_login_success
