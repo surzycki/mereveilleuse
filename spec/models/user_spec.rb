@@ -30,8 +30,12 @@ describe User do
       expect(subject).to respond_to :state
     end
 
-    it 'defines enum for state' do
-      expect(subject).to define_enum_for(:state)
+    it 'has status' do
+      expect(subject).to respond_to :status
+    end
+
+    it 'defines enum for status' do
+      expect(subject).to define_enum_for(:status)
         .with [ :unregistered, :registered ]
     end
   end
