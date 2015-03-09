@@ -1,4 +1,6 @@
 fr:
+  help:
+    label: Vous avez besoin d'aide? 
   recommendation:
     header:
       title: Partageons nos bonnes adresses santé entre mamans du quartier
