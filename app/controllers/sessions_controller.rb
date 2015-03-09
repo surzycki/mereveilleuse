@@ -1,11 +1,12 @@
 class SessionsController < ApplicationController
+  # For the entry point we have to skip the authenticity validations, as the post is coming
+  # from facebook
   skip_before_filter :verify_authenticity_token, only: :index
   around_filter :catch_exceptions
 
   # GET /session
   # POST /session
   def index 
-    session[:test] = "ho"
     Authentication.new(self).tap do |auth|
       auth.with facebook_authentication
     end
@@ -25,7 +26,6 @@ class SessionsController < ApplicationController
 
     redirect_to not_found_path
   end
-
   def on_registration_success 
     redirect_to referral_path
   end
