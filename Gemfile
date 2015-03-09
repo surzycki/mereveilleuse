@@ -18,6 +18,7 @@ gem 'state_machine'                                       # Adds support for cre
 gem 'bootstrap-sass'              
 gem 'hologram'                                            # A markdown based documentation system for style guides.
 gem 'bourbon'                                             # A lightweight mixin library for Sass. 
+gem 'therubyracer'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
@@ -47,7 +48,7 @@ group :test do
   gem 'spring' 
   gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes
   gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)
-  gem 'therubyracer'
+  
 end
 
 ruby '2.2.0'
