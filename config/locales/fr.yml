@@ -4,3 +4,28 @@ fr:
       title: Partageons nos bonnes adresses santé entre mamans du quartier
     form:
       title: Pour vous inscrire et rejoindre la communauté, partagez votre adresse santé préférée
+      practitioner_name:
+        label: Je recommande
+        placeholder: Entrez le nom du professionnel   
+      profession:
+        label: Exerçant en qualité de
+        placeholder: Sélectionnez la spécialité
+      patient_type:
+        label: Avec
+        placeholder: Précisez pour qui
+      address:
+        label: À
+        placeholder: Rensignez l'adresse
+      submit: Rejoindre la communauté
+    
+    information: 
+      title:  Les super pouvoirs de MèreVeilleuse
+      reasons:
+        one:
+          title: La Communauté
+          content: Nous échangeons nos meilleures adresses santé entre amies et mamans du quartier. Nous nous avertissons sur les mauvaises.
+        two:
+          title: La Transparence
+          content: Nous luttons contre les fausses recommandations. Nous sommes entre mamans et le resterons ;)
+        
+

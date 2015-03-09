@@ -1,0 +1,26 @@
+%section
+  .jumbotron.text-center
+    %h1 Mèreveilleuse
+    %h2= t('recommendation.header.title') 
+
+%section
+  .container-fluid
+    .row
+      .col-sm-12
+        %p= t('recommendation.form.title')
+    
+    .row  
+      .col-sm-6
+        = form_for(@form, url: '#', method: :put) do |f|
+          = render 'referral', f: f
+          = f.submit t('recommendation.form.submit') , class: 'btn btn-primary btn-block' 
+      .col-sm-6
+        %h3= t('recommendation.information.title')
+        
+        %ul
+          %li
+            %p.bold= t('recommendation.information.reasons.one.title')
+            %p= t('recommendation.information.reasons.one.content') 
+          %li
+            %p.bold= t('recommendation.information.reasons.two.title')
+            %p= t('recommendation.information.reasons.two.content') 

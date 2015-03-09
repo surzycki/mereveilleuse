@@ -7,8 +7,14 @@ class SessionsController < ApplicationController
   # GET /session
   # POST /session
   def index 
-    Authentication.new(self).tap do |auth|
-      auth.with facebook_authentication
+    # for testing
+    if request.method == 'GET'
+      on_authentication_success(User.last)
+      on_registration_success
+    else
+      Authentication.new(self).tap do |auth|
+        auth.with facebook_authentication
+      end
     end
   end
 
@@ -27,7 +33,7 @@ class SessionsController < ApplicationController
     redirect_to not_found_path
   end
   def on_registration_success 
-    redirect_to referral_path
+    redirect_to recommendation_path
   end
 
   def on_login_success

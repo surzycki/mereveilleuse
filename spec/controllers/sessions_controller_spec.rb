@@ -51,7 +51,7 @@ describe SessionsController do
         
         it 'redirects to referral path' do
           expect(controller).to have_received(:redirect_to)
-            .with referral_path
+            .with recommendation_path
         end
       end
 

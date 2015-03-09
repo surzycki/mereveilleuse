@@ -1,4 +1,4 @@
-describe ReferralsController do
+describe RecommendationsController do
   describe '#sanity check' do
     it 'is true' do
       expect(true).to be true

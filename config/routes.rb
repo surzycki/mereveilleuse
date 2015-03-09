@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   match 'session',    to: 'sessions#index',         via: [:get, :post] 
   
-  get   'referral',   to: 'referrals#index'
-  get   'assessment', to: 'assessments#index'
-  get   'search',     to: 'searches#index'
+  get   'recommendation',   to: 'recommendations#index'
+  get   'assessment',       to: 'assessments#index'
+  get   'search',           to: 'searches#index'
 
   # custom error pages
   match '/404', to: 'errors#not_found',             via: :all, as: :not_found

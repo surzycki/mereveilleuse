@@ -25,6 +25,10 @@ describe Practitioner do
     it 'has mobile_phone' do
       expect(subject).to respond_to :mobile_phone
     end
+
+    it 'has uuid' do
+      expect(subject).to respond_to :uuid
+    end
   end
 
   describe 'associations' do
@@ -38,7 +42,6 @@ describe Practitioner do
       expect(subject).to have_many(:professions)
         .through(:occupations)
     end
-
 
     it 'has many recommendations' do
       expect(subject).to have_many(:recommendations)
@@ -54,6 +57,15 @@ describe Practitioner do
     it 'has one location' do
       expect(subject).to have_one(:location)
         .dependent(:destroy)
+    end
+  end
+
+  describe 'callbacks' do
+    context 'after_initialize' do
+      it 'call set_uuid' do
+        allow_any_instance_of(Practitioner).to receive(:set_uuid)
+        expect(Practitioner.new).to have_received(:set_uuid)
+      end
     end
   end
 end
