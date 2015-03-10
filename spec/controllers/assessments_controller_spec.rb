@@ -1,3 +1,0 @@
-describe AssessmentsController do
-
-end

@@ -144,7 +144,7 @@ describe RecommendationsController do
     context 'on_form_error' do
       before do
         allow(controller).to receive(:render)
-        allow(controller.flash).to receive(:now)
+        allow(controller.flash.now).to receive(:[]=)
         controller.on_form_error errors
       end
 
@@ -154,8 +154,8 @@ describe RecommendationsController do
       end
 
       it 'sets flash with errors' do
-        expect(controller.flash).to have_received(:now)
-          .with errors
+        expect(controller.flash.now).to have_received(:[]=)
+          .with :alert, errors
       end
     end
   end
