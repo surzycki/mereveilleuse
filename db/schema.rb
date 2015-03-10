@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309144650) do
+ActiveRecord::Schema.define(version: 20150309174157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20150309144650) do
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "wait_time"
     t.integer  "availability"
     t.integer  "bedside_manner"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150309144650) do
     t.text     "comment"
     t.integer  "user_id"
     t.integer  "practitioner_id"
+    t.string   "state",           default: "step_one"
   end
 
   add_index "recommendations", ["practitioner_id"], name: "index_recommendations_on_practitioner_id", using: :btree
@@ -94,7 +95,6 @@ ActiveRecord::Schema.define(version: 20150309144650) do
     t.string   "lastname"
     t.string   "email"
     t.boolean  "has_invited", default: false
-    t.string   "state",       default: "0"
     t.integer  "status",      default: 0
   end
 

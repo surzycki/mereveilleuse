@@ -49,9 +49,9 @@ describe SessionsController do
           controller.on_registration_success
         end
         
-        it 'redirects to referral path' do
+        it 'redirects to new_recommendation_path path' do
           expect(controller).to have_received(:redirect_to)
-            .with recommendation_path
+            .with new_recommendation_path
         end
       end
 
@@ -61,9 +61,9 @@ describe SessionsController do
           controller.on_login_success
         end
         
-        it 'redirects to referral path' do
+        it 'redirects to new_search_path path' do
           expect(controller).to have_received(:redirect_to)
-            .with search_path
+            .with new_search_path
         end
       end
 

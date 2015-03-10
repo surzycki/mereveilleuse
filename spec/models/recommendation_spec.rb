@@ -25,6 +25,14 @@ describe Recommendation do
     it 'has comment' do
       expect(subject).to respond_to :comment
     end
+
+    it 'has state' do
+      expect(subject).to respond_to :state
+    end
+
+    it 'has state default value' do
+      expect(subject.state).to eq 'step_one'
+    end
   end
 
   describe 'associations' do

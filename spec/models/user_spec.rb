@@ -26,10 +26,6 @@ describe User do
       expect(subject).to respond_to :has_invited
     end
 
-    it 'has state' do
-      expect(subject).to respond_to :state
-    end
-
     it 'has status' do
       expect(subject).to respond_to :status
     end

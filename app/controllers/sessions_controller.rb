@@ -18,6 +18,8 @@ class SessionsController < ApplicationController
     end
   end
 
+
+  # event listeners
   def on_authentication_success(account)
     # set user_id in env for the authentication since we
     # aren't passing these during a via parmas in a post
@@ -32,12 +34,13 @@ class SessionsController < ApplicationController
 
     redirect_to not_found_path
   end
+  
   def on_registration_success 
-    redirect_to recommendation_path
+    redirect_to new_recommendation_path
   end
 
   def on_login_success
-    redirect_to search_path
+    redirect_to new_search_path
   end
  
   private

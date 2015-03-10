@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   match 'session',    to: 'sessions#index',         via: [:get, :post] 
   
-  get   'recommendation',   to: 'recommendations#index'
-  get   'assessment',       to: 'assessments#index'
-  get   'search',           to: 'searches#index'
-
+  resources :recommendations
+  resource  :search,          only: [ :new, :create, :show ]
+  
   # custom error pages
   match '/404', to: 'errors#not_found',             via: :all, as: :not_found
   match '/422', to: 'errors#unprocessable_entity',  via: :all, as: :unprocessable_entity

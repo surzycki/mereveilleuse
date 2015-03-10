@@ -1,9 +1,26 @@
 fr:
   help:
     label: Vous avez besoin d'aide? 
-  recommendation:
-    header:
+  header:
+    recommendation: 
       title: Partageons nos bonnes adresses santé entre mamans du quartier
+
+  rating:
+    form:
+      title: Que pensez-vous de ce professionnel?
+      wait_time:  
+        label: Ponctualité
+      availability:
+        label: Disponibilité
+      bedside_manner:
+        label: Accueil & suivi
+      efficacy: 
+        label: Efficacité
+      comments:
+        label: Racontez-nous votre expérience avec ce professionnel
+      submit: Valider la recommandations
+
+  recommendation:   
     form:
       title: Pour vous inscrire et rejoindre la communauté, partagez votre adresse santé préférée
       practitioner_name:
