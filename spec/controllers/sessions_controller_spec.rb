@@ -41,62 +41,62 @@ describe SessionsController do
         end    
       end
     end 
+  end 
 
-    context 'listeners' do
-      context 'on_registration_success' do
-        before do
-          allow(controller).to receive(:redirect_to)
-          controller.on_registration_success
-        end
-        
-        it 'redirects to new_recommendation_path path' do
-          expect(controller).to have_received(:redirect_to)
-            .with new_recommendation_path
-        end
+  describe 'listeners' do
+     
+    context 'on_registration_success' do
+      before do
+        allow(controller).to receive(:redirect_to)
+        controller.on_registration_success
       end
-
-      context 'on_login_success' do
-        before do
-          allow(controller).to receive(:redirect_to)
-          controller.on_login_success
-        end
-        
-        it 'redirects to new_search_path path' do
-          expect(controller).to have_received(:redirect_to)
-            .with new_search_path
-        end
-      end
-
-      context 'on_authentication_success' do
-        let(:account)  { spy ('account') }
-        let(:warden)   { spy ('warden') }
-
-        before do
-          allow(controller).to receive(:warden).and_return warden
-          allow(warden).to receive(:set_user)
-
-          controller.on_authentication_success account
-        end
-        
-        it 'sets warden user' do
-          expect(warden).to have_received(:set_user)
-            .with account
-        end
-      end
-
-      context 'on_authentication_fail' do
-        let(:exception)  { spy ('exception') }
-        
-        before do
-          allow(controller).to receive(:redirect_to)
-          controller.on_authentication_fail exception
-        end
-        
-        it 'redirects to not_found_path' do
-          expect(controller).to have_received(:redirect_to)
-            .with not_found_path
-        end
+      
+      it 'redirects to new_recommendation_path path' do
+        expect(controller).to have_received(:redirect_to)
+          .with new_recommendation_path
       end
     end
-  end 
+
+    context 'on_login_success' do
+      before do
+        allow(controller).to receive(:redirect_to)
+        controller.on_login_success
+      end
+      
+      it 'redirects to new_search_path path' do
+        expect(controller).to have_received(:redirect_to)
+          .with new_search_path
+      end
+    end
+
+    context 'on_authentication_success' do
+      let(:account)  { spy ('account') }
+      let(:warden)   { spy ('warden') }
+      
+      before do
+        allow(controller).to receive(:warden).and_return warden
+        allow(warden).to receive(:set_user)
+        controller.on_authentication_success account
+      end
+      
+      it 'sets warden user' do
+        expect(warden).to have_received(:set_user)
+          .with account
+      end
+    end
+
+    context 'on_authentication_fail' do
+      let(:exception)  { spy ('exception') }
+      
+      before do
+        allow(controller).to receive(:redirect_to)
+        controller.on_authentication_fail exception
+      end
+      
+      it 'redirects to not_found_path' do
+        expect(controller).to have_received(:redirect_to)
+          .with not_found_path
+      end
+    end
+  end
 end

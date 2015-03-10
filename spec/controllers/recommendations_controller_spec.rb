@@ -127,4 +127,36 @@ describe RecommendationsController do
       end
     end
   end
+
+  describe 'listeners' do
+    context 'on_next_step' do
+      before do
+        allow(controller).to receive(:redirect_to)
+        controller.on_next_step recommendation
+      end
+
+      it 'redirects to edit_recommendation_path' do
+        expect(controller).to have_received(:redirect_to)
+          .with edit_recommendation_path(recommendation)
+      end
+    end
+
+    context 'on_form_error' do
+      before do
+        allow(controller).to receive(:render)
+        allow(controller.flash).to receive(:now)
+        controller.on_form_error errors
+      end
+
+      it 'renders new template' do
+        expect(controller).to have_received(:render)
+          .with(:new)
+      end
+
+      it 'sets flash with errors' do
+        expect(controller.flash).to have_received(:now)
+          .with errors
+      end
+    end
+  end
 end
