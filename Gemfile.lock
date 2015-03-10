@@ -101,7 +101,7 @@ GEM
     colorize (0.7.5)
     columnize (0.9.0)
     dalli (2.7.2)
-    database_cleaner (1.4.0)
+    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
@@ -185,7 +185,7 @@ GEM
       faraday
       multi_json
     libv8 (3.16.14.7)
-    listen (2.8.5)
+    listen (2.9.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -304,7 +304,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    sexp_processor (4.4.5)
+    sexp_processor (4.5.0)
     shellany (0.0.1)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
