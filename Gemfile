@@ -20,6 +20,7 @@ gem 'hologram'                                            # A markdown based doc
 gem 'bourbon'                                             # A lightweight mixin library for Sass. 
 gem 'therubyracer'                                        # Embed the V8 Javascript Interpreter into Ruby
 gem 'activeadmin',              github: 'activeadmin'
+gem 'devise'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
