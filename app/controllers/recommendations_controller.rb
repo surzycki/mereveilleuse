@@ -1,7 +1,7 @@
 class RecommendationsController < ApplicationController
   before_filter :load_form, only: [ :edit, :update ]
   around_filter :catch_exceptions
-  
+
   # GET recommendations/new
   def new
     @form = RecommendationForm.new Recommendation.new
@@ -11,7 +11,7 @@ class RecommendationsController < ApplicationController
   def create
     @form = RecommendationForm.new Recommendation.new
     
-    RecommendationFormWizard.new(self).tap do |wizard|
+    RecommendationWizard.new(self).tap do |wizard|
       wizard.set @form, recommendation_params
     end 
   end
@@ -23,7 +23,7 @@ class RecommendationsController < ApplicationController
 
   # PUT recommendations/:id
   def update
-    RecommendationFormWizard.new(self).tap do |wizard|
+    RecommendationWizard.new(self).tap do |wizard|
       wizard.set @form, recommendation_params
     end 
   end
@@ -51,8 +51,7 @@ class RecommendationsController < ApplicationController
   def catch_exceptions
     yield
   rescue => error  
-    Raygun.track_exception(error)
-    logger.error("EXCEPTION CAUGHT: #{error}")
+    TrackError.new( error, logger )
     redirect_to not_found_path
   end
 end

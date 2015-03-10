@@ -1,4 +1,4 @@
-class RecommendationFormWizard
+class RecommendationWizard
   attr_reader :listener
 
   def initialize(listener)
@@ -11,7 +11,7 @@ class RecommendationFormWizard
     if form.next_step
       @listener.on_next_step form.recommendation
     else
-      @listener.on_form_error form.errors.full_messages.join(' - ')
+      @listener.on_form_error form.errors
     end
   end
 end

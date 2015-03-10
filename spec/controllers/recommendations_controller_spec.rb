@@ -1,8 +1,15 @@
 describe RecommendationsController do
-  let(:form) { spy('form') }
-
+  let(:form)            { spy('form') }
+  let(:wizard)          { spy('wizard') }
+  let(:params)          { spy('params') }
+  let(:errors)          { spy('errors') }
+  let(:recommendation)  { build_stubbed :recommendation }
+  
   before do
-    allow(RecommendationForm).to receive(:new).and_return(form)
+    allow(Recommendation).to       receive(:find).and_return recommendation
+    allow(RecommendationForm).to   receive(:new).and_return form
+    allow(RecommendationWizard).to receive(:new).and_return wizard
+    allow(controller).to receive(:recommendation_params).and_return params
   end
 
   describe 'GET new' do
@@ -25,47 +32,99 @@ describe RecommendationsController do
     end
   end
 
-  describe 'PUT update' do
+  describe 'POST create' do
     context 'success' do
-      context 'form step one' do
-        before do
-          allow(form).to receive(:next_step).and_return(true)
-          
-          put :update, recommendation_form: attr
-        end
-
-        it 'returns http redirect' do
-          expect(response).to be_redirect
-        end
-
-        it 'redirects to edit recommendation path' do
-          expect(response).to redirect_to edit_recommendation_path
-        end
-
-        it 'initializes a form' do
-          expect(RecommendationForm).to have_received(:new)
-        end
-
-        it 'assigns form' do
-          expect(assigns[:form]).to eq form
-        end
-
-        it 'assigns parameters to form' do
-          expect(form).to have_received(:attributes=)
-        end
-
-        it 'calls next step on form' do
-          expect(form).to have_received(:next_step)
-        end
+      before do
+        post :create, recommendation_form: params 
       end
 
-      context 'form completed' do
-        
+      it 'initializes form' do
+        expect(assigns[:form]).to eq form
+      end
+
+      it 'initializes wizard with context' do
+        expect(RecommendationWizard).to have_received(:new)
+          .with controller
+      end
+
+      it 'sets wizard' do
+        expect(wizard).to have_received(:set)
+          .with form, params
       end
     end
 
-    context 'fail' do
+    context 'exception' do
+      before do
+        allow(wizard).to receive(:set).and_throw :error
+        
+        post :create, recommendation_form: params 
+      end
+
+      it 'redirects to not_found_path' do
+        expect(response).to redirect_to not_found_path
+      end
+    end
+  end
+
+  describe 'GET edit' do
+    before { get :edit, id: recommendation }
+
+    it 'returns http success' do
+      expect(response).to be_success
+    end
+  
+    it 'renders the application layout' do
+      expect(response).to render_template(layout: 'application')
+    end
+  
+    it 'renders the new template' do
+      expect(response).to render_template(:new)
+    end
+
+    it 'finds form' do
+      expect(Recommendation).to have_received(:find)
+    end
+
+    it 'initializes form' do
+      expect(RecommendationForm).to have_received(:new)
+    end
+  end
+
+  describe 'PUT update' do
+    context 'success' do
+      before do
+        put :update, id: recommendation, recommendation_form: params
+      end
       
+      it 'finds form' do
+        expect(Recommendation).to have_received(:find)
+      end
+  
+      it 'initializes form' do
+        expect(RecommendationForm).to have_received(:new)
+      end
+
+      it 'initializes wizard with context' do
+        expect(RecommendationWizard).to have_received(:new)
+          .with controller
+      end
+
+      it 'sets wizard' do
+        expect(wizard).to have_received(:set)
+          .with form, params
+      end
+    end
+
+    context 'exception' do
+      before do
+        allow(wizard).to receive(:set).and_throw :error
+        
+        put :update, id: recommendation, recommendation_form: params
+      end
+
+      it 'redirects to not_found_path' do
+        expect(response).to redirect_to not_found_path
+      end
     end
   end
 end

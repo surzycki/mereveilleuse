@@ -1,4 +1,4 @@
-describe RecommendationForm, focus: true do
+describe RecommendationForm do
   subject { RecommendationForm.new recommendation }
   
   let(:recommendation) { Recommendation.new }
