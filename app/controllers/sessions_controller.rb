@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   def on_authentication_success(account)
     # set user_id in env for the authentication since we
     # aren't passing these during a via parmas in a post
-    warden.set_user account
+    warden.set_user account, scope: :user
   end
 
   def on_authentication_fail(exception = nil )

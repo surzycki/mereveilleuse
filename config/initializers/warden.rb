@@ -1,6 +1,8 @@
 Rails.configuration.middleware.use Warden::Manager do |manager|
   manager.default_strategies :facebook_canvas
-  manager.failure_app = lambda { |env| SessionsController.action(:on_authentication_fail).call(env) }
+  manager.scope_defaults :user, strategies: [:facebook_canvas]
+  
+  manager.failure_app   = lambda { |env| SessionsController.action(:on_authentication_fail).call(env) }
 end
 
 # Setup Session Serialization
