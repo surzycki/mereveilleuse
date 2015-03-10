@@ -81,7 +81,7 @@ describe SessionsController do
       
       it 'sets warden user' do
         expect(warden).to have_received(:set_user)
-          .with account
+          .with account, scope: :user
       end
     end
 
