@@ -16,8 +16,8 @@
       
       .form-group
         = f.label :patient_type, t('recommendation.form.patient_type.label')
-        = f.collection_select(:patient_type, PatientType.all, :id, :name)
-        =# f.text_field :patient_type, class: 'form-control', placeholder: t('recommendation.form.patient_type.placeholder')
+        = f.collection_select(:patient_type, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') } )
+        =# f.text_field :patient_type, class: 'form-control', placeholder: 
       
       .form-group
         = f.label :address, t('recommendation.form.address.label')
