@@ -8,6 +8,7 @@ class RecommendationForm
                 
   delegate :state, :state=, to: :recommendation
 
+  
   state_machine :state, initial: :step_one do
     before_transition do |object, transaction|
       object.valid?
@@ -68,7 +69,7 @@ class RecommendationForm
     @practitioner_id = practitioner.id
     @recommendation  = recommendation
   end
-  
+
   # turns attrs in hash, removes blanks
   # eg: 
   #     firstname = 'Joe'
