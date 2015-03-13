@@ -1,0 +1,20 @@
+// *************************************
+//
+//   State
+//   -> Collapsed, Active
+//
+//   State rules are ways to describe how our modules or layouts 
+//   will look when in a particular state. Is it hidden or expanded? 
+//   Is it active or inactive?
+//
+// *************************************
+
+.field_with_errors {
+  .form-control, select {
+    border-color: $warning-color !important;
+  
+    &:focus {
+      border-color: $warning-color !important;
+    }
+  }
+}

@@ -38,10 +38,29 @@ describe Location do
   end
 
   describe '#address' do
-    pending 'this needs to work'
+    let(:subject)  { build_stubbed :location }
+    
+    it 'returns address' do
+      address = "#{subject.street}, #{subject.postal_code}, #{subject.city}"
+      expect(subject.address).to eq(address)
+    end
+
+    it 'returns address (no postal_code)' do
+      subject.postal_code = ''
+
+      address = "#{subject.street}, #{subject.city}"
+      expect(subject.address).to eq(address)
+    end
+
+    it 'returns address (no city)' do
+      subject.city = ''
+
+      address = "#{subject.street}, #{subject.postal_code}"
+      expect(subject.address).to eq(address)
+    end
   end
 
   describe '#address=' do
-    pending 'this needs to work'
+    pending
   end
 end

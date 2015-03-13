@@ -10,15 +10,13 @@ describe RecommendationsController do
     allow(Recommendation).to       receive(:find).and_return recommendation
     allow(RecommendationForm).to   receive(:new).and_return form
     allow(RecommendationWizard).to receive(:new).and_return wizard
+    allow(Recommendation).to       receive(:new)
     allow(Practitioner).to         receive(:find_or_create_by).and_return practitioner
-    
-    allow(Recommendation).to receive(:new)
-    allow(Practitioner).to   receive(:new)
-
+  
     allow(controller).to receive(:recommendation_params).and_return params
   end
 
-  describe 'GET new', focus: true do
+  describe 'GET new' do
     context 'success' do
       before do 
         get :new
@@ -36,14 +34,6 @@ describe RecommendationsController do
         expect(response).to render_template(:new)
       end
   
-      it 'initializes form with blank practitioner' do
-        expect(Practitioner).to have_received(:new)
-      end
-
-      it 'initializes form with blank recommendation' do
-        expect(Recommendation).to have_received(:new)
-      end
-
       it 'assigns form' do
         expect(assigns[:form]).to eq form
       end
@@ -54,19 +44,19 @@ describe RecommendationsController do
     end
   end
 
-  describe 'POST create', focus: true do
+  describe 'POST create' do
     context 'success' do
       before do
-        post :create, recommendation_form: params
+        post :create, recommendation_form: params, practitioner_id: ''
       end
 
       it 'initializes form with blank recommendation' do
         expect(Recommendation).to have_received(:new)
       end
 
-      it 'initializes form with practitioner' do
+      it 'finds practitioner' do
         expect(Practitioner).to have_received(:find_or_create_by)
-          .with hash_including(id: practitioner.id.to_s)
+          .with(hash_including(id: ''))
       end
 
       it 'assigns form' do
@@ -88,7 +78,7 @@ describe RecommendationsController do
       before do
         allow(wizard).to receive(:set).and_throw :error
         
-        post :create, recommendation_form: params 
+        post :create, recommendation_form: params, practitioner_id: ''
       end
 
       it 'redirects to not_found_path' do
@@ -119,6 +109,7 @@ describe RecommendationsController do
   
       it 'finds form' do
         expect(Recommendation).to have_received(:find)
+          .with(recommendation.id.to_s)
       end
   
       it 'initializes form' do
@@ -139,6 +130,7 @@ describe RecommendationsController do
       
       it 'finds form' do
         expect(Recommendation).to have_received(:find)
+          .with(recommendation.id.to_s)
       end
   
       it 'initializes form' do
@@ -177,12 +169,12 @@ describe RecommendationsController do
     context 'on_next_step' do
       before do
         allow(controller).to receive(:redirect_to)
-        controller.on_next_step recommendation
+        controller.on_next_step form.recommendation
       end
 
       it 'redirects to edit_recommendation_path' do
         expect(controller).to have_received(:redirect_to)
-          .with edit_recommendation_path(recommendation)
+          .with edit_recommendation_path(form.recommendation)
       end
     end
 
@@ -190,6 +182,7 @@ describe RecommendationsController do
       before do
         allow(controller).to receive(:render)
         allow(controller.flash.now).to receive(:[]=)
+   
         controller.on_form_error errors
       end
 
@@ -200,7 +193,11 @@ describe RecommendationsController do
 
       it 'sets flash with errors' do
         expect(controller.flash.now).to have_received(:[]=)
-          .with :alert, errors
+          .with :alert, anything
+      end
+
+      it 'retrieves error messages' do
+        expect(errors).to have_received(:full_messages)
       end
     end
   end 

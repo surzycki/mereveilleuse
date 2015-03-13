@@ -5,7 +5,7 @@
 directories %w(app lib config spec)
 
 ## Uncomment to clear the screen before every task
-clearing :on
+#clearing :on
 
 guard :rspec, cmd: 'bin/rspec' do
   require "guard/rspec/dsl"

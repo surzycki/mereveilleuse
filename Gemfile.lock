@@ -213,6 +213,7 @@ GEM
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    namae (0.9.3)
     nenv (0.2.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -383,6 +384,7 @@ DEPENDENCIES
   jquery-rails
   koala (~> 1.11.0rc)
   lograge
+  namae
   pg
   puma
   rails (= 4.2.0)

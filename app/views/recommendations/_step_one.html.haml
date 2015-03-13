@@ -8,7 +8,7 @@
       .form-group
         = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
         = f.text_field :practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder') 
-        = f.hidden_field :practitioner_id
+        = hidden_field_tag :practitioner_id, ''
 
       .form-group
         = f.label :profession, t('recommendation.form.profession.label')

@@ -1,4 +1,28 @@
 fr:
+  activemodel:
+    attributes:
+      recommendation_form:
+        practitioner_name: Je recommande
+        profession: La spécialité
+        patient_type: Précisez pour qui
+        address: À l'adresse
+        user: utilisateur
+
+    errors:
+      models:
+        recommendation_form:
+          attributes:
+            practitioner_name:
+              blank: doit être rempli
+            profession: 
+              blank: doit être rempli
+            patient_type: 
+              blank: doit être rempli
+            address: 
+              blank: doit être rempli
+            user: 
+              blank: doit être rempli
+
   help:
     label: Vous avez besoin d'aide? 
   header:

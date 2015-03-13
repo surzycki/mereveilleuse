@@ -5,12 +5,12 @@ class RecommendationsController < ApplicationController
 
   # GET recommendations/new
   def new
-    @form = RecommendationForm.new Recommendation.new, Practitioner.new
+    @form = RecommendationForm.new 
   end 
 
   # POST recommendations
   def create 
-    @form = RecommendationForm.new Recommendation.new, Practitioner.find_or_create_by( id: recommendation_params['practitioner_id'] )
+    @form = RecommendationForm.new Recommendation.new, Practitioner.find_or_create_by( id: params[:practitioner_id] )
 
     RecommendationWizard.new(self).tap do |wizard|
       wizard.set @form, recommendation_params
@@ -35,7 +35,7 @@ class RecommendationsController < ApplicationController
   end
 
   def on_form_error(errors)
-    flash.now[:alert] = errors
+    flash.now[:alert] = errors.full_messages
     render :new
   end
 

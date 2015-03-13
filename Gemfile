@@ -19,8 +19,9 @@ gem 'bootstrap-sass'
 gem 'hologram'                                            # A markdown based documentation system for style guides.
 gem 'bourbon'                                             # A lightweight mixin library for Sass. 
 gem 'therubyracer'                                        # Embed the V8 Javascript Interpreter into Ruby
-gem 'activeadmin',              github: 'activeadmin'
+gem 'namae'                                               # Namae (名前) parses personal names and splits them into their component parts.
 gem 'devise'
+gem 'activeadmin',              github: 'activeadmin'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net

@@ -1,0 +1,7 @@
+- flash.each do |key, value| 
+  .flash-notification.flash-fixed-top{class: "#{key}"}
+    .flash-message
+      = value
+      
+- flash.discard(:alert)
+- flash.discard(:notice)

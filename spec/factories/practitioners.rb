@@ -12,18 +12,5 @@ FactoryGirl.define do
     occupations do |practitioner|
       Array.new(1) { practitioner.association :occupation }
     end
-
-    trait :blank do
-      firstname       ''
-      lastname        ''
-      email           ''
-      phone           ''
-      mobile_phone    ''
-      status          Practitioner.statuses[:not_indexed]
-
-      association :location, :blank
-    end
-
-    factory :empty_practitioner, traits: [:blank]
   end
 end
