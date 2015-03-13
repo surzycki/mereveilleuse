@@ -7,7 +7,7 @@ class RecommendationWizard
 
   def set(form, attributes)
     form.attributes = attributes
-
+    
     if form.next_step
       @listener.on_next_step form.recommendation
     else

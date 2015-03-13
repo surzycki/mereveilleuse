@@ -3,42 +3,73 @@ describe RecommendationsController do
   let(:wizard)          { spy('wizard') }
   let(:params)          { spy('params') }
   let(:errors)          { spy('errors') }
+  let(:practitioner)    { build_stubbed :practitioner }
   let(:recommendation)  { build_stubbed :recommendation }
-  
+
   before do
     allow(Recommendation).to       receive(:find).and_return recommendation
     allow(RecommendationForm).to   receive(:new).and_return form
     allow(RecommendationWizard).to receive(:new).and_return wizard
+    allow(Practitioner).to         receive(:find_or_create_by).and_return practitioner
+    
+    allow(Recommendation).to receive(:new)
+    allow(Practitioner).to   receive(:new)
+
     allow(controller).to receive(:recommendation_params).and_return params
   end
 
-  describe 'GET new' do
-    before { get :new }
-
-    it 'returns http success' do
-      expect(response).to be_success
-    end
+  describe 'GET new', focus: true do
+    context 'success' do
+      before do 
+        get :new
+      end 
   
-    it 'renders the application layout' do
-      expect(response).to render_template(layout: 'application')
-    end
+      it 'returns http success' do
+        expect(response).to be_success
+      end
+    
+      it 'renders the application layout' do
+        expect(response).to render_template(layout: 'application')
+      end
+    
+      it 'renders the new template' do
+        expect(response).to render_template(:new)
+      end
   
-    it 'renders the new template' do
-      expect(response).to render_template(:new)
+      it 'initializes form with blank practitioner' do
+        expect(Practitioner).to have_received(:new)
+      end
+
+      it 'initializes form with blank recommendation' do
+        expect(Recommendation).to have_received(:new)
+      end
+
+      it 'assigns form' do
+        expect(assigns[:form]).to eq form
+      end
     end
 
-    it 'initializes form' do
-      expect(assigns[:form]).to eq form
+    context 'unauthenticated' do
+      pending 'should handle this'
     end
   end
 
-  describe 'POST create' do
+  describe 'POST create', focus: true do
     context 'success' do
       before do
-        post :create, recommendation_form: params 
+        post :create, recommendation_form: params
       end
 
-      it 'initializes form' do
+      it 'initializes form with blank recommendation' do
+        expect(Recommendation).to have_received(:new)
+      end
+
+      it 'initializes form with practitioner' do
+        expect(Practitioner).to have_received(:find_or_create_by)
+          .with hash_including(id: practitioner.id.to_s)
+      end
+
+      it 'assigns form' do
         expect(assigns[:form]).to eq form
       end
 
@@ -64,29 +95,39 @@ describe RecommendationsController do
         expect(response).to redirect_to not_found_path
       end
     end
+
+    context 'unauthenticated' do
+      pending 'should handle this'
+    end
   end
 
   describe 'GET edit' do
-    before { get :edit, id: recommendation }
-
-    it 'returns http success' do
-      expect(response).to be_success
-    end
+    context 'success' do
+      before { get :edit, id: recommendation }
   
-    it 'renders the application layout' do
-      expect(response).to render_template(layout: 'application')
-    end
+      it 'returns http success' do
+        expect(response).to be_success
+      end
+    
+      it 'renders the application layout' do
+        expect(response).to render_template(layout: 'application')
+      end
+    
+      it 'renders the new template' do
+        expect(response).to render_template(:new)
+      end
   
-    it 'renders the new template' do
-      expect(response).to render_template(:new)
+      it 'finds form' do
+        expect(Recommendation).to have_received(:find)
+      end
+  
+      it 'initializes form' do
+        expect(RecommendationForm).to have_received(:new)
+      end
     end
 
-    it 'finds form' do
-      expect(Recommendation).to have_received(:find)
-    end
-
-    it 'initializes form' do
-      expect(RecommendationForm).to have_received(:new)
+    context 'unauthenticated' do
+      pending 'should handle this'
     end
   end
 
@@ -126,6 +167,10 @@ describe RecommendationsController do
         expect(response).to redirect_to not_found_path
       end
     end
+
+    context 'unauthenticated' do
+      pending 'should handle this'
+    end
   end
 
   describe 'listeners' do
@@ -158,5 +203,5 @@ describe RecommendationsController do
           .with :alert, errors
       end
     end
-  end
+  end 
 end

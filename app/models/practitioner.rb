@@ -9,6 +9,8 @@ class Practitioner < ActiveRecord::Base
   has_many :occupations, dependent: :destroy, autosave: true
   has_many :professions, through: :occupations
 
+  enum status: [ :not_indexed, :indexed ]
+
   private
   def set_uuid
     self.uuid ||= SecureRandom.uuid rescue nil

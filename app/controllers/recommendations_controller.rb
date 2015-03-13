@@ -1,16 +1,17 @@
 class RecommendationsController < ApplicationController
-  before_filter :load_form, only: [ :edit, :update ]
+  before_filter :load_form,   only: [ :edit, :update ]
+
   around_filter :catch_exceptions
 
   # GET recommendations/new
   def new
-    @form = RecommendationForm.new Recommendation.new
+    @form = RecommendationForm.new Recommendation.new, Practitioner.new
   end 
 
   # POST recommendations
-  def create
-    @form = RecommendationForm.new Recommendation.new
-    
+  def create 
+    @form = RecommendationForm.new Recommendation.new, Practitioner.find_or_create_by( id: recommendation_params['practitioner_id'] )
+
     RecommendationWizard.new(self).tap do |wizard|
       wizard.set @form, recommendation_params
     end 
@@ -29,8 +30,8 @@ class RecommendationsController < ApplicationController
   end
 
   # event listeners
-  def on_next_step(recommendation)
-    redirect_to edit_recommendation_path(recommendation)
+  def on_next_step(form)
+    redirect_to edit_recommendation_path(form.recommendation)
   end
 
   def on_form_error(errors)

@@ -21,11 +21,27 @@ describe Location do
     it 'has an country' do
       expect(subject).to respond_to :country
     end
+
+    it 'has a latitude' do
+      expect(subject).to respond_to :latitude
+    end
+
+    it 'has a longitude' do
+      expect(subject).to respond_to :longitude
+    end
   end
 
   describe 'associations' do
     it 'belongs to' do
       expect(subject).to belong_to(:locatable)
     end
+  end
+
+  describe '#address' do
+    pending 'this needs to work'
+  end
+
+  describe '#address=' do
+    pending 'this needs to work'
   end
 end

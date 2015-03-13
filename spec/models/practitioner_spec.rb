@@ -1,4 +1,4 @@
-describe Practitioner do
+describe Practitioner, focus: true do
   describe '#initialize' do
     it 'initializes' do
       expect{ Practitioner.new }.to_not raise_error
@@ -28,6 +28,15 @@ describe Practitioner do
 
     it 'has uuid' do
       expect(subject).to respond_to :uuid
+    end
+
+    it 'has a status' do
+      expect(subject).to respond_to :status
+    end
+
+    it 'defines enum for status' do
+      expect(subject).to define_enum_for(:status)
+        .with [ :not_indexed, :indexed ]
     end
   end
 
@@ -67,5 +76,26 @@ describe Practitioner do
         expect(Practitioner.new).to have_received(:set_uuid)
       end
     end
+  end
+
+  describe '#fullname=' do
+    pending 'this needs to work'
+  end
+
+  describe '#fullname' do
+    pending 'this needs to work'
+  end
+
+  describe '#address' do
+    pending 'this needs to work'
+  end
+
+  describe '#address=' do
+    pending 'this needs to work'
+  end
+
+  describe '#add_occupation' do
+    # prevent from adding same occupation 2x
+    pending 'this needs to work'
   end
 end

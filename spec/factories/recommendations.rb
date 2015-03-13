@@ -8,6 +8,7 @@ FactoryGirl.define do
 
     user
     practitioner
+    profession
 
     patient_types do |practitioner|
       Array.new(1) { practitioner.association :patient_type }

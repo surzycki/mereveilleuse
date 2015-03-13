@@ -1,9 +1,11 @@
 class RecommendationForm 
   include ActiveModel::Model
 
-  attr_accessor :practitioner, :patient_type, :profession, :address, :user, :recommendation,
+  attr_reader   :practitioner, :recommendation, :practitioner_id 
+
+  attr_accessor :practitioner_name, :patient_type, :profession, :address, :user,
                 :wait_time, :availability, :bedside_manner, :efficacy, :comment
-  
+                
   delegate :state, :state=, to: :recommendation
 
   state_machine :state, initial: :step_one do
@@ -22,13 +24,24 @@ class RecommendationForm
 
     state :step_one do
       def form_fields
-        [:practitioner, :patient_type, :profession, :address]
+        [:practitioner_name, :practitioner_id, :user, :patient_type, :profession, :address]
+      end
+
+      def save
+        attributes = hashify(:user, :profession )
+                      .merge(patient_type_ids: [ @patient_type ] )
+                      .merge(practitioner_id: @practitioner.id )
+        
+        @recommendation.update_attributes attributes
       end
     end
 
     state :step_two do
       def form_fields
         [:wait_time, :availability, :bedside_manner, :efficacy, :comment]
+      end
+
+      def save
       end
     end
 
@@ -50,11 +63,20 @@ class RecommendationForm
     end
   end
 
-  def initialize(recommendation)
-    @recommendation = recommendation
+  def initialize(recommendation, practitioner)
+    @practitioner    = practitioner
+    @practitioner_id = practitioner.id
+    @recommendation  = recommendation
   end
-
-  def save
-    @recommendation.save
+  
+  # turns attrs in hash, removes blanks
+  # eg: 
+  #     firstname = 'Joe'
+  #     lastname  = ''
+  #     hashify :firstname, :lastname => { firstname: 'Joe' }
+  def hashify(*attrs)
+    Hash[*[attrs.map do |attr|
+      [attr, send(attr)]
+    end].flatten].delete_if { |k,v| v.blank? }
   end
 end

@@ -44,6 +44,10 @@ describe Recommendation do
       expect(subject).to belong_to(:practitioner)
     end
 
+    it 'belongs_to profession' do
+      expect(subject).to belong_to(:profession)
+    end
+
     it 'has and belongs to many patient_types' do
       expect(subject).to have_and_belong_to_many(:patient_types)
     end

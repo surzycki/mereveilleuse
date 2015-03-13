@@ -6,9 +6,9 @@
   .col-sm-6
     = form_for(@form, url: recommendations_path, method: :post) do |f|
       .form-group
-        = label_tag :practitioner_name, t('recommendation.form.practitioner_name.label')
-        = search_field_tag :practitioner_name, nil, placeholder: t('recommendation.form.practitioner_name.placeholder'), class: 'form-control' 
-        = f.hidden_field :practitioner
+        = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
+        = f.text_field :practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder') 
+        = f.hidden_field :practitioner_id
 
       .form-group
         = f.label :profession, t('recommendation.form.profession.label')

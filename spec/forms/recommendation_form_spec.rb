@@ -1,21 +1,31 @@
 describe RecommendationForm do
-  subject { RecommendationForm.new recommendation }
-  
-  let(:recommendation) { Recommendation.new }
+  subject { RecommendationForm.new Recommendation.new, practitioner }
 
-  describe '#initialize' do
-    it 'initializes with recommendation' do
-      expect { RecommendationForm.new recommendation }.to_not raise_error
+  let(:practitioner)    { build_stubbed :practitioner }
+  let(:attributes)      { attributes_for :recommendation_form }
+  let(:recommendation)  { subject.recommendation}
+
+  describe '#initialize', focus: true do
+    it 'initializes with recommendation and practitioner' do
+      expect { RecommendationForm.new Recommendation.new, practitioner }.to_not raise_error
     end
 
-    it 'errors without recommendation' do
-      expect { RecommendationForm.new }.to raise_error
+    it 'errors without practitioner' do
+      expect { RecommendationForm.new Recommendation.new }.to raise_error
     end
   end
 
   describe 'attributes' do
     it 'has a practitioner' do 
       expect(subject).to respond_to :practitioner
+    end
+
+    it 'has a practitioner_name' do 
+      expect(subject).to respond_to :practitioner_name
+    end
+
+    it 'has a user' do
+      expect(subject).to respond_to :user
     end
 
     it 'has a patient_type' do 
@@ -52,7 +62,7 @@ describe RecommendationForm do
 
     it 'has a state' do
       expect(subject).to respond_to :state
-    end
+    end    
   end
 
   describe 'state machine' do
@@ -81,13 +91,34 @@ describe RecommendationForm do
     end
   end
 
-  describe 'transitions' do
+  describe 'transition callbacks' do
+    context 'before transition' do
+      before do
+        allow(subject).to receive(:valid?)
+        subject.next_step
+      end
+      
+      it 'checks form validity' do
+        expect(subject).to have_received(:valid?)
+      end
+    end
+
+    context 'after transition' do
+      before do
+        allow(subject).to receive(:save)
+        subject.next_step
+      end
+
+      it 'saves form' do
+        expect(subject).to have_received(:save)
+      end
+    end
   end
 
-  describe 'form_fields' do
+  describe '#form_fields' do
     context 'step_one' do
       it 'has form fields' do
-        expect(subject.form_fields).to eq [:practitioner, :patient_type, :profession, :address]
+        expect(subject.form_fields).to eq [:practitioner_id, :practitioner_name, :user, :patient_type, :profession, :address]
       end
     end
 
@@ -100,6 +131,196 @@ describe RecommendationForm do
 
     context 'step_three' do
       
+    end
+  end
+
+  describe '#save' do
+    context 'step_one' do
+      before do
+        allow(recommendation).to receive(:update_attributes)
+        allow(practitioner).to receive(:update_attributes)
+      end
+
+      context 'existing practitioner' do
+        before do
+          subject.attributes = attributes
+          subject.save
+        end
+        
+        it 'updates recommendation with practitioner_id' do
+          expect(recommendation).to have_received(:update_attributes)
+            .with hash_including(practitioner_id: practitioner.id) 
+        end 
+  
+        it 'updates recommendation with user' do
+          expect(recommendation).to have_received(:update_attributes)
+            .with hash_including(user: attributes[:user]) 
+        end
+  
+        it 'updates recommendation with profession' do
+          expect(recommendation).to have_received(:update_attributes)
+            .with hash_including(profession: attributes[:profession]) 
+        end
+
+        it 'updates recommendation with patient_type' do
+          expect(recommendation).to have_received(:update_attributes)
+            .with hash_including(patient_type_ids: [ attributes[:patient_type] ] ) 
+        end
+
+        it 'does NOT update practitioner' do
+          expect(practitioner).to_not have_received(:update_attributes)
+        end
+      end
+
+      context 'new practitioner' do
+        let(:practitioner) { build_stubbed :empty_practitioner }
+
+        before do
+          allow(practitioner).to receive(:fullname=)
+          allow(practitioner).to receive(:address=)
+          allow(practitioner).to receive(:add_occupation)
+
+          subject.attributes = attributes.merge(practitioner_name: 'New Practitioner' )
+          subject.save
+        end
+
+        it 'updates recommendation with practitioner_id' do
+          expect(recommendation).to have_received(:update_attributes)
+            .with hash_including(practitioner_id: practitioner.id) 
+        end 
+   
+        it 'updates recommendation with user' do
+          expect(recommendation).to have_received(:update_attributes)
+            .with hash_including(user: attributes[:user]) 
+        end
+  
+        it 'updates recommendation with profession' do
+          expect(recommendation).to have_received(:update_attributes)
+            .with hash_including(profession: attributes[:profession]) 
+        end
+
+        it 'update practitioner to not_indexed' do
+          expect(pactitioner).to have_received(:not_indexed!)
+        end
+  
+        it 'updates practitioner with practitioner_name' do
+          expect(pactitioner).to have_received(:fullname=)
+            .with attributes[:practitioner_name]
+        end
+  
+        it 'update practitioner with address' do
+          expect(practitioner).to have_received(:address=)
+            .with attributes[:address]
+        end
+  
+        it 'update practitioner with occupation' do
+          expect(practitioner).to have_received(:add_occupation)
+            .with attributes[:profession]
+        end
+      end
+
+      context 'modifying practitioner' do
+        
+      end
+    end
+
+    context 'step_two' do
+      before do
+        allow(recommendation).to receive(:update_attributes)
+        
+        subject.state      = 'step_two'
+        subject.attributes = attributes
+        subject.save
+      end
+
+      it 'updates recommendation with wait_time' do
+        expect(recommendation).to have_received(:update_attributes)
+          .with hash_including(wait_time: attributes[:wait_time]) 
+      end
+
+      it 'updates recommendation with availability' do
+        expect(recommendation).to have_received(:update_attributes)
+          .with hash_including(availability: attributes[:availability]) 
+      end
+
+      it 'updates recommendation with bedside_manner' do
+        expect(recommendation).to have_received(:update_attributes)
+          .with hash_including(bedside_manner: attributes[:bedside_manner]) 
+      end
+
+      it 'updates recommendation with efficacy' do
+        expect(recommendation).to have_received(:update_attributes)
+          .with hash_including(efficacy: attributes[:efficacy]) 
+      end
+
+      it 'updates recommendation with comment' do
+        expect(recommendation).to have_received(:update_attributes)
+          .with hash_including(comment: attributes[:comment]) 
+      end
+
+      it 'does NOT update practitioner' do
+        expect(practitioner).to_not have_received(:update_attributes)
+      end
+    end
+
+  
+    context 'modifying practitioner' do
+      before do
+        allow(practitioner).to have_received(:not_indexed!)
+        allow(practitioner).to have_received(:fullname=)
+        allow(practitioner).to have_received(:address=)
+      end
+
+      context 'modifying existing practitioner' do
+        it 'sets practitioner to not_indexed' do
+          expect(pactitioner).to have_received(:not_indexed!)
+        end
+  
+        it 'updates practitioner with name' do
+          expect(pactitioner).to have_received(:fullname=)
+            .with attributes[:practitioner_name]
+        end
+  
+        it 'update practitioner with address' do
+          expect(practitioner).to have_received(:address=)
+            .with attributes[:address]
+        end
+  
+        it 'update practitioner with occupation' do
+          expect(practitioner).to have_received(:add_occupation)
+            .with attributes[:profession]
+        end
+      end
+
+      context 'new practitioner' do
+        it 'creates a pactitioner' do
+          expect(Practitioner).to have_received(:find_or_create_by)
+            .with hash_including(id: attributes[:practitioner_id])
+        end
+  
+        it 'sets practitioner to not_indexed' do
+          expect(pactitioner).to have_received(:not_indexed!)
+        end
+  
+        it 'updates practitioner with name' do
+          expect(pactitioner).to have_received(:set_name)
+            .with attributes[:practitioner_name]
+        end
+  
+        it 'update practitioner with address' do
+          expect(practitioner).to have_received(:address)
+            .with attributes[:address]
+        end
+  
+        it 'update practitioner with occupation' do
+          expect(practitioner).to have_received(:add_occupation)
+            .with attributes[:profession]
+        end
+      end
+    end
+
+    context 'multiple writes' do
+      pending
     end
   end
 end

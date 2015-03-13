@@ -3,4 +3,5 @@ class Recommendation < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :practitioner
+  belongs_to :profession
 end

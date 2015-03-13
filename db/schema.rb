@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310212652) do
+ActiveRecord::Schema.define(version: 20150311144711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,14 +50,16 @@ ActiveRecord::Schema.define(version: 20150310212652) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "street"
     t.string   "city"
     t.string   "postal_code"
     t.string   "country"
     t.integer  "locatable_id"
     t.string   "locatable_type"
+    t.float    "latitude",       default: 0.0
+    t.float    "longitude",      default: 0.0
   end
 
   add_index "locations", ["locatable_type", "locatable_id"], name: "index_locations_on_locatable_type_and_locatable_id", using: :btree
@@ -88,14 +90,15 @@ ActiveRecord::Schema.define(version: 20150310212652) do
   add_index "patient_types_recommendations", ["recommendation_id"], name: "index_patient_types_recommendations_on_recommendation_id", using: :btree
 
   create_table "practitioners", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "firstname"
     t.string   "lastname"
     t.string   "email"
     t.string   "phone"
     t.string   "mobile_phone"
     t.string   "uuid"
+    t.integer  "status",       default: 0
   end
 
   create_table "professions", force: :cascade do |t|
@@ -115,9 +118,11 @@ ActiveRecord::Schema.define(version: 20150310212652) do
     t.integer  "user_id"
     t.integer  "practitioner_id"
     t.string   "state",           default: "step_one"
+    t.integer  "profession_id"
   end
 
   add_index "recommendations", ["practitioner_id"], name: "index_recommendations_on_practitioner_id", using: :btree
+  add_index "recommendations", ["profession_id"], name: "index_recommendations_on_profession_id", using: :btree
   add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
