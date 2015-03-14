@@ -1,7 +1,7 @@
 class RecommendationsController < ApplicationController
-  before_filter :load_form,   only: [ :edit, :update ]
+  before_filter :load_form, only: [ :edit, :update ]
 
-  around_filter :catch_exceptions
+  around_filter :catch_exceptions, unless: 'Rails.env.development?'
 
   # GET recommendations/new
   def new
@@ -9,9 +9,9 @@ class RecommendationsController < ApplicationController
   end 
 
   # POST recommendations
-  def create 
-    @form = RecommendationForm.new Recommendation.new, Practitioner.find_or_create_by( id: params[:practitioner_id] )
-
+  def create
+    @form = RecommendationForm.new Recommendation.new, find_practitioner_by_name
+    
     RecommendationWizard.new(self).tap do |wizard|
       wizard.set @form, recommendation_params
     end 
@@ -40,13 +40,16 @@ class RecommendationsController < ApplicationController
   end
 
   private
-  
   def recommendation_params
-    params.require(:recommendation_form).permit(@form.form_fields)
+    params.require(:recommendation_form).permit(:practitioner_name, :user_id, :patient_type_id, :profession_id, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment)
   end
 
   def load_form
     @form = RecommendationForm.new Recommendation.find(params[:id])
+  end
+
+  def find_practitioner_by_name
+    Practitioner.find_by_fullname recommendation_params[:practitioner_name]
   end
 
   def catch_exceptions

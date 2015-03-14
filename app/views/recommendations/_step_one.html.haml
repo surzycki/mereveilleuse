@@ -8,15 +8,15 @@
       .form-group
         = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
         = f.text_field :practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder') 
-        = hidden_field_tag :practitioner_id, ''
+        = f.hidden_field :user_id, value: current_user.id
 
       .form-group
-        = f.label :profession, t('recommendation.form.profession.label')
-        = f.collection_select(:profession, Profession.all, :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
+        = f.label :profession_id, t('recommendation.form.profession.label')
+        = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
            
       .form-group
-        = f.label :patient_type, t('recommendation.form.patient_type.label')
-        = f.collection_select(:patient_type, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
+        = f.label :patient_type_id, t('recommendation.form.patient_type.label')
+        = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
         
       .form-group
         = f.label :address, t('recommendation.form.address.label')

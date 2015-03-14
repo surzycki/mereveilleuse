@@ -8,6 +8,7 @@
 
 PatientType.delete_all
 Profession.delete_all
+User.delete_all
 
 patient_types = PatientType.create([
   { name: 'Une future maman'},
@@ -17,10 +18,14 @@ patient_types = PatientType.create([
   { name: 'Un adolescent (12 ans +)'}
 ])
 
-profression = Profession.create([
+professions = Profession.create([
   { name: 'Médecin Généralist' },
   { name: 'Nutritionniste' },
   { name: 'Ostéopathes' },
   { name: 'Pédiatres' },
   { name: 'Sophrologues' }
+])
+
+users = User.create([
+  { facebook_id: 123, firstname: 'Bob', lastname: 'Hope', email: 'bob@test.com' }
 ])

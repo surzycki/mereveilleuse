@@ -6,5 +6,6 @@ class Location < ActiveRecord::Base
   end
 
   def address=(value)
+    
   end
 end

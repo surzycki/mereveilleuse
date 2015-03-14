@@ -9,7 +9,7 @@ class RecommendationWizard
     form.attributes = attributes
     
     if form.next_step
-      @listener.on_next_step form.recommendation
+      @listener.on_next_step form
     else
       @listener.on_form_error form.errors
     end

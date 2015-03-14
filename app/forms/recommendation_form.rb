@@ -3,66 +3,56 @@ class RecommendationForm
 
   attr_reader   :practitioner, :recommendation
 
-  attr_accessor :practitioner_id, :practitioner_name, :patient_type, :profession, :address, :user,
+  attr_accessor :practitioner_name, :patient_type_id, :profession_id, :address, :user_id,
                 :wait_time, :availability, :bedside_manner, :efficacy, :comment
                 
   delegate :state, :state=, to: :recommendation
   
   state_machine :state, initial: :step_one do
     before_transition do |object, transaction|
-      object.valid?
+      object.valid? ? object.save : false
     end
 
     after_transition do |object, transaction|
-      object.save
+      # save state
+      object.recommendation.save
     end
 
-    # finalize
-    #after_transition from: :step_three do |object|
-      
-    #end
-
     state :step_one do
-      validates :practitioner_name, :practitioner_id, :user, :patient_type, :profession, :address, presence: true 
+      validates :practitioner_name, :user_id, :patient_type_id, :profession_id, :address, presence: true 
      
-      def form_fields
-        [:practitioner_name, :user, :patient_type, :profession, :address]
-      end
-
-      def save
-        attributes = hashify(:user, :profession )
-                      .merge(patient_type_ids: [ patient_type ] )
-                      .merge(practitioner_id: practitioner.id )
+      def save 
+        recommendation.attributes   = hashify(:user_id, :profession_id ).merge(patient_type_ids: [ patient_type_id ] )
+        recommendation.practitioner = practitioner
         
-        recommendation.update_attributes attributes
-
         # someone has changed the practitioner information needs to be handled
         if update_practitioner?
           practitioner.fullname = practitioner_name
           practitioner.address  = address
-
-          practitioner.add_occupation profession
-          practitioner.not_indexed!
-        end
+          practitioner.status   = :not_indexed
+          
+          practitioner.add_occupation profession_id
+          practitioner.save
+        end  
+      rescue 
+        false      
       end
     end
 
     state :step_two do
-      validates :wait_time, :availability, :bedside_manner, :efficacy, presence: true 
-
-      def form_fields
-        [:wait_time, :availability, :bedside_manner, :efficacy, :comment]
-      end
+      validates :wait_time, :availability, :bedside_manner, :efficacy, :comment, presence: true 
 
       def save
-        attributes = hashify(:wait_time, :availability, :bedside_manner, :efficacy, :comment )
-        
-        recommendation.update_attributes attributes
+        recommendation.attributes = hashify(:wait_time, :availability, :bedside_manner, :efficacy, :comment )
+      rescue 
+        false      
       end
     end
 
     state :step_three do
-      
+      def save
+        
+      end
     end
 
     event :next_step do
@@ -80,32 +70,24 @@ class RecommendationForm
   end
 
   def initialize(recommendation = nil, practitioner = nil)
-    
-    @practitioner    = practitioner || Practitioner.new
-    @practitioner_id = practitioner.try(:id)
-    @recommendation  = recommendation || Recommendation.new
+    @practitioner   = practitioner || Practitioner.new
+    @recommendation = recommendation || Recommendation.new
   end
 
-  # turns attrs in hash, removes blanks
-  # eg: 
-  #     firstname = 'Joe'
-  #     lastname  = ''
-  #     hashify :firstname, :lastname => { firstname: 'Joe' }
-  def hashify(*attrs)
-    Hash[*[attrs.map do |attr|
-      [attr, send(attr)]
-    end].flatten].delete_if { |k,v| v.blank? }
-  end
-
-  # determines if the practitioner needs updating
-  # by hashing modifiable attributes against current practitioner
   def update_practitioner?
     # is a new practitioner, go ahead and update
     return true if practitioner.primary_occupation.nil?
 
-    input  = Digest::MD5.hexdigest("#{practitioner_name}-#{profession}-#{address}") 
-    actual = Digest::MD5.hexdigest("#{practitioner.fullname}-#{practitioner.primary_occupation.id}-#{practitioner.address}")
+    input  = Digest::MD5.hexdigest("#{practitioner_name}-#{profession_id}-#{address}") 
+    actual = Digest::MD5.hexdigest("#{practitioner.fullname}-#{practitioner.primary_occupation.profession_id}-#{practitioner.address}")
     
     input != actual
+  end
+
+  # turns attrs in hash, removes blanks
+  def hashify(*attrs)
+    Hash[*[attrs.map do |attr|
+      [attr, send(attr)]
+    end].flatten].delete_if { |k,v| v.blank? }
   end
 end

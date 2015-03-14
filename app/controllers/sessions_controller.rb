@@ -2,14 +2,14 @@ class SessionsController < ApplicationController
   # For the entry point we have to skip the authenticity validations, as the post is coming
   # from facebook
   skip_before_filter :verify_authenticity_token, only: :index
-  around_filter :catch_exceptions
+  around_filter :catch_exceptions, unless: 'Rails.env.development?'
 
   # GET /session
   # POST /session
   def index 
     # for testing
     if request.method == 'GET'
-      on_authentication_success(User.last)
+      on_authentication_success(User.first)
       on_registration_success
     else
       Authentication.new(self).tap do |auth|

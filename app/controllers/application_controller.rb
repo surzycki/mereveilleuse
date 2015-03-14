@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    warden.user
+    warden.user scope: :user
   end
 
   private

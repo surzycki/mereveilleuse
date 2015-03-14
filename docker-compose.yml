@@ -8,6 +8,7 @@ dev:
   links:
     - db
     - memcached
+    - redis
   environment:
     RAILS_ENV: development
   
@@ -32,5 +33,8 @@ memcached:
   image: sameersbn/memcached:latest
   environment:
     CACHE_SIZE: '64'
+
+redis: 
+  image: redis
 
 

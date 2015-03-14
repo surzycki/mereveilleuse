@@ -1,16 +1,16 @@
 %p= f.label :wait_time, t("rating.form.#{item}.label")
 %label.radio-inline
-  = radio_button('recommendation_form', item, 0)
+  = f.radio_button item, 0
   0
 %label.radio-inline
-  = radio_button('recommendation_form', item, 1)
+  = f.radio_button item, 1
   1
 %label.radio-inline
-  = radio_button('recommendation_form', item, 2)
+  = f.radio_button item, 2
   2
 %label.radio-inline
-  = radio_button('recommendation_form', item, 3)
+  = f.radio_button item, 3
   3
 %label.radio-inline
-  = radio_button('recommendation_form', item, 4)
+  = f.radio_button item, 4
   4

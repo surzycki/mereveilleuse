@@ -10,8 +10,8 @@ describe RecommendationsController do
     allow(Recommendation).to       receive(:find).and_return recommendation
     allow(RecommendationForm).to   receive(:new).and_return form
     allow(RecommendationWizard).to receive(:new).and_return wizard
-    allow(Recommendation).to       receive(:new)
-    allow(Practitioner).to         receive(:find_or_create_by).and_return practitioner
+    allow(Recommendation).to       receive(:new).and_return recommendation
+    allow(Practitioner).to         receive(:find_by_fullname).and_return practitioner
   
     allow(controller).to receive(:recommendation_params).and_return params
   end
@@ -55,8 +55,7 @@ describe RecommendationsController do
       end
 
       it 'finds practitioner' do
-        expect(Practitioner).to have_received(:find_or_create_by)
-          .with(hash_including(id: ''))
+        expect(Practitioner).to have_received(:find_by_fullname)
       end
 
       it 'assigns form' do
@@ -107,9 +106,8 @@ describe RecommendationsController do
         expect(response).to render_template(:new)
       end
   
-      it 'finds form' do
-        expect(Recommendation).to have_received(:find)
-          .with(recommendation.id.to_s)
+      it 'assigns form' do
+        expect(assigns[:form]).to eq form
       end
   
       it 'initializes form' do
@@ -128,9 +126,8 @@ describe RecommendationsController do
         put :update, id: recommendation, recommendation_form: params
       end
       
-      it 'finds form' do
-        expect(Recommendation).to have_received(:find)
-          .with(recommendation.id.to_s)
+      it 'assigns form' do
+        expect(assigns[:form]).to eq form
       end
   
       it 'initializes form' do

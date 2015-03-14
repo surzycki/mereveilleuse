@@ -43,6 +43,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara'                                          # Acceptance test framework for web application
+  gem 'turnip'                                            # Gherkin extension for RSpec
   gem 'guard'                                             # Guard is a command line tool to easily handle events on file system modifications
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+

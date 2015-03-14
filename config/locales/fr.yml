@@ -3,10 +3,15 @@ fr:
     attributes:
       recommendation_form:
         practitioner_name: Je recommande
-        profession: La spécialité
-        patient_type: Précisez pour qui
+        profession_id: La spécialité
+        patient_type_id: Précisez pour qui
         address: À l'adresse
-        user: utilisateur
+        user_id: utilisateur
+        wait_time: Ponctualité
+        availability: Disponibilité
+        bedside_manner: Accueil & suivi
+        efficacy: Efficacité
+        comment: Expérience avec ce professionnel
 
     errors:
       models:
@@ -14,14 +19,25 @@ fr:
           attributes:
             practitioner_name:
               blank: doit être rempli
-            profession: 
+            profession_id: 
               blank: doit être rempli
-            patient_type: 
+            patient_type_id: 
               blank: doit être rempli
             address: 
               blank: doit être rempli
-            user: 
+            user_id: 
               blank: doit être rempli
+            wait_time:
+              blank: doit être rempli
+            availability: 
+              blank: doit être rempli
+            bedside_manner:
+              blank: doit être rempli
+            efficacy:
+              blank: doit être rempli
+            comment:  
+              blank: doit être rempli
+
 
   help:
     label: Vous avez besoin d'aide? 
