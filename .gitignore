@@ -15,4 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
-deploy_id_rsa
+
+
+.DS_Store
