@@ -19,7 +19,6 @@ test:
     - .:/var/www
   links:
     - db
-    - memcached
   environment:
     RAILS_ENV: test
 

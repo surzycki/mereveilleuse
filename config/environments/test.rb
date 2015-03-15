@@ -38,7 +38,7 @@ Rails.application.configure do
   config.active_support.deprecation = :stderr
 
   # config namespaced store, servers stored in ENV
-  config.cache_store = :dalli_store, nil, { namespace: 'mereveilleuse-test', compress: true }
+  #config.cache_store = :dalli_store, nil, { namespace: 'mereveilleuse-test', compress: true }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
