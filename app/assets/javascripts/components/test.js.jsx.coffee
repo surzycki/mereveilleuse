@@ -1,6 +1,7 @@
-CommentBox = React.createClass(render: ->
+root = exports ? this
+
+root.CommentBox = React.createClass(render: ->
   `<h1>yo</h1>`
 )
 
-React.render `<CommentBox/>`, document.getElementById('example')
 
