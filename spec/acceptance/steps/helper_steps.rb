@@ -12,7 +12,7 @@ module HelperSteps
     path = case page
     when 'recommendation step one'
       new_recommendation_path
-    when 'recommendation step two'
+    when 'recommendation step two', 'recommendation step three'
       edit_recommendation_path(Recommendation.first || 1)
     else
       root_path
@@ -27,7 +27,7 @@ module HelperSteps
     path = case page
     when 'recommendation step one'
       new_recommendation_path
-    when 'recommendation step two'
+    when 'recommendation step two', 'recommendation step three'
       edit_recommendation_path(Recommendation.first || 1)
     else
       root_path
@@ -37,14 +37,18 @@ module HelperSteps
   end
 
   step 'I modify the :model :attribute with :value' do |model_name, attribute, value|
-    id = "#{model_name.underscore}_#{attribute.underscore}"
+    id = "#{underscoreize(model_name)}_#{underscoreize(attribute)}"
     fill_in "#{id}", with: value
 
     form_modifications[id.to_sym] = value
   end
 
   step 'I select :option from :field on :form' do |option, field, form|
-    select option, from: "#{form.underscore}[#{field.underscore}]"
+    select option, from: "#{underscoreize(form)}[#{underscoreize(field)}]"
+  end
+
+  step 'I choose :field :value on the :form' do |field, value, form|
+    choose "#{underscoreize(form)}_#{underscoreize(field)}_#{value}"
   end
 
   step 'I submit the form' do
@@ -52,17 +56,13 @@ module HelperSteps
   end
 
   step 'there :are :count :model' do |are, count, model|
-    expect(model.singularize.capitalize.constantize.count).to eq count.to_i
+    expect(translate_model(model).count).to eq count.to_i
   end
 
-  step 'I see an error message' do
-    expect(page).to have_css('.alert.flash-fixed-top.flash-notification')
-  end
+  step 'I :whether_to see an error message' do |positive|
+    expectation = positive ? :to : :not_to
 
-  step 'a practitioner :fullname exists' do |fullname|
-    @practitioner = FactoryGirl.create :practitioner
-    @practitioner.fullname = fullname
-    @practitioner.save
+    expect(page).send expectation, have_css('.alert.flash-fixed-top.flash-notification')
   end
 
   step 'I :whether_to see :text' do |positive, text|
@@ -74,8 +74,30 @@ module HelperSteps
     print page.html
   end
 
+  step 'there :whether_to be a :model with :attribute :value' do |positive ,model, attribute, value|
+    expectation = positive ? :to : :not_to
+    klass = translate_model(model)
+    expect(klass.send "find_by_#{attribute}", value).send expectation, be_truthy 
+  end
+
+  step 'there :whether_to be a :association for :model with :attribute :value' do |positive, association, model, attribute, value|
+    expectation  = positive ? :to : :not_to
+    klass        = translate_model(model)
+    clause       = Hash[attribute, value.downcase]
+    result       = klass.joins(association.pluralize.to_sym).where clause
+    expect(result.count).send expectation, eq(1)
+  end
+
   def form_modifications
     @form_modifications ||= {}
+  end
+
+  def translate_model(value)
+    value.singularize.capitalize.constantize
+  end
+
+  def underscoreize(value)
+    value.split(' ').join('_')
   end
 end
 
