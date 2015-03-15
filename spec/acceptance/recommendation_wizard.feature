@@ -35,6 +35,7 @@ Feature: Recommendation Wizard
     When I modify the 'RecommendationForm' practitioner_name with 'Bob Jones'  
     And I submit the form
     Then I should not be on 'recommendation step two'
+    And show page
     And I see an error message
     And there are 0 practitioners
     And there are 0 recommendations
@@ -43,6 +44,6 @@ Feature: Recommendation Wizard
   Scenario: Step Two Success
     Given recommendation wizard step one is complete
     And I am on 'recommendation step two'
-    
+
 
   Scenario: Step Two Fail
