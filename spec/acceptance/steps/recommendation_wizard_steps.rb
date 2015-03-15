@@ -1,6 +1,6 @@
 module RecommendationWizardSteps
-  step 'recommendation wizard step one is complete' do
-    FactoryGirl.create :recommendation, :step_one_complete
+  step 'recommendation wizard :step is complete' do |step|
+    FactoryGirl.create :recommendation, "#{step}_complete".to_sym 
   end
 
   step 'a practitioner :fullname exists' do |fullname|

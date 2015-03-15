@@ -76,4 +76,5 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   config.cache_store = :dalli_store, nil, { namespace: 'mereveilleuse-staging', compress: true }
+
 end

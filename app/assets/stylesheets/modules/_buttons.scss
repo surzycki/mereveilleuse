@@ -1,0 +1,71 @@
+/*doc
+---
+title: Button Basics
+name: button
+category: buttons
+---
+
+Button styles can be applied to any element. Typically you'll want to
+use either a `<button>` or an `<a>` element
+
+If your button is actually a link to another page, please use the
+`<a>` element, while if your button performs an action, such as submitting
+a form or triggering some javascript event, then use a `<button>` element.
+
+```haml_example
+%button.btn.btn-primary 
+  Button
+
+%a.btn.btn-primary{ href: '#' } 
+  Link
+```
+*/
+
+/*doc
+---
+title: Variations
+name: button-2
+category: buttons
+parent: button
+---
+
+```haml_example
+%button.btn.btn-primary Primary
+%button.btn.btn-secondary Secondary
+%button.btn.btn-alternate 
+  %i.icon-plus.icon-sm
+  %span Alternate
+
+%button.btn.btn-minor 
+  %i.icon-scroll-left.icon-sm
+  %span Previous
+```
+*/
+
+.btn-primary {
+  border-bottom-width: 3px;
+  border-top: 0;
+  border-color: darken($primary-action-color,20%);
+  background-color: $primary-action-color;
+  color: $light-color !important;
+
+  &:focus, &:hover, &:active, &:active:focus {
+    border-color: $primary-action-color;
+    background-color: lighten($primary-action-color,10%);
+    color: $light-color;
+  }
+}
+
+.btn-secondary {
+  border-bottom-width: 3px;
+  border-top: 0;
+  border-color: darken($secondary-action-color,20%);
+  background-color: $secondary-action-color;
+  color: $dark-color !important;
+
+  &:focus, &:hover, &:active, &:active:focus {
+    border-color: $secondary-action-color;
+    background-color: lighten($secondary-action-color,10%);
+    color: $dark-color;
+  }
+}

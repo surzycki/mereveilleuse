@@ -21,7 +21,8 @@ gem 'bourbon'                                             # A lightweight mixin 
 gem 'therubyracer'                                        # Embed the V8 Javascript Interpreter into Ruby
 gem 'namae'                                               # Namae (名前) parses personal names and splits them into their component parts.
 gem 'devise'
-gem 'activeadmin',              github: 'activeadmin'
+gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'activeadmin',                 github: 'activeadmin'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net

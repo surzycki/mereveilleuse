@@ -56,3 +56,12 @@ Feature: Recommendation Wizard
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
     Then I should see an error message
+
+  Scenario: Step Three Success (No Invite)
+    Given recommendation wizard step two is complete
+    And I am on 'recommendation step three'
+
+  Scenario: Step Three Success (Invite)
+    Given recommendation wizard step two is complete
+    And I am on 'recommendation step three'
+

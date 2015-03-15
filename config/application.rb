@@ -38,5 +38,9 @@ module AppFacebook
 
     # for custom error pages
     config.exceptions_app = self.routes
+
+    # react js
+    config.react.variant      = :production
+    config.react.addons       = true
   end
 end

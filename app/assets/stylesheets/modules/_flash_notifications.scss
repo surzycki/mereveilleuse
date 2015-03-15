@@ -1,0 +1,40 @@
+/*doc
+---
+title: Flash Notification
+name: flash-1
+category: flash
+---
+
+```haml_example
+.flash-notification.alert
+  .flash-icon
+  .flash-message
+    Hello World 
+  
+
+.flash-notification.notice
+  .flash-icon
+  .flash-message
+    Hello World
+```
+*/
+
+.flash-notification {
+  @include border-radius(0);
+  width: 100%;
+  display: table;
+  padding-right: 10px !important;
+  text-align: center;
+
+  &.alert {
+    background-color: $warning-color;
+    margin-bottom: 0;
+    color: $light-color;
+  }
+}
+
+.flash-fixed-top {
+  position: fixed;
+  top: 0px;
+  z-index: 3000;
+}

@@ -45,6 +45,7 @@ fr:
     recommendation: 
       title: Partageons nos bonnes adresses santé entre mamans du quartier
 
+
   rating:
     form:
       title: Que pensez-vous de ce professionnel?
@@ -53,12 +54,12 @@ fr:
       availability:
         label: Disponibilité
       bedside_manner:
-        label: Accueil & suivi
+        label: Ecoute
       efficacy: 
         label: Efficacité
       comments:
         label: Racontez-nous votre expérience avec ce professionnel
-      submit: Valider la recommandations
+      submit: Valider ma recommandations
 
   recommendation:   
     form:
@@ -86,5 +87,13 @@ fr:
         two:
           title: La Transparence
           content: Nous luttons contre les fausses recommandations. Nous sommes entre mamans et le resterons ;)
-        
-
+     
+  invite: 
+    information:
+      title:  Merci pour votre premiére contribution
+      subtitle: Vous êtes MèreVeilleuse !
+      question: Voulez-vous faire connaître MèreVeilleuse à vos amies?
+      reason: En invitant vos amies vous pourrez consulter leurs recommandations
+      submit:
+        affirmative: Oui, ça me prend 3 secondes
+        negative: Non, je le ferais peut-être plus tard

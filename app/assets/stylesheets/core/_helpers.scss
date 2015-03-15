@@ -24,3 +24,14 @@
 .bold {
   font-weight: 600 !important;
 }
+
+.normal {
+  font-weight: 300 !important;
+}
+
+@mixin border-radius($radius) {
+  @include border-top-radius($radius);
+  @include border-bottom-radius($radius);
+  @include border-left-radius($radius);
+  @include border-right-radius($radius);
+}
