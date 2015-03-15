@@ -10,4 +10,5 @@ end
 
 RSpec.configure do |config|
   config.include RequestHelpers, type: :request
+  config.include RequestHelpers, type: :acceptance, file_path: %r(spec/acceptance)
 end

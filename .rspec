@@ -1,3 +1,4 @@
---color
+--color -r turnip/rspec
 --require rails_helper
---format progress
+--format documentation
+

@@ -95,9 +95,11 @@ Configuration for application environment is located in ENV variables
 
 You can use the test container to run the tests
 
-    docker-compose run test guard -p -l 2
+    docker-compose run test guard -p -l 2 -g rspec
 
+Or if only acceptance tests
 
+    docker-compose run test guard -g acceptance
 
 
 ###Services (job queues, cache servers, search engines, etc.)
