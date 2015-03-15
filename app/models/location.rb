@@ -8,4 +8,8 @@ class Location < ActiveRecord::Base
   def address=(value)
     
   end
+
+  def short_address
+    [city, postal_code].reject(&:blank?).join(', ').titleize
+  end
 end

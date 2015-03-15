@@ -60,6 +60,29 @@ describe Location do
     end
   end
 
+  describe '#short_address' do
+    let(:subject)  { build_stubbed :location }
+    
+    it 'returns short_address' do
+      short_address = "#{subject.city}, #{subject.postal_code}"
+      expect(subject.short_address).to eq(short_address)
+    end
+
+    it 'returns short_address (no postal_code)' do
+      subject.postal_code = ''
+
+      short_address = "#{subject.city}"
+      expect(subject.short_address).to eq(short_address)
+    end
+
+    it 'returns short_address (no city)' do
+      subject.city = ''
+
+      short_address = "#{subject.postal_code}"
+      expect(subject.short_address).to eq(short_address)
+    end
+  end
+
   describe '#address=' do
     pending
   end

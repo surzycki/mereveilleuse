@@ -9,6 +9,7 @@ dev:
     - db
     - memcached
     - redis
+    - elasticsearch
   environment:
     RAILS_ENV: development
   
@@ -35,5 +36,8 @@ memcached:
 
 redis: 
   image: redis
+
+elasticsearch:
+  image: elasticsearch
 
 

@@ -6,10 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+USER_COUNT = 10
+
 PatientType.delete_all
 Profession.delete_all
 User.delete_all
 
+puts '-- creating patient types...'
 patient_types = PatientType.create([
   { name: 'Une future maman'},
   { name: 'Une maman'},
@@ -18,6 +21,7 @@ patient_types = PatientType.create([
   { name: 'Un adolescent (12 ans +)'}
 ])
 
+puts '-- creating professions...'
 professions = Profession.create([
   { name: 'Médecin Généralist' },
   { name: 'Nutritionniste' },
@@ -26,6 +30,17 @@ professions = Profession.create([
   { name: 'Sophrologues' }
 ])
 
-users = User.create([
-  { facebook_id: 123, firstname: 'Bob', lastname: 'Hope', email: 'bob@test.com' }
-])
+puts '-- creating generic users...'
+users = Array.new(USER_COUNT) {
+  user = User.create()
+  user.facebook_id  = rand.to_s[2..11]
+  user.firstname    = Forgery(:name).first_name
+  user.lastname     = Forgery(:name).last_name
+  user.email        = Forgery(:internet).email_address
+  user.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+  user.save
+}
+
+puts '-- creating admin user...'
+AdminUser.create!(email: 'ops@mereveilleuse.com', password: 'thinkbigger', password_confirmation: 'thinkbigger')
+

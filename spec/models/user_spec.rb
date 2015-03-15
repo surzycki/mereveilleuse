@@ -36,7 +36,6 @@ describe User do
     end
   end
 
-
   describe 'associations' do
     it 'has many recommendations' do
       expect(subject).to have_many(:recommendations)
@@ -57,6 +56,59 @@ describe User do
     it 'has one location' do
       expect(subject).to have_one(:location)
         .dependent(:destroy)
+    end
+  end
+
+  describe 'context' do
+    context 'before_save' do
+      let(:user) { create :user }
+
+      before do
+        allow_any_instance_of(User).to receive(:normalize_name)
+          .and_call_original
+      end
+
+      it 'calls normalize_name' do
+        expect(user).to have_received(:normalize_name)
+      end
+
+      it 'downcases firstname' do
+        user.firstname = 'BOB'
+        user.save
+
+        expect(user.read_attribute(:firstname)).to eq('bob')
+      end
+
+      it 'downcases lastname' do
+        user.lastname = 'HOPE'
+        user.save
+        
+        expect(user.read_attribute(:lastname)).to eq('hope')
+      end
+    end
+  end
+
+  describe '#firstname' do
+    it 'returns firstname capitalized' do
+      user = build_stubbed :user, firstname: 'BOB'
+      expect(user.firstname).to eq 'Bob'
+    end
+
+    it 'no firstname returns nil' do
+      user = build_stubbed :user, firstname: nil
+      expect(user.firstname).to be_nil
+    end
+  end
+
+  describe '#lastname' do
+    it 'returns lastname capitalized' do
+      user = build_stubbed :user, lastname: 'JONES'
+      expect(user.lastname).to eq 'Jones'
+    end
+
+    it 'no lastname returns nil' do
+      user = build_stubbed :user, lastname: nil
+      expect(user.lastname).to be_nil
     end
   end
 end
