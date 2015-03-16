@@ -1,14 +1,11 @@
-fr:
+en:
   time:
     am: am
     formats:
       date: "%A %d %B %Y"
-      day_of_month: "%d %b"
       short_date: "%d/%m/%Y"
       default: "%d %B %Y %H:%M:%S"
       long: "%A %d %B %Y %H:%M"
       short: "%d %b %H:%M"
       time: "%Hh%M"
-      
-  date:
-    day_names: [Dimanche, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi] 
+     

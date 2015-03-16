@@ -9,6 +9,10 @@ describe Occupation do
     it 'has a experience' do
       expect(subject).to respond_to :experience
     end
+
+    it 'delegates name to profession' do
+      expect(subject).to delegate_method(:name).to(:profession)
+    end
   end
 
   describe 'associations' do
@@ -20,4 +24,6 @@ describe Occupation do
       expect(subject).to belong_to(:profession)
     end
   end
+
+
 end

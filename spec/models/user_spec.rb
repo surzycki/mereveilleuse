@@ -111,4 +111,10 @@ describe User do
       expect(user.lastname).to be_nil
     end
   end
+
+  describe '#fullname' do
+    it 'returns fullname' do
+      expect(subject.fullname).to eq "#{subject.firstname} #{subject.lastname}"
+    end
+  end
 end

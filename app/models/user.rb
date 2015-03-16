@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
 
   enum status: [ :unregistered, :registered ] 
 
+  def fullname
+    "#{firstname} #{lastname}"  
+  end
+
   def firstname
     _firstname = read_attribute(:firstname)
     return if _firstname.nil?

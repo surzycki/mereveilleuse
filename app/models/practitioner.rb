@@ -19,6 +19,10 @@ class Practitioner < ActiveRecord::Base
 
   enum status: [ :not_indexed, :indexed ]
 
+  # For activeadmin new_record? nil issue
+  # http://stackoverflow.com/questions/7206541/activeadmin-with-has-many-problem-undefined-method-new-record
+  accepts_nested_attributes_for :occupations, allow_destroy: true
+
   delegate :address, 
            :address=, 
            to: :location, prefix: false, allow_nil: true
