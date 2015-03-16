@@ -11,14 +11,14 @@ module HelperSteps
   step 'I am on the :path page' do |path|
     path = "#{underscoreize path}_path"
     
-    visit routes.send(path)
+    visit route_helpers.send(path)
   end
 
   step 'I :whether_to be on the :path page' do |positive, path|
     expectation = positive ? :to : :not_to
     path        = "#{underscoreize path}_path"
     
-    expect(current_path).send expectation, eq(routes.send(path))
+    expect(current_path).send expectation, eq(route_helpers.send(path))
   end
 
   step 'I modify the :model :attribute with :value' do |model_name, attribute, value|
@@ -81,7 +81,7 @@ module HelperSteps
     @form_modifications ||= {}
   end
 
-  def routes
+  def route_helpers
     Rails.application.routes.url_helpers
   end
 
