@@ -8,34 +8,6 @@ module HelperSteps
     FactoryGirl.create :patient_type, name: 'Person'
   end
 
-  step 'I am on :page' do |page|
-    path = case page
-    when 'recommendation step one'
-      new_recommendation_path
-    when 'recommendation step two', 'recommendation step three'
-      edit_recommendation_path(Recommendation.first || 1)
-    else
-      root_path
-    end
-
-    visit path
-  end
-
-  step 'I :whether_to be on :page' do |positive, page|
-    expectation = positive ? :to : :not_to
-
-    path = case page
-    when 'recommendation step one'
-      new_recommendation_path
-    when 'recommendation step two', 'recommendation step three'
-      edit_recommendation_path(Recommendation.first || 1)
-    else
-      root_path
-    end
-
-    expect(current_path).send expectation, eq(path)
-  end
-
   step 'I modify the :model :attribute with :value' do |model_name, attribute, value|
     id = "#{underscoreize(model_name)}_#{underscoreize(attribute)}"
     fill_in "#{id}", with: value

@@ -3,6 +3,7 @@ describe RecommendationsController do
   let(:wizard)          { spy('wizard') }
   let(:params)          { spy('params') }
   let(:errors)          { spy('errors') }
+  let(:user)            { spy('user') }
   let(:practitioner)    { build_stubbed :practitioner }
   let(:recommendation)  { build_stubbed :recommendation }
 
@@ -172,6 +173,24 @@ describe RecommendationsController do
       it 'redirects to edit_recommendation_path' do
         expect(controller).to have_received(:redirect_to)
           .with edit_recommendation_path(form.recommendation)
+      end
+    end
+
+    context 'on_form_complete' do
+      before do
+        allow(controller).to receive(:redirect_to)
+        allow(controller).to receive(:current_user).and_return user
+      
+        controller.on_form_complete form.recommendation
+      end
+
+      it 'redirects to show recommendation_path' do
+        expect(controller).to have_received(:redirect_to)
+          .with recommendation_path(form.recommendation)
+      end
+
+      it 'completes user registration' do
+        expect(user).to have_received(:registered!)
       end
     end
 

@@ -1,2 +1,29 @@
 %section
   = render 'shared/header'
+
+%section
+  .container-fluid
+    .row
+      .col-sm-12
+        %p= t('search.form.title')
+
+    .row  
+      .col-sm-6
+        = form_for(:form, url: '#', method: :post) do |f|
+          .form-group
+            = f.label :profession_id, t('search.form.profession.label')
+            = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
+
+          .form-group
+            = f.label :patient_type_id, t('search.form.patient_type.label')
+            = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
+      
+          .form-group
+            = f.label :address, t('search.form.address.label')
+            = f.text_field :address, class: 'form-control', placeholder: t('search.form.address.placeholder')
+
+          .form-group
+            = f.label :extra, t('search.form.address.label')
+            = f.text_area :extra, class: 'form-control', rows: 8
+
+          = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'

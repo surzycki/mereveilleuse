@@ -29,9 +29,19 @@ class RecommendationsController < ApplicationController
     end 
   end
 
+  # GET recommendations/:id
+  def show
+
+  end
+
   # event listeners
   def on_next_step(form)
     redirect_to edit_recommendation_path(form.recommendation)
+  end
+
+  def on_form_complete(form)
+    current_user.registered!
+    redirect_to recommendation_path(form.recommendation)
   end
 
   def on_form_error(errors)

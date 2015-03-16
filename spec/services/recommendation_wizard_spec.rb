@@ -39,6 +39,36 @@ describe RecommendationWizard do
         expect(listener).to have_received(:on_next_step)
           .with form.recommendation  
       end
+
+      it 'does NOT trigger on_form_complete event' do
+        expect(listener).to_not have_received(:on_form_complete)
+      end
+
+      it 'does NOT trigger on_form_error event' do
+        expect(listener).to_not have_received(:on_form_error)
+      end
+    end
+
+    context 'completed' do
+      before do
+        allow(form).to receive(:next_step).and_return true
+        allow(form).to receive(:state).and_return 'completed'
+
+        RecommendationWizard.new(listener).tap { |wizard| wizard.set form, attributes }
+      end
+
+      it 'triggers on_form_complete event' do
+        expect(listener).to have_received(:on_form_complete)
+          .with form.recommendation  
+      end
+
+      it 'does NOT trigger on_next_step event' do
+        expect(listener).to_not have_received(:on_next_step)
+      end
+
+      it 'does NOT trigger on_form_error event' do
+        expect(listener).to_not have_received(:on_form_error)
+      end
     end
 
     context 'failure' do
@@ -52,6 +82,14 @@ describe RecommendationWizard do
       it 'triggers on_form_error event' do
         expect(listener).to have_received(:on_form_error)
           .with form.errors  
+      end
+
+      it 'does NOT trigger on_next_step event' do
+        expect(listener).to_not have_received(:on_next_step)
+      end
+
+      it 'does NOT trigger on_form_complete event' do
+        expect(listener).to_not have_received(:on_form_complete)
       end
     end
   end

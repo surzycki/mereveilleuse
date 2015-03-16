@@ -9,7 +9,8 @@ class RecommendationWizard
     form.attributes = attributes
     
     if form.next_step
-      @listener.on_next_step form
+      @listener.on_next_step(form)     if form.state != 'completed'
+      @listener.on_form_complete(form) if form.state == 'completed'
     else
       @listener.on_form_error form.errors
     end

@@ -47,6 +47,23 @@ fr:
 
   not_available: Pas Disponible
 
+  search: 
+    form:
+      title: A la recherche d’un MèreVeilleux professionnel?
+      profession:
+        label: Je recherche
+        placeholder: Sélectionnez la spécialité
+      patient_type:
+        label: Pour
+        placeholder: Précisez pour qui
+      address:
+        label: À
+        placeholder: Précisez votre adresse
+      extra: 
+        label: Information complémentaire
+
+      submit: Sollicitez la communauté
+
   rating:
     form:
       title: Que pensez-vous de ce professionnel?
