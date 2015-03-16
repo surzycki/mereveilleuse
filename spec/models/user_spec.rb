@@ -59,7 +59,7 @@ describe User do
     end
   end
 
-  describe 'context' do
+  describe 'callback' do
     context 'before_save' do
       let(:user) { create :user }
 
@@ -88,6 +88,10 @@ describe User do
     end
   end
 
+  describe 'scopes' do
+    it_behaves_like 'a model with a fullname finder'
+  end
+
   describe '#firstname' do
     it 'returns firstname capitalized' do
       user = build_stubbed :user, firstname: 'BOB'
@@ -113,8 +117,6 @@ describe User do
   end
 
   describe '#fullname' do
-    it 'returns fullname' do
-      expect(subject.fullname).to eq "#{subject.firstname} #{subject.lastname}"
-    end
-  end
+    it_behaves_like 'a model with a fullname attribute'
+  end  
 end

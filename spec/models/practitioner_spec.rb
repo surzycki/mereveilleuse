@@ -114,74 +114,13 @@ describe Practitioner do
   end
 
   describe 'scopes' do
-    context 'find_by_fullname' do
-      context 'successul' do
-        before do
-          allow(Practitioner).to receive(:find_by)
-          Practitioner.find_by_fullname('Joe Blow')
-        end
-
-        it 'finds by firstname' do
-          expect(Practitioner).to have_received(:find_by)
-            .with hash_including(firstname: 'joe')
-        end
-
-        it 'finds by lastname' do
-          expect(Practitioner).to have_received(:find_by)
-            .with hash_including(lastname: 'blow')
-        end
-      end
-
-      context 'not found' do
-        it 'returns nil' do
-          expect(Practitioner.find_by_fullname('Homer Simpson')).to be_nil
-        end
-      end
-
-      context 'unrecognized input' do
-        it 'single name returns nil' do
-          expect(Practitioner.find_by_fullname('Simpson')).to be_nil
-        end
-
-        it 'blank returns nil' do
-          expect(Practitioner.find_by_fullname('')).to be_nil
-        end
-
-        it 'nil returns nil' do
-          expect(Practitioner.find_by_fullname).to be_nil
-        end
-
-        it 'strange returns nil' do
-          expect(Practitioner.find_by_fullname('-- -')).to be_nil
-        end
-      end
-    end
-  end
-
-  describe '#fullname=' do
-    it 'parses standard names' do
-      subject.fullname = 'Bob Jones'
-      expect(subject.firstname).to eq 'Bob'
-      expect(subject.lastname).to eq 'Jones'
-    end
-
-    it 'parses hyphenated names' do
-      subject.fullname = 'Jean-Pierre Jones'
-      expect(subject.firstname).to eq 'Jean Pierre'
-      expect(subject.lastname).to eq 'Jones'
-    end
-
-    it 'parses compount names' do
-      subject.fullname = 'Jean Pierre Jones'
-      expect(subject.firstname).to eq 'Jean Pierre'
-      expect(subject.lastname).to eq 'Jones'
+    describe 'scopes' do
+      it_behaves_like 'a model with a fullname finder'
     end
   end
 
   describe '#fullname' do
-    it 'returns fullname' do
-      expect(subject.fullname).to eq "#{subject.firstname} #{subject.lastname}"
-    end
+    it_behaves_like 'a model with a fullname attribute'
   end
 
   describe '#firstname' do

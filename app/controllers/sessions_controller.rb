@@ -7,10 +7,12 @@ class SessionsController < ApplicationController
   # GET /session
   # POST /session
   def index 
-    # for testing
+    # for bypass facebook authentication for developmenet / testing
+    
     if request.method == 'GET'
-      on_authentication_success(User.first)
-      on_registration_success
+      Authentication.new(self).tap do |auth|
+        auth.with( FacebookAuthentication.development(User.first) )
+      end
     else
       Authentication.new(self).tap do |auth|
         auth.with facebook_authentication

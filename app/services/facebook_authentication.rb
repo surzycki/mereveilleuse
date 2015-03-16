@@ -1,4 +1,13 @@
 class FacebookAuthentication
+  def self.development(current_user)
+    OpenStruct.new(
+      firstname:   current_user.firstname,
+      lastname:    current_user.lastname,
+      email:       current_user.email,
+      facebook_id: current_user.facebook_id
+    )
+  end
+
   attr_reader :signed_request, :firstname, :lastname, :email, :facebook_id, :location_name, :authenticated
 
   # Authenticates user to facebook using signed requests

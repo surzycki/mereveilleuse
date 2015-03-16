@@ -1,11 +1,24 @@
 module HelperSteps
   step 'I am logged in' do
-    integration_sign_in FactoryGirl.create(:user)
+    integration_sign_in(User.first || FactoryGirl.create(:user))
   end
 
   step 'the application is setup' do
     FactoryGirl.create :profession,   name: 'Doctor'
     FactoryGirl.create :patient_type, name: 'Person'
+  end
+
+  step 'I am on the :path page' do |path|
+    path = "#{underscoreize path}_path"
+    
+    visit routes.send(path)
+  end
+
+  step 'I :whether_to be on the :path page' do |positive, path|
+    expectation = positive ? :to : :not_to
+    path        = "#{underscoreize path}_path"
+    
+    expect(current_path).send expectation, eq(routes.send(path))
   end
 
   step 'I modify the :model :attribute with :value' do |model_name, attribute, value|
@@ -60,8 +73,16 @@ module HelperSteps
     expect(result.count).send expectation, eq(1)
   end
 
+  step 'a :model exists' do |model|
+    FactoryGirl.create(model.downcase.to_sym)
+  end
+
   def form_modifications
     @form_modifications ||= {}
+  end
+
+  def routes
+    Rails.application.routes.url_helpers
   end
 
   def translate_model(value)
