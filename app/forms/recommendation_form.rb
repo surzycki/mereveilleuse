@@ -49,16 +49,9 @@ class RecommendationForm
       end
     end
 
-    state :step_three do
-      def save
-        
-      end
-    end
-
     event :next_step do
       transition step_one: :step_two
-      transition step_two: :step_three
-      transition step_three: :completed
+      transition step_two: :completed
     end
   end
 

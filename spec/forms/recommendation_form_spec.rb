@@ -134,15 +134,8 @@ describe RecommendationForm do
     end
 
     context 'step two' do
-      it 'transitions to step_three ' do
+      it 'transitions to completed ' do
         subject.state = 'step_two'
-        expect(subject.next_step_transition.to).to eq 'step_three'
-      end
-    end
-
-    context 'entering step_three' do
-      it 'transitions to completed' do
-        subject.state = 'step_three'
         expect(subject.next_step_transition.to).to eq 'completed'
       end
     end

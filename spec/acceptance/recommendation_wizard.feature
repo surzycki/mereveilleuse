@@ -57,11 +57,11 @@ Feature: Recommendation Wizard
     And I submit the form
     Then I should see an error message
 
-  Scenario: Step Three Success (No Invite)
+  Scenario: Completed Success (No Invite)
     Given recommendation wizard 'step two' is complete
-    And I am on 'recommendation step three'
+    And I am on 'recommendation completed'
 
-  Scenario: Step Three Success (Invite)
+  Scenario: Completed Success (Invite)
     Given recommendation wizard 'step two' is complete
-    And I am on 'recommendation step three'
+    And I am on 'recommendation completed'
 

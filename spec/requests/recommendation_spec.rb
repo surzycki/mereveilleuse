@@ -225,7 +225,7 @@ describe 'recommendation' do
       it 'updates state' do
         expect do
           put recommendation_path(recommendation), recommendation_form: form_data
-        end.to change{ recommendation.reload.state }.from('step_two').to('step_three')
+        end.to change{ recommendation.reload.state }.from('step_two').to('completed')
       end
     end
 

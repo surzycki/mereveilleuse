@@ -3,7 +3,7 @@ ActiveAdmin.register Recommendation do
 
   menu label: 'Recommendations', priority: 4
 
-  permit_params :availability, :bedside_manner, :efficacy, :wait_time, :comment, :profession_id
+  permit_params :state, :availability, :bedside_manner, :efficacy, :wait_time, :comment, :profession_id
 
   filter :state,                as: :check_boxes, collection: RecommendationForm.state_machine.states.map(&:name)
   filter :profession,           as: :select,      collection: Profession.order('name ASC'),  label: 'Occupation'
@@ -44,7 +44,10 @@ ActiveAdmin.register Recommendation do
     column :bedside_manner
     column :efficacy
     column :wait_time
-    column :created_at
+    
+    column 'Created at' do |user|
+      I18n.l(user.created_at, format: :short_date)  
+    end
 
     actions
   end
@@ -74,7 +77,10 @@ ActiveAdmin.register Recommendation do
       row :efficacy
       row :wait_time
       row :comment
-      row :created_at
+      
+      row 'Created at' do |user|
+        I18n.l(user.created_at, format: :short_date)  
+      end
     end
   end
 
@@ -82,6 +88,7 @@ ActiveAdmin.register Recommendation do
     f.semantic_errors
 
     f.inputs 'Recommendation' do
+      f.input :state, as: :select, collection: RecommendationForm.state_machine.states.map(&:name)
       f.input :profession
       
       f.input :availability

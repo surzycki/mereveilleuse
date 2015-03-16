@@ -7,6 +7,20 @@ ActiveAdmin.register PatientType do
 
   permit_params :name
 
+  controller do
+    def update
+      update! do |format|
+        format.html { redirect_to admin_patient_types_path }
+      end
+    end
+
+    def create
+      create! do |format|
+        format.html { redirect_to admin_patient_types_path }
+      end
+    end
+  end
+
   index do
     column :name
     column :id 
