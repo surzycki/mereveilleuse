@@ -4,11 +4,11 @@
 %section
   .container-fluid
     .row
-      .col-sm-10.col-sm-offset-1
+      .col-sm-12.text-center
         %p= t('search.form.title')
 
     .row  
-      .col-sm-5.col-sm-offset-1
+      .col-sm-6.col-sm-offset-3
         = form_for(:form, url: new_search_path, method: :get) do |f|
           .form-group
             = f.label :profession_id, t('search.form.profession.label')
@@ -26,4 +26,5 @@
             = f.label :extra, t('search.form.address.label')
             = f.text_area :extra, class: 'form-control', rows: 8
 
-          = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
+          =# f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
+          = link_to t('search.form.submit'), '#', id: 'commit', class: 'btn btn-primary btn-block'

@@ -16,4 +16,6 @@
 //= require react
 //= require react_ujs
 //= require_tree ./components
+// require avgrund/jquery.avgrund-1.3.2
+
 //= require invite

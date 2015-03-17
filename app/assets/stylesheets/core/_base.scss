@@ -27,8 +27,8 @@ $wide-screen: $screen-lg-min;
 
 html {
   width: 100%;
-  height: 100%;
-  
+  //height: 100%;
+  //background-color: #000;
   //-webkit-font-smoothing: antialiased;
   //     -o-font-smoothing: antialiased;
   //-moz-osx-font-smoothing: grayscale;
@@ -58,6 +58,6 @@ html {
 
 body {
   width: 100%;
-  height: 100%;
+  //height: 100%;
 }
 
