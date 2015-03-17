@@ -52,6 +52,7 @@ class SessionsController < ApplicationController
   end
 
   def is_development?
+    Rails.logger.warn('***** DEVELOPMENT MODE *****')
     (request.method == 'GET') && (Rails.env.development? || Rails.env.test? )
   end
 
