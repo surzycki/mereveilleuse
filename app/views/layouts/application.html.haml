@@ -19,7 +19,8 @@
     <![endif]-->
    
   %body
-    = render 'shared/facebook_javascript_sdk'
+    = facebook_javascript_sdk(yield(:facebook_javascript_sdk))
+    
     = render 'shared/flash'
     = yield
     = render 'navs/help'

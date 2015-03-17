@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   def index 
     # for bypass facebook authentication for developmenet / testing
     
-    if request.method == 'GET'
+    if is_development? 
       Authentication.new(self).tap do |auth|
         auth.with( FacebookAuthentication.development(User.first) )
       end
@@ -50,6 +50,11 @@ class SessionsController < ApplicationController
   def facebook_authentication
     @facebook_authentication ||= FacebookAuthentication.new(params[:signed_request])
   end
+
+  def is_development?
+    (request.method == 'GET') && (Rails.env.development? || Rails.env.test? )
+  end
+
 
   def catch_exceptions
     yield
