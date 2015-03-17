@@ -18,5 +18,10 @@ ADD Gemfile $APP_HOME/Gemfile
 ADD Gemfile.lock $APP_HOME/Gemfile.lock
 RUN bundle install 
 
+# allow access to servers
+RUN echo "Host staging.therapeutes.com\n\tStrictHostKeyChecking no\n\tForwardAgent yes\n" >> /root/.ssh/config
+RUN echo "Host app002.therapeutes.com\n\tStrictHostKeyChecking no\n\tForwardAgent yes\n" >> /root/.ssh/config
+RUN echo "IdentityFile /root/.ssh/id_rsa\n" >> /root/.ssh/config
+
 # hook up source files
 ADD . $APP_HOME#
