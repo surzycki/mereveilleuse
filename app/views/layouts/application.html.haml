@@ -20,8 +20,9 @@
    
   %body{ class: apply_blur? }
     = render 'shared/facebook_javascript_sdk'
-    = render 'shared/flash'
-    = yield
-    = render 'navs/help'
+    %section{ style: 'height:100%;' }
+      = render 'shared/flash'
+      = yield
+      = render 'navs/help'
     
     = javascript_include_tag :application

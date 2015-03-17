@@ -1,0 +1,25 @@
+/*doc
+---
+title: Jumbotron
+name: jumbotron
+category: jumbotron
+---
+
+```haml_example
+.container
+  .jumbotron
+    %h1 Hello World H1
+    %h2 Hello World H2
+    %h3 Hello World H3
+    %p 
+      This is a simple hero unit, a simple jumbotron-style component for 
+      calling extra attention to featured content or information.
+    %dl
+      %dt Sit sane 
+      %dd Quis enim potest ea, quae probabilia videantur ei.
+```
+*/
+
+.jumbotron {
+  margin-bottom: 0 !important;
+}
