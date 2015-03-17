@@ -3,13 +3,14 @@
 %html{html_attrs('fr')}
   %head
     %title
+      MèreVeilleuse  
+    
     = stylesheet_link_tag :application, media: 'screen'
     
     %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0'}
     %meta{charset: 'utf-8'}
-    
-    
+
     %link(href='http://canvas.merevielleuse.com/' rel='canonical')
      
     = csrf_meta_tags
@@ -18,9 +19,7 @@
     = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     <![endif]-->
    
-  %body{ class: apply_blur? }
-    = render 'shared/facebook_javascript_sdk'
-    = render 'shared/flash'
+  %body
     = yield
     = render 'navs/help'
     

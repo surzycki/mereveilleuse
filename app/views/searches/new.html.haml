@@ -4,11 +4,11 @@
 %section
   .container-fluid
     .row
-      .col-sm-12
+      .col-sm-10.col-sm-offset-1
         %p= t('search.form.title')
 
     .row  
-      .col-sm-6
+      .col-sm-5.col-sm-offset-1
         = form_for(:form, url: new_search_path, method: :get) do |f|
           .form-group
             = f.label :profession_id, t('search.form.profession.label')

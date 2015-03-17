@@ -4,31 +4,35 @@
       appId      : '#{ENV['FACEBOOK_APP_ID']}',
       xfbml      : false,
       cookie     : true,
+      status     : true,
       version    : 'v2.2'
     });
+ 
+    FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
+    FB.Event.subscribe('auth.statusChange', onStatusChange);
 
-    function onLogin(response) {
-      if (response.status == 'connected') {
-        FB.api('/me?fields=first_name', function(data) {
-          var welcomeBlock = document.getElementById('fb-welcome');
-          welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-        });
+    function login(callback) {
+      FB.login(callback, { scope: 'user_friends, email, user_location'} );
+    }
+
+    function loginCallback(response) {
+      console.log('loginCallback',response);
+      if(response.status != 'connected') {
+        location.reload();
       }
     }
-    
-    FB.getLoginStatus(function(response) {
-      // Check login status on load, and if the user is
-      // already logged in, go directly to the welcome message.
-      if (response.status == 'connected') {
-        onLogin(response);
-      } else {
-        // Otherwise, show Login dialog first.
-        FB.login(function(response) {
-          onLogin(response);
-        }, {scope: 'user_friends, email, user_location'});
-      }
-    });
 
+    function onStatusChange(response) {
+      if( response.status != 'connected' ) {
+        login(loginCallback);
+      } else {
+        $('body').removeClass('blur')
+        console.log('connected');
+      }
+    }
+    function onAuthResponseChange(response) {
+      console.log('onAuthResponseChange', response.status);
+    }
   };
 
   (function(d, s, id){

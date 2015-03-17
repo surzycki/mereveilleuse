@@ -1,7 +1,5 @@
 module ApplicationHelper
-  def facebook_javascript_sdk(value = 'yes')
-    return if value == 'no'
-    
-    render 'shared/facebook_javascript_sdk'
+  def apply_blur?
+    'blur' if (content_for(:apply_blur) == 'true')
   end
 end

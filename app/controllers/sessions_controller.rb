@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
   # POST /session
   def index 
     # for bypass facebook authentication for developmenet / testing
-    
     if is_development? 
+      Rails.logger.warn('***** DEVELOPMENT MODE *****')
       Authentication.new(self).tap do |auth|
         auth.with( FacebookAuthentication.development(User.first) )
       end
@@ -52,7 +52,6 @@ class SessionsController < ApplicationController
   end
 
   def is_development?
-    Rails.logger.warn('***** DEVELOPMENT MODE *****')
     (request.method == 'GET') && (Rails.env.development? || Rails.env.test? )
   end
 
