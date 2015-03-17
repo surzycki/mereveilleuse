@@ -7,7 +7,7 @@ describe StaticPagesController do
     end
 
     it 'renders the application layout' do
-      expect(response).to render_template(layout: 'application')
+      expect(response).to render_template(layout: 'static_pages')
     end
 
     it 'renders the conditions template' do
@@ -23,7 +23,7 @@ describe StaticPagesController do
     end
 
     it 'renders the application layout' do
-      expect(response).to render_template(layout: 'application')
+      expect(response).to render_template(layout: 'static_pages')
     end
 
     it 'renders the privacy template' do
