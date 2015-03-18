@@ -14,6 +14,7 @@ RUN mkdir -p /tmp
 WORKDIR /tmp
 
 RUN apt-get install -y libicu52
+
 RUN git clone https://github.com/Pyppe/phantomjs2.0-ubuntu14.04x64.git
 RUN mv phantomjs2.0-ubuntu14.04x64/bin/phantomjs /usr/local/bin/
 RUN rm -rf phantomjs2.0-ubuntu14.04x64

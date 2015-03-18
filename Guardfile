@@ -17,6 +17,15 @@ group :acceptance do
   end
 end
 
+group :wip do
+  guard :rspec, cmd: 'bin/rspec spec --tag "wip"' do
+    watch(%r{^spec/acceptance/(.+)\.feature$})
+    watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
+      Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
+    end
+  end
+end
+
 group :rspec do
   guard :rspec, cmd: 'bin/rspec' do
     require "guard/rspec/dsl"

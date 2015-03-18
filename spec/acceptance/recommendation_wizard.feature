@@ -1,4 +1,3 @@
-@wip
 Feature: Recommendation Wizard 
   Background:
     Given I am logged in
@@ -15,6 +14,14 @@ Feature: Recommendation Wizard
     And there should be a practitioner with fullname 'Bob Jones'
     And there should be a recommendation for practitioner with lastname 'Jones'
     #And the practitioner address is '6 rue Gobert'
+
+
+  @js
+  Scenario: Test JS
+    Given I am on recommendation 'step one'
+    And I take a screenshot
+    And show page
+    Then I should see 'hello from here'
 
   Scenario: Step One Success (Existing Practitioner)
     Given I am on recommendation 'step one'

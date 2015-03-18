@@ -1,7 +1,7 @@
 root = exports ? this
 
 root.CommentBox = React.createClass(render: ->
-  `<h1>yo</h1>`
+  `<h1>hello from here</h1>`
 )
 
 

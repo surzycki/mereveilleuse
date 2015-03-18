@@ -52,11 +52,11 @@ module HelperSteps
 
   step 'I :whether_to see :text' do |positive, text|
     expectation = positive ? :to : :not_to
-    expect(page.body).send expectation, eq(text)
+    expect(page.body).send expectation, include(text)
   end
 
   step 'show page' do
-    print page.html
+    save_page
   end
 
   step 'there :whether_to be a :model with :attribute :value' do |positive ,model, attribute, value|
@@ -75,6 +75,10 @@ module HelperSteps
 
   step 'a :model exists' do |model|
     FactoryGirl.create(model.downcase.to_sym)
+  end
+
+  step 'I take a screenshot' do 
+    screenshot
   end
 
   def form_modifications
