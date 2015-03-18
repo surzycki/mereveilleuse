@@ -16,7 +16,7 @@
 //= require typeahead
 
 // shim for phantomjs < 2.0.0 and react
-// require es5-shim                
+//= require es5-shim                
 //= require react
 //= require react_ujs
 //= require_tree ./components
