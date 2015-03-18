@@ -56,6 +56,7 @@ module HelperSteps
   end
 
   step 'show page' do
+    
     save_page
   end
 

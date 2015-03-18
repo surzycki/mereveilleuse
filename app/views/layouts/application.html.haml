@@ -19,7 +19,8 @@
     <![endif]-->
    
   %body{ class: apply_blur? }
-    = render 'shared/facebook_javascript_sdk'
+    = render 'shared/facebook_javascript_sdk' unless Rails.env.test?
+    
     %section.remodal-bg{ style: 'height:100%;' }
       = render 'shared/flash'
       = yield
