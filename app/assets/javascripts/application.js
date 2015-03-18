@@ -15,7 +15,7 @@
 //= require bootstrap-sprockets
 //= require typeahead
 
-// shim for phantomjs < 2.0.0 and react
+// shim for phantomjs < 2.0.0 and react (for circleci)
 //= require es5-shim                
 //= require react
 //= require react_ujs

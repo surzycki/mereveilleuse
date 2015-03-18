@@ -2,10 +2,12 @@ root = exports ? this
 
 root.PractitionerSelect = React.createClass(
   propTypes: 
-    name:        React.PropTypes.string
-    class:       React.PropTypes.string
-    placeholder: React.PropTypes.string
-  
+    field:  React.PropTypes.string
+
+  componentWillMount: ->
+    this.props.name = "#{this.props.form}[#{this.props.field}]"
+    this.props.id   = "#{this.props.form}_#{this.props.field}"
+    
   componentDidMount: ->
     console.log 'mounted'
 
@@ -13,9 +15,8 @@ root.PractitionerSelect = React.createClass(
     console.log 'will unmount'
 
   render: ->
-    `<input type='search' name='recommendation_form[practitioner_name]' id='recommendation_form_practitioner_name' ref='input' 
-        className={this.props.class} 
-        placeholder={this.props.placeholder} />`
+    `<input type='search' name={ this.props.name } id={ this.props.id } ref='input' 
+        className={ this.props.className } placeholder={ this.props.placeholder } />`
 
     
 )
