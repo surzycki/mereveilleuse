@@ -1,4 +1,4 @@
-@wip @js
+@acceptance @js
 Feature: Recommendation Wizard 
   Background:
     Given I am logged in
@@ -16,6 +16,7 @@ Feature: Recommendation Wizard
     And there should be a recommendation for practitioner with lastname 'Jones'
     #And the practitioner address is '6 rue Gobert'
 
+  
   Scenario: Step One Success (Existing Practitioner)
     Given I am on recommendation 'step one'
     And a practitioner 'Homer Simpson' exists
@@ -24,6 +25,7 @@ Feature: Recommendation Wizard
     And I select 'Person' from patient_type_id on 'recommendation form' 
     And I modify the 'recommendation form' address with '6 rue Gobert' 
     And I submit the form
+    And show page
     Then I should be on recommendation 'step two'
     And there should be a practitioner with fullname 'Homer Simpson'
     And there should be a recommendation for practitioner with lastname 'Simpson'

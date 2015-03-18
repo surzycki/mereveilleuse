@@ -56,7 +56,6 @@ module HelperSteps
   end
 
   step 'show page' do
-    
     save_page
   end
 
@@ -78,7 +77,7 @@ module HelperSteps
     FactoryGirl.create(model.downcase.to_sym)
   end
 
-  step 'I take a screenshot' do 
+  step 'take a screenshot' do 
     screenshot
   end
 

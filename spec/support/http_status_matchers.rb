@@ -28,3 +28,9 @@ RSpec::Matchers.define :be_internal_server_error do |expected|
     actual == 500
   end
 end
+
+RSpec::Matchers.define :be_json do |expected|
+  match do |actual|
+    (actual.header['Content-Type']).include? 'application/json'
+  end
+end

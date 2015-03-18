@@ -6,11 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-USER_COUNT = 10
+USER_COUNT         = 10
+PRACTITIONER_COUNT = 50
 
 PatientType.delete_all
 Profession.delete_all
 User.delete_all
+Practitioner.delete_all
 
 puts '-- creating patient types...'
 patient_types = PatientType.create([
@@ -39,6 +41,19 @@ users = Array.new(USER_COUNT) {
   user.email        = Forgery(:internet).email_address
   user.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
   user.save
+}
+
+puts '-- creating indexed practitioners...'
+practitioners = Array.new(PRACTITIONER_COUNT) {
+  practitioner = Practitioner.create()
+  practitioner.firstname    = Forgery(:name).first_name
+  practitioner.lastname     = Forgery(:name).last_name
+  practitioner.email        = Forgery(:internet).email_address
+  practitioner.phone        = Forgery(:address).phone
+  practitioner.mobile_phone = Forgery(:address).phone
+  practitioner.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+  practitioner.indexed!
+  practitioner.save
 }
 
 puts '-- creating admin user...'

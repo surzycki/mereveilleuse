@@ -1,3 +1,0 @@
-describe InvitesController do
-
-end

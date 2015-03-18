@@ -20,6 +20,7 @@ gem 'hologram'                                            # A markdown based doc
 gem 'bourbon'                                             # A lightweight mixin library for Sass. 
 gem 'therubyracer'                                        # Embed the V8 Javascript Interpreter into Ruby
 gem 'namae'                                               # Namae (名前) parses personal names and splits them into their component parts.
+gem 'searchkick'                                          # Intelligent search made easy
 gem 'devise'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
@@ -54,6 +55,7 @@ group :test do
   gem 'spring-commands-rspec'
   gem 'spring' 
   gem 'poltergeist'                                       # A PhantomJS driver for Capybara
+  gem 'webmock'                                           # Library for stubbing and setting expectations on HTTP requests in Ruby.
   gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes
   gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)
 end

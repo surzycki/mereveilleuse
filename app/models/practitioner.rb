@@ -21,6 +21,7 @@ class Practitioner < ActiveRecord::Base
            :address=, 
            to: :location, prefix: false, allow_nil: true
 
+  searchkick text_start: [:firstname, :lastname], index_prefix: Rails.env
 
   def add_occupation(profession_id)
     occupation = Occupation.find_or_initialize_by(
@@ -33,6 +34,18 @@ class Practitioner < ActiveRecord::Base
 
   def primary_occupation
     occupations.first
+  end
+
+  def search_data
+    { 
+      fullname: fullname,
+      firstname: self.firstname,
+      lastname: self.lastname
+    }
+  end
+
+  def should_index?
+    indexed?
   end
 
   private

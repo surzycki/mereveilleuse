@@ -1,4 +1,6 @@
 describe Practitioner do
+  it_behaves_like 'a person with a name'
+
   describe '#initialize' do
     it 'initializes' do
       expect{ Practitioner.new }.to_not raise_error
@@ -113,40 +115,6 @@ describe Practitioner do
     end
   end
 
-  describe 'scopes' do
-    describe 'scopes' do
-      it_behaves_like 'a model with a fullname finder'
-    end
-  end
-
-  describe '#fullname' do
-    it_behaves_like 'a model with a fullname attribute'
-  end
-
-  describe '#firstname' do
-    it 'returns firstname capitalized' do
-      practitioner = build_stubbed :practitioner, firstname: 'BOB'
-      expect(practitioner.firstname).to eq 'Bob'
-    end
-
-    it 'no firstname returns nil' do
-      practitioner = build_stubbed :practitioner, firstname: nil
-      expect(practitioner.firstname).to be_nil
-    end
-  end
-
-  describe '#lastname' do
-    it 'returns lastname capitalized' do
-      practitioner = build_stubbed :practitioner, lastname: 'JONES'
-      expect(practitioner.lastname).to eq 'Jones'
-    end
-
-    it 'no lastname returns nil' do
-      practitioner = build_stubbed :practitioner, lastname: nil
-      expect(practitioner.lastname).to be_nil
-    end
-  end
-
   describe '#add_occupation' do
     context 'new practitioner' do
       let(:subject) { Practitioner.new }
@@ -190,6 +158,36 @@ describe Practitioner do
   describe '#primary_occupation' do
     it 'returns occupation' do
       expect(subject.primary_occupation).to eq subject.occupations.first
+    end
+  end
+
+  describe '#search_data' do
+    let(:subject)  { build_stubbed :practitioner }
+
+    it 'has fullname' do
+      expect(subject.search_data).to include(fullname: subject.fullname)
+    end
+
+    it 'has firstname' do
+      expect(subject.search_data).to include(firstname: subject.firstname)
+    end
+
+    it 'has lastname' do
+      expect(subject.search_data).to include(lastname: subject.lastname)
+    end
+  end
+
+  describe '#should_index?' do
+    it 'indexes when status indexed' do
+      subject = build_stubbed :practitioner
+
+      expect(subject.should_index?).to eq true
+    end
+
+    it 'does NOT index when status not_indexed' do
+      subject = build_stubbed :practitioner, status: Practitioner.statuses[:not_indexed] 
+      
+      expect(subject.should_index?).to eq false
     end
   end
 end

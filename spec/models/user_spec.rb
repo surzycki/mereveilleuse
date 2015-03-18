@@ -1,4 +1,6 @@
 describe User do
+  it_behaves_like 'a person with a name'
+
   describe '#initialize' do
     it 'initializes' do
       expect{ User.new }.to_not raise_error
@@ -87,36 +89,4 @@ describe User do
       end
     end
   end
-
-  describe 'scopes' do
-    it_behaves_like 'a model with a fullname finder'
-  end
-
-  describe '#firstname' do
-    it 'returns firstname capitalized' do
-      user = build_stubbed :user, firstname: 'BOB'
-      expect(user.firstname).to eq 'Bob'
-    end
-
-    it 'no firstname returns nil' do
-      user = build_stubbed :user, firstname: nil
-      expect(user.firstname).to be_nil
-    end
-  end
-
-  describe '#lastname' do
-    it 'returns lastname capitalized' do
-      user = build_stubbed :user, lastname: 'JONES'
-      expect(user.lastname).to eq 'Jones'
-    end
-
-    it 'no lastname returns nil' do
-      user = build_stubbed :user, lastname: nil
-      expect(user.lastname).to be_nil
-    end
-  end
-
-  describe '#fullname' do
-    it_behaves_like 'a model with a fullname attribute'
-  end  
 end
