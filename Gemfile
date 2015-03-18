@@ -53,6 +53,7 @@ group :test do
   gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
   gem 'spring-commands-rspec'
   gem 'spring' 
+  gem 'poltergeist'                                       # A PhantomJS driver for Capybara
   gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes
   gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)
 end

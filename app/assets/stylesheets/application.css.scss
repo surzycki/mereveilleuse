@@ -18,7 +18,7 @@
 @import 'bourbon';
 @import 'breakpoint';
 @import 'bootstrap';
-//@import 'avgrund/avgrund';
+@import 'jquery.remodal';
 
 @import 'core/base';
 @import 'core/helpers';
@@ -27,6 +27,7 @@
 @import 'modules/jumbotron';
 @import 'modules/buttons';
 @import 'modules/flash_notifications';
+@import 'modules/modal';
 
 @import 'inbox';
 

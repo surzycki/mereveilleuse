@@ -63,6 +63,11 @@ fr:
         label: Information complémentaire
 
       submit: Sollicitez la communauté
+    success: 
+      title: Merci pour la confiance que vous accordez à la communauté!
+      subtitle: Nous collectons les recommandations dans votre quartier et nous vous envoyons le résultat par email !
+      action: Partagez sur Facebook
+      information: Soyez MèreVeilleuse et aidez d'autres mamans à trouver les bonnes adresses
 
   rating:
     form:

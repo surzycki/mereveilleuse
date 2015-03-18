@@ -8,21 +8,6 @@
       version    : 'v2.2'
     });
 
-    function echoSize() {
-      //document.getElementById('output').innerHTML = 
-      //   "HTML Content Width: " + window.innerWidth + 
-      //   " Height: " + window.innerHeight;
-      //console.log(window.innerWidth + ' x ' + window.innerHeight);
-    }
-
-    //echoSize();
-    //window.onresize = echoSize;
-
-    //FB.Canvas.setSize();
-    
-    console.log ('autogrow')
-    FB.Canvas.setAutoGrow(100);
-
     FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
     FB.Event.subscribe('auth.statusChange', onStatusChange);
 

@@ -20,9 +20,10 @@
    
   %body{ class: apply_blur? }
     = render 'shared/facebook_javascript_sdk'
-    %section{ style: 'height:100%;' }
+    %section.remodal-bg{ style: 'height:100%;' }
       = render 'shared/flash'
       = yield
       = render 'navs/help'
+      = render 'shared/modal'
     
     = javascript_include_tag :application
