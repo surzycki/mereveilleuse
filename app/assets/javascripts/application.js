@@ -14,12 +14,15 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require typeahead
+//= require typeahead-addresspicker
+//= require pubsub
+//= require jquery.remodal
 
 // shim for phantomjs < 2.0.0 and react (for circleci)
 //= require es5-shim                
 //= require react
 //= require react_ujs
 //= require_tree ./components
-//= require jquery.remodal
 
+//= require forms
 //= require invite

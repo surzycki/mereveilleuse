@@ -34,7 +34,10 @@ root.PractitionerAutocomplete = React.createClass(
 
   handleChange: ->
     this.setState( { value: event.target.value } ) 
-  
+    # send clear event
+    if event.target.value == ''
+      PubSub.publish( 'practitioner:selected', { address: ''} );
+
   render: ->
     `<input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }
         className={ this._props.className } placeholder={ this._props.placeholder } value={this.state.value} onChange={this.handleChange}  />`
@@ -59,9 +62,11 @@ root.PractitionerAutocomplete = React.createClass(
 
     $(element).on 'typeahead:selected', (jquery, option) ->
       console.log(option)
+      PubSub.publish( 'practitioner:selected', option );
 
   _destroy_typeahead: ->
     element = this.getDOMNode()
     $(element).typeahead('destroy')
+    
 
 )

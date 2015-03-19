@@ -27,4 +27,5 @@
       = render 'navs/help'
       = render 'shared/modal'
     
+    = javascript_include_tag "//maps.googleapis.com/maps/api/js?v=3.exp&key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places&sensor=false"
     = javascript_include_tag :application
