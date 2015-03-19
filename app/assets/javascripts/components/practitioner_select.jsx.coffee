@@ -4,50 +4,64 @@ root.PractitionerSelect = React.createClass(
   propTypes: 
     field:  React.PropTypes.string
 
+  getInitialState: ->
+    value: null;
+  
   componentWillMount: ->
-    this.props.name       = "#{this.props.form}[#{this.props.field}]"
-    this.props.id         = "#{this.props.form}_#{this.props.field}"
-    this.props.className  = "#{this.props.className} typeahead"
+    input  = $.parseHTML(this.props.field)
+   
+    this._props.name        = $(input).attr('name')
+    this._props.id          = $(input).attr('id')
+    this._props.className   = "#{$(input).attr('class')} typeahead"
+    this._props.placeholder = $(input).attr('placeholder')
+    this._props.data_error  = $(input).attr('data-error')
+    
+    this.setState( { value: $(input).attr('value') } ) 
 
   componentDidMount: ->
+    this._initialize_typeahead()
+    
+  componentWillUnmount: ->
+    this._destroy_typeahead()
+   
+  _props: {}
+
+  engine: -> 
+    new Bloodhound(
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('fullname')
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      remote: 
+        url: '/practitioners/autocomplete?query=%QUERY'
+    )
+
+  handleChange: ->
+    this.setState( { value: event.target.value } ) 
+  
+  render: ->
+    `<input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }
+        className={ this._props.className } placeholder={ this._props.placeholder } value={this.state.value} onChange={this.handleChange}  />`
+   
+
+  _initialize_typeahead: ->
+    practitioner_engine = this.engine()
+    practitioner_engine.initialize()
+
     element = this.getDOMNode()
     
-    $(element).typeahead {
+    $(element).typeahead { 
       hint: true
       highlight: true
-      minLength: 1
+      minLength: 2
     },
-      name: 'states'
-      displayKey: 'value'
-      source: this.substringMatcher(['Indiana','Idaho','Illinois','Irresponsible'])
-    
-    console.log 'mounted'
+      name: 'practitioner_name'
+      displayKey: 'fullname'
+      source: practitioner_engine.ttAdapter()
 
-  componentWillUnmount: ->
-    console.log 'will unmount'
+    $(element).on 'typeahead:selected', (jquery, option) ->
+      console.log(option)
 
-  substringMatcher: (strs) ->
-    (q, cb) ->
-      matches = undefined
-      substrRegex = undefined
-      # an array that will be populated with substring matches
-      matches = []
-      # regex used to determine if a string contains the substring `q`
-      substrRegex = new RegExp(q, 'i')
-      # iterate through the pool of strings and for any string that
-      # contains the substring `q`, add it to the `matches` array
-      $.each strs, (i, str) ->
-        if substrRegex.test(str)
-          # the typeahead jQuery plugin expects suggestions to a
-          # JavaScript object, refer to typeahead docs for more info
-          matches.push value: str
-        return
-      cb matches
-      return
+  _destroy_typeahead: ->
+    element = this.getDOMNode()
+    $(element).typeahead('destroy')
 
-  render: ->
-    `<input type='search' name={ this.props.name } id={ this.props.id } ref='input' 
-        className={ this.props.className } placeholder={ this.props.placeholder } />`
-
-    
 )

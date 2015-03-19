@@ -156,8 +156,18 @@ describe Practitioner do
   end
 
   describe '#primary_occupation' do
+    let(:subject)  { build_stubbed :practitioner }
+
     it 'returns occupation' do
       expect(subject.primary_occupation).to eq subject.occupations.first
+    end
+
+    context 'no occupation' do
+      let(:subject) { Practitioner.new }
+
+      it 'returns null occupation' do
+        expect(subject.primary_occupation).to be_a(NullOccupation)
+      end
     end
   end
 

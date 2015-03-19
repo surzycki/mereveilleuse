@@ -442,6 +442,7 @@ DEPENDENCIES
   koala (~> 1.11.0rc)
   lograge
   namae
+  nokogiri
   pg
   poltergeist
   puma

@@ -10,7 +10,8 @@
     = form_for(@form, url: recommendations_path, method: :post) do |f|
       .form-group
         = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
-        = react_component('PractitionerSelect', field: 'practitioner_name', form: f.object_name, className: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder') )
+        =# react_component('PractitionerSelect', field: 'practitioner_name', form: f.object_name, className: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder') )
+        = react_component( 'PractitionerSelect', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
         = f.hidden_field :user_id, value: current_user.id
 
       .form-group

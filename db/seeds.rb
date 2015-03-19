@@ -52,6 +52,8 @@ practitioners = Array.new(PRACTITIONER_COUNT) {
   practitioner.phone        = Forgery(:address).phone
   practitioner.mobile_phone = Forgery(:address).phone
   practitioner.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+  practitioner.occupations  << Occupation.create( { profession: Profession.all.sample, experience: 10 } )
+
   practitioner.indexed!
   practitioner.save
 }

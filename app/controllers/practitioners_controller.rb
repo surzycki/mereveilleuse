@@ -1,4 +1,7 @@
 class PractitionersController < ApplicationController
+  around_filter :catch_exceptions, unless: 'Rails.env.development?'
+
+  # GET practitioners/autocomplete?query={query}
   def autocomplete
     respond_to do |format|
       format.json { create_json_response }
@@ -8,6 +11,14 @@ class PractitionersController < ApplicationController
 
   private
   def create_json_response
-    render json: { message: 'hi', phone: 'who' }, status: :ok
+    @results = Practitioner.search( params[:query], fields: [ {fullname: :word_start} ], limit: 10).results
+    render :autocomplete
+  end
+
+  def catch_exceptions
+    yield
+  rescue => error  
+    TrackError.new( error, logger )
+    render json: {error: [ error ]}, status: :internal_server_error
   end
 end

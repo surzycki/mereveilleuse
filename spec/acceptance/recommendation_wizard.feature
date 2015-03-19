@@ -25,7 +25,6 @@ Feature: Recommendation Wizard
     And I select 'Person' from patient_type_id on 'recommendation form' 
     And I modify the 'recommendation form' address with '6 rue Gobert' 
     And I submit the form
-    And show page
     Then I should be on recommendation 'step two'
     And there should be a practitioner with fullname 'Homer Simpson'
     And there should be a recommendation for practitioner with lastname 'Simpson'

@@ -6,4 +6,8 @@ class NullOccupation
   def experience
     0
   end
+
+  def profession_id
+    0
+  end
 end

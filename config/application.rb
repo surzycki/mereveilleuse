@@ -40,6 +40,15 @@ module AppFacebook
     # for custom error pages
     config.exceptions_app = self.routes
 
+    # change field with errors behaviour
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance| 
+      return if html_tag.blank?
+      
+      node = Nokogiri::HTML::fragment(html_tag).children.first
+      node['data-error'] = true
+      node.to_html.html_safe
+    end
+
     # react js
     config.react.variant      = :production
     config.react.addons       = true
