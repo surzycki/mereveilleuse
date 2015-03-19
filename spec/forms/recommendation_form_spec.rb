@@ -209,13 +209,37 @@ describe RecommendationForm do
   end
 
   describe '#save' do
-    context 'exception' do
-      before do
-        allow(recommendation).to receive(:attributes=).and_raise :error 
+    context 'exceptions' do
+      context 'general exception' do
+        before do
+          allow(recommendation).to receive(:attributes=).and_raise :error 
+        end
+  
+        it 'returns false' do
+          expect(subject.save).to be false
+        end
+
+        it 'sets error message' do
+          subject.save
+          
+          expect(subject.errors[:base]).to include I18n.t('errors.general')
+        end
       end
 
-      it 'returns false' do
-        expect(subject.save).to be false
+      context 'NameError exception' do
+        before do
+          allow(recommendation).to receive(:attributes=).and_raise NameError
+        end
+  
+        it 'returns false' do
+          expect(subject.save).to be false
+        end
+
+        it 'sets error message for address'  do
+          subject.save 
+         
+          expect(subject.errors[:address]).to include I18n.t('errors.address_parser')
+        end
       end
     end
   end

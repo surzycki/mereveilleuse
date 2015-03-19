@@ -42,21 +42,21 @@ describe Location do
     
     it 'returns address' do
       address = "#{subject.street}, #{subject.postal_code}, #{subject.city}"
-      expect(subject.address).to eq(address)
+      expect(subject.address).to eq(address.titleize)
     end
 
     it 'returns address (no postal_code)' do
       subject.postal_code = ''
 
       address = "#{subject.street}, #{subject.city}"
-      expect(subject.address).to eq(address)
+      expect(subject.address).to eq(address.titleize)
     end
 
     it 'returns address (no city)' do
       subject.city = ''
 
       address = "#{subject.street}, #{subject.postal_code}"
-      expect(subject.address).to eq(address)
+      expect(subject.address).to eq(address.titleize)
     end
   end
 
@@ -65,25 +65,46 @@ describe Location do
     
     it 'returns short_address' do
       short_address = "#{subject.city}, #{subject.postal_code}"
-      expect(subject.short_address).to eq(short_address)
+      expect(subject.short_address).to eq(short_address.titleize)
     end
 
     it 'returns short_address (no postal_code)' do
       subject.postal_code = ''
 
       short_address = "#{subject.city}"
-      expect(subject.short_address).to eq(short_address)
+      expect(subject.short_address).to eq(short_address.titleize)
     end
 
     it 'returns short_address (no city)' do
       subject.city = ''
 
       short_address = "#{subject.postal_code}"
-      expect(subject.short_address).to eq(short_address)
+      expect(subject.short_address).to eq(short_address.titleize)
     end
   end
 
   describe '#address=' do
-    pending
+    let(:address_parser) { spy('address parser') }
+    
+    before do
+      allow(AddressParser).to receive(:new).and_return(address_parser)
+      allow(subject).to receive(:save)
+
+      subject.address = 'address'
+    end
+    
+    it 'parses the address' do
+      expect(AddressParser).to have_received(:new)
+        .with('address')
+    end
+
+    it 'saves' do
+      expect(subject).to have_received(:save)
+    end
+
+    it 'it sets attributes to parsed values' do 
+      expect(address_parser).to have_received(:set)
+        .with subject
+    end
   end
 end

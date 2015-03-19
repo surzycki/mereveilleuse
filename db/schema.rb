@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311144711) do
+ActiveRecord::Schema.define(version: 20150319150857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20150311144711) do
     t.string   "locatable_type"
     t.float    "latitude",       default: 0.0
     t.float    "longitude",      default: 0.0
+    t.string   "department"
+    t.string   "region"
   end
 
   add_index "locations", ["locatable_type", "locatable_id"], name: "index_locations_on_locatable_type_and_locatable_id", using: :btree

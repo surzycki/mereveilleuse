@@ -3,7 +3,7 @@ class Practitioner < ActiveRecord::Base
 
   after_initialize :set_uuid
 
-  has_one   :location, dependent: :destroy, as: :locatable
+  has_one   :location, dependent: :destroy, as: :locatable, autosave: true
 
   has_many  :recommendations, dependent: :destroy
   has_many  :references, through: :recommendations, source: :user
@@ -17,11 +17,19 @@ class Practitioner < ActiveRecord::Base
   # http://stackoverflow.com/questions/7206541/activeadmin-with-has-many-problem-undefined-method-new-record
   accepts_nested_attributes_for :occupations, allow_destroy: true
 
-  delegate :address, 
-           :address=, 
-           to: :location, prefix: false, allow_nil: true
+  delegate :address, to: :location, prefix: false, allow_nil: true
 
   searchkick word_start: [:fullname], index_prefix: Rails.env
+
+  def address=(value)
+    if self.location
+      self.location.address = value
+    else
+      self.location = Location.new().tap do |loc|
+        loc.address = value
+      end
+    end
+  end
 
   def add_occupation(profession_id)
     occupation = Occupation.find_or_initialize_by(

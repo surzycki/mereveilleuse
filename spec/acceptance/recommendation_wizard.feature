@@ -1,34 +1,36 @@
+# dependant upon geocoder stubs
+
 @acceptance @js
 Feature: Recommendation Wizard 
   Background:
     Given I am logged in
     And the application is setup
   
+ 
   Scenario: Step One Success (Create Practitioner)
     Given I am on recommendation 'step one'
     When I modify the 'recommendation form' practitioner_name with 'Bob Jones'
     And I select 'Doctor' from profession_id on 'recommendation form'
     And I select 'Person' from patient_type_id on 'recommendation form' 
-    And I modify the 'recommendation form' address with '6 rue Gobert'
+    And I modify the 'recommendation form' address with '6 rue gobert paris france'
     And I submit the form
     Then I should be on recommendation 'step two'
     And there should be a practitioner with fullname 'Bob Jones'
     And there should be a recommendation for practitioner with lastname 'Jones'
-    #And the practitioner address is '6 rue Gobert'
+    And the practitioner 'Bob Jones' address is '6 Rue Gobert, 75011, Paris'
 
-  
   Scenario: Step One Success (Existing Practitioner)
     Given I am on recommendation 'step one'
     And a practitioner 'Homer Simpson' exists
     When I modify the 'recommendation form' practitioner_name with 'Homer Simpson'  
     And I select 'Doctor' from profession_id on 'recommendation form'
     And I select 'Person' from patient_type_id on 'recommendation form' 
-    And I modify the 'recommendation form' address with '6 rue Gobert' 
+    And I modify the 'recommendation form' address with '6 rue gobert paris france' 
     And I submit the form
     Then I should be on recommendation 'step two'
     And there should be a practitioner with fullname 'Homer Simpson'
     And there should be a recommendation for practitioner with lastname 'Simpson'
-    #And the practitioner address is '6 rue Gobert'
+    And the practitioner 'Homer Simpson' address is '6 Rue Gobert, 75011, Paris'
        
   Scenario: Step One Fail
     Given I am on recommendation 'step one'

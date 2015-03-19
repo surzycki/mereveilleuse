@@ -1,3 +1,4 @@
+# spec is dependent upon geocoder stub
 describe 'recommendation' do
   let!(:user)          { create :user }
   let!(:patient_type)  { create :patient_type } 
@@ -8,37 +9,43 @@ describe 'recommendation' do
   end
 
   describe 'create' do
-    let(:form_data) {{
-      practitioner_name:  practitioner.fullname,
-      patient_type_id:    patient_type.id,
-      profession_id:      practitioner.primary_occupation.profession_id,
-      address:            practitioner.address,
-      user_id:            user.id
-    }}
-
     context 'new practitioner' do
+      let(:form_data) {{
+        practitioner_name:  'New Practitioner',
+        patient_type_id:    patient_type.id,
+        profession_id:      practitioner.primary_occupation.profession_id,
+        address:            '6 rue gobert paris france',
+        user_id:            user.id
+      }}
+
       context 'success' do
         it 'creates a practitioner' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: 'New Practitioner')
+            post recommendations_path, recommendation_form: form_data
           end.to change(Practitioner, :count).by(1)
         end
 
         it 'creates a occupation' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: 'New Practitioner')
+            post recommendations_path, recommendation_form: form_data
           end.to change(Occupation, :count).by(1)
         end
 
         it 'creates a recommendations' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: 'New Practitioner')
+            post recommendations_path, recommendation_form: form_data
           end.to change(Recommendation, :count).by(1)
+        end
+
+        it 'creates a location' do
+          expect do
+            post recommendations_path, recommendation_form: form_data
+          end.to change(Location, :count).by(1)
         end
 
         it 'is not_indexed' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: 'New Practitioner')
+            post recommendations_path, recommendation_form: form_data
           end.to_not change { Practitioner.first.status }
         end
       end
@@ -61,10 +68,25 @@ describe 'recommendation' do
             post recommendations_path, recommendation_form: form_data.merge(practitioner_name: '')
           end.to_not change(Occupation, :count)
         end
+
+        it 'does NOT create a location' do
+          expect do
+            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: '')
+          end.to_not change(Location, :count)
+        end
       end
+    
     end
 
     context 'existing practitioner (not modified)' do
+      let(:form_data) {{
+        practitioner_name:  practitioner.fullname,
+        patient_type_id:    patient_type.id,
+        profession_id:      practitioner.primary_occupation.profession_id,
+        address:            practitioner.address,
+        user_id:            user.id
+      }}
+
       context 'success' do
         it 'does NOT create a practitioner' do
           expect do
@@ -84,6 +106,12 @@ describe 'recommendation' do
           end.to change(Recommendation, :count).by(1)
         end
 
+        it 'does NOT create a location' do
+          expect do
+            post recommendations_path, recommendation_form: form_data
+          end.to_not change(Location, :count)
+        end
+
         it 'does NOT set not_indexed status' do
           expect do
             post recommendations_path, recommendation_form: form_data
@@ -110,6 +138,12 @@ describe 'recommendation' do
           end.to_not change(Occupation, :count)
         end
 
+        it 'does NOT create a location' do
+          expect do
+            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
+          end.to_not change(Location, :count)
+        end
+
         it 'does NOT set not_indexed status' do
           expect do
             post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
@@ -118,36 +152,44 @@ describe 'recommendation' do
       end
     end
 
+    # this spec uses stubs for geocoder
     context 'existing practitioner (modified)' do
+      let(:form_data) {{
+        practitioner_name:  practitioner.fullname,
+        patient_type_id:    patient_type.id,
+        profession_id:      '9090',
+        address:            '75011',
+        user_id:            user.id
+      }}
+
       context 'success' do
         it 'does NOT create a practitioner' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, address: 'New address')
+            post recommendations_path, recommendation_form: form_data
           end.to_not change(Practitioner, :count)
         end
 
         it 'creates an occupation' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, address: 'New address')
+            post recommendations_path, recommendation_form: form_data
           end.to change(Occupation, :count).by(1)
         end
 
         it 'creates a recommendations' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, address: 'New address')
+            post recommendations_path, recommendation_form: form_data
           end.to change(Recommendation, :count).by(1)
         end
 
         it 'sets not_indexed status' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, address: 'New address')
+            post recommendations_path, recommendation_form: form_data
           end.to change { practitioner.reload.status }.to('not_indexed')
         end
 
         it 'changes address' do
-          skip
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, address: 'New address')
+            post recommendations_path, recommendation_form: form_data
           end.to change { practitioner.reload.address }
         end
       end
@@ -155,26 +197,32 @@ describe 'recommendation' do
       context 'validation error' do
         it 'does NOT create a practitioner' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
           end.to_not change(Practitioner, :count)
         end
 
         it 'does NOT create a recommendations' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
           end.to_not change(Recommendation, :count)
         end
 
         it 'does NOT create a occupation' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
           end.to_not change(Occupation, :count)
         end
 
         it 'does NOT set not_indexed status' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(profession_id: 9090, patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
           end.to_not change { practitioner.reload.status }
+        end
+
+        it 'oes NOT change address' do
+          expect do
+            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
+          end.to_not change { practitioner.reload.address }
         end
       end
     end

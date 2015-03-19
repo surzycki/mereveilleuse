@@ -34,8 +34,10 @@ class RecommendationForm
           practitioner.add_occupation profession_id
           practitioner.save
         end  
+      rescue NameError => e
+        errors.add(:address, I18n.t('errors.address_parser')) && false
       rescue 
-        false      
+        errors[:base] << I18n.t('errors.general') && false
       end
     end
 

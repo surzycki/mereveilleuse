@@ -38,6 +38,9 @@ fr:
             comment:  
               blank: doit être rempli
 
+  errors: 
+    general: 'Quelque chose a mal tourné'
+    address_parser: 'Adresse introuvable'
 
   help:
     label: Vous avez besoin d'aide? 

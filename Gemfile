@@ -22,6 +22,9 @@ gem 'therubyracer'                                        # Embed the V8 Javascr
 gem 'namae'                                               # Namae (名前) parses personal names and splits them into their component parts.
 gem 'searchkick'                                          # Intelligent search made easy
 gem 'nokogiri'                                            # Nokogiri (鋸) is an HTML, XML, SAX, and Reader parser with XPath and CSS selector support.
+gem 'geocoder'                                            # Complete Ruby geocoding solution
+gem 'redis'                                               # A Ruby client library for Redis
+gem 'wisper'                                              # A micro library providing Ruby objects with Publish-Subscribe capabilities
 gem 'devise'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
@@ -52,6 +55,7 @@ group :test do
   gem 'guard'                                             # Guard is a command line tool to easily handle events on file system modifications
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+
+  gem 'wisper-rspec'                                      # RSpec matchers and stubbing for Wisper
   gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
   gem 'spring-commands-rspec'
   gem 'spring' 

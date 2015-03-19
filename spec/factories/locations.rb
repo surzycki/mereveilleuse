@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :location do
-    street      '123 East Street'
-    city        'Paris'
+    street      '6 rue gobert'
+    city        'paris'
     postal_code '75011'
-    country     'France'
+    country     'france'
     latitude      1.111
     longitude     2.222
 
