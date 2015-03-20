@@ -26,14 +26,14 @@ ActiveAdmin.register Recommendation do
       status_tag(recommendation.state, recommendation)
     end
 
+    column 'Practitioner' do |recommendation|
+      link_to_practitioner recommendation.practitioner
+    end
+
     column :profession
 
     column 'Patient Types' do |recommendation|
       get_patient_types recommendation
-    end
-
-    column 'Practitioner' do |recommendation|
-      link_to_practitioner recommendation.practitioner
     end
 
     column 'Mother' do |recommendation|
@@ -58,14 +58,14 @@ ActiveAdmin.register Recommendation do
         status_tag(recommendation.state, recommendation)
       end
   
+      row 'Practitioner' do |recommendation|
+        link_to_practitioner recommendation.practitioner
+      end
+
       row :profession
   
       row 'Patient Types' do |recommendation|
         get_patient_types recommendation
-      end
-
-      row 'Practitioner' do |recommendation|
-        link_to_practitioner recommendation.practitioner
       end
   
       row 'Mother' do |recommendation|

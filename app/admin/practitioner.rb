@@ -10,6 +10,16 @@ ActiveAdmin.register Practitioner do
   filter :email_cont,                 as: :string, label: 'Email'
   filter :location_city_cont,         as: :string, label: 'City'
 
+  scope :all, default: true
+  
+  scope :indexed do |practitioner|
+    practitioner.where(status: Practitioner.statuses[:indexed])
+  end
+  
+  scope :not_indexed do |practitioner|
+    practitioner.where(status: Practitioner.statuses[:not_indexed])
+  end
+  
   controller do
     def edit
       practitioner = scoped_collection.find(params[:id])

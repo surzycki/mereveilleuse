@@ -1,14 +1,14 @@
 module ActiveAdmin::ViewHelpers
   def user_status(user)
     status = :ok      if user.registered? 
-    status = :pending if user.unregistered?
+    status = :error   if user.unregistered?
   
     status
   end
 
   def practitioner_status(practitioner)
     status = :ok      if practitioner.indexed? 
-    status = :pending if practitioner.not_indexed?
+    status = :error   if practitioner.not_indexed?
   
     status
   end

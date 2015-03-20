@@ -12,6 +12,16 @@ ActiveAdmin.register User do
 
   filter :created_at
 
+  scope :all, default: true
+  
+  scope :registered do |user|
+    user.where(status: User.statuses[:registered])
+  end
+  
+  scope :unregistered do |user|
+    user.where(status: User.statuses[:unregistered])
+  end
+
   controller do
     def edit
       user = scoped_collection.find(params[:id])
@@ -19,7 +29,7 @@ ActiveAdmin.register User do
     end
   end
 
-  index do
+  index title: 'Mothers' do
     column 'Status' do |user|
       status_tag(user.status, user_status(user))
     end
