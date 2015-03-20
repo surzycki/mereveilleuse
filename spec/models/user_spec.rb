@@ -59,6 +59,11 @@ describe User do
       expect(subject).to have_one(:location)
         .dependent(:destroy)
     end
+
+    it 'has many searches' do
+      expect(subject).to have_many(:searches)
+        .dependent(:destroy)
+    end
   end
 
   describe 'callback' do

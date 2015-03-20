@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319150857) do
+ActiveRecord::Schema.define(version: 20150320135343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,35 @@ ActiveRecord::Schema.define(version: 20150319150857) do
   add_index "recommendations", ["practitioner_id"], name: "index_recommendations_on_practitioner_id", using: :btree
   add_index "recommendations", ["profession_id"], name: "index_recommendations_on_profession_id", using: :btree
   add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
+
+  create_table "searches", force: :cascade do |t|
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "status",      default: 0
+    t.float    "latitude",    default: 0.0
+    t.float    "longitude",   default: 0.0
+    t.text     "information"
+    t.integer  "user_id"
+    t.text     "settings"
+  end
+
+  add_index "searches", ["user_id"], name: "index_searches_on_user_id", using: :btree
+
+  create_table "searches_patient_types", id: false, force: :cascade do |t|
+    t.integer "search_id"
+    t.integer "patient_type_id"
+  end
+
+  add_index "searches_patient_types", ["patient_type_id"], name: "index_searches_patient_types_on_patient_type_id", using: :btree
+  add_index "searches_patient_types", ["search_id"], name: "index_searches_patient_types_on_search_id", using: :btree
+
+  create_table "searches_professions", id: false, force: :cascade do |t|
+    t.integer "search_id"
+    t.integer "profession_id"
+  end
+
+  add_index "searches_professions", ["profession_id"], name: "index_searches_professions_on_profession_id", using: :btree
+  add_index "searches_professions", ["search_id"], name: "index_searches_professions_on_search_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                  null: false

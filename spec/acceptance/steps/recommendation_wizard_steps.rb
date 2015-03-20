@@ -18,7 +18,7 @@ module RecommendationWizardSteps
       edit_recommendation_path(@recommendation)
     when 'completed'
       @recommendation = FactoryGirl.create :recommendation, :completed
-      recommendation_path(@recommendation =)
+      recommendation_path(@recommendation)
     else
       root_path
     end

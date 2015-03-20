@@ -22,4 +22,6 @@ describe SearchesController do
     end
   end
 
+  describe 'POST create' do
+  end
 end

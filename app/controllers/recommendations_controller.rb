@@ -10,7 +10,6 @@ class RecommendationsController < ApplicationController
 
   # POST recommendations
   def create
-    
     @form = RecommendationForm.new Recommendation.new, find_practitioner_by_name
     
     RecommendationWizard.new(self).tap do |wizard|

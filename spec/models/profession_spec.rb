@@ -20,5 +20,9 @@ describe Profession do
       expect(subject).to have_many(:practitioners)
         .through(:occupations)
     end 
+
+    it 'has and belongs to many searches' do
+      expect(subject).to have_and_belong_to_many(:searches)
+    end
   end
 end
