@@ -28,6 +28,7 @@ class RecommendationForm
         # someone has changed the practitioner information needs to be handled
         if update_practitioner?
           practitioner.fullname = practitioner_name
+          
           practitioner.address  = address
           practitioner.status   = :not_indexed
           
@@ -47,7 +48,7 @@ class RecommendationForm
       def save
         recommendation.attributes = hashify(:wait_time, :availability, :bedside_manner, :efficacy, :comment )
       rescue 
-        false      
+        errors[:base] << I18n.t('errors.general') && false      
       end
     end
 

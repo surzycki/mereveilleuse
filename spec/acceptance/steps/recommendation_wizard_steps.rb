@@ -14,9 +14,11 @@ module RecommendationWizardSteps
     when 'step one'
       new_recommendation_path
     when 'step two'
-      edit_recommendation_path(Recommendation.first || 1)
+      @recommendation = FactoryGirl.create :recommendation, :step_two
+      edit_recommendation_path(@recommendation)
     when 'completed'
-      recommendation_path(Recommendation.first || 1)
+      @recommendation = FactoryGirl.create :recommendation, :completed
+      recommendation_path(@recommendation =)
     else
       root_path
     end

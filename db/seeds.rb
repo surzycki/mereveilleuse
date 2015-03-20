@@ -1,29 +1,63 @@
-# encoding: utf-8
-require 'csv'
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Emanuel', city: cities.first)
 
+USER_COUNT         = 10
+PRACTITIONER_COUNT = 50
 
-file = File.open('doctor_import.csv', 'rb')
-contents = file.read
-sector = Array.new
-professions = Array.new
+PatientType.delete_all
+Profession.delete_all
+User.delete_all
+Practitioner.delete_all
 
-datas = CSV.parse contents
+puts '-- creating patient types...'
+patient_types = PatientType.create([
+  { name: 'Une future maman'},
+  { name: 'Une maman'},
+  { name: 'Un nourisson (0 - 3)'},
+  { name: 'Un bébé (4 - 11)'},
+  { name: 'Un adolescent (12 ans +)'}
+])
 
-datas.each do |data|
-  begin
-    sector.push data[5]
-    professions.push data[6]
-  rescue
-    puts "not found for: #{data[0]}"
-  end
-end
+puts '-- creating professions...'
+professions = Profession.create([
+  { name: 'Médecin Généralist' },
+  { name: 'Nutritionniste' },
+  { name: 'Ostéopathes' },
+  { name: 'Pédiatres' },
+  { name: 'Sophrologues' }
+])
 
-sector.uniq.each do |x|
-  puts x
-end
+puts '-- creating generic users...'
+users = Array.new(USER_COUNT) {
+  user = User.create()
+  user.facebook_id  = rand.to_s[2..11]
+  user.firstname    = Forgery(:name).first_name
+  user.lastname     = Forgery(:name).last_name
+  user.email        = Forgery(:internet).email_address
+  user.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+  user.save
+}
 
-puts '----'
+puts '-- creating indexed practitioners...'
+practitioners = Array.new(PRACTITIONER_COUNT) {
+  practitioner = Practitioner.create()
+  practitioner.firstname    = Forgery(:name).first_name
+  practitioner.lastname     = Forgery(:name).last_name
+  practitioner.email        = Forgery(:internet).email_address
+  practitioner.phone        = Forgery(:address).phone
+  practitioner.mobile_phone = Forgery(:address).phone
+  practitioner.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+  practitioner.occupations  << Occupation.create( { profession: Profession.all.sample, experience: 10 } )
 
-professions.uniq.each do |x|
-  puts x
-end
+  practitioner.indexed!
+  practitioner.save
+}
+
+puts '-- creating admin user...'
+AdminUser.create!(email: 'ops@mereveilleuse.com', password: 'thinkbigger', password_confirmation: 'thinkbigger')
+

@@ -17,11 +17,13 @@ class Practitioner < ActiveRecord::Base
   # http://stackoverflow.com/questions/7206541/activeadmin-with-has-many-problem-undefined-method-new-record
   accepts_nested_attributes_for :occupations, allow_destroy: true
 
-  delegate :address, to: :location, prefix: false, allow_nil: true
+  delegate :address,   to: :location, prefix: false, allow_nil: true
+  delegate :longitude, to: :location, prefix: false, allow_nil: true
+  delegate :latitude,  to: :location, prefix: false, allow_nil: true
 
   searchkick word_start: [:fullname], index_prefix: Rails.env
 
-  def address=(value)
+  def address=(value) 
     if self.location
       self.location.address = value
     else

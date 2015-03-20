@@ -12,6 +12,7 @@ require 'dotenv' ; Dotenv.load '.env.local', ".env.#{Rails.env}"
 module AppFacebook
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/lib/extensions)
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

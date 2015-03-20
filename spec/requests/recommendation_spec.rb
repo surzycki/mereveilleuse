@@ -229,7 +229,7 @@ describe 'recommendation' do
   end
 
   describe 'update' do
-    let(:recommendation) { create :recommendation, :step_one_complete }
+    let(:recommendation) { create :recommendation, :step_two }
 
     let(:form_data) {{
       wait_time:        '1',

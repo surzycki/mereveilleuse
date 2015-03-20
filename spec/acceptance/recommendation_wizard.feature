@@ -42,8 +42,7 @@ Feature: Recommendation Wizard
     And there should not be a recommendation for practitioner with lastname 'Jones'
     
   Scenario: Step Two Success
-    Given recommendation wizard 'step one' is complete
-    And I am on recommendation 'step two'
+    Given I am on recommendation 'step two'
     When I choose 'wait_time' 1 on the 'recommendation form'
     And I choose 'availability' 1 on the 'recommendation form'
     And I choose 'bedside_manner' 1 on the 'recommendation form'
@@ -54,17 +53,14 @@ Feature: Recommendation Wizard
     And I should not see an error message
 
   Scenario: Step Two Fail
-    Given recommendation wizard 'step one' is complete
     And I am on recommendation 'step two'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
     Then I should see an error message
 
   Scenario: Completed Success (No Invite)
-    Given recommendation wizard 'step two' is complete
-    And I am on recommendation 'completed'
+    Given I am on recommendation 'completed'
 
   Scenario: Completed Success (Invite)
-    Given recommendation wizard 'step two' is complete
-    And I am on recommendation 'completed'
+    Given I am on recommendation 'completed'
 
