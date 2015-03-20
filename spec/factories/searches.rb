@@ -16,7 +16,5 @@ FactoryGirl.define do
     information     'Hello there'
 
     settings   ''
-
-
   end
 end

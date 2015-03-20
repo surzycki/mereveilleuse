@@ -17,10 +17,12 @@ class SearchesController < ApplicationController
 
   private
   def search_params
-    params.require(:search_form).permit(:address, :profession_id, :patient_id, :information )
+    params.require(:search_form)
+      .permit(:address, :profession_id, :patient_id, :information )
+      .merge(user_id: current_user.id)
   end
 
   def search_service
-    @search_service ||= SearchService.new(SearchForm.new(search_params), current_user)
+    @search_service ||= SearchService.new(SearchForm.new(search_params))
   end
 end

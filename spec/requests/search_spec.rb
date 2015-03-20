@@ -13,12 +13,18 @@ describe 'search' do
       it 'creates search' do
       end
 
+      it 'creates a location' do
+      end
+
       it 'schedules an email' do
       end
     end
 
     context 'duplicate search' do
       it 'does NOT create a search' do
+      end
+
+      it 'does NOT create location' do
       end
 
       it 'does NOT schedule an email' do
