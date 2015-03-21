@@ -1,5 +1,5 @@
 describe Search do
-  it_behaves_like 'a model with a location'
+  it_behaves_like 'it has location attributes'
 
   describe '#initialize' do
     it 'initializes' do
@@ -8,20 +8,16 @@ describe Search do
   end
 
   describe 'attributes' do
-    it 'has a latitude' do
-      expect(subject).to respond_to :latitude
-    end
-
-    it 'has a longitude' do
-      expect(subject).to respond_to :longitude
-    end
-
     it 'has a information' do
       expect(subject).to respond_to :information
     end
 
     it 'has a settings' do
       expect(subject).to respond_to :settings
+    end
+
+    it 'has a md5_hash' do
+      expect(subject).to respond_to :md5_hash
     end
 
     it 'defines enum for status' do
@@ -44,22 +40,26 @@ describe Search do
     it 'belongs to user' do
       expect(subject).to belong_to(:user) 
     end
-
-    it 'has one location' do
-      expect(subject).to have_one(:location)
-        .dependent(:destroy)
-    end
   end
 
   describe 'callbacks' do
-    context 'after_initialize' do
-      it 'call set_hash_id' do
-        allow_any_instance_of(Search).to receive(:set_hash_id)
-        expect(Search.new).to have_received(:set_hash_id)
+    context 'after_validation' do
+      let(:subject)  { build_stubbed :search }
+
+      before { subject.valid? }
+
+      it 'creates the correct hash' do
+        string = "#{subject.status}-#{subject.patient_types.map(&:id)}-#{subject.professions.map(&:id)}-#{subject.address}-#{subject.user.try(:id)}"
+      
+        expect(subject.md5_hash).to eq Digest::MD5.hexdigest(string)
       end
 
-      it 'has correct hash_id' do
+      it 'changes hash with attributes' do
+        old_hash       = subject.md5_hash
+        subject.status = Search.statuses[:canceled]
         
+        subject.valid? 
+        expect(subject.md5_hash).to_not eq old_hash
       end
     end
   end

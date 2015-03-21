@@ -7,8 +7,33 @@ module RequestHelpers
   end
 end
 
+module SignInHelpers
+  # If we don't need all the overhead of signing we can
+  # bypass much of the signin logic and stub the login
+  def stubbed_sign_in(resource = double('resource'))
+    allow_message_expectations_on_nil()
+    
+    resource_name = resource.class.name.downcase
+
+    if resource.nil?
+      allow(request.env['warden']).to receive(:authenticate!)
+        .and_throw(:warden, scope: :resource)
+      
+      allow(controller).to receive("current_#{resource_name}")
+        .and_return(nil)
+    else
+      allow(request.env['warden']).to receive(:authenticate!)
+        .and_return(resource)
+      
+      allow(controller).to receive("current_#{resource_name}")
+        .and_return(resource)
+    end
+  end
+end
+
 
 RSpec.configure do |config|
+  config.include SignInHelpers,  type: :controller
   config.include RequestHelpers, type: :request
   config.include RequestHelpers, type: :acceptance, file_path: %r(spec/acceptance)
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320135343) do
+ActiveRecord::Schema.define(version: 20150320231912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,14 +128,13 @@ ActiveRecord::Schema.define(version: 20150320135343) do
   add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
 
   create_table "searches", force: :cascade do |t|
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "status",      default: 0
-    t.float    "latitude",    default: 0.0
-    t.float    "longitude",   default: 0.0
     t.text     "information"
     t.integer  "user_id"
     t.text     "settings"
+    t.string   "md5_hash"
   end
 
   add_index "searches", ["user_id"], name: "index_searches_on_user_id", using: :btree

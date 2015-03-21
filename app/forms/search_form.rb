@@ -1,28 +1,27 @@
 class SearchForm
   include ActiveModel::Model
 
-  attr_reader   :search, :location
-  attr_accessor :address, :profession_id, :patient_id, :information, :user_id
+  attr_accessor :address, :profession_id, :patient_type_id, :information, :user_id
 
-  def location
-    @location ||= Location.new(address: @address)
-  end
+  validates :address, :profession_id, :patient_type_id, :user_id, presence: true 
 
   def search
     @search ||= Search.new({ 
-      profession_ids: [ @profession_id ], 
-      patient_ids:    [ @patient_id ],
-      user_id:        @user_id,
-      information:    @information, 
-      location:       location
+      profession_ids:    [ profession_id ], 
+      patient_type_ids:  [ patient_type_id ],
+      user_id:           user_id,
+      information:       information, 
+      address:           address
     })
   end
 
-  def save    
-    if(search_exists? or search.valid?)
-      publish :success, self
+  def process   
+    # don't have to save a search that is already present (no duplicates)
+    if self.valid?
+      return true if search_exists?
+      search.save  
     else
-      publish :error, self
+      false
     end
   end
 
@@ -33,6 +32,9 @@ class SearchForm
 
   private
   def search_exists?
-    Search.where(hash_id: search.hash_id )
+    # make sure we generate the md5 hash for the current attributes
+    search.valid?
+    # check to see if the same search is already in the database   
+    Search.where(md5_hash: search.md5_hash ).present?
   end
 end

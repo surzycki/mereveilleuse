@@ -88,7 +88,6 @@ describe Location do
     
     before do
       allow(AddressParser).to receive(:new).and_return(address_parser)
-      allow(subject).to receive(:save)
 
       subject.address = 'address'
     end
@@ -96,10 +95,6 @@ describe Location do
     it 'parses the address' do
       expect(AddressParser).to have_received(:new)
         .with('address')
-    end
-
-    it 'saves' do
-      expect(subject).to have_received(:save)
     end
 
     it 'it sets attributes to parsed values' do 

@@ -1,5 +1,6 @@
 describe User do
-  it_behaves_like 'a person with a name'
+  it_behaves_like 'it has person name attributes'
+  it_behaves_like 'it has location attributes'
 
   describe '#initialize' do
     it 'initializes' do
@@ -55,43 +56,9 @@ describe User do
         .dependent(:destroy)
     end
 
-    it 'has one location' do
-      expect(subject).to have_one(:location)
-        .dependent(:destroy)
-    end
-
     it 'has many searches' do
       expect(subject).to have_many(:searches)
         .dependent(:destroy)
-    end
-  end
-
-  describe 'callback' do
-    context 'before_save' do
-      let(:user) { create :user }
-
-      before do
-        allow_any_instance_of(User).to receive(:normalize_name)
-          .and_call_original
-      end
-
-      it 'calls normalize_name' do
-        expect(user).to have_received(:normalize_name)
-      end
-
-      it 'downcases firstname' do
-        user.firstname = 'BOB'
-        user.save
-
-        expect(user.read_attribute(:firstname)).to eq('bob')
-      end
-
-      it 'downcases lastname' do
-        user.lastname = 'HOPE'
-        user.save
-        
-        expect(user.read_attribute(:lastname)).to eq('hope')
-      end
     end
   end
 end

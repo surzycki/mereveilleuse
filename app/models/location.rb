@@ -9,8 +9,6 @@ class Location < ActiveRecord::Base
     AddressParser.new(value).tap do |parser|
       parser.set(self)
     end
-    
-    self.save
   end
 
   def short_address

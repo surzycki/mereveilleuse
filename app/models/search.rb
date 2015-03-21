@@ -1,9 +1,10 @@
 class Search < ActiveRecord::Base
+  include LocationAttributes
+
   store :settings, accessors: [ :sent_practitioners ], coder: JSON
 
-  after_initialize :set_hash
+  after_validation :set_md5_hash
 
-  has_one    :location, dependent: :destroy, as: :locatable
   belongs_to :user
 
   has_and_belongs_to_many :patient_types, join_table: 'searches_patient_types', dependent: :destroy
@@ -11,12 +12,11 @@ class Search < ActiveRecord::Base
 
   enum status: [ :active, :canceled ]
 
-  delegate :address,   to: :location, prefix: false, allow_nil: true
-  delegate :longitude, to: :location, prefix: false, allow_nil: true
-  delegate :latitude,  to: :location, prefix: false, allow_nil: true
-
   private
-  def set_hash
-
+  def set_md5_hash
+    #puts "#{self.status}-#{self.patient_types.map(&:id)}-#{self.professions.map(&:id)}-#{self.address}-#{self.user.try(:id)}"
+    self.md5_hash = Digest::MD5.hexdigest(
+      "#{self.status}-#{self.patient_types.map(&:id)}-#{self.professions.map(&:id)}-#{self.address}-#{self.user.try(:id)}"
+    ) rescue nil
   end
 end

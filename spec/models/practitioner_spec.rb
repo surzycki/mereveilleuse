@@ -1,6 +1,6 @@
 describe Practitioner do
-  it_behaves_like 'a person with a name'
-  it_behaves_like 'a model with a location'
+  it_behaves_like 'it has person name attributes'
+  it_behaves_like 'it has location attributes'
 
   describe '#initialize' do
     it 'initializes' do
@@ -42,7 +42,7 @@ describe Practitioner do
         .with [ :not_indexed, :indexed ]
     end
   end
-  
+
   describe 'associations' do
     it 'has many occupations' do
       expect(subject).to have_many(:occupations)
@@ -77,33 +77,6 @@ describe Practitioner do
       it 'call set_uuid' do
         allow_any_instance_of(Practitioner).to receive(:set_uuid)
         expect(Practitioner.new).to have_received(:set_uuid)
-      end
-    end
-
-    context 'before_save' do
-      let(:practitioner) { create :practitioner }
-
-      before do
-        allow_any_instance_of(Practitioner).to receive(:normalize_name)
-          .and_call_original
-      end
-
-      it 'calls normalize_name' do
-        expect(practitioner).to have_received(:normalize_name)
-      end
-
-      it 'downcases firstname' do
-        practitioner.firstname = 'BOB'
-        practitioner.save
-
-        expect(practitioner.read_attribute(:firstname)).to eq('bob')
-      end
-
-      it 'downcases lastname' do
-        practitioner.lastname = 'HOPE'
-        practitioner.save
-        
-        expect(practitioner.read_attribute(:lastname)).to eq('hope')
       end
     end
   end

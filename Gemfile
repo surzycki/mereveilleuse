@@ -25,6 +25,7 @@ gem 'nokogiri'                                            # Nokogiri (鋸) is an
 gem 'geocoder'                                            # Complete Ruby geocoding solution
 gem 'redis'                                               # A Ruby client library for Redis
 gem 'wisper'                                              # A micro library providing Ruby objects with Publish-Subscribe capabilities
+gem 'sidekiq'                                             # Simple, efficient background processing for Ruby.
 gem 'devise'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
@@ -55,12 +56,14 @@ group :test do
   gem 'guard'                                             # Guard is a command line tool to easily handle events on file system modifications
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+
-  gem 'wisper-rspec'                                      # RSpec matchers and stubbing for Wisper
+  
   gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
   gem 'spring-commands-rspec'
   gem 'spring' 
   gem 'poltergeist'                                       # A PhantomJS driver for Capybara
   gem 'webmock'                                           # Library for stubbing and setting expectations on HTTP requests in Ruby.
+  gem 'rspec-activejob'                                   # RSpec matchers for testing ActiveJob
+  gem 'wisper-rspec',               require: false        # RSpec matchers and stubbing for Wisper
   gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes
   gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)
 end

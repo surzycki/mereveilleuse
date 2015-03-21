@@ -1,4 +1,4 @@
-shared_examples 'a person with a name' do
+shared_examples 'it has person name attributes' do
   describe '.find_by_fullname' do
     context 'successul' do
       before do
@@ -80,7 +80,7 @@ shared_examples 'a person with a name' do
     end
   end
 
-   describe '#lastname' do
+  describe '#lastname' do
     it 'returns lastname capitalized' do
       person = build_stubbed described_class.name.downcase.to_sym, lastname: 'JONES'
       expect(person.lastname).to eq 'Jones'
@@ -89,6 +89,37 @@ shared_examples 'a person with a name' do
     it 'no lastname returns nil' do
       person = build_stubbed described_class.name.downcase.to_sym, lastname: nil
       expect(person.lastname).to be_nil
+    end
+  end
+
+  describe 'callbacks' do 
+    context 'before_save' do
+      let(:subject) { described_class.new }
+
+      before do
+        allow_any_instance_of(described_class).to receive(:normalize_name)
+          .and_call_original
+      end
+  
+      it 'calls normalize_name' do
+        subject.save
+
+        expect(subject).to have_received(:normalize_name)
+      end
+  
+      it 'downcases firstname' do
+        subject.firstname = 'BOB'
+        subject.save
+
+        expect(subject.read_attribute(:firstname)).to eq('bob')
+      end
+
+      it 'downcases lastname' do
+        subject.lastname = 'HOPE'
+        subject.save
+        
+        expect(subject.read_attribute(:lastname)).to eq('hope')
+      end
     end
   end
 end

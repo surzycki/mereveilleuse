@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include PersonNameAttributes
-
-  has_one  :location, dependent: :destroy, as: :locatable
+  include LocationAttributes
+  
   has_many :searches, dependent: :destroy
 
   has_many :recommendations, dependent: :destroy
