@@ -56,5 +56,17 @@ module AppFacebook
 
     # active job adapter
     config.active_job.queue_adapter = :sidekiq
+
+    # email
+    config.action_mailer.delivery_method     = :smtp
+    config.action_mailer.smtp_settings       = { 
+      address:         ENV['MEREVEILLEUSE_SMTP_HOST'], 
+      port:            ENV['MEREVEILLEUSE_SMTP_PORT'],
+      user_name:       ENV['MEREVEILLEUSE_SMTP_USERNAME'],
+      password:        ENV['MEREVEILLEUSE_SMTP_PASSWORD'],
+      domain:          ENV['MEREVEILLEUSE_HOST'],
+      authentication:  :plain,
+      enable_starttls_auto: true
+    }
   end
 end

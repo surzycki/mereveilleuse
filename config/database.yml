@@ -4,9 +4,9 @@ default: &default
   reconnect: true
   pool: 5
   template: template0
-  username: <%= ENV['MEREVEILEUSE_DATABASE_USER'] %>
-  host: <%= ENV['MEREVEILEUSE_DATABASE_HOST'] %>
-  password: <%= ENV['MEREVEILEUSE_DATABASE_PASSWORD'] %>
+  username: <%= ENV['MEREVEILLEUSE_DATABASE_USER'] %>
+  host: <%= ENV['MEREVEILLEUSE_DATABASE_HOST'] %>
+  password: <%= ENV['MEREVEILLEUSE_DATABASE_PASSWORD'] %>
   
 test:
   <<: *default
