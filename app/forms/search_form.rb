@@ -23,6 +23,10 @@ class SearchForm
     else
       false
     end
+  rescue NameError => e
+    errors.add(:address, I18n.t('errors.address_parser')) && false
+  rescue 
+    errors[:base] << I18n.t('errors.general') && false
   end
 
   # ActiveModel support

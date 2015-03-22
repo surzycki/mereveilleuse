@@ -33,9 +33,10 @@ ActiveAdmin.register User do
     column 'Status' do |user|
       status_tag(user.status, user_status(user))
     end
-    
-    column :lastname 
+
     column :firstname
+    column :lastname 
+    
     column :email
     
     column 'Location' do |user|  
@@ -57,8 +58,9 @@ ActiveAdmin.register User do
         status_tag(user.status, user_status(user))
       end
       
-      row :lastname
       row :firstname
+      row :lastname
+      
       row :email
       
       row 'Location' do |user|  
@@ -79,8 +81,8 @@ ActiveAdmin.register User do
 
     f.inputs 'Mother' do
       f.input :status, as: :select, collection: User.statuses.keys
-      f.input :lastname,  required:  true, input_html: { value:  f.object.lastname }
       f.input :firstname, required:  true, input_html: { value:  f.object.firstname }
+      f.input :lastname,  required:  true, input_html: { value:  f.object.lastname }
       f.input :email,     required:  true
     end
 

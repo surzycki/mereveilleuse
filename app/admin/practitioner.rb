@@ -32,12 +32,13 @@ ActiveAdmin.register Practitioner do
       status_tag(practitioner.status, practitioner_status(practitioner))
     end
     
+    column :firstname
+    column :lastname 
+    
     column 'Occupation' do |practitioner|
       get_occupation practitioner
     end
 
-    column :lastname 
-    column :firstname
     column :email
     column :phone
     column :mobile_phone
@@ -59,12 +60,14 @@ ActiveAdmin.register Practitioner do
         status_tag(practitioner.status, practitioner_status(practitioner))
       end
 
+      row :firstname
+      row :lastname 
+      
       row 'Occupation' do |practitioner|
         get_occupation practitioner
       end
       
-      row :lastname 
-      row :firstname
+      
       row :email
       row :phone
       row :mobile_phone
@@ -84,8 +87,9 @@ ActiveAdmin.register Practitioner do
 
     f.inputs 'Practitioner' do
       f.input :status, as: :select, collection: Practitioner.statuses.keys
-      f.input :lastname,  required:  true, input_html: { value:  f.object.lastname }
       f.input :firstname, required:  true, input_html: { value:  f.object.firstname }
+      f.input :lastname,  required:  true, input_html: { value:  f.object.lastname }
+
       f.input :email
       f.input :phone
       f.input :mobile_phone

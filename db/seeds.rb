@@ -61,3 +61,5 @@ practitioners = Array.new(PRACTITIONER_COUNT) {
 puts '-- creating admin user...'
 AdminUser.create!(email: 'ops@mereveilleuse.com', password: 'thinkbigger', password_confirmation: 'thinkbigger')
 
+puts '-- indexing'
+Practitioner.reindex

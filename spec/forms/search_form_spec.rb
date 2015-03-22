@@ -68,10 +68,10 @@ describe SearchForm do
         before do
           allow(subject).to receive(:search_exists?).and_return false
           allow(subject).to receive(:search).and_return search
+          subject.process
         end
 
         it 'saves search' do
-          subject.process
           expect(search).to have_received(:save)
         end
   
@@ -84,15 +84,53 @@ describe SearchForm do
     context 'when invalid' do
       before do
         allow(subject).to receive(:valid?).and_return false
+        subject.process
       end
 
       it 'does NOT save search' do
-        subject.process
         expect(search).to_not have_received(:save)
       end
 
       it 'returns false' do
         expect(subject.process).to be false
+      end
+    end
+
+    context 'when exception' do
+      before do
+        allow(subject).to receive(:valid?).and_raise :error
+        subject.process
+      end
+
+      it 'does NOT save search' do
+        expect(search).to_not have_received(:save)
+      end
+
+      it 'returns false' do
+        expect(subject.process).to be false
+      end
+
+      it 'sets error object' do
+        expect(subject.errors[:base]).to include I18n.t('errors.general')
+      end
+    end
+
+    context 'when NameError' do
+      before do
+        allow(subject).to receive(:valid?).and_raise NameError
+        subject.process
+      end
+
+      it 'does NOT save search' do
+        expect(search).to_not have_received(:save)
+      end
+
+      it 'returns false' do
+        expect(subject.process).to be false
+      end
+
+      it 'sets error object' do
+        expect(subject.errors[:address]).to include I18n.t('errors.address_parser')
       end
     end
   end

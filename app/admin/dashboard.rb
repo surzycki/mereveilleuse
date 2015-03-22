@@ -7,16 +7,22 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel 'New Mothers', priority: 1 do
           table_for User.where(status: User.statuses[:registered]).order('created_at desc').limit(15) do
-            column :lastname 
-            column :firstname
+            column 'Search' do |user|
+              status_tag(user_search_status(user), user_search_status(user))
+            end
+
+            column 'Mother' do |user|
+              link_to_user user
+            end
+            
             column :email
   
-            column 'Location' do |practitioner|  
-              link_to_location practitioner.location
+            column 'Location' do |user|  
+              link_to_location user.location
             end
   
-            column 'Member Since' do |practitioner|
-              I18n.l(practitioner.created_at, format: :short_date)  
+            column 'Member Since' do |user|
+              I18n.l(user.created_at, format: :short_date)  
             end
           end
           
@@ -27,16 +33,19 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel 'Abandoned Mothers', priority: 1 do
           table_for User.where.not(status: User.statuses[:registered]).order('created_at desc').limit(15) do
-            column :lastname 
-            column :firstname
+            
+            column 'Mother' do |user|
+              link_to_user user
+            end
+
             column :email
   
-            column 'Location' do |practitioner|  
-              link_to_location practitioner.location
+            column 'Location' do |user|  
+              link_to_location user.location
             end
   
-            column 'Created' do |practitioner|
-              I18n.l(practitioner.created_at, format: :short_date)  
+            column 'Created' do |user|
+              I18n.l(user.created_at, format: :short_date)  
             end
           end
           
@@ -63,8 +72,8 @@ ActiveAdmin.register_page "Dashboard" do
               link_to_user recommendation.user
             end
   
-            column 'Created' do |practitioner|
-              I18n.l(practitioner.created_at, format: :short_date)  
+            column 'Created' do |recommendation|
+              I18n.l(recommendation.created_at, format: :short_date)  
             end
           end
           
@@ -89,7 +98,7 @@ ActiveAdmin.register_page "Dashboard" do
               link_to_user recommendation.user
             end
   
-            column 'Created' do |practitioner|
+            column 'Created' do |recommendation|
               I18n.l(practitioner.created_at, format: :short_date)  
             end
           end
@@ -103,12 +112,14 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel 'Modified Practitioners (not indexed)', priority: 1 do
           table_for Practitioner.where(status: Practitioner.statuses[:not_indexed]).order('created_at desc').limit(15) do
+            column 'Practitioner' do |practitioner|
+              link_to_practitioner practitioner
+            end
+
             column 'Occupation' do |practitioner|
               get_occupation practitioner
             end
-
-            column :lastname 
-            column :firstname
+            
             column :email
 
             column 'Location' do |practitioner|  
@@ -121,6 +132,40 @@ ActiveAdmin.register_page "Dashboard" do
           end
           
           strong { link_to 'View All', admin_practitioners_path('q[status_in][]'=> '0', order: 'created_at_desc') }
+        end
+      end
+    end
+
+    columns do
+      column do
+        panel 'Recent Searches', priority: 1 do
+          table_for Search.where(status: Search.statuses[:active]).order('created_at desc').limit(15) do
+            column 'Status' do |search|
+              status_tag(search.status, search_status(search))
+            end
+            
+            column 'Mother' do |search|
+              link_to_user search.user
+            end
+
+            column 'Profession' do |search|
+              get_professions search
+            end
+        
+            column 'Patient Type' do |search|
+              get_patient_types search
+            end
+          
+            column 'Location' do |search|  
+              link_to_location search.location, :address
+            end
+        
+            column 'Created at' do |search|
+              I18n.l(search.created_at, format: :short_date)  
+            end
+          end
+          
+          strong { link_to 'View All', admin_searches_path('q[status_in][]'=> '0', order: 'created_at_desc') }
         end
       end
     end

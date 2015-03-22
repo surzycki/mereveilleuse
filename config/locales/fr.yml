@@ -51,8 +51,8 @@ fr:
 
 
   errors: 
-    general: 'Quelque chose a mal tourné'
-    address_parser: 'Adresse introuvable'
+    general: Quelque chose a mal tourné
+    address_parser:  introuvable
 
   help:
     label: Vous avez besoin d'aide? 
