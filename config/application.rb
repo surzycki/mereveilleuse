@@ -53,5 +53,8 @@ module AppFacebook
     # react js
     config.react.variant      = :production
     config.react.addons       = true
+
+    # active job adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end

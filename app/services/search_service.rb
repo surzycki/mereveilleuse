@@ -9,9 +9,9 @@ class SearchService
 
   def execute(provider)
     if form.process
-      provider.execute form.search
+      results = provider.execute form.search
       
-      publish :success, form.search
+      publish :success, results
     else
       publish :fail, form.errors
     end

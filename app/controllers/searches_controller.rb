@@ -10,7 +10,7 @@ class SearchesController < ApplicationController
   def create
     @form = SearchForm.new search_params
 
-    search_service.on :success do |search|
+    search_service.on :success do |results|
       render :show
     end
 

@@ -15,12 +15,13 @@ set :keep_releases,   5
 set :log_directory,               '/var/log/mereveilleuse/app_facebook'
 set :normalize_asset_timestamps,  %{public/images public/javascripts public/stylesheets}
 
-
+set :sidekiq_config, File.join(release_path, 'config', 'sidekiq.yml')
 
 namespace :deploy do
   desc 'Restart application'
   task :restart do
     invoke 'puma:phased-restart'
+    invoke 'sidekiq:rolling_restart'
   end
 
   after :publishing, :restart
