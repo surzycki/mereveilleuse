@@ -22,4 +22,64 @@ category: jumbotron
 
 .jumbotron {
   margin-bottom: 0 !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+
+  h1 {
+    font-size: rem(32px);
+  }
 }
+
+
+/*doc
+---
+title: Jumbotron Transparent
+name: jumbotron-2
+category: jumbotron
+parent: jumbotron
+---
+
+```haml_example
+.container
+  .jumbotron.jumbotron-transparent
+    %h1 Hello, world!
+    %p 
+      This is a simple hero unit, a simple jumbotron-style component for 
+      calling extra attention to featured content or information.
+    %dl
+      %dt Sit sane 
+      %dd Quis enim potest ea, quae probabilia videantur ei.
+```
+*/
+
+.jumbotron-transparent {
+  background-color: $transparent-color;
+  color: $dark-color;
+}
+
+/*doc
+---
+title: Jumbotron Primary
+name: jumbotron-3
+category: jumbotron
+parent: jumbotron
+---
+
+```haml_example
+.container
+  .jumbotron.jumbotron-primary
+    %h1 Hello, world!
+    %p 
+      This is a simple hero unit, a simple jumbotron-style component for 
+      calling extra attention to featured content or information.
+    %dl
+      %dt Sit sane 
+      %dd Quis enim potest ea, quae probabilia videantur ei.
+```
+*/
+
+.jumbotron-primary {
+  background-color: $primary-color;
+  color: $light-color;
+}
+

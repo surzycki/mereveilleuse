@@ -57,7 +57,8 @@ group :test do
   gem 'guard'                                             # Guard is a command line tool to easily handle events on file system modifications
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+
-  
+  gem 'email_spec'                                        # Collection of RSpec/MiniTest matchers and Cucumber steps for testing email in a ruby app using ActionMailer or Pony
+  gem 'rspec-activejob'                                   # RSpec matchers for testing ActiveJob
   gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
   gem 'spring-commands-rspec'
   gem 'spring' 

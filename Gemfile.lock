@@ -143,6 +143,9 @@ GEM
     elasticsearch-transport (1.0.7)
       faraday
       multi_json
+    email_spec (1.6.0)
+      launchy (~> 2.1)
+      mail (~> 2.2)
     erubis (2.7.0)
     execjs (2.4.0)
     factory_girl (4.5.0)
@@ -226,6 +229,8 @@ GEM
       addressable
       faraday
       multi_json
+    launchy (2.4.3)
+      addressable (~> 2.3)
     libv8 (3.16.14.7)
     listen (2.9.0)
       celluloid (>= 0.15.2)
@@ -446,6 +451,7 @@ DEPENDENCIES
   database_cleaner
   devise
   dotenv
+  email_spec
   factory_girl_rails
   forgery
   geocoder

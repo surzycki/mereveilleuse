@@ -3,9 +3,8 @@ ActiveAdmin.register Recommendation do
 
   menu label: 'Recommendations', priority: 4
 
-  permit_params :state, :availability, :bedside_manner, :efficacy, :wait_time, :comment, :profession_id
+  permit_params :availability, :bedside_manner, :efficacy, :wait_time, :comment, :profession_id
 
-#  filter :state,                as: :check_boxes, collection: RecommendationForm.state_machine.states.map(&:name)
   filter :profession,           as: :select,      collection: Profession.order('name ASC'),  label: 'Occupation'
   filter :patient_types_id_eq,  as: :select,      collection: PatientType.order('name ASC'), label: 'Patient Type'
 
@@ -22,10 +21,6 @@ ActiveAdmin.register Recommendation do
   end
 
   index do
-    column 'State' do |recommendation|
-      status_tag(recommendation.state, recommendation)
-    end
-
     column 'Practitioner' do |recommendation|
       link_to_practitioner recommendation.practitioner
     end
@@ -54,10 +49,6 @@ ActiveAdmin.register Recommendation do
 
   show title: proc{ |recommendation| "#{recommendation.user.fullname} for #{recommendation.practitioner.fullname}" } do
     attributes_table do
-      row 'State' do |recommendation|
-        status_tag(recommendation.state, recommendation)
-      end
-  
       row 'Practitioner' do |recommendation|
         link_to_practitioner recommendation.practitioner
       end
@@ -88,7 +79,6 @@ ActiveAdmin.register Recommendation do
     f.semantic_errors
 
     f.inputs 'Recommendation' do
-#      f.input :state, as: :select, collection: RecommendationForm.state_machine.states.map(&:name)
       f.input :profession
       
       f.input :availability

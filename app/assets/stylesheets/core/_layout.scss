@@ -4,3 +4,47 @@
 //   or more modules together. 
 //
 // *************************************
+
+/*doc
+---
+title: Showcase
+name: layout-1
+category: layout
+---
+
+```haml_example
+.container
+  .row
+    .col-md-4
+      .showcase
+        %i.icon-verified
+        %dl
+          %dt Showcase
+          %dd Quis enim potest ea, quae probabilia videantur ei.
+    
+```
+*/
+
+.showcase {
+  padding: 30px;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+
+  i {
+
+  }
+
+  dt {
+    padding: 6px 20px 0 20px;
+    hyphens: auto;
+    font-size: 18px;
+  }
+
+  dd {
+    padding-top: 10px;
+    font-size: 16px;
+    line-height: 27px;
+  }
+}

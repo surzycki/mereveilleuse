@@ -16,7 +16,6 @@ class SearchResultsEmailJob < ActiveJob::Base
     end
 
     search_service.execute RecommendationSearchProvider.new
-
   end
 
   private 

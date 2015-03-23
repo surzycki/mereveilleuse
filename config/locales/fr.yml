@@ -56,9 +56,40 @@ fr:
 
   help:
     label: Vous avez besoin d'aide? 
+  
   header:
-    recommendation: 
-      title: Partageons nos bonnes adresses santé entre mamans du quartier
+    registrations: 
+      title: Partageons nos meilleures adresses santé entre mamans du quartier
+      subtitle: Les recommendations des mamans vous aident à protéger votre santé et celles de vos enfants
+
+  registrations:
+    action:
+      primary: Rejoindre la communauté
+      secondary: En savoir plus
+
+    how:
+      title: Comment ça marche ?
+      showcase:
+        one:
+          title: Je rejoins la communauté
+          content: en recommandant un professionnel aux mamans de mon quartier. (ostéopathe, médecin généraliste,  pédiatre...)
+
+        two:
+          title: J’effectue ma recherche 
+          content: en indiquant mon adresse et le type de professionnel qui m’intéresse.
+
+        three:
+          title: Je reçois les recommandations 
+          content: de mes amies inscrites et des mamans de mon quartier. (100% mamans garanties ;) )
+
+    example: 
+      title: Exemple de recherche
+      subtitle: Marie recherche un diétécien après son accouchement
+
+    join_now: 
+      title: Rejoindre la communauté
+      content: La communauté MèreVeilleuse est basée sur la réciprocité et l’entraide entre mamans. Pour rejoindre la communauté nous vous demandons d'aider les mamans de votre quartier en recommandant un professionnel. (un ostéopathe, un médecin généraliste, un pédiatre,…, tout ce qui peut aider les mamans)
+      action: Join Now!
 
   not_available: Pas Disponible
 

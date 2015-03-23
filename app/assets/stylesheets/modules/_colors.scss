@@ -1,0 +1,61 @@
+/*doc
+---
+title: Color Basics
+name: color
+category: colors
+---
+We have a few colors that can be used in various contexts.
+<div class="line swatches">
+    <div class="swatch">
+      <div class="docSwatch background-primary"></div>
+      <code>$primary-color</code>
+    </div>
+    <div class="swatch">
+      <div class="docSwatch background-secondary"></div>
+      <code>$secondary-color</code>
+    </div>
+    <div class="swatch">
+      <div class="docSwatch background-alternate"></div>
+      <code>$alternate-color</code>
+    </div>
+    <div class="swatch">
+      <div class="docSwatch background-minor"></div>
+      <code>$minor-color</code>
+    </div>
+</div>
+*/
+
+/*doc
+---
+title: Contextual Helpers
+name: helper
+category: colors
+parent: color
+---
+All colors are have a `background-` or `color-` helper.
+
+```haml_example
+%p.background-primary.color-light background-primary color-light
+%p.background-secondary.color-light background-secondary color-light
+```
+*/
+
+@mixin contextual-helper($context, $color) {
+  .background-#{$context} {
+    background-color: $color !important;
+  }
+
+  .color-#{$context} {
+    color: $color !important;
+
+    a {
+      color: $color !important;
+    }
+  }
+}
+
+@include contextual-helper('primary',   $primary-color);
+@include contextual-helper('secondary', $secondary-color);
+@include contextual-helper('alternate', $alternate-color);
+@include contextual-helper('minor',     $minor-color);
+

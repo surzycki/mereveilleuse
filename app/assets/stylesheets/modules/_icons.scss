@@ -1,0 +1,58 @@
+/*doc
+---
+title: Sizes
+name: icon-1
+category: icons
+parent: icon
+---
+
+```haml_example
+%i.icon-education.icon-xs
+%i.icon-education.icon-sm
+%i.icon-education
+%i.icon-education.icon-lg
+%i.icon-education.icon-xl
+```
+*/
+
+.icon-xs {
+  font-size: 1em;
+}
+
+.icon-sm {
+  font-size: 1.618em;
+}
+
+.icon-lg {
+  font-size: 4.236em;
+}
+
+.icon-xl {
+  font-size: 6.654em;
+}
+
+/*doc
+---
+title: Rounded
+name: icon-2
+category: icons
+---
+
+```haml_example
+%i.icon-education.icon-round.icon-sm
+%i.icon-education.icon-round
+%i.icon-education.icon-round.icon-lg
+```
+*/
+
+.icon-round {
+  @include border-radius(50%);
+  padding: 0;
+  display: inline-block;
+  width: 1.7em;
+  height: 1.7em;
+  line-height: 1.7em;
+  text-align: center;
+  background-color: $secondary-background-color;
+  color: $light-color
+}

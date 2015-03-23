@@ -57,7 +57,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel 'New Recommendations', priority: 1 do
-          table_for Recommendation.where(state: 'completed').order('created_at desc').limit(15) do
+          table_for Recommendation.order('created_at desc').limit(15) do
             column 'Practitioner' do |recommendation|
               link_to_practitioner recommendation.practitioner
             end
@@ -77,66 +77,10 @@ ActiveAdmin.register_page "Dashboard" do
             end
           end
           
-          strong { link_to 'View All', admin_recommendations_path('q[state_in][]'=> 'completed', order: 'created_at_desc') }
+          strong { link_to 'View All', admin_recommendations_path(order: 'created_at_desc') }
         end
       end
 
-      column do
-        panel 'Abandoned Recommendations', priority: 1 do
-          table_for Recommendation.where.not(state: 'completed').order('created_at desc').limit(15) do
-            column :profession
-            
-            column 'Patient Types' do |recommendation|
-              get_patient_types recommendation
-            end
-
-            column 'Practitioner' do |recommendation|
-              link_to_practitioner recommendation.practitioner
-            end
-
-            column 'Mother' do |recommendation|
-              link_to_user recommendation.user
-            end
-  
-            column 'Created' do |recommendation|
-              I18n.l(practitioner.created_at, format: :short_date)  
-            end
-          end
-                                      
-          strong { link_to 'View All', "#{admin_recommendations_path}/?q[state_in][]=step_one&q[state_in][]=step_two&order=created_at_desc" }
-        end
-      end
-    end
-
-    columns do
-      column do
-        panel 'Modified Practitioners (not indexed)', priority: 1 do
-          table_for Practitioner.where(status: Practitioner.statuses[:not_indexed]).order('created_at desc').limit(15) do
-            column 'Practitioner' do |practitioner|
-              link_to_practitioner practitioner
-            end
-
-            column 'Occupation' do |practitioner|
-              get_occupation practitioner
-            end
-            
-            column :email
-
-            column 'Location' do |practitioner|  
-              link_to_location practitioner.location
-            end
-        
-            column 'Created' do |practitioner|
-              I18n.l(practitioner.created_at, format: :short_date)  
-            end
-          end
-          
-          strong { link_to 'View All', admin_practitioners_path('q[status_in][]'=> '0', order: 'created_at_desc') }
-        end
-      end
-    end
-
-    columns do
       column do
         panel 'Recent Searches', priority: 1 do
           table_for Search.where(status: Search.statuses[:active]).order('created_at desc').limit(15) do
@@ -166,6 +110,34 @@ ActiveAdmin.register_page "Dashboard" do
           end
           
           strong { link_to 'View All', admin_searches_path('q[status_in][]'=> '0', order: 'created_at_desc') }
+        end
+      end
+    end
+
+    columns do
+      column do
+        panel 'Modified Practitioners (not indexed)', priority: 1 do
+          table_for Practitioner.where(status: Practitioner.statuses[:not_indexed]).order('created_at desc').limit(15) do
+            column 'Practitioner' do |practitioner|
+              link_to_practitioner practitioner
+            end
+
+            column 'Occupation' do |practitioner|
+              get_occupation practitioner
+            end
+            
+            column :email
+
+            column 'Location' do |practitioner|  
+              link_to_location practitioner.location
+            end
+        
+            column 'Created' do |practitioner|
+              I18n.l(practitioner.created_at, format: :short_date)  
+            end
+          end
+          
+          strong { link_to 'View All', admin_practitioners_path('q[status_in][]'=> '0', order: 'created_at_desc') }
         end
       end
     end

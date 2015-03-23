@@ -25,6 +25,11 @@
 @import 'core/helpers';
 @import 'core/layout';
 
+@import 'modules/colors';
+@import 'modules/nav';
+@import 'modules/components';
+@import 'modules/typography';
+@import 'modules/icons';
 @import 'modules/jumbotron';
 @import 'modules/buttons';
 @import 'modules/flash_notifications';

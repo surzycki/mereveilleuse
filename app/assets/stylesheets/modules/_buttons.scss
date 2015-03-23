@@ -21,6 +21,29 @@ a form or triggering some javascript event, then use a `<button>` element.
 ```
 */
 
+.btn {
+  position: relative;
+
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 1px;
+  
+  &:focus, &:hover, &:active, &:active:focus {
+    outline: none;
+    text-decoration: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+
+   -webkit-font-smoothing: subpixel-antialiased;
+        -o-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+      -moz-font-smoothing: subpixel-antialiased;
+}
+
 /*doc
 ---
 title: Variations
@@ -61,11 +84,37 @@ parent: button
   border-top: 0;
   border-color: darken($secondary-action-color,20%);
   background-color: $secondary-action-color;
-  color: $dark-color !important;
+  color: $light-color !important;
 
   &:focus, &:hover, &:active, &:active:focus {
     border-color: $secondary-action-color;
-    background-color: lighten($secondary-action-color,10%);
-    color: $dark-color;
+    background-color: darken($secondary-action-color,10%);
+    color: $light-color;
+  }
+}
+
+.btn-alternate {
+  border-bottom-width: 3px;
+  border-top: 0;
+  border-color: $alternate-action-color;
+  background-color: $alternate-action-color;
+  color: $light-color !important;
+
+  &:focus, &:hover, &:active, &:active:focus {
+    border-color: $alternate-action-color;
+    background-color: $alternate-action-color;
+    color: $light-color;
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-width: 3px;
+  border-top-style: solid;
+
+  color: $dark-color;
+
+  &:focus, &:hover, &:active, &:active:focus {
+    background-color: transparent;
   }
 }

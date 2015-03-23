@@ -1,2 +1,58 @@
+= render 'navs/main'
+
 %section
-  = render 'shared/header'
+  .jumbotron.text-center
+    %h1.normal= t('header.registrations.title') 
+    %h3.normal= t('header.registrations.subtitle')
+
+    .row
+      .col-sm-4.col-sm-offset-2
+        = link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block'
+      .col-sm-4
+        = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block'
+
+%section.text-center
+  .jumbotron.jumbotron-transparent
+    %h1.normal= t('registrations.how.title')  
+
+    .row
+      .col-sm-4
+        .showcase
+          %i.icon-round.icon-xl
+          %dl
+            %dt= t('registrations.how.showcase.one.title')
+            %dd= t('registrations.how.showcase.one.content')
+
+      .col-sm-4
+        .showcase
+          %i.icon-round.icon-xl
+          %dl
+            %dt= t('registrations.how.showcase.two.title')
+            %dd= t('registrations.how.showcase.two.content')
+
+      .col-sm-4
+        .showcase
+          %i.icon-round.icon-xl
+          %dl
+            %dt= t('registrations.how.showcase.three.title')
+            %dd= t('registrations.how.showcase.three.content')
+        
+
+%section.text-center
+  .jumbotron
+    %h1= t('registrations.example.title')
+    %h3.normal= t('registrations.example.subtitle')
+
+    .row
+      .col-sm-8.col-sm-offset-2
+        .browser-mockup.browser-mockup-with-url
+          = image_tag 'http://placehold.it/580x400/fff/eee', class: 're'
+
+%section.text-center
+  .jumbotron.jumbotron-primary
+    %h1= t('registrations.join_now.title')
+    %p= t('registrations.join_now.content')
+    %br
+    .row
+      .col-sm-6.col-sm-offset-3
+        = link_to t('registrations.join_now.action'), '#', class: 'btn btn-alternate btn-block btn-outline'
