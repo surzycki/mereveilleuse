@@ -1,0 +1,28 @@
+.row
+  .col-sm-10.col-sm-offset-1
+    %h3= t('rating.form.title')
+
+= form_for(@form, url: recommendation_path(@form.recommendation), method: :put) do |f|
+  .row 
+    .col-sm-5.col-sm-offset-1
+      .form-group
+        = render 'rating_buttons', f: f, item: 'wait_time'
+        
+      .form-group
+        = render 'rating_buttons', f: f, item: 'availability'
+
+    .col-sm-5
+      .form-group
+        = render 'rating_buttons', f: f, item: 'bedside_manner'
+
+      .form-group
+        = render 'rating_buttons', f: f, item: 'efficacy'
+
+  .row
+    .col-sm-10.col-sm-offset-1
+      .form-group
+        %h3= t('rating.form.comments.label')
+        = f.text_area :comment, class: 'form-control', rows: 6
+  .row
+    .col-sm-6.col-sm-offset-5
+      = f.submit t('rating.form.submit') , class: 'btn btn-primary btn-block'

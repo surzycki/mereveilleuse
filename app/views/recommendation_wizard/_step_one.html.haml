@@ -1,0 +1,39 @@
+= provide :apply_blur, :true
+
+.row
+  .col-sm-10.col-sm-offset-1
+    %br
+    %p= t('recommendation.form.title')
+
+.row  
+  .col-sm-5.col-sm-offset-1
+    = form_for(@form, url: recommendations_path, method: :post) do |f|
+      = f.hidden_field :user_id, value: current_user.id
+
+      .form-group
+        = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
+        = react_component( 'PractitionerAutocomplete', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
+        
+      .form-group
+        = f.label :profession_id, t('recommendation.form.profession.label')
+        = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
+           
+      .form-group
+        = f.label :patient_type_id, t('recommendation.form.patient_type.label')
+        = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
+        
+      .form-group
+        = f.label :address, t('recommendation.form.address.label')
+        = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('recommendation.form.address.placeholder')))
+
+      = f.submit t('recommendation.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
+
+  .col-sm-5
+    %h3= t('recommendation.information.title')
+    %ul
+      %li
+        %p.bold= t('recommendation.information.reasons.one.title')
+        %p= t('recommendation.information.reasons.one.content') 
+      %li
+        %p.bold= t('recommendation.information.reasons.two.title')
+        %p= t('recommendation.information.reasons.two.content') 
