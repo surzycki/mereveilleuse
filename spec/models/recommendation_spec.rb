@@ -33,7 +33,6 @@ describe Recommendation do
     it 'has state default value' do
       expect(subject.state).to eq 'step_one'
     end
-
   end
 
   describe 'associations' do
@@ -84,6 +83,17 @@ describe Recommendation do
 
       expect(subject.coordinates).to eq [ subject.latitude, subject.longitude ]
     end
+  end
+
+  describe '#rating' do
+    it 'calculates a rating' do
+      subject.wait_time       = 2
+      subject.availability    = 2
+      subject.bedside_manner  = 4
+      subject.efficacy        = 4
+      
+      expect(subject.rating).to be 3.0
+    end 
   end
 
   describe '#search_data' do

@@ -11,7 +11,7 @@ class SearchesController < ApplicationController
     @form = SearchForm.new search_params
 
     search_service.on :success do |results|
-      render :show
+      redirect_to search_path, notice: 'success'
     end
 
     search_service.on :fail do |errors|

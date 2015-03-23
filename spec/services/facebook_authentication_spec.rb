@@ -58,8 +58,8 @@ describe FacebookAuthentication do
       expect(subject).to respond_to :facebook_id
     end
 
-    it 'has a location_name' do
-      expect(subject).to respond_to :location_name
+    it 'has a address' do
+      expect(subject).to respond_to :address
     end
    
     it 'has a authenticated' do
@@ -89,8 +89,8 @@ describe FacebookAuthentication do
         expect(subject.facebook_id).to eq '111111111'
       end
 
-      it 'sets location_name' do
-        expect(subject.location_name).to eq 'Paris, France'
+      it 'sets address' do
+        expect(subject.address).to eq 'Paris, France'
       end 
 
       context 'no location' do
@@ -103,8 +103,8 @@ describe FacebookAuthentication do
           }
         }
         
-        it 'doesn NOT set location_name' do
-          expect(subject.location_name).to be nil
+        it 'doesn NOT set address' do
+          expect(subject.address).to be nil
         end
       end   
     end

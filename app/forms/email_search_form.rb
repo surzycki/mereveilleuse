@@ -1,4 +1,6 @@
 class EmailSearchForm
+  include ActiveModel::Model
+  
   attr_accessor :search
 
   def initialize(search) 

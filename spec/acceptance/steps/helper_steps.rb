@@ -9,16 +9,27 @@ module HelperSteps
   end
 
   step 'I am on the :path page' do |path|
-    path = "#{underscoreize path}_path"
-    
-    visit route_helpers.send(path)
+    action, route = path.split(' ')
+    case action
+    when 'new'
+      visit route_helpers.send([action,route,'path'].join('_'))
+    when 'show'
+      visit route_helpers.send([route,'path'].join('_'), '1')
+    end 
   end
 
   step 'I :whether_to be on the :path page' do |positive, path|
     expectation = positive ? :to : :not_to
-    path        = "#{underscoreize path}_path"
     
-    expect(current_path).send expectation, eq(route_helpers.send(path))
+    action, route = path.split(' ')
+    case action
+    when 'new'
+      path = [action,route,'path'].join('_')
+      expect(current_path).send expectation, eq(route_helpers.send(path))
+    when 'show'
+      path = [route,'path'].join('_')
+      expect(current_path).send expectation, eq(route_helpers.send(path, '1'))
+    end 
   end
 
   step 'I modify the :model :attribute with :value' do |model_name, attribute, value|
@@ -40,6 +51,11 @@ module HelperSteps
     find(:xpath, '//input[@type="submit"]').click
   end
 
+  step ':field should be marked as invalid' do |field|
+    expectation = find("label[for='#{field}']")['data-error']
+    expect(expectation).to eq 'true'
+  end
+
   step 'there :are :count :model' do |are, count, model|
     expect(translate_model(model).count).to eq count.to_i
   end
@@ -48,6 +64,12 @@ module HelperSteps
     expectation = positive ? :to : :not_to
 
     expect(page).send expectation, have_css('.alert.flash-fixed-top.flash-notification')
+  end
+
+  step 'I :whether_to see a success message' do |positive|
+    expectation = positive ? :to : :not_to
+
+    expect(page).send expectation, have_css('.flash-fixed-top.flash-notification.notice')
   end
 
   step 'I :whether_to see :text' do |positive, text|

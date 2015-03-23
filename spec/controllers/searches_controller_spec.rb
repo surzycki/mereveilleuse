@@ -8,9 +8,10 @@ describe SearchesController do
 
   before do
     allow(SearchForm).to receive(:new).and_return form
+    stubbed_sign_in user
   end
 
-  describe 'GET new' do
+  describe 'GET new' do  
     describe 'success' do
       before { get :new }
       
@@ -62,8 +63,6 @@ describe SearchesController do
         allow(DelayedEmailSearchProvider).to receive(:new).and_return provider
         allow(SearchService).to receive(:new).and_return search_service
 
-        stubbed_sign_in user
-
         post :create, search_form: params
       end
 
@@ -99,27 +98,24 @@ describe SearchesController do
       before do
         stub_wisper_publisher('SearchService', :execute, :success, search)
       
-        stubbed_sign_in user
-
         post :create, search_form: params
       end
 
-      it 'returns http success' do
-        expect(response).to be_success
+      it 'returns http redirect' do
+        expect(response).to be_redirect
       end
-    
-      it 'renders the application layout' do
-        expect(response).to render_template(layout: 'application')
+
+      it 'redirects to search_path' do
+        expect(response).to redirect_to search_path
       end
-    
-      it 'renders the show template' do
-        expect(response).to render_template(:show)
-      end
+
+      it 'sets flash' do
+        expect(flash[:notice]).to be_present
+      end 
     end
 
     context 'on fail event' do
       before do
-        stubbed_sign_in user
         stub_wisper_publisher('SearchService', :execute, :fail, errors)
     
         post :create, search_form: params

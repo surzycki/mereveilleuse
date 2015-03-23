@@ -3,11 +3,7 @@ module RecommendationWizardSteps
     FactoryGirl.create :recommendation, "#{underscoreize(step)}_complete".to_sym 
   end
 
-  step 'a practitioner :fullname exists' do |fullname|
-    @practitioner = FactoryGirl.create :practitioner
-    @practitioner.fullname = fullname
-    @practitioner.save
-  end
+  
 
   step 'I am on recommendation :page' do |page|
     path = case page
@@ -43,10 +39,7 @@ module RecommendationWizardSteps
     expect(current_path).send expectation, eq(path)
   end
 
-  step 'the practitioner :fullname address is :address' do |fullname, address|
-    practitioner = Practitioner.find_by_fullname fullname
-    expect(practitioner.address).to eq address
-  end
+  
 end
 
 RSpec.configure do |config|

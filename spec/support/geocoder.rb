@@ -86,3 +86,20 @@ Geocoder::Lookup::Test.add_stub(
     }
   ]
 )
+
+Geocoder::Lookup::Test.add_stub(
+  '6 Rue Gobert, 75011, Paris', [
+    {
+      'latitude'     => 42.2,
+      'longitude'    => 2.2,
+      'address'      => '6 Rue Gobert, 75011 Paris, France',
+      'city'         => 'Paris',
+      'state'        => 'Île-de-France',
+      'sub_state'    => 'Paris',
+      'state_code'   => 'IDF',
+      'country'      => 'France',
+      'country_code' => 'FR',
+      'postal_code'  => '75011'
+    }
+  ]
+)

@@ -1,18 +1,21 @@
+# wip
 class RecommendationWizard
-  attr_reader :listener
+  include Wisper::Publisher
 
-  def initialize(listener)
-    @listener = listener
+  attr_accessor :form
+
+  def initialize(form)
+    @form = form
   end
 
-  def set(form, attributes)
+  def next_step(attributes)
     form.attributes = attributes
     
     if form.next_step
-      @listener.on_next_step(form)     if form.state != 'completed'
-      @listener.on_form_complete(form) if form.state == 'completed'
+      publish :next_step, form    if form.state != 'completed'
+      publish :complete,  form    if form.state == 'completed'
     else
-      @listener.on_form_error form.errors
+      publish :fail, form.errors
     end
   end
 end

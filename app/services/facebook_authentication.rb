@@ -1,14 +1,15 @@
 class FacebookAuthentication
-  def self.development(current_user)
+  def self.stub(params)
     OpenStruct.new(
-      firstname:   current_user.firstname,
-      lastname:    current_user.lastname,
-      email:       current_user.email,
-      facebook_id: current_user.facebook_id
+      firstname:     params.firstname,
+      lastname:      params.lastname,
+      email:         params.email,
+      address:       params.address, 
+      facebook_id:   params.facebook_id
     )
   end
 
-  attr_reader :signed_request, :firstname, :lastname, :email, :facebook_id, :location_name, :authenticated
+  attr_reader :signed_request, :firstname, :lastname, :email, :facebook_id, :address, :authenticated
 
   # Authenticates user to facebook using signed requests
   # FACEBOOK_APP_ID and FACEBOOK_SECRET should be set in the ENV vars 
@@ -42,6 +43,6 @@ class FacebookAuthentication
     @email        = json[:email]
     @facebook_id  = json[:id]
 
-    @location_name = json[:location][:name] if json[:location]
+    @address      = json[:location][:name] if json[:location]
   end
 end

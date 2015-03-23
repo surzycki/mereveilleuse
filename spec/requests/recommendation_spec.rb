@@ -3,10 +3,8 @@ describe 'recommendation' do
   let!(:user)          { create :user }
   let!(:patient_type)  { create :patient_type } 
   let!(:practitioner)  { create :practitioner }
-  
-  before do 
-    integration_sign_in user 
-  end
+
+  before { integration_sign_in user }
 
   describe 'create' do
     context 'new practitioner' do
@@ -15,7 +13,10 @@ describe 'recommendation' do
         patient_type_id:    patient_type.id,
         profession_id:      practitioner.primary_occupation.profession_id,
         address:            '6 rue gobert paris france',
-        user_id:            user.id
+        wait_time:          2,
+        availability:       2,
+        bedside_manner:     4,
+        efficacy:           4
       }}
 
       context 'success' do
@@ -43,10 +44,16 @@ describe 'recommendation' do
           end.to change(Location, :count).by(1)
         end
 
-        it 'is not_indexed' do
+        it 'has practitioner not indexed' do
           expect do
             post recommendations_path, recommendation_form: form_data
           end.to_not change { Practitioner.first.status }
+        end
+
+        it 'has a correct recommendation' do
+          post recommendations_path, recommendation_form: form_data
+
+          expect(Recommendation.first.rating).to be 3.0
         end
       end
 
@@ -75,7 +82,6 @@ describe 'recommendation' do
           end.to_not change(Location, :count)
         end
       end
-    
     end
 
     context 'existing practitioner (not modified)' do
@@ -84,9 +90,12 @@ describe 'recommendation' do
         patient_type_id:    patient_type.id,
         profession_id:      practitioner.primary_occupation.profession_id,
         address:            practitioner.address,
-        user_id:            user.id
+        wait_time:          2,
+        availability:       2,
+        bedside_manner:     4,
+        efficacy:           4
       }}
-
+      
       context 'success' do
         it 'does NOT create a practitioner' do
           expect do
@@ -112,54 +121,51 @@ describe 'recommendation' do
           end.to_not change(Location, :count)
         end
 
-        it 'does NOT set not_indexed status' do
-          expect do
-            post recommendations_path, recommendation_form: form_data
-          end.to_not change { practitioner.reload.status }
+        it 'has a correct recommendation' do
+          post recommendations_path, recommendation_form: form_data
+
+          expect(Recommendation.first.rating).to be 3.0
         end
       end
 
       context 'validation error' do
         it 'does NOT create a practitioner' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: '')
           end.to_not change(Practitioner, :count)
         end
 
         it 'does NOT create a recommendations' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: '')
           end.to_not change(Recommendation, :count)
         end
 
         it 'does NOT create a occupation' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: '')
           end.to_not change(Occupation, :count)
         end
 
         it 'does NOT create a location' do
           expect do
-            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
+            post recommendations_path, recommendation_form: form_data.merge(practitioner_name: '')
           end.to_not change(Location, :count)
-        end
-
-        it 'does NOT set not_indexed status' do
-          expect do
-            post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
-          end.to_not change(practitioner, :status)
         end
       end
     end
 
-    # this spec uses stubs for geocoder
+
     context 'existing practitioner (modified)' do
       let(:form_data) {{
         practitioner_name:  practitioner.fullname,
         patient_type_id:    patient_type.id,
         profession_id:      '9090',
-        address:            '75011',
-        user_id:            user.id
+        address:            'paris',
+        wait_time:          2,
+        availability:       2,
+        bedside_manner:     4,
+        efficacy:           4
       }}
 
       context 'success' do
@@ -191,6 +197,12 @@ describe 'recommendation' do
           expect do
             post recommendations_path, recommendation_form: form_data
           end.to change { practitioner.reload.address }
+        end
+
+        it 'has a correct recommendation' do
+          post recommendations_path, recommendation_form: form_data
+
+          expect(Recommendation.first.rating).to be 3.0
         end
       end
 
@@ -224,94 +236,6 @@ describe 'recommendation' do
             post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
           end.to_not change { practitioner.reload.address }
         end
-      end
-    end
-  end
-
-  describe 'update' do
-    let(:recommendation) { create :recommendation, :step_two }
-
-    let(:form_data) {{
-      wait_time:        '1',
-      availability:     '1',
-      bedside_manner:   '1',
-      efficacy:         '1',
-      comment:          'comment'
-    }}
-  
-    context 'success' do
-      it 'updates wait_time' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data
-        end.to change{ recommendation.reload.wait_time }.to(1)
-      end
-
-      it 'updates availability' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data
-        end.to change{ recommendation.reload.availability }.to(1)
-      end
-
-      it 'updates bedside_manner' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data
-        end.to change{ recommendation.reload.bedside_manner }.to(1)
-      end
-
-      it 'updates efficacy' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data
-        end.to change{ recommendation.reload.efficacy }.to(1)
-      end
-
-      it 'updates comment' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data
-        end.to change{ recommendation.reload.comment }.to('comment')
-      end
-
-      it 'updates state' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data
-        end.to change{ recommendation.reload.state }.from('step_two').to('completed')
-      end
-    end
-
-    context 'validation error' do
-      it 'does NOT update wait_time' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data.merge(efficacy: '')
-        end.to_not change{ recommendation.reload.wait_time }
-      end
-
-      it 'does NOT update availability' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data.merge(efficacy: '')
-        end.to_not change{ recommendation.reload.availability }
-      end
-
-      it 'does NOT update bedside_manner' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data.merge(efficacy: '')
-        end.to_not change{ recommendation.reload.bedside_manner }
-      end
-
-      it 'does NOT update efficacy' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data.merge(efficacy: '')
-        end.to_not change{ recommendation.reload.efficacy }
-      end
-
-      it 'does NOT update comment' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data.merge(efficacy: '')
-        end.to_not change{ recommendation.reload.comment }
-      end
-
-      it 'does NOT update state' do
-        expect do
-          put recommendation_path(recommendation), recommendation_form: form_data.merge(efficacy: '')
-        end.to_not change{ recommendation.reload.state }
       end
     end
   end
