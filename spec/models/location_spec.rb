@@ -1,4 +1,4 @@
-describe Location do
+describe Location  do
   describe '#initialize' do
     it 'initializes' do
       expect{ Location.new }.to_not raise_error
@@ -29,6 +29,19 @@ describe Location do
     it 'has a longitude' do
       expect(subject).to respond_to :longitude
     end
+
+    it 'has an unparsed_address' do
+      expect(subject).to respond_to :unparsed_address
+    end
+
+    it 'has a status' do
+      expect(subject).to respond_to :status
+    end
+
+    it 'defines enum for status' do
+      expect(subject).to define_enum_for(:status)
+        .with [ :not_geocoded, :geocoded ]
+    end
   end
 
   describe 'associations' do
@@ -38,48 +51,68 @@ describe Location do
   end
 
   describe '#address' do
-    let(:subject)  { build_stubbed :location }
-    
-    it 'returns address' do
-      address = "#{subject.street}, #{subject.postal_code}, #{subject.city}"
-      expect(subject.address).to eq(address.titleize)
+    context 'with parsed address' do 
+      let(:subject)  { build_stubbed :location }
+      
+      it 'returns address' do
+        address = "#{subject.street}, #{subject.postal_code}, #{subject.city}"
+        expect(subject.address).to eq(address.titleize)
+      end
+  
+      it 'returns address (no postal_code)' do
+        subject.postal_code = ''
+  
+        address = "#{subject.street}, #{subject.city}"
+        expect(subject.address).to eq(address.titleize)
+      end
+  
+      it 'returns address (no city)' do
+        subject.city = ''
+  
+        address = "#{subject.street}, #{subject.postal_code}"
+        expect(subject.address).to eq(address.titleize)
+      end
     end
 
-    it 'returns address (no postal_code)' do
-      subject.postal_code = ''
+    context 'with not_geocoded address' do 
+      let(:subject)  { build_stubbed :location, :not_geocoded }
 
-      address = "#{subject.street}, #{subject.city}"
-      expect(subject.address).to eq(address.titleize)
-    end
-
-    it 'returns address (no city)' do
-      subject.city = ''
-
-      address = "#{subject.street}, #{subject.postal_code}"
-      expect(subject.address).to eq(address.titleize)
+      it 'returns not_geocoded address' do
+        expect(subject.address).to eq (subject.unparsed_address)
+      end
     end
   end
 
   describe '#short_address' do
-    let(:subject)  { build_stubbed :location }
-    
-    it 'returns short_address' do
-      short_address = "#{subject.city}, #{subject.postal_code}"
-      expect(subject.short_address).to eq(short_address.titleize)
+    context 'with parsed address' do
+      let(:subject)  { build_stubbed :location }
+      
+      it 'returns short_address' do
+        short_address = "#{subject.city}, #{subject.postal_code}"
+        expect(subject.short_address).to eq(short_address.titleize)
+      end
+  
+      it 'returns short_address (no postal_code)' do
+        subject.postal_code = ''
+  
+        short_address = "#{subject.city}"
+        expect(subject.short_address).to eq(short_address.titleize)
+      end
+  
+      it 'returns short_address (no city)' do
+        subject.city = ''
+  
+        short_address = "#{subject.postal_code}"
+        expect(subject.short_address).to eq(short_address.titleize)
+      end
     end
 
-    it 'returns short_address (no postal_code)' do
-      subject.postal_code = ''
+    context 'with not_geocoded address' do 
+      let(:subject)  { build_stubbed :location, :not_geocoded }
 
-      short_address = "#{subject.city}"
-      expect(subject.short_address).to eq(short_address.titleize)
-    end
-
-    it 'returns short_address (no city)' do
-      subject.city = ''
-
-      short_address = "#{subject.postal_code}"
-      expect(subject.short_address).to eq(short_address.titleize)
+      it 'returns not_geocoded address' do
+        expect(subject.short_address).to eq (subject.unparsed_address)
+      end
     end
   end
 

@@ -49,5 +49,6 @@ class RecommendationForm
     practitioner.status   = :not_indexed
           
     practitioner.add_occupation profession_id
+    practitioner.save
   end
 end

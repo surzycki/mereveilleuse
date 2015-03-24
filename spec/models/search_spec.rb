@@ -29,12 +29,10 @@ describe Search do
   describe 'associations' do
     it 'has and belongs to many patient_types' do
       expect(subject).to have_and_belong_to_many(:patient_types)
-        .dependent(:destroy)
     end
 
     it 'has and belongs to many professions' do
       expect(subject).to have_and_belong_to_many(:professions)
-        .dependent(:destroy)
     end
 
     it 'belongs to user' do

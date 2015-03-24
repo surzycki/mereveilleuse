@@ -54,9 +54,6 @@ module AppFacebook
     config.react.variant      = :production
     config.react.addons       = true
 
-    # active job adapter
-    config.active_job.queue_adapter = :sidekiq
-
     # email
     config.action_mailer.delivery_method     = :smtp
     config.action_mailer.smtp_settings       = { 
@@ -68,5 +65,7 @@ module AppFacebook
       authentication:  :plain,
       enable_starttls_auto: true
     }
+
+    
   end
 end

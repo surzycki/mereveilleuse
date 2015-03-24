@@ -1,3 +1,6 @@
-.jumbotron.text-center
-  %h1= image_tag('logo.png')
-  %h3.normal= t('header.recommendation.title') 
+.jumbotron.text-center.no-top-padding
+    = render 'navs/main'
+    %br
+    %br
+    %h1.normal= t('header.registrations.title') 
+    %h3.normal= t('header.registrations.subtitle')

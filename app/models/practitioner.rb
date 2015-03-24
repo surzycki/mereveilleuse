@@ -3,12 +3,16 @@ class Practitioner < ActiveRecord::Base
   include LocationAttributes
 
   after_initialize :set_uuid
+  before_save      :reindex_recommendations, if: Proc.new { |practitioner| practitioner.location_changed? }
 
   has_many  :recommendations, dependent: :destroy
   has_many  :references, through: :recommendations, source: :user
 
   has_many :occupations, dependent: :destroy, autosave: true
   has_many :professions, through: :occupations
+
+  has_and_belongs_to_many :federations
+  has_and_belongs_to_many :insurances
 
   enum status: [ :not_indexed, :indexed ]
 
@@ -43,8 +47,22 @@ class Practitioner < ActiveRecord::Base
     indexed?
   end
 
+  def location_changed?
+    location.try(:changed?)
+  end
+
+  def geocoded?
+    Monad::Maybe(location).geocoded? == true
+  end
+
   private
   def set_uuid
     self.uuid ||= SecureRandom.uuid rescue nil
+  end
+
+  def reindex_recommendations
+    recommendations.each do |recommendation|
+      recommendation.reindex
+    end
   end
 end

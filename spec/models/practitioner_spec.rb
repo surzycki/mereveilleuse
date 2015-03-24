@@ -70,6 +70,14 @@ describe Practitioner do
       expect(subject).to have_one(:location)
         .dependent(:destroy)
     end
+
+    it 'has and belongs to many insurances' do
+      expect(subject).to have_and_belong_to_many(:insurances)
+    end
+
+    it 'has and belongs to many federations' do
+      expect(subject).to have_and_belong_to_many(:federations)
+    end
   end
 
   describe 'callbacks' do
@@ -77,6 +85,33 @@ describe Practitioner do
       it 'call set_uuid' do
         allow_any_instance_of(Practitioner).to receive(:set_uuid)
         expect(Practitioner.new).to have_received(:set_uuid)
+      end
+    end
+    
+    context 'before_save' do
+      let(:subject) { create :practitioner } 
+
+      before { allow(subject).to receive(:reindex_recommendations) }  
+      
+      context 'location changed' do  
+        before do
+          subject.address = 'france'
+          subject.save
+        end
+
+        it 'reindexs recommendations' do
+          expect(subject).to have_received(:reindex_recommendations)
+        end
+      end
+
+      context 'location NOT changed' do
+        before do
+          subject.save
+        end
+
+        it 'does NOT reindex recommedations' do
+          expect(subject).to_not have_received(:reindex_recommendations)
+        end
       end
     end
   end
@@ -164,6 +199,55 @@ describe Practitioner do
       subject = build_stubbed :practitioner, status: Practitioner.statuses[:not_indexed] 
       
       expect(subject.should_index?).to eq false
+    end
+  end
+
+  describe '#location_changed?' do
+    let(:subject) { create :practitioner }
+    
+    context 'when location changed' do 
+      it 'returns true' do
+        subject.address = 'france'
+        expect(subject.location_changed?).to be true
+      end
+    end
+
+    context 'when location NOT changed' do 
+      it 'returns false' do
+        expect(subject.location_changed?).to be false
+      end
+    end
+
+    context 'when nil location' do 
+      let(:subeject) { Practitioner.new }
+
+      it 'returns false' do
+        expect(subject.location_changed?).to be false
+      end
+    end
+  end
+
+  describe '#geocoded?' do
+    context 'when location geocoded' do
+      let(:subject)  { build_stubbed :practitioner }
+
+      it 'returns true' do
+        expect(subject.geocoded?).to be true
+      end
+    end
+
+    context 'when location NOT geocoded' do
+      let(:subject)  { build_stubbed :practitioner, :not_geocoded }
+    
+      it 'returns false' do
+        expect(subject.geocoded?).to be false
+      end
+    end
+
+    context 'when location nil' do
+      it 'returns false' do
+        expect(subject.geocoded?).to be false
+      end
     end
   end
 end

@@ -1,7 +1,8 @@
-= render 'navs/main'
-
 %section
-  .jumbotron.text-center
+  .jumbotron.text-center.no-top-padding
+    = render 'navs/main'
+    %br
+    %br
     %h1.normal= t('header.registrations.title') 
     %h3.normal= t('header.registrations.subtitle')
 
@@ -55,4 +56,4 @@
     %br
     .row
       .col-sm-6.col-sm-offset-3
-        = link_to t('registrations.join_now.action'), '#', class: 'btn btn-alternate btn-block btn-outline'
+        = link_to t('registrations.join_now.action'), new_recommendation_path, class: 'btn btn-alternate btn-block btn-outline'

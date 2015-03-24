@@ -9,8 +9,18 @@ class RecommendationsController < ApplicationController
   # POST recommendations
   def create
     @form = RecommendationForm.new recommendation_params
-  
+    
+    # recommendations (practitioners) are not geocoded by default to lessen
+    # the burden on the system, practitioners are geocoded only when a
+    # new recommendation is made.
+    recommendation_service.subscribe( 
+      RecommendationGeocodeListener.new,
+      on: :success,
+      with: :geocode 
+    )
+
     recommendation_service.on :success do |recommendation|
+      current_user.registered!
       redirect_to recommendation_path(recommendation), notice: 'success'
     end
 

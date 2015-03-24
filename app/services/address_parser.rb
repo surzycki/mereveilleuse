@@ -1,26 +1,29 @@
 class AddressParser
-  attr_reader :street, :city, :postal_code,  :department, :region, :country, :latitude, :longitude
+  attr_reader :street, :city, :postal_code,  :department, :region, :country, :latitude, :longitude, :status
 
   def initialize(address)
     begin
+      
       result       = find address
       
       @street      = parse_address(result.address)
       @city        = result.city 
       @postal_code = result.postal_code
-      @department  = result.sub_state
+      @department  = result.try(:sub_state)
       @region      = result.state
       @country     = result.country
   
       @latitude    = result.latitude
       @longitude   = result.longitude 
-    rescue
+      @status      = 'geocoded'
+
+    rescue => e
       raise NameError
     end
   end
 
   def set(object)
-    [ :city, :postal_code, :department, :region, :country, :latitude, :longitude ].each do |attr|
+    [ :city, :postal_code, :department, :region, :country, :latitude, :longitude, :status ].each do |attr|
       object.send "#{attr}=", self.send(attr)
     end
 

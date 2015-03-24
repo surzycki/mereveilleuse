@@ -43,10 +43,14 @@ describe AddressParser do
 
     it 'has a longitude' do
       expect(subject).to respond_to :longitude
+    end   
+
+    it 'has a status' do
+      expect(subject).to respond_to :status
     end    
   end
 
-  describe 'sets attributes' do
+  describe 'assigns attributes' do
     context 'generic (city)' do
       it 'sets a city' do
         expect(subject.city).to eq('Paris')
@@ -75,6 +79,10 @@ describe AddressParser do
       it 'sets a longitude' do
         expect(subject.longitude).to eq(2.2)
       end
+
+      it 'sets a status' do
+        expect(subject.status).to eq 'geocoded'
+      end
     end
 
     context 'street' do
@@ -93,6 +101,57 @@ describe AddressParser do
           expect(subject.street).to eq('6 Rue Gobert')
         end
       end
+    end
+  end
+
+  describe '#set' do
+    let(:object)  { spy('object') } 
+
+    before do
+      subject.set object
+    end
+
+    it 'sets city on passed object' do
+      expect(object).to have_received(:city=)
+        .with 'Paris'
+    end
+
+    it 'sets postal_code on passed object' do
+      expect(object).to have_received(:postal_code=)
+    end
+
+    it 'sets department on passed object' do
+      expect(object).to have_received(:department=)
+        .with 'Paris'
+    end
+
+    it 'sets region on passed object' do
+      expect(object).to have_received(:region=)
+        .with 'Île-de-France'
+    end
+
+    it 'sets country on passed object' do
+      expect(object).to have_received(:country=)
+        .with 'France'
+    end
+
+    it 'sets latitude on passed object' do
+      expect(object).to have_received(:latitude=)
+        .with 42.2
+    end
+
+    it 'sets longitude on passed object' do
+      expect(object).to have_received(:longitude=)
+        .with 2.2
+    end
+
+    it 'sets status on passed object' do
+      expect(object).to have_received(:status=)
+        .with 'geocoded'
+    end
+
+    it 'sets street on passed object' do
+      expect(object).to have_received(:street=)
     end
   end
 

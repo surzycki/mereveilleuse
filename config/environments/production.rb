@@ -80,5 +80,6 @@ Rails.application.configure do
   # config namespaced store, servers stored in ENV
   config.cache_store = :dalli_store, nil, { namespace: 'mereveilleuse-production', compress: true }
 
-  
+  # active job adapter
+  config.active_job.queue_adapter = :sidekiq
 end

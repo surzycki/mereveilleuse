@@ -27,7 +27,7 @@ module ActiveAdmin::ViewHelpers
     status
   end
 
-  def link_to_location(location, type = :short_address)
+  def link_to_location(location, type = :address)
     if location.present?
       link_to(location.send(type), edit_admin_location_path(location))
     else
@@ -64,5 +64,10 @@ module ActiveAdmin::ViewHelpers
   def get_professions(resource)
     professions = resource.professions.map { |x| x.name }
     professions.join(', ')
+  end
+
+  def get_insurances(resource)
+    insurances = resource.insurances.map { |x| x.name }
+    insurances.join(', ')
   end
 end

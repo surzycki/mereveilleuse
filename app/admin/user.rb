@@ -34,8 +34,9 @@ ActiveAdmin.register User do
       status_tag(user.status, user_status(user))
     end
 
-    column :firstname
-    column :lastname 
+    column 'Name' do |user|
+      user.fullname
+    end
     
     column :email
     
@@ -58,8 +59,9 @@ ActiveAdmin.register User do
         status_tag(user.status, user_status(user))
       end
       
-      row :firstname
-      row :lastname
+      row 'Name' do |user|
+        user.fullname
+      end
       
       row :email
       

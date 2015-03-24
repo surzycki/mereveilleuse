@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320231912) do
+ActiveRecord::Schema.define(version: 20150324003151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,19 +49,49 @@ ActiveRecord::Schema.define(version: 20150320231912) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "federations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  create_table "federations_practitioners", id: false, force: :cascade do |t|
+    t.integer "federation_id"
+    t.integer "practitioner_id"
+  end
+
+  add_index "federations_practitioners", ["federation_id"], name: "index_federations_practitioners_on_federation_id", using: :btree
+  add_index "federations_practitioners", ["practitioner_id"], name: "index_federations_practitioners_on_practitioner_id", using: :btree
+
+  create_table "insurances", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  create_table "insurances_practitioners", id: false, force: :cascade do |t|
+    t.integer "insurance_id"
+    t.integer "practitioner_id"
+  end
+
+  add_index "insurances_practitioners", ["insurance_id"], name: "index_insurances_practitioners_on_insurance_id", using: :btree
+  add_index "insurances_practitioners", ["practitioner_id"], name: "index_insurances_practitioners_on_practitioner_id", using: :btree
+
   create_table "locations", force: :cascade do |t|
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "street"
     t.string   "city"
     t.string   "postal_code"
     t.string   "country"
     t.integer  "locatable_id"
     t.string   "locatable_type"
-    t.float    "latitude",       default: 0.0
-    t.float    "longitude",      default: 0.0
+    t.float    "latitude",         default: 0.0
+    t.float    "longitude",        default: 0.0
     t.string   "department"
     t.string   "region"
+    t.string   "unparsed_address"
+    t.integer  "status",           default: 0
   end
 
   add_index "locations", ["locatable_type", "locatable_id"], name: "index_locations_on_locatable_type_and_locatable_id", using: :btree

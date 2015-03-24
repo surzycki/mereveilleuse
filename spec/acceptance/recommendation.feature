@@ -4,6 +4,7 @@ Feature: Recommendation Form
     Given I am logged in 
     And the application is setup
 
+  
   Scenario: Recommend Unknown Practitioner
     Given I am on the 'new recommendation' page
     When I modify the 'recommendation form' practitioner_name with 'Bob Jones'

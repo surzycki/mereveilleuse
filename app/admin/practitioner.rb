@@ -32,8 +32,10 @@ ActiveAdmin.register Practitioner do
       status_tag(practitioner.status, practitioner_status(practitioner))
     end
     
-    column :firstname
-    column :lastname 
+    column 'Name' do |practitioner|
+      practitioner.fullname
+    end
+    
     
     column 'Occupation' do |practitioner|
       get_occupation practitioner
@@ -60,13 +62,13 @@ ActiveAdmin.register Practitioner do
         status_tag(practitioner.status, practitioner_status(practitioner))
       end
 
-      row :firstname
-      row :lastname 
+      row 'Name' do |practitioner|
+        practitioner.fullname
+      end
       
       row 'Occupation' do |practitioner|
         get_occupation practitioner
       end
-      
       
       row :email
       row :phone
@@ -74,6 +76,10 @@ ActiveAdmin.register Practitioner do
   
       row 'Location' do |practitioner|  
         link_to_location practitioner.location
+      end
+
+      row 'Insurance' do |practitioner|  
+        get_insurances practitioner
       end
   
       row 'Created' do |practitioner|

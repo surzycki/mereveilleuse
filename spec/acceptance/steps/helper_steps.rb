@@ -27,8 +27,11 @@ module HelperSteps
       path = [action,route,'path'].join('_')
       expect(current_path).send expectation, eq(route_helpers.send(path))
     when 'show'
-      path = [route,'path'].join('_')
-      expect(current_path).send expectation, eq(route_helpers.send(path, '1'))
+      path = [route.pluralize,'path'].join('_')
+      route = route_helpers.send(path)
+      regex = Regexp.new("^#{route}/\\d+$")
+     
+      expect(current_path).send expectation, match(regex)
     end 
   end
 

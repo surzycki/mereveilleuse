@@ -77,4 +77,6 @@ Rails.application.configure do
   # Use a different cache store in production.
   config.cache_store = :dalli_store, nil, { namespace: 'mereveilleuse-staging', compress: true }
 
+  # active job adapter
+  config.active_job.queue_adapter = :sidekiq
 end

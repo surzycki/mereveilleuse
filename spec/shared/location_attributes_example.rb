@@ -24,6 +24,14 @@ shared_examples 'it has location attributes' do
     it 'delegates longitude to location allow nil' do
       expect(subject.longitude).to be_nil
     end
+
+    it 'delegates unparsed_address to location' do
+      expect(subject).to delegate_method(:unparsed_address).to(:location)
+    end
+
+    it 'delegates unparsed_address to location allow nil' do
+      expect(subject.unparsed_address).to be_nil
+    end
   end
 
   describe 'associations' do

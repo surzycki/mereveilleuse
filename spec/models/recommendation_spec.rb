@@ -53,33 +53,23 @@ describe Recommendation do
     end
   end
 
-  describe '#latitude' do
-    it 'returns 0 with no pracitioner' do
-      expect(subject.latitude).to eq 0
+  describe 'delegations' do
+    it 'delegates address to practitioner' do
+      expect(subject).to delegate_method(:address).to(:practitioner)
     end
 
-    it 'return latitude' do
-      subject = build_stubbed :recommendation, :completed
-      
-      expect(subject.latitude).to eq subject.practitioner.latitude
-    end
-  end
-
-  describe '#longitude' do
-    it 'returns 0 with no pracitioner' do
-      expect(subject.longitude).to eq 0
+    it 'delegates latitude to practitioner' do
+      expect(subject).to delegate_method(:latitude).to(:practitioner)
     end
 
-    it 'return longitude' do
-      subject = build_stubbed :recommendation, :completed
-      
-      expect(subject.longitude).to eq subject.practitioner.longitude
+    it 'delegates longitude to practitioner' do
+      expect(subject).to delegate_method(:longitude).to(:practitioner)
     end
   end
 
   describe '#coordinates' do
     it 'return lat/long' do
-      subject = build_stubbed :recommendation, :completed
+      subject = build_stubbed :recommendation
 
       expect(subject.coordinates).to eq [ subject.latitude, subject.longitude ]
     end
@@ -97,7 +87,7 @@ describe Recommendation do
   end
 
   describe '#search_data' do
-    let(:subject)  { build_stubbed :recommendation, :completed }
+    let(:subject)  { build_stubbed :recommendation }
   
     it 'has coordinates' do
       expect(subject.search_data).to include(coordinates: subject.coordinates)
@@ -114,20 +104,16 @@ describe Recommendation do
 
   describe '#should_index?' do
     it 'indexes when state completed' do
-      subject = build_stubbed :recommendation, :completed
+      subject = build_stubbed :recommendation
+      
 
       expect(subject.should_index?).to eq true
     end
 
-    it 'does NOT index when state step one' do
+    it 'does NOT index when state NOT completed' do
       subject = build_stubbed :recommendation
-      
-      expect(subject.should_index?).to eq false
-    end
+      subject.state = 'step_one'
 
-    it 'does NOT index when state step two' do
-      subject = build_stubbed :recommendation, :step_two
-      
       expect(subject.should_index?).to eq false
     end
   end

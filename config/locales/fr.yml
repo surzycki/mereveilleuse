@@ -54,6 +54,11 @@ fr:
     general: Quelque chose a mal tourné
     address_parser:  introuvable
 
+  nav:
+    main:
+      blog: blog
+      help: besoin d'aide? 
+
   help:
     label: Vous avez besoin d'aide? 
   

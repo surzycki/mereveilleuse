@@ -5,11 +5,20 @@ ActiveAdmin.register Location do
 
   permit_params :street, :city, :postal_code, :country
 
+  controller do
+    def edit
+      location = scoped_collection.find(params[:id])
+      @page_title = "#{location.address}"
+    end
+  end
+
   index do
     column :street
     column :city
     column :postal_code
     column :country
+
+    column :unparsed_address
 
     actions
   end
@@ -20,6 +29,8 @@ ActiveAdmin.register Location do
       row :city
       row :postal_code
       row :country
+
+      row :unparsed_address
     end
   end
 
@@ -31,7 +42,7 @@ ActiveAdmin.register Location do
       f.input :street
       f.input :city
       f.input :postal_code
-      f.input :country, as: :string
+      f.input :country, as: :string     
     end
 
     f.actions

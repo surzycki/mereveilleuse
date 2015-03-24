@@ -2,18 +2,14 @@ class Recommendation < ActiveRecord::Base
   has_and_belongs_to_many :patient_types
   
   belongs_to :user
-  belongs_to :practitioner, autosave: true
+  belongs_to :practitioner
   belongs_to :profession
 
+  delegate :latitude,  to: :practitioner, prefix: false, allow_nil: true
+  delegate :longitude, to: :practitioner, prefix: false, allow_nil: true
+  delegate :address,   to: :practitioner, prefix: false, allow_nil: true
+
   searchkick locations: ['coordinates'], index_prefix: Rails.env
-
-  def latitude 
-    Monad::Maybe(practitioner).latitude.to_f
-  end
-
-  def longitude 
-    Monad::Maybe(practitioner).longitude.to_f
-  end
 
   def coordinates
     [ latitude, longitude ]

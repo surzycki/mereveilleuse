@@ -45,4 +45,7 @@ Rails.application.configure do
 
   # react js
   config.react.variant = :development
+
+  # active job adapter
+  config.active_job.queue_adapter = :inline
 end

@@ -12,5 +12,15 @@ FactoryGirl.define do
     occupations do |practitioner|
       Array.new(1) { practitioner.association :occupation }
     end
+
+    trait :with_recommendation do
+      recommendations do |practitioner|
+        Array.new(1) { practitioner.association :recommendation }
+      end
+    end
+
+    trait :not_geocoded do
+      association :location, :not_geocoded
+    end
   end
 end

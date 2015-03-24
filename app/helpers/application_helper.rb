@@ -4,4 +4,8 @@ module ApplicationHelper
     
     'blur' if (content_for(:apply_blur) == 'true')
   end
+
+  def brand
+    image_tag 'logo-small.png'
+  end
 end

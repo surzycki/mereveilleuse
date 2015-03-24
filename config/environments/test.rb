@@ -41,4 +41,7 @@ Rails.application.configure do
   #config.cache_store = :dalli_store, nil, { namespace: 'mereveilleuse-test', compress: true }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # active job adapter
+  config.active_job.queue_adapter = :test
 end

@@ -1,65 +1,84 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#encoding: utf-8
+require 'csv'
 
-USER_COUNT         = 10
-PRACTITIONER_COUNT = 50
 
-PatientType.delete_all
-Profession.delete_all
-User.delete_all
-Practitioner.delete_all
+file = File.open('doctor_import.csv', 'rb')
+contents    = file.read
+sector      = Array.new
+professions = Array.new
 
-puts '-- creating patient types...'
-patient_types = PatientType.create([
-  { name: 'Une future maman'},
-  { name: 'Une maman'},
-  { name: 'Un nourisson (0 - 3)'},
-  { name: 'Un bébé (4 - 11)'},
-  { name: 'Un adolescent (12 ans +)'}
-])
+datas = CSV.parse contents
 
-puts '-- creating professions...'
-professions = Profession.create([
-  { name: 'Médecin Généralist' },
-  { name: 'Nutritionniste' },
-  { name: 'Ostéopathes' },
-  { name: 'Pédiatres' },
-  { name: 'Sophrologues' }
-])
+datas[0..10].each do |data|
+  
+  begin
+    if data[0]
+      name_array = data[0].split(' ')
+      name      = "#{name_array.pop} #{name_array.join(' ')}".force_encoding('utf-8').titleize
+    end
 
-puts '-- creating generic users...'
-users = Array.new(USER_COUNT) {
-  user = User.create()
-  user.facebook_id  = rand.to_s[2..11]
-  user.firstname    = Forgery(:name).first_name
-  user.lastname     = Forgery(:name).last_name
-  user.email        = Forgery(:internet).email_address
-  user.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
-  user.save
-}
+    if data[1]
+      address = data[1].force_encoding('utf-8').titleize
+    end
 
-puts '-- creating indexed practitioners...'
-practitioners = Array.new(PRACTITIONER_COUNT) {
-  practitioner = Practitioner.create()
-  practitioner.firstname    = Forgery(:name).first_name
-  practitioner.lastname     = Forgery(:name).last_name
-  practitioner.email        = Forgery(:internet).email_address
-  practitioner.phone        = Forgery(:address).phone
-  practitioner.mobile_phone = Forgery(:address).phone
-  practitioner.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
-  practitioner.occupations  << Occupation.create( { profession: Profession.all.sample, experience: 10 } )
+    if data[2]
+      phone = data[2].delete(' ')
+    end
 
-  practitioner.indexed!
-  practitioner.save
-}
+    if data[3]
+      mobile = data[3].delete(' ')
+    end
+
+    if data[4]
+      email = data[4]
+    end
+
+  
+    if data[5]
+      insurance_name = data[5].force_encoding('utf-8').titleize
+      insurance = Insurance.find_by(name: insurance_name) || Insurance.create(name: insurance_name)
+    
+    end
+
+    if data[6]
+      profession_name = data[6].force_encoding('utf-8').titleize
+      profession = Profession.find_by(name: profession_name) || Profession.create(name: profession_name)
+    end
+
+    practitioner = Practitioner.create({
+      fullname:     name,
+      email:        email, 
+      mobile_phone: mobile,
+      phone:        phone
+    })
+
+
+    practitioner.insurances << insurance
+    practitioner.add_occupation profession.id
+
+    practitioner.location = Location.new({unparsed_address: address})
+
+    practitioner.indexed!
+    practitioner.save
+
+  rescue => e
+    puts "#{e.message} not found for: #{data[0]}"
+  end
+end
 
 puts '-- creating admin user...'
 AdminUser.create!(email: 'ops@mereveilleuse.com', password: 'thinkbigger', password_confirmation: 'thinkbigger')
 
-puts '-- indexing'
-Practitioner.reindex
+
+#sector.uniq.each do |x|
+#  puts x
+#end
+#
+#puts '----'
+#
+#professions.uniq.each do |x|
+#  puts x
+#end
+#
+#puts professions.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 }
+#puts sector.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 }#
