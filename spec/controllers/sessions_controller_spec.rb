@@ -43,6 +43,15 @@ describe SessionsController do
   end
 
   describe 'POST create' do
+    context 'handle authenticity token' do
+      it 'skips authenticity token' do
+        allow(controller).to receive (:verify_authenticity_token)
+        post :create, signed_request: '1234', fb_locale: 'en_US'
+
+        expect(controller).to_not have_received(:verify_authenticity_token)
+      end
+    end
+
     context 'success' do
       before do
         post :create, signed_request: '1234', fb_locale: 'en_US'

@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   # For the entry point we have to skip the authenticity validations, as the post is coming from facebook
-  skip_before_filter :verify_authenticity_token, only: :index
+  skip_before_filter :verify_authenticity_token, only: :create
   around_filter      :catch_exceptions, unless: 'Rails.env.development?'
 
   # non facebook canvas entry point
