@@ -86,7 +86,7 @@ describe Recommendation do
     end 
   end
 
-  describe '#search_data', focus: true do
+  describe '#search_data' do
     let(:subject)  { build_stubbed :recommendation }
   
     it 'has location' do
@@ -103,6 +103,10 @@ describe Recommendation do
 
     it 'has practitioner_id' do
       expect(subject.search_data).to include(practitioner_id: subject.practitioner.id )
+    end
+
+    it 'has rating' do
+      expect(subject.search_data).to include(rating: subject.rating )
     end
   end
 

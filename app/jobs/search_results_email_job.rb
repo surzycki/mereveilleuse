@@ -8,7 +8,7 @@ class SearchResultsEmailJob < ActiveJob::Base
 
     search_service.on :success do |results|
       # send email
-      SearchMailer.results(search, results).deliver_later
+      RecommendationMailer.results(search, results).deliver_later
       
       # reschedule email
       DelayedEmailSearchProvider.new.tap do |provider|

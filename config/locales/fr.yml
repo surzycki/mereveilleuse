@@ -64,6 +64,9 @@ fr:
       recommend: Recommandez un professionnel
       help: Besion d'aide?
 
+  email: 
+    recommendation:
+      subject: Les %{profession} du %{postal_code}
 
   header:
     registrations: 

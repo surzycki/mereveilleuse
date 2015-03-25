@@ -27,12 +27,13 @@ class RecommendationSearchProvider
       },
 
       order: { 
+        rating: 'desc',
         _geo_distance: { 
           location: "#{search.latitude}, #{search.longitude}", order: 'asc', unit: 'km' 
         } 
       },
 
-      page: 1, per_page: 3
+      page: 1, per_page: 1
     }).results
   end
 end

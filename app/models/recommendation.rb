@@ -26,7 +26,8 @@ class Recommendation < ActiveRecord::Base
       location:         coordinates,
       profession_id:    self.profession_id,
       patient_type_ids: patient_types.map(&:id),
-      practitioner_id:  practitioner.id
+      practitioner_id:  practitioner.id,
+      rating:           self.rating
     }
   end
 

@@ -1,0 +1,47 @@
+%h1= "Bonjour #{@user.firstname}"
+%p
+  Les MèreVeilleuses du
+  = @search_location.postal_code
+  recommandent un nouveau
+  = @search_profession.name
+
+%hr
+
+- @recommendations.each do |recommendation|
+  
+  %h2
+    %p= recommendation.practitioner.fullname
+    %p= recommendation.profession.name
+    %p= recommendation.patient_types.first.name
+    %p= recommendation.rating
+
+  %ul
+    %li 
+      %p
+        = t('rating.form.wait_time.label')
+        = recommendation.wait_time
+    %li 
+      %p
+        = t('rating.form.availability.label')
+        = recommendation.availability
+    %li 
+      %p
+        = t('rating.form.bedside_manner.label')
+        = recommendation.bedside_manner
+    %li 
+      %p
+        = t('rating.form.efficacy.label')
+        = recommendation.efficacy
+
+  %p= recommendation.comment
+
+%p= link_to 'Je ne cherche plus', '#'
+%p= link_to 'Je recommande un spécialiste', url_for(controller: 'recommendations', action: 'new', only_path: false)
+
+%ul
+  %li
+    Facebook
+  %li 
+    Twitter
+  %li
+    Blog

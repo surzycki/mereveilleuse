@@ -61,11 +61,11 @@ module AppFacebook
       port:            ENV['MEREVEILLEUSE_SMTP_PORT'],
       user_name:       ENV['MEREVEILLEUSE_SMTP_USERNAME'],
       password:        ENV['MEREVEILLEUSE_SMTP_PASSWORD'],
-      domain:          ENV['MEREVEILLEUSE_HOST'],
+      domain:          ENV['MEREVEILLEUSE_SMTP_DOMAIN'],
       authentication:  :plain,
       enable_starttls_auto: true
     }
-
+    config.action_mailer.default_url_options = { host: ENV['MEREVEILLEUSE_HOST'] }
     
   end
 end
