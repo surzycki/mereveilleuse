@@ -4,7 +4,7 @@ class RecommendationSearchProvider
   def execute(search)
     @search = search
     results = perform_search
-    
+    byebug
     # save unique sent_practitioners to search so we don't send the same practitioners
     @search.sent_practitioners = (@search.sent_practitioners + results.map(&:practitioner_id)).uniq
     @search.save

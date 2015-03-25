@@ -3,14 +3,14 @@ class RecommendationMailer < ApplicationMailer
     # don't send if no recommendations
     return if recommendations.empty?
     
+    @search             = search
     @user               = search.user
     @search_profession  = search.professions.first
-    @search_location    = search.location
     @recommendations    = recommendations
 
     mail(
       to: @user.email, 
-      subject: I18n.t('email.recommendation.subject', profession: @search_profession.name.pluralize, postal_code: @search_location.postal_code )
+      subject: I18n.t('email.recommendation.subject', profession: @search_profession.name.pluralize, address: search.address )
     )
   end
 end
