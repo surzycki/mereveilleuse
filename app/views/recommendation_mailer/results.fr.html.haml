@@ -10,8 +10,10 @@
 - @recommendations.each do |recommendation|
   
   %h2
-    %p= recommendation.practitioner.fullname
-    %p= recommendation.profession.name
+    %p
+      = recommendation.practitioner.fullname
+      = recommendation.profession.name
+    %p= recommendation.address
     %p= recommendation.patient_types.first.name
     %p= recommendation.rating
 
