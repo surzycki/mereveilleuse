@@ -18,7 +18,7 @@ end
 
 PREFIXES = ['dr','madame','monsieur']
 
-decoded.sample(100).each do |data|
+decoded.each do |data|
   begin
     
     if data[0].present?
@@ -50,7 +50,6 @@ decoded.sample(100).each do |data|
     if data[4].present?
       email = data[4]
     end
-
   
     if data[5].present?
       insurance_name = data[5].titleize
@@ -62,14 +61,12 @@ decoded.sample(100).each do |data|
       profession = Profession.find_by(name: profession_name) || Profession.create(name: profession_name)
     end
 
-    
     practitioner = Practitioner.create({
       fullname:     name,
       email:        email, 
       mobile_phone: mobile,
       phone:        phone
     })
-
     
     if insurance
       practitioner.insurances << insurance

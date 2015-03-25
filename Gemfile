@@ -28,6 +28,7 @@ gem 'redis'                                               # A Ruby client librar
 gem 'wisper'                                              # A micro library providing Ruby objects with Publish-Subscribe capabilities
 gem 'sidekiq'                                             # Simple, efficient background processing for Ruby.
 gem 'devise'
+gem 'unicode_utils'
 
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
@@ -53,7 +54,6 @@ group :development, :test do
   gem 'lograge'                                           # An attempt to tame Rails' default policy to log everything.
   gem 'hirb'                                              # A mini view framework for console/irb that's easy to use, even while under its influence.
   gem 'awesome_print'                                     # Pretty print your Ruby objects with style -- in full color and with proper indentation
-  gem 'unicode_utils'
 end
 
 group :test do
