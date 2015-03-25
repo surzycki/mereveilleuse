@@ -82,16 +82,16 @@ fr:
       title: Comment ça marche ?
       showcase:
         one:
-          title: Je rejoins la communauté
-          content: en recommandant un professionnel aux mamans de mon quartier. (ostéopathe, médecin généraliste,  pédiatre...)
+          title: Communauté
+          content: Je rejoins la communauté en recommandant un professionnel aux mamans de mon quartier. (ostéopathe, médecin généraliste,  pédiatre...)
 
         two:
-          title: J’effectue ma recherche 
-          content: en indiquant mon adresse et le type de professionnel qui m’intéresse.
+          title: Recherche
+          content: J’effectue ma recherche en indiquant mon adresse et le type de professionnel qui m’intéresse.
 
         three:
-          title: Je reçois les recommandations 
-          content: de mes amies inscrites et des mamans de mon quartier. (100% mamans garanties ;) )
+          title: Recommandations
+          content: Je reçois les recommandations de mes amies inscrites et des mamans de mon quartier. (100% mamans garanties ;) )
 
     example: 
       title: Exemple de recherche
@@ -181,7 +181,12 @@ fr:
         two:
           title: La Transparence
           content: Nous luttons contre les fausses recommandations. Nous sommes entre mamans et le resterons ;)
-     
+  
+  open_graph:
+    title: MèreVeilleuse
+    description: Partageons nos meilleures adresses santé entre mamans du quartier
+    site_name: MèreVeilleuse
+
   invite: 
     information:
       title:  Merci pour votre premiére contribution

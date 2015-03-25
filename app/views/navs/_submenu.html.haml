@@ -1,7 +1,8 @@
-%ul.nav.nav-pills.nav-justified
-  %li{ role: 'presentation' }
-    = link_to t('nav.submenu.invite'), '#', id: 'invite'
-  %li{ role: 'presentation' }
-    = link_to t('nav.submenu.recommend'), new_recommendation_path
-  %li{ role: 'presentation' }
-    = link_to t('nav.submenu.search'), new_search_path
+- if current_user.registered?
+  %ul.nav.nav-pills.nav-justified
+    %li{ role: 'presentation' }
+      = link_to t('nav.submenu.invite'), '#', id: 'invite'
+    %li{ role: 'presentation' }
+      = link_to t('nav.submenu.recommend'), new_recommendation_path
+    %li{ role: 'presentation' }
+      = link_to t('nav.submenu.search'), new_search_path

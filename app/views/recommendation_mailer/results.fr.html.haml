@@ -38,7 +38,7 @@
   %p= recommendation.comment
 
 %p= link_to 'Je ne cherche plus', '#'
-%p= link_to 'Je recommande un spécialiste', url_for(controller: 'recommendations', action: 'new', only_path: false)
+%p= link_to 'Je recommande un spécialiste', ENV['FACEBOOK_CANVAS']
 
 %ul
   %li

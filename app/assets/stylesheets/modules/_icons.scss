@@ -1,5 +1,26 @@
 /*doc
 ---
+title: Icon Basics
+name: icon
+category: icons
+---
+
+Icons use the `<i>` element followed by a specific class
+
+```haml_example
+%i.icon-education
+%i.icon-association
+%i.icon-scroll-down
+```
+*/
+%icon-stroke-icons {
+  font-family: Pe-icon-7-stroke;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/*doc
+---
 title: Sizes
 name: icon-1
 category: icons
@@ -55,4 +76,39 @@ category: icons
   text-align: center;
   background-color: $secondary-background-color;
   color: $light-color
+}
+
+
+/*doc
+---
+title: Types
+name: icon-9
+category: icons
+---
+
+| Icon                                | Class               | Icon                                       |  Class         
+|:-----------------------------------:| ------------------- |:------------------------------------------:| ---------------
+| <i class="icon-community"></i>      | `icon-community`    | <i class="icon-search"></i>                | `icon-search`
+| <i class="icon-recommend"></i>      | `icon-recommend`    |                                            | 
+*/
+
+.icon-community {
+  @extend %icon-stroke-icons;
+  &:before {
+    content: '\e616';
+  }
+}
+
+.icon-search {
+  @extend %icon-stroke-icons;
+  &:before {
+    content: '\e618';
+  }
+}
+
+.icon-recommend {
+  @extend %icon-stroke-icons;
+  &:before {
+    content: '\e66c';
+  }
 }

@@ -12,6 +12,11 @@ ActiveAdmin.register Search do
 
   filter :created_at
 
+  member_action :cancel do
+    resource.canceled!
+    redirect_to admin_searches_path, notice: 'Canceled!'
+  end
+
   scope :all, default: true
   
   scope :active do |search|
@@ -51,6 +56,8 @@ ActiveAdmin.register Search do
       I18n.l(search.created_at, format: :short_date)  
     end
 
-    actions
+    actions defaults: false do |search|
+      link_to('Cancel', cancel_admin_search_path(search))
+    end
   end
 end

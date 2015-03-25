@@ -26,3 +26,4 @@
 
 //= require forms
 //= require invite
+//= require share

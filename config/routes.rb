@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   
   mount Sidekiq::Web, at: '/admin/sidekiq'
   
-  resource  :session,         only: [ :new, :create ]
+  resource  :session,         only: [ :new, :create, :show ]
   resource  :search,          only: [ :new, :create, :show ]
   resource  :help,            only: [ :new, :create, :show ]
   resources :recommendations, only: [ :new, :create, :show ]

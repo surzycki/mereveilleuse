@@ -18,7 +18,7 @@ end
 
 PREFIXES = ['dr','madame','monsieur']
 
-decoded.each do |data|
+decoded.sample(200).each do |data|
   begin
     
     if data[0].present?
@@ -120,11 +120,11 @@ unless Rails.env.production?
     user.save
   }
 
-  RECOMMENDATION_COUNT = 200
+  RECOMMENDATION_COUNT = 100
   puts '-- creating recommendation users...'
 
   recommendations = Array.new(RECOMMENDATION_COUNT) {
-    practitioner = Practitioner.all.sample
+    practitioner = Practitioner.joins(:location).where("unparsed_address LIKE '%Paris'").sample
 
     form = RecommendationForm.new({
       user_id:            User.all.sample.id,

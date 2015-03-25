@@ -7,6 +7,41 @@
 
 /*doc
 ---
+title: Cover
+name: layout-0
+category: layout
+---
+
+```haml_example
+%section.cover.cover-landing
+  .jumbotron.jumbotron-transparent
+    %h1 Hello World
+```
+*/
+
+.cover {
+  position: relative;
+  
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-attachment: scroll !important;
+  background-position: 50% 0;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 6px;
+}
+
+.cover-landing {
+  @include background-image(image-url('background-top-landing.jpg')); 
+}
+
+/*doc
+---
 title: Showcase
 name: layout-1
 category: layout
@@ -48,3 +83,39 @@ category: layout
     line-height: 27px;
   }
 }
+
+/*doc
+---
+title: Responsive Spacer
+name: layout-8
+category: layout
+---
+Insert vertical space of `x` pixels.  Similar to bootstrap responsive grid in that
+combinations of classes can lead to different spacing on different responsive
+breakpoints 
+
+```haml_example
+%p Hello World !
+.space-md-10.space-sm-100.space-xs-100
+%p Hello World !
+.space-md-100.space-sm-10.space-xs-100
+%p Hello World !
+```
+*/
+
+@mixin responsive-spaces($prefix) {
+  @for $i from 1 through 20 {
+    .space-#{$prefix}-#{$i * 10} { height: #{$i * 10}px; }
+  }
+}
+
+@include responsive-spaces('xs');
+
+@media (min-width: $screen-sm-min) {
+  @include responsive-spaces('sm');
+}
+
+@media (min-width: $screen-md-min) {
+  @include responsive-spaces('md');
+}
+

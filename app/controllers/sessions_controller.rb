@@ -22,6 +22,15 @@ class SessionsController < ApplicationController
     authentication_service.authenticate facebook_authentication
   end
 
+  # GET /session
+  def show
+    if current_user.registered?
+      redirect_to new_search_path
+    else
+      redirect_to new_registration_path   
+    end
+  end
+
   private
   def initialize_authentication_service
     authentication_service.on :success do |account|

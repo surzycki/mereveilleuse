@@ -1,7 +1,7 @@
 %nav.navbar.navbar-default{role: 'navigation'}
   .container-fluid
     .navbar-header
-      %a.navbar-brand{ href: '#' } 
+      = link_to session_path, class: 'navbar-brand' do
         = brand
 
     .navbar-collapse.collapse#collapse-1

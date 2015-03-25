@@ -3,7 +3,7 @@ class RecommendationMailerPreview < ActionMailer::Preview
   def results
     search = Search.all.sample
     recommendations = [ Recommendation.all.sample ]
-
+    
     RecommendationMailer.results search, recommendations
   end
 end
