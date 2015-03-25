@@ -17,7 +17,7 @@ $ ->
       return
     return
 
-  $(document).on 'click', '#tester', onChallenge
+  $(document).on 'click', '#invite', onChallenge
 
   #$('#commit').avgrund
   #  height: 200

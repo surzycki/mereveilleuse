@@ -1,6 +1,5 @@
 class DelayedEmailSearchProvider
   def execute(search)
-    #puts "executing"
-    true
+    SearchResultsEmailJob.set(wait: 1.minutes).perform_later(search)
   end
 end

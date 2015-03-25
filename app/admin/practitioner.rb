@@ -8,7 +8,7 @@ ActiveAdmin.register Practitioner do
   filter :professions_id_eq,          as: :select, label: 'Occupation', collection: Profession.order('name ASC')
   filter :firstname_or_lastname_cont, as: :string, label: 'Name'
   filter :email_cont,                 as: :string, label: 'Email'
-  filter :location_city_cont,         as: :string, label: 'City'
+  filter :location_city_cont,         as: :string, label: 'City (geocoded practitioners)'
 
   scope :all, default: true
   
@@ -49,6 +49,14 @@ ActiveAdmin.register Practitioner do
       link_to_location practitioner.location
     end
 
+    column 'Geocoded?' do |practitioner|
+      if practitioner.geocoded?
+        status_tag('yes', :ok)
+      else
+        status_tag('no', :error)
+      end
+    end
+
     column 'Created' do |practitioner|
       I18n.l(practitioner.created_at, format: :short_date)  
     end
@@ -60,6 +68,14 @@ ActiveAdmin.register Practitioner do
     attributes_table do
       row 'Status' do |practitioner|
         status_tag(practitioner.status, practitioner_status(practitioner))
+      end
+
+      row 'Geocoded?' do |practitioner|
+        if practitioner.geocoded?
+          status_tag('yes', :ok)
+        else
+          status_tag('no', :error)
+        end
       end
 
       row 'Name' do |practitioner|

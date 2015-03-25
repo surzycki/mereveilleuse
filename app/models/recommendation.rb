@@ -9,7 +9,7 @@ class Recommendation < ActiveRecord::Base
   delegate :longitude, to: :practitioner, prefix: false, allow_nil: true
   delegate :address,   to: :practitioner, prefix: false, allow_nil: true
 
-  searchkick locations: ['coordinates'], index_prefix: Rails.env
+  searchkick locations: ['location'], index_prefix: Rails.env
 
   def coordinates
     [ latitude, longitude ]
@@ -23,9 +23,10 @@ class Recommendation < ActiveRecord::Base
 
   def search_data
     { 
-      coordinates:      coordinates,
+      location:         coordinates,
       profession_id:    self.profession_id,
-      patient_type_ids: patient_types.map(&:id)
+      patient_type_ids: patient_types.map(&:id),
+      practitioner_id:  practitioner.id
     }
   end
 

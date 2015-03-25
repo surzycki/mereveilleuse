@@ -7,11 +7,12 @@ class SearchForm
 
   def search
     @search ||= Search.new({ 
-      profession_ids:    [ profession_id ], 
-      patient_type_ids:  [ patient_type_id ],
-      user_id:           user_id,
-      information:       information, 
-      address:           address
+      profession_ids:     [ profession_id ], 
+      patient_type_ids:   [ patient_type_id ],
+      user_id:            user_id,
+      information:        information, 
+      address:            address,
+      sent_practitioners: []
     })
   end
 

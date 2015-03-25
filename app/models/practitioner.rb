@@ -28,6 +28,7 @@ class Practitioner < ActiveRecord::Base
       practitioner_id: self.id
     )
 
+    # dont save
     self.association(:occupations).add_to_target(occupation)
   end
 

@@ -2,4 +2,14 @@
   = render 'shared/header'
 
 %section
-  success
+  = render 'navs/submenu'
+
+%section
+  .container-fluid
+    .row
+      .col-sm-8.col-sm-offset-2.text-center
+        %br
+        %h1.normal= t('search.success.subtitle')
+  
+        = link_to t('search.success.action'), '#', class: 'btn btn-primary btn-block', id: 'invite'
+        %p.small= t('search.success.information')

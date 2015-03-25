@@ -43,6 +43,10 @@ ActiveAdmin.register Search do
       link_to_location search.location, :address
     end
 
+    column 'Sent Practitioners' do |search|  
+      search.sent_practitioners.count
+    end
+
     column 'Created at' do |search|
       I18n.l(search.created_at, format: :short_date)  
     end

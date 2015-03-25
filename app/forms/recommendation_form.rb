@@ -15,7 +15,8 @@ class RecommendationForm
       bedside_manner:    bedside_manner,
       efficacy:          efficacy,
       comment:           comment,
-      practitioner:      practitioner   
+      practitioner:      practitioner,
+      state:             'completed'   
     })
   end
 

@@ -31,6 +31,12 @@ category: flash
     margin-bottom: 0;
     color: $light-color;
   }
+
+  &.notice {
+    margin-bottom: 0;
+    background-color: $success-color;
+    color: $light-color;
+  }
 }
 
 .flash-fixed-top {

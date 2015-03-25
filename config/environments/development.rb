@@ -47,5 +47,5 @@ Rails.application.configure do
   config.react.variant = :development
 
   # active job adapter
-  config.active_job.queue_adapter = :inline
+  config.active_job.queue_adapter = :sidekiq
 end

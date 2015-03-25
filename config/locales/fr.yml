@@ -58,10 +58,13 @@ fr:
     main:
       blog: blog
       help: besoin d'aide? 
+    submenu:
+      search: Effectuez une recherche
+      invite: Invitez des amies
+      recommend: Recommandez un professionnel
+      help: Besion d'aide?
 
-  help:
-    label: Vous avez besoin d'aide? 
-  
+
   header:
     registrations: 
       title: Partageons nos meilleures adresses santé entre mamans du quartier
@@ -97,6 +100,20 @@ fr:
       action: Join Now!
 
   not_available: Pas Disponible
+
+  help:
+    form:
+      title: Vous avez besoin d'aide?
+      email:
+        label: Email
+        placeholder: Votre adresse email 
+      topics: 
+        label: Objet
+        placeholder: Objet
+      message: 
+        label: Message
+
+      submit: Merci
 
   search: 
     form:

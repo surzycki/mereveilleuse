@@ -13,6 +13,7 @@ gem 'dotenv'                                              # Loads environment va
 gem 'dalli'                                               # High performance memcached client for Ruby
 gem 'raygun4ruby'                                         # Find bugs before your users do
 gem 'koala',                    '~> 1.11.0rc'             # A lightweight, flexible library for Facebook with support for OAuth authentication
+gem 'rails-settings-cached',    '0.4.1'                   # This is imporved from rails-settings, added caching for all settings
 gem 'warden'                                              # General Rack Authentication Framework
 gem 'state_machine'                                       # Adds support for creating state machines for attributes on any Ruby class
 gem 'bootstrap-sass'              
@@ -27,8 +28,11 @@ gem 'redis'                                               # A Ruby client librar
 gem 'wisper'                                              # A micro library providing Ruby objects with Publish-Subscribe capabilities
 gem 'sidekiq'                                             # Simple, efficient background processing for Ruby.
 gem 'devise'
+
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
+
+gem 'sinatra', :require => nil
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net
@@ -49,6 +53,7 @@ group :development, :test do
   gem 'lograge'                                           # An attempt to tame Rails' default policy to log everything.
   gem 'hirb'                                              # A mini view framework for console/irb that's easy to use, even while under its influence.
   gem 'awesome_print'                                     # Pretty print your Ruby objects with style -- in full color and with proper indentation
+  gem 'unicode_utils'
 end
 
 group :test do

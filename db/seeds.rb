@@ -1,50 +1,68 @@
 #encoding: utf-8
 require 'csv'
+require 'unicode_utils'
 
 
-file = File.open('doctor_import.csv', 'rb')
-contents    = file.read
-sector      = Array.new
-professions = Array.new
+puts '-- import practitioner database...'
+file_contents = CSV.read("spec/fixtures/doctor_import.csv", col_sep: ",")
 
-datas = CSV.parse contents
+decoded = file_contents.map do |line|
+  line.map do |entry|
+    if entry
+      UnicodeUtils.compatibility_decomposition(entry)
+    else
+      ''
+    end
+  end
+end
 
-datas[0..10].each do |data|
-  
+PREFIXES = ['dr','madame','monsieur']
+
+decoded.sample(100).each do |data|
   begin
-    if data[0]
-      name_array = data[0].split(' ')
-      name      = "#{name_array.pop} #{name_array.join(' ')}".force_encoding('utf-8').titleize
+    
+    if data[0].present?
+      # handle DR, Madame, Monsieur
+      name_array = data[0].downcase.split(' ')
+    
+      if (name_array & PREFIXES).empty?
+        # invert name
+        name = "#{name_array.pop} #{name_array.join(' ')}".titleize   
+      else
+        # remove dr, madame, mon
+        name_array.shift
+        name = name_array.join(' ').titleize
+      end
     end
 
-    if data[1]
-      address = data[1].force_encoding('utf-8').titleize
+    if data[1].present?
+      address = data[1].squish.titleize
     end
 
-    if data[2]
+    if data[2].present?
       phone = data[2].delete(' ')
     end
 
-    if data[3]
+    if data[3].present?
       mobile = data[3].delete(' ')
     end
 
-    if data[4]
+    if data[4].present?
       email = data[4]
     end
 
   
-    if data[5]
-      insurance_name = data[5].force_encoding('utf-8').titleize
+    if data[5].present?
+      insurance_name = data[5].titleize
       insurance = Insurance.find_by(name: insurance_name) || Insurance.create(name: insurance_name)
-    
     end
 
-    if data[6]
-      profession_name = data[6].force_encoding('utf-8').titleize
+    if data[6].present?
+      profession_name = data[6].titleize
       profession = Profession.find_by(name: profession_name) || Profession.create(name: profession_name)
     end
 
+    
     practitioner = Practitioner.create({
       fullname:     name,
       email:        email, 
@@ -52,14 +70,25 @@ datas[0..10].each do |data|
       phone:        phone
     })
 
+    
+    if insurance
+      practitioner.insurances << insurance
+    end
 
-    practitioner.insurances << insurance
-    practitioner.add_occupation profession.id
+    if profession
+      practitioner.add_occupation profession.id
+    end
 
-    practitioner.location = Location.new({unparsed_address: address})
+    if address
+      practitioner.location = Location.new({unparsed_address: address})
+    end
 
     practitioner.indexed!
     practitioner.save
+
+    puts '-------'
+    puts "#{practitioner.fullname}"
+    puts practitioner.address
 
   rescue => e
     puts "#{e.message} not found for: #{data[0]}"
@@ -69,16 +98,57 @@ end
 puts '-- creating admin user...'
 AdminUser.create!(email: 'ops@mereveilleuse.com', password: 'thinkbigger', password_confirmation: 'thinkbigger')
 
+puts '-- creating patient types...'
+patient_types = PatientType.create([
+  { name: 'Une future maman'},
+  { name: 'Une maman'},
+  { name: 'Un nourisson (0 - 3)'},
+  { name: 'Un bébé (4 - 11)'},
+  { name: 'Un adolescent (12 ans +)'}
+])
 
-#sector.uniq.each do |x|
-#  puts x
-#end
-#
-#puts '----'
-#
-#professions.uniq.each do |x|
-#  puts x
-#end
-#
-#puts professions.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 }
-#puts sector.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 }#
+
+
+unless Rails.env.production? 
+  
+  USER_COUNT = 10
+  puts '-- creating generic users...'
+  users = Array.new(USER_COUNT) {
+    user = User.create()
+    user.facebook_id  = rand.to_s[2..11]
+    user.firstname    = Forgery(:name).first_name
+    user.lastname     = Forgery(:name).last_name
+    user.email        = Forgery(:internet).email_address
+    user.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+    user.save
+  }
+
+  RECOMMENDATION_COUNT = 200
+  puts '-- creating recommendation users...'
+
+  recommendations = Array.new(RECOMMENDATION_COUNT) {
+    practitioner = Practitioner.all.sample
+
+    form = RecommendationForm.new({
+      user_id:            User.all.sample.id,
+      practitioner_name:  practitioner.fullname,
+      patient_type_id:    PatientType.all.sample.id,
+      profession_id:      practitioner.primary_occupation.profession_id,
+      address:            practitioner.address,
+      wait_time:          rand(0..4),
+      availability:       rand(0..4),
+      bedside_manner:     rand(0..4),
+      efficacy:           rand(0..4),
+      comment:            Forgery(:lorem_ipsum).words(rand(5..10))
+    })
+
+    form.process
+
+    GeocodePractitionerJob.perform_later practitioner
+  }
+end
+
+puts '-- indexing models...'
+Practitioner.reindex
+Recommendation.reindex
+  

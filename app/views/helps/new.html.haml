@@ -1,0 +1,31 @@
+%section
+  = render 'shared/header'
+
+%section
+  = render 'navs/submenu'
+
+%section
+  .container-fluid
+    .row
+      .col-sm-12.text-center
+        %br
+        %p= t('help.form.title')
+
+  .container-fluid
+    .row
+      .col-sm-6.col-sm-offset-3
+        = form_for(@form, url: help_path, method: :post) do |f|
+          .form-group
+            = f.label :email, t('help.form.email.label')
+            = f.text_field(:email, class: 'form-control', placeholder: t('help.form.email.placeholder'))
+ 
+          .form-group
+            = f.label :help_topic, t('help.form.topics.label')
+            = f.collection_select(:help_topic, HelpTopic.all, :id, :name, { include_blank: t('help.form.topics.placeholder') }, class: 'form-control' )
+
+          .form-group
+            = f.label :message, t('help.form.message.label')
+            = f.text_area :message, class: 'form-control', rows: 8
+
+          = f.submit t('help.form.submit'), class: 'btn btn-primary btn-block'
+   

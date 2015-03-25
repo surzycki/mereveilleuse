@@ -2,6 +2,9 @@
   = render 'shared/header'
 
 %section
+  = render 'navs/submenu'
+
+%section
   .container-fluid
     .row
       .col-sm-12.text-center
@@ -29,7 +32,7 @@
             = f.text_area :information, class: 'form-control', rows: 8
 
           = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
-          =# link_to t('search.form.submit'), '#modal', id: 'commit', class: 'btn btn-primary btn-block'
+         
 
           
 

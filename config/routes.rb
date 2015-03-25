@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   
+  mount Sidekiq::Web, at: '/admin/sidekiq'
+  
   resource  :session,         only: [ :new, :create ]
   resource  :search,          only: [ :new, :create, :show ]
+  resource  :help,            only: [ :new, :create, :show ]
   resources :recommendations, only: [ :new, :create, :show ]
   resources :registrations,   only: [ :new, :create, :show ]
   
