@@ -22,6 +22,7 @@ category: flash
 .flash-notification {
   @include border-radius(0);
   width: 100%;
+  height: 72px;
   display: table;
   padding-right: 10px !important;
   text-align: center;
