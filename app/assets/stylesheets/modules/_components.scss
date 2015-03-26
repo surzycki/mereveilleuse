@@ -72,7 +72,7 @@ parent: components
   display: inline-block;
 
   input[type="radio"] {
-    display:none;
+    display: hidden;
   }
   
   input[type="radio"] + label {
