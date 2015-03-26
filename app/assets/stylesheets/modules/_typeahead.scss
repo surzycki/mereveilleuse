@@ -1,0 +1,29 @@
+// Sensible Defaults
+.twitter-typeahead {
+  background-color: transparent;
+}
+
+.twitter-typeahead .tt-input, .twitter-typeahead .tt-hint {
+  
+}
+
+.twitter-typeahead .tt-hint {
+  color: $muted-color;
+}
+
+.tt-dropdown-menu {
+  @include border-radius($input-border-radius);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-top: -4px;
+  border: 1px solid $input-border;
+
+}
+
+.tt-cursor {
+  background-color: $primary-action-color !important;
+  background-image: none !important;
+  cursor: pointer;
+
+  p { color: $light-color !important; }
+}

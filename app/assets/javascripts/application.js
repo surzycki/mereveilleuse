@@ -16,7 +16,7 @@
 //= require typeahead
 //= require typeahead-addresspicker
 //= require pubsub
-//= require jquery.remodal
+//= require jquery.scrollTo
 
 // shim for phantomjs < 2.0.0 and react (for circleci)
 //= require es5-shim                
@@ -24,6 +24,7 @@
 //= require react_ujs
 //= require_tree ./components
 
+//= require general
 //= require forms
 //= require invite
 //= require share

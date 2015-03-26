@@ -2,28 +2,30 @@
   .jumbotron-transparent.text-center.no-top-padding
     = render 'navs/main'
     
-    .space-xs-40
+    .space-xs-50
 
     .row
       .col-sm-8.col-sm-offset-2
-        %h2= t('header.registrations.title') 
+        %h2= t('header.registrations.title_html') 
         %p.normal= t('header.registrations.subtitle')
 
-    .space-xs-20
+    .space-xs-30
 
     .row
       .col-sm-4.col-sm-offset-2
         = link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block'
       .col-sm-4
-        = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block'
+        = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'learn-more'
 
-    .space-xs-80
+    .space-xs-90
 
-%section.text-center
+%section.text-center#learn-more-section
   .jumbotron.jumbotron-transparent
+    .space-xs-10
+
     %h1= t('registrations.how.title')  
 
-    .space-xs-30
+    .space-xs-40
 
     .row
       .col-sm-4
@@ -46,7 +48,8 @@
           %dl
             %dt= t('registrations.how.showcase.three.title')
             %dd= t('registrations.how.showcase.three.content')
-        
+    
+    .space-xs-10        
 
 %section.text-center
   .jumbotron
@@ -60,9 +63,17 @@
 
 %section.text-center
   .jumbotron.jumbotron-primary
-    %h1= t('registrations.join_now.title')
-    %p= t('registrations.join_now.content')
-    %br
+    .space-xs-20
+
+    .row
+      .col-sm-8.col-sm-offset-2
+        %h1= t('registrations.join_now.title')
+        %p= t('registrations.join_now.content')
+    
+    .space-xs-30
+
     .row
       .col-sm-6.col-sm-offset-3
         = link_to t('registrations.join_now.action'), new_recommendation_path, class: 'btn btn-alternate btn-block btn-outline'
+
+    .space-xs-60

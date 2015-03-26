@@ -108,10 +108,6 @@ describe SearchesController do
       it 'redirects to search_path' do
         expect(response).to redirect_to search_path
       end
-
-      it 'sets flash' do
-        expect(flash[:notice]).to be_present
-      end 
     end
 
     context 'on fail event' do

@@ -24,9 +24,9 @@ a form or triggering some javascript event, then use a `<button>` element.
 .btn {
   @include border-radius($input-border-radius);
   position: relative;
-  padding: 15px;
+  padding: 17px;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
   text-decoration: none;
   letter-spacing: 1px;
   

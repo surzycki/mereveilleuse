@@ -18,7 +18,7 @@ Feature: Recommendation Form
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
     Then I should be on the 'show recommendation' page
-    And I should see a success message
+    
 
   Scenario: Recommend Unknown Practitioner (validation error)
     Given I am on the 'new recommendation' page
@@ -56,7 +56,7 @@ Feature: Recommendation Form
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
     Then I should be on the 'show recommendation' page
-    And I should see a success message
+    
  
   Scenario: Recommend Known Practitioner (modified)
     Given I am on the 'new recommendation' page
@@ -72,7 +72,7 @@ Feature: Recommendation Form
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
     Then I should be on the 'show recommendation' page
-    And I should see a success message
+    
 
   Scenario: Recommend Known Practitioner (bad address)
     Given I am on the 'new recommendation' page

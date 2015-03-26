@@ -70,7 +70,7 @@ fr:
 
   header:
     registrations: 
-      title: Partageons nos meilleures adresses santé entre mamans du quartier
+      title_html: <b>Partageons</b> nos meilleures adresses santé entre mamans du quartier
       subtitle: Les recommendations des mamans vous aident à protéger votre santé et celles de vos enfants
 
   registrations:

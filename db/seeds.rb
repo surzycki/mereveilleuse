@@ -18,7 +18,7 @@ end
 
 PREFIXES = ['dr','madame','monsieur']
 
-decoded.sample(200).each do |data|
+decoded.each do |data|
   begin
     
     if data[0].present?

@@ -1,6 +1,12 @@
-.jumbotron.text-center.no-top-padding
+%section.cover.cover-landing 
+  .jumbotron-transparent.text-center.no-top-padding
     = render 'navs/main'
-    %br
-    %br
-    %h1.normal= t('header.registrations.title') 
-    %h3.normal= t('header.registrations.subtitle')
+   
+    .space-xs-20
+
+    .row
+      .col-sm-8.col-sm-offset-2
+        %h2= t('header.registrations.title_html') 
+        %p.normal= t('header.registrations.subtitle')
+
+    .space-xs-30

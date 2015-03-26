@@ -21,11 +21,11 @@ class RecommendationsController < ApplicationController
 
     recommendation_service.on :success do |recommendation|
       current_user.registered!
-      redirect_to recommendation_path(recommendation), notice: 'success'
+      redirect_to recommendation_path(recommendation)
     end
 
     recommendation_service.on :fail do |errors|
-      flash.now[:alert] = errors.full_messages
+      flash.now[:alert] = errors.full_messages.join(', ')
       render :new
     end
 

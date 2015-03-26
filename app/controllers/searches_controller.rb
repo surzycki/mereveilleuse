@@ -11,11 +11,11 @@ class SearchesController < ApplicationController
     @form = SearchForm.new search_params
 
     search_service.on :success do |results|
-      redirect_to search_path, notice: t('search.success.title')
+      redirect_to search_path
     end
 
     search_service.on :fail do |errors|
-      flash.now[:alert] = errors.full_messages
+      flash.now[:alert] = errors.full_messages.join(', ')
       render :new
     end
 
