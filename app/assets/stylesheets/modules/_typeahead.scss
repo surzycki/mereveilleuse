@@ -11,19 +11,25 @@
   color: $muted-color;
 }
 
+.twitter-typeahead .tt-suggestion > p {
+  font-weight: 300 !important;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.twitter-typeahead .tt-suggestion > p:hover {
+  background-color: $primary-action-color !important;
+  cursor: pointer;
+}
+
 .tt-dropdown-menu {
   @include border-radius($input-border-radius);
   -webkit-box-shadow: none;
   box-shadow: none;
   margin-top: -4px;
   border: 1px solid $input-border;
-
+  width: 100%;
 }
 
-.tt-cursor {
-  background-color: $primary-action-color !important;
-  background-image: none !important;
-  cursor: pointer;
-
-  p { color: $light-color !important; }
-}
