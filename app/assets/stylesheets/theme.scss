@@ -1,0 +1,10 @@
+// *************************************
+//
+//   Theme
+//   -> App specific 
+//
+// *************************************
+
+.thick-secondary-shadow {
+  box-shadow: 2px 2px 0px 2px darken($secondary-action-color,25%);
+}

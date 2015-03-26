@@ -115,6 +115,7 @@ parent: button
   color: $dark-color;
 
   &:focus, &:hover, &:active, &:active:focus {
-    background-color: transparent;
+    //background-color: transparent;
+    color: $primary-action-color !important;
   }
 }
