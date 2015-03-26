@@ -71,4 +71,36 @@ describe Search do
       expect(subject.settings).to eq ( { 'sent_practitioners' => '1,2,3' } )
     end
   end
+
+  describe '#profession_name' do
+    context 'exists' do
+      let(:subject) { build_stubbed :search }
+  
+      it 'returns profession name' do
+        expect(subject.profession_name).to eq(subject.professions.first.name)
+      end
+    end
+
+    context 'does NOT exist' do
+      it 'returns Nothing' do
+        expect(subject.profession_name).to eq(Monadic::Nothing)
+      end
+    end
+  end
+
+  describe '#patient_type_name' do
+    context 'exists' do 
+      let(:subject) { build_stubbed :search }
+  
+      it 'returns patient_type name' do
+        expect(subject.patient_type_name).to eq(subject.patient_types.first.name)
+      end
+    end
+
+    context 'does NOT exist' do
+      it 'returns Nothing' do
+        expect(subject.patient_type_name).to eq(Monadic::Nothing)
+      end
+    end
+  end
 end

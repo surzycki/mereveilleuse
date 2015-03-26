@@ -27,6 +27,8 @@ gem 'geocoder'                                            # Complete Ruby geocod
 gem 'redis'                                               # A Ruby client library for Redis
 gem 'wisper'                                              # A micro library providing Ruby objects with Publish-Subscribe capabilities
 gem 'sidekiq'                                             # Simple, efficient background processing for Ruby.
+gem 'roadie-rails'                                        # CSS styled emails without the hassle.
+gem 'monadic'                                             # helps dealing with exceptional situations, 
 gem 'devise'
 gem 'unicode_utils'
 

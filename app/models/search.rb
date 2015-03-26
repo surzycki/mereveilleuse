@@ -12,6 +12,14 @@ class Search < ActiveRecord::Base
 
   enum status: [ :active, :canceled ]
 
+  def profession_name
+    Maybe(professions.first).name._
+  end
+
+  def patient_type_name
+    Maybe(patient_types.first).name._
+  end
+
   private
   def set_md5_hash
     self.md5_hash = Digest::MD5.hexdigest(

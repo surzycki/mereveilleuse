@@ -4,4 +4,4 @@
   .rating-input
     = f.radio_button item, value
     %label{ for: "#{f.object_name}_#{item}_#{value}"}
-      %span
+      %span{ class: "rating-#{value}"}

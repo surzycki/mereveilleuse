@@ -60,7 +60,7 @@ describe SearchesController do
 
     context 'success' do
       before do
-        allow(DelayedEmailSearchProvider).to receive(:new).and_return provider
+        allow(RecommendationsEmailProvider).to receive(:new).and_return provider
         allow(SearchService).to receive(:new).and_return search_service
 
         post :create, search_form: params
@@ -85,7 +85,7 @@ describe SearchesController do
       end
 
       it 'creates delayed email provider' do
-        expect(DelayedEmailSearchProvider).to have_received(:new)
+        expect(RecommendationsEmailProvider).to have_received(:new)
       end
 
       it 'executes search service' do

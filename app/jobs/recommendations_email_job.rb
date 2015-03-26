@@ -1,4 +1,4 @@
-class SearchResultsEmailJob < ActiveJob::Base
+class RecommendationsEmailJob < ActiveJob::Base
   queue_as :default
  
   attr_reader :form
@@ -11,7 +11,7 @@ class SearchResultsEmailJob < ActiveJob::Base
       RecommendationMailer.results(search, results).deliver_later
       
       # reschedule email
-      DelayedEmailSearchProvider.new.tap do |provider|
+      RecommendationsEmailProvider.new.tap do |provider|
         provider.execute search
       end
     end

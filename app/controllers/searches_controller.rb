@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
       render :new
     end
 
-    search_service.execute DelayedEmailSearchProvider.new
+    search_service.execute RecommendationsEmailProvider.new
   end
 
   # GET show

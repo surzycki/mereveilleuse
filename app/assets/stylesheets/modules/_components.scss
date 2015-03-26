@@ -90,23 +90,22 @@ parent: components
     border-radius:  50%;
   }
   
-  input[type="radio"] + label span {
-    @include background-image(image-url('4-rating.png')); 
-    //background-color: #333;
+  @mixin rating-values() {
+    @for $i from 0 through 4 {
+      
+      input[type="radio"] + label .rating-#{$i} {
+        @include background-image(image-url('#{$i}-rating.png')); 
+      }
+      
+      input[type="radio"]:checked + label .rating-#{$i} {
+        @include background-image(image-url('#{$i}-rating-checked.png'));
+      }
+
+      //.space-#{$prefix}-#{$i * 10} { height: #{$i * 10}px; }
+    }
   }
-  
-  input[type="radio"]:checked + label span{
-    @include background-image(image-url('4-rating-checked.png'));
-    //background-color: #FF0000;
-  }
-  
-  input[type="radio"] + label span,
-  input[type="radio"]:checked + label span {
-    //-webkit-transition:background-color 0.4s linear;
-    //-o-transition:background-color 0.4s linear;
-    //-moz-transition:background-color 0.4s linear;
-    //transition:background-color 0.4s linear;
-  }
+
+  @include rating-values();
 }
 
 

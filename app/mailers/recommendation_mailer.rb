@@ -5,12 +5,16 @@ class RecommendationMailer < ApplicationMailer
     
     @search             = search
     @user               = search.user
-    @search_profession  = search.professions.first
     @recommendations    = recommendations
 
     mail(
       to: @user.email, 
-      subject: I18n.t('email.recommendation.subject', profession: @search_profession.name.pluralize, address: search.address )
+      subject: subject_for_results(search)
     )
+  end
+
+  private
+  def subject_for_results(search)
+    I18n.t('email.recommendation.subject', profession: search.profession_name.pluralize, address: search.address )
   end
 end

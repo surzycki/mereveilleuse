@@ -1,3 +1,50 @@
-%hmtl
-  %body
-    = yield
+!!!  XML
+!!!  Strict
+%html{xmlns: 'http://www.w3.org/1999/xhtml'}
+  %head
+    %meta{content: 'width=device-width', name: 'viewport'}
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}
+    %meta{charset: 'utf-8'}
+    
+    %title 
+      mèreveilleuse
+    
+    %style{'data-roadie-ignore' => true}
+      :plain
+        .appleLinksWhite a { color: #ffffff !important; text-decoration: none;}
+    
+    
+    = stylesheet_link_tag :email, media: 'screen'
+  
+  %body{ topmargin: 0, leftmargin: 0, marginheight: 0, marginwidth: 0 }
+    %table.body
+      %tr
+        %td.center{ align: 'center', valign: 'top' }
+          %center
+            %table.container
+              %tr
+                %td
+                  %table.row.header
+                    %tr
+                      %td.wrapper
+                        %table.twelve.columns
+                          %tr
+                            %td.center
+                              %center
+                                %b
+                                  mèreveilleuse
+                                com
+                            %td.expander
+      
+                  = yield
+                  
+            %table.row.footer
+              %tr
+                %td.wrapper.last
+                  %table.twelve.columns
+                    %tr
+                      %td.center
+                        %center
+                          Footer
+                      %td.expander
+

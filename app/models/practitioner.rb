@@ -53,7 +53,7 @@ class Practitioner < ActiveRecord::Base
   end
 
   def geocoded?
-    Monad::Maybe(location).geocoded? == true
+    Maybe(location).geocoded?._ == true
   end
 
   private
