@@ -68,11 +68,11 @@ parent: components
 
 */
 .rating-input {
-  margin:5px 23px 0 0;
+  margin:5px rem(12px) 0 0;
   display: inline-block;
 
   input[type="radio"] {
-    display: hidden;
+    visibility: hidden;
   }
   
   input[type="radio"] + label {

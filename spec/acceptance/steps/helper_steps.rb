@@ -106,6 +106,10 @@ module HelperSteps
     screenshot
   end
 
+  step 'I rate :field :value on the :form' do |field,value,form|
+    find("label[for=#{underscoreize(form)}_#{field}_#{value}]").click
+  end
+
   def form_modifications
     @form_modifications ||= {}
   end
