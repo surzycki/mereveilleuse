@@ -1,16 +1,7 @@
-%p= f.label :wait_time, t("rating.form.#{item}.label")
-%label.radio-inline
-  = f.radio_button item, 0
-  0
-%label.radio-inline
-  = f.radio_button item, 1
-  1
-%label.radio-inline
-  = f.radio_button item, 2
-  2
-%label.radio-inline
-  = f.radio_button item, 3
-  3
-%label.radio-inline
-  = f.radio_button item, 4
-  4
+%div= f.label item, t("rating.form.#{item}.label")
+
+- (0..4).each do |value|
+  .rating-input
+    = f.radio_button item, value
+    %label{ for: "#{f.object_name}_#{item}_#{value}"}
+      %span

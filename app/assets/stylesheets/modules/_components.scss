@@ -53,3 +53,61 @@ parent: components
   box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
 }
 
+/*doc
+---
+title: Rating Selector
+name: components-2
+category: components
+parent: components
+---
+
+```haml_example
+  
+
+```
+
+*/
+.rating-input {
+  margin:5px 23px 0 0;
+  display: inline-block;
+
+  input[type="radio"] {
+    display:none;
+  }
+  
+  input[type="radio"] + label {
+    color: #333;  
+  }
+  
+  input[type="radio"] + label span {
+    display:inline-block;
+    width:56px;
+    height:56px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+  }
+  
+  input[type="radio"] + label span {
+    @include background-image(image-url('4-rating.png')); 
+    //background-color: #333;
+  }
+  
+  input[type="radio"]:checked + label span{
+    @include background-image(image-url('4-rating-checked.png'));
+    //background-color: #FF0000;
+  }
+  
+  input[type="radio"] + label span,
+  input[type="radio"]:checked + label span {
+    //-webkit-transition:background-color 0.4s linear;
+    //-o-transition:background-color 0.4s linear;
+    //-moz-transition:background-color 0.4s linear;
+    //transition:background-color 0.4s linear;
+  }
+}
+
+
+
