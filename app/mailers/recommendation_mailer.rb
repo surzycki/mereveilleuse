@@ -3,9 +3,11 @@ class RecommendationMailer < ApplicationMailer
     # don't send if no recommendations
     return if recommendations.empty?
     
+    @recommendation     = recommendations.first
+    
     @search             = search
     @user               = search.user
-    @recommendations    = recommendations
+    @recommender        = @recommendation.recommender
 
     mail(
       to: @user.email, 

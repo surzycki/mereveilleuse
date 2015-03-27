@@ -1,0 +1,18 @@
+.icon-lg {
+  font-size: 30px;
+}
+
+.icon-square {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  display: inline-block;
+}
+
+.icon-round {
+  @include border-radius(50%);
+  padding: 0;
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+}

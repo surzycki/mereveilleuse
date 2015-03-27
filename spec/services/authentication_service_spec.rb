@@ -37,6 +37,11 @@ describe AuthenticationService do
           .with hash_including(email: anything)
       end
 
+      it 'updates profile_image' do
+        expect(account).to have_received(:update)
+          .with hash_including(profile_image: anything)
+      end
+
       it 'updates address' do
         expect(account).to have_received(:update)
           .with hash_including(address: anything)

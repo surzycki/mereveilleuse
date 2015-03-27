@@ -6,7 +6,7 @@ class Practitioner < ActiveRecord::Base
   before_save      :reindex_recommendations, if: Proc.new { |practitioner| practitioner.location_changed? }
 
   has_many  :recommendations, dependent: :destroy
-  has_many  :references, through: :recommendations, source: :user
+  has_many  :recommenders, through: :recommendations, source: :recommender, class_name: 'User'
 
   has_many :occupations, dependent: :destroy, autosave: true
   has_many :professions, through: :occupations
@@ -20,7 +20,7 @@ class Practitioner < ActiveRecord::Base
   # http://stackoverflow.com/questions/7206541/activeadmin-with-has-many-problem-undefined-method-new-record
   accepts_nested_attributes_for :occupations, allow_destroy: true
 
-  searchkick word_start: [:fullname], index_prefix: Rails.env
+  searchkick word_start: [:fullname], index_prefix: "mereveilleuse-#{Rails.env}"
 
   def add_occupation(profession_id)
     occupation = Occupation.find_or_initialize_by(

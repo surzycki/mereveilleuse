@@ -8,9 +8,10 @@ class AuthenticationService
       account = User.find_or_create_by(facebook_id: auth.facebook_id)
       
       account.update(
-        firstname: auth.firstname,
-        lastname:  auth.lastname,
-        email:     auth.email
+        firstname:     auth.firstname,
+        lastname:      auth.lastname,
+        email:         auth.email,
+        profile_image: auth.profile_image
       )
 
       # isolate update of address in case address not found error.  

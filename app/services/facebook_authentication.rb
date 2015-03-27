@@ -5,11 +5,12 @@ class FacebookAuthentication
       lastname:      params.lastname,
       email:         params.email,
       address:       params.address, 
-      facebook_id:   params.facebook_id
+      facebook_id:   params.facebook_id,
+      profile_image: params.profile_image
     )
   end
 
-  attr_reader :signed_request, :firstname, :lastname, :email, :facebook_id, :address, :authenticated
+  attr_reader :signed_request, :firstname, :lastname, :email, :facebook_id, :address, :authenticated, :profile_image
 
   # Authenticates user to facebook using signed requests
   # FACEBOOK_APP_ID and FACEBOOK_SECRET should be set in the ENV vars 
@@ -30,6 +31,7 @@ class FacebookAuthentication
 
     set_attributes facebook_api.get_object('me')
 
+
     @authenticated = true
   rescue Exception => e
     @authenticated = false
@@ -38,11 +40,12 @@ class FacebookAuthentication
   def set_attributes(json)
     json = json.with_indifferent_access
     
-    @firstname    = json[:first_name]
-    @lastname     = json[:last_name]
-    @email        = json[:email]
-    @facebook_id  = json[:id]
+    @firstname      = json[:first_name]
+    @lastname       = json[:last_name]
+    @email          = json[:email]
+    @facebook_id    = json[:id]
+    @profile_image  = Koala::Facebook::API.new.get_picture(@facebook_id, type: 'large')
 
-    @address      = json[:location][:name] if json[:location]
+    @address        = json[:location][:name] if json[:location]
   end
 end

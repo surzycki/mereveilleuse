@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325145341) do
+ActiveRecord::Schema.define(version: 20150327025255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,14 +192,15 @@ ActiveRecord::Schema.define(version: 20150325145341) do
   add_index "searches_professions", ["search_id"], name: "index_searches_professions_on_search_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "facebook_id"
     t.string   "firstname"
     t.string   "lastname"
     t.string   "email"
-    t.boolean  "has_invited", default: false
-    t.integer  "status",      default: 0
+    t.boolean  "has_invited",   default: false
+    t.integer  "status",        default: 0
+    t.string   "profile_image"
   end
 
 end

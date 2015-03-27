@@ -6,6 +6,8 @@ describe FacebookAuthentication do
   
   let(:oauth)             { spy('facebook_oauth') }
   let(:facebook_api)      { spy('facebook_api') }
+  let(:profile_image)     { 'http://facebook.com/profile/image' }
+  
   let(:facebook_me) { 
     {
       'id': '111111111', 
@@ -25,6 +27,7 @@ describe FacebookAuthentication do
     
     allow(oauth).to receive(:parse_signed_request).and_return validated_request
     allow(facebook_api).to receive(:get_object).and_return facebook_me
+    allow(facebook_api).to receive(:get_picture).and_return profile_image
   end
 
   describe '#initialize' do
@@ -65,6 +68,10 @@ describe FacebookAuthentication do
     it 'has a authenticated' do
       expect(subject).to respond_to :authenticated
     end
+
+    it 'has profile image' do
+      expect(subject).to respond_to :profile_image
+    end
   end
 
   describe 'authentication' do
@@ -91,6 +98,10 @@ describe FacebookAuthentication do
 
       it 'sets address' do
         expect(subject.address).to eq 'Paris, France'
+      end
+
+      it 'sets profile_image' do
+        expect(subject.profile_image).to eq profile_image
       end 
 
       context 'no location' do

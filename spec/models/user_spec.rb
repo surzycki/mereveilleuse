@@ -33,6 +33,10 @@ describe User do
       expect(subject).to respond_to :status
     end
 
+    it 'has a profile image' do
+      expect(subject).to respond_to :profile_image
+    end
+
     it 'defines enum for status' do
       expect(subject).to define_enum_for(:status)
         .with [ :unregistered, :registered ]

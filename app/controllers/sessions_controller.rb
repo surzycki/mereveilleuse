@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to not_found_path
     else 
       initialize_authentication_service
-    
+      
       authentication_service.authenticate FacebookAuthentication.stub(User.first)
     end
   end

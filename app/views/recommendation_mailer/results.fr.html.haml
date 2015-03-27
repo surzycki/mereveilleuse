@@ -1,49 +1,85 @@
-%h1= "Bonjour #{@user.firstname}"
-%p
-  Les MèreVeilleuses du
-  = @search.address
-  recommandent un nouveau
-  = @search.profession_name
+%table.row.content
+  %tr
+    %td.wrapper.last
+      %table.twelve.columns
+        %tr
+          %td
+            %center
+              %h2.center
+                #{ @recommender.fullname } recommended a(n) 
+                %b
+                  #{ @recommendation.profession_name } 
+                for a
+                %b
+                  = @recommendation.patient_type_name
+          
+          %td.expander
+
+%table.row.content
+  %tr
+    %td.wrapper.no-gutter
+      %table.two.columns
+        %tr
+          %td.center
+            %center
+              = image_tag @user.profile_image, class: 'icon-round center'
+          %td.expander
+    
+    %td.wrapper.last
+      %table.ten.columns
+        %tr
+          %td
+            %h4
+              You are searching for an #{@search.profession_name}
+            %p
+              Four score and sever years ago, our forefather brought upon this land a great pizza, one with many toppings. A pizza so grand, so magnificent, it made the italians cry.
+                 
+          %td.expander  
 
 %hr
 
-- @recommendations.each do |recommendation|
-  
-  %h2
-    %p
-      = recommendation.practitioner.fullname
-      = recommendation.profession.name
-    %p= recommendation.address
-    %p= recommendation.patient_types.first.name
-    %p= recommendation.rating
 
-  %ul
-    %li 
-      %p
-        = t('rating.form.wait_time.label')
-        = recommendation.wait_time
-    %li 
-      %p
-        = t('rating.form.availability.label')
-        = recommendation.availability
-    %li 
-      %p
-        = t('rating.form.bedside_manner.label')
-        = recommendation.bedside_manner
-    %li 
-      %p
-        = t('rating.form.efficacy.label')
-        = recommendation.efficacy
+%table.row.content
+  %tr
+    %td.wrapper.no-gutter
+      %table.two.columns
+        %tr
+          %td.center
+            %center
+              = image_tag @recommender.profile_image, class: 'icon-round center'
+          %td.expander
+    
+    %td.wrapper.last
+      %table.ten.columns
+        %tr
+          %td
+            %h4
+              #{@recommender.fullname} recommended
+            %p
+              I recommend the osteopath 
+              %b
+                #{@recommendation.practitioner_fullname} 
+              with an overall note of 
+              %b
+                #{ @recommendation.rating }.  
+              Julie has great bedside manner, is very punctual, and the wait time is correct.
+            %p
+              #{@recommendation.comment}
+            %p
+              Here are Julie’s contact details.
+          %td.expander  
 
-  %p= recommendation.comment
+%hr  
 
-%p= link_to 'Je ne cherche plus', '#'
-%p= link_to 'Je recommande un spécialiste', ENV['FACEBOOK_CANVAS']
-
-%ul
-  %li
-    Facebook
-  %li 
-    Twitter
-  %li
-    Blog
+%table.row.content
+  %tr
+    %td.center{ align: 'center' }
+      %center
+        %table.container
+          %tr
+            %td.wrapper.last
+              %table.twelve.columns
+                %tr
+                  %td
+                    = static_map_for @recommendation
+                  %td.expander

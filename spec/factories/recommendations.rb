@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :recommendation do
-    user
+    recommender
     practitioner
     profession
 

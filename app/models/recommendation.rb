@@ -1,7 +1,8 @@
 class Recommendation < ActiveRecord::Base
   has_and_belongs_to_many :patient_types
   
-  belongs_to :user
+  belongs_to :recommender, class_name: :User, foreign_key: 'user_id'
+
   belongs_to :practitioner
   belongs_to :profession
 
@@ -9,7 +10,11 @@ class Recommendation < ActiveRecord::Base
   delegate :longitude, to: :practitioner, prefix: false, allow_nil: true
   delegate :address,   to: :practitioner, prefix: false, allow_nil: true
 
-  searchkick locations: ['location'], index_prefix: Rails.env
+  delegate :fullname,  to: :practitioner, prefix: true, allow_nil: true
+  delegate :fullname,  to: :recommender,  prefix: true, allow_nil: true
+  delegate :name,      to: :profession,   prefix: true, allow_nil: true
+
+  searchkick locations: ['location'], index_prefix: "mereveilleuse-#{Rails.env}"
 
   def coordinates
     [ latitude, longitude ]
@@ -33,5 +38,9 @@ class Recommendation < ActiveRecord::Base
 
   def should_index?
     state == 'completed'
+  end
+
+  def patient_type_name
+    Maybe(patient_types.first).name._
   end
 end

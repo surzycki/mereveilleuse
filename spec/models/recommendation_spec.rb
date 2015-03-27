@@ -36,8 +36,9 @@ describe Recommendation do
   end
 
   describe 'associations' do
-    it 'belongs to user' do
-      expect(subject).to belong_to(:user)
+    it 'belongs to recommender' do
+      expect(subject).to belong_to(:recommender).class_name('User')
+        .with_foreign_key('user_id')
     end
 
     it 'belongs to practitioner' do
@@ -64,6 +65,18 @@ describe Recommendation do
 
     it 'delegates longitude to practitioner' do
       expect(subject).to delegate_method(:longitude).to(:practitioner)
+    end
+
+    it 'delegates fullname to practitioner' do
+      expect(subject).to delegate_method(:fullname).to(:practitioner).with_prefix(true)
+    end
+
+    it 'delegates fullname to recommender' do
+      expect(subject).to delegate_method(:fullname).to(:recommender).with_prefix(true)
+    end
+
+    it 'delegates name to profession' do
+      expect(subject).to delegate_method(:name).to(:profession).with_prefix(true)
     end
   end
 
@@ -123,6 +136,22 @@ describe Recommendation do
       subject.state = 'step_one'
 
       expect(subject.should_index?).to eq false
+    end
+  end
+
+  describe '#patient_type_name' do
+    context 'exists' do 
+      let(:subject) { build_stubbed :recommendation }
+  
+      it 'returns patient_type name' do
+        expect(subject.patient_type_name).to eq(subject.patient_types.first.name)
+      end
+    end
+
+    context 'does NOT exist' do
+      it 'returns Nothing' do
+        expect(subject.patient_type_name).to eq(Monadic::Nothing)
+      end
     end
   end
 end

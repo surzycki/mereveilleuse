@@ -18,7 +18,7 @@ end
 
 PREFIXES = ['dr','madame','monsieur']
 
-decoded.each do |data|
+decoded.sample(100).each do |data|
   begin
     
     if data[0].present?
@@ -112,11 +112,12 @@ unless Rails.env.production?
   puts '-- creating generic users...'
   users = Array.new(USER_COUNT) {
     user = User.create()
-    user.facebook_id  = rand.to_s[2..11]
-    user.firstname    = Forgery(:name).first_name
-    user.lastname     = Forgery(:name).last_name
-    user.email        = Forgery(:internet).email_address
-    user.location     = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+    user.facebook_id   = rand.to_s[2..11]
+    user.profile_image = 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p200x200/11048272_10152899386389495_4816823952488602691_n.jpg?oh=4b6cecd2f0fa443344ac295183b109e6&oe=55A3BDD1&__gda__=1434000297_0c5a7ac3f49cfca954338920bad8178c'
+    user.firstname     = Forgery(:name).first_name
+    user.lastname      = Forgery(:name).last_name
+    user.email         = Forgery(:internet).email_address
+    user.location      = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
     user.save
   }
 

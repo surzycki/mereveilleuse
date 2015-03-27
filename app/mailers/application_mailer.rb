@@ -1,5 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
-   include Roadie::Rails::Automatic
+  include Roadie::Rails::Automatic
+  
+  helper MailerHelper
    
   default from: 'team@mereveilleuse.com'
   

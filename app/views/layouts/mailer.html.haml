@@ -26,25 +26,54 @@
                 %td
                   %table.row.header
                     %tr
-                      %td.wrapper
+                      %td.wrapper.last
                         %table.twelve.columns
                           %tr
                             %td.center
                               %center
-                                %b
-                                  mèreveilleuse
-                                com
+                                = image_tag 'logo-badge.jpg', class: 'center'
+                                %br
+                                = image_tag 'group-of-mothers.jpg', class: 'center'
                             %td.expander
       
                   = yield
-                  
-            %table.row.footer
+            
+            %table.container.footer     
               %tr
-                %td.wrapper.last
-                  %table.twelve.columns
+                %td
+                  %table.row
                     %tr
-                      %td.center
-                        %center
-                          Footer
-                      %td.expander
-
+                      %td.wrapper.last
+                        %table.twelve.columns
+                          %tr
+                            %td.center
+                              %center
+                                %hr
+                                This email was to #{@user.email}. #{ link_to 'Click here to unsubscribe', '#' }
+                  %table.row
+                    %tr    
+                      %td.wrapper.last
+                        %table.twelve.columns  
+                          %tr
+                            %td.two.sub-columns.center 
+                              
+                            %td.two.sub-columns.center 
+                              %i.icon-lg.icon-square.background-google.color-light
+                                = link_to '#' do
+                                  = image_tag 'social-icons-google.png'
+                            %td.two.sub-columns.center
+                              %i.icon-lg.icon-square.background-twitter.color-light
+                                = link_to '#' do
+                                  = image_tag 'social-icons-twitter.png'
+                            %td.two.sub-columns.center 
+                              %i.icon-lg.icon-square.background-facebook.color-light
+                                = link_to '#' do
+                                  = image_tag 'social-icons-facebook.png'
+                            %td.two.sub-columns.center 
+                              %i.icon-lg.icon-square.background-instagram.color-light
+                                = link_to '#' do
+                                  = image_tag 'social-icons-instagram.png'
+                            %td.two.sub-columns.center 
+                              
+                            %td.expander 
+                                          

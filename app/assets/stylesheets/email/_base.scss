@@ -1,0 +1,24 @@
+body {
+  //background-color: #FF00FF;
+}
+
+img {
+  float: none !important;
+}
+
+table.container {
+  display:block !important;
+  max-width:580px !important;
+  width: 580px;
+  padding: 10px;
+  margin:0 auto !important; /* makes it centered */
+  clear:both !important;
+  background-color: $light-color;
+}
+
+i {
+  font-style: normal;
+}
+
+
+

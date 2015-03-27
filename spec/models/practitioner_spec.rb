@@ -60,10 +60,11 @@ describe Practitioner do
         .dependent(:destroy)
     end
 
-    it 'has many references through recommendations' do
-      expect(subject).to have_many(:references)
+    it 'has many recommenders through recommendations' do
+      expect(subject).to have_many(:recommenders)
         .through(:recommendations)
-        .source(:user)
+        .source(:recommender)
+        .class_name('User')
     end
 
     it 'has one location' do
