@@ -3,25 +3,32 @@
 %html{html_attrs('fr')}
   %head
     %title
-      MèreVeilleuse  
-    
     = stylesheet_link_tag :application, media: 'screen'
     
     %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0'}
     %meta{charset: 'utf-8'}
+    
+    %meta{ property: 'og:title',       content: t('open_graph.title') }
+    %meta{ property: 'og:description', content: t('open_graph.description') }
+    %meta{ property: 'og:site_name',   content: t('open_graph.site_name') }
+    
+
 
     %link(href='http://canvas.merevielleuse.com/' rel='canonical')
     = favicon_link_tag 'favicon.ico'
-    
+     
     = csrf_meta_tags
 
     <!--[if lt IE 9]>
     = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     <![endif]-->
    
-  %body
-    = render 'shared/header'
+  %body{ class: apply_blur? }
+    = render 'shared/facebook_javascript_sdk' unless Rails.env.test?
+    = render 'shared/flash'
     = yield
-
+    = render 'shared/footer'
+     
+    = javascript_include_tag "//maps.googleapis.com/maps/api/js?v=3.exp&key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places&sensor=false"
     = javascript_include_tag :application

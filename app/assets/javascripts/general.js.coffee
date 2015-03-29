@@ -1,5 +1,12 @@
 $ ->
   
+  $('#skippr').skippr
+    childrenElementType: 'img'
+    navType: 'bubble'
+    arrows: false
+    autoPlay: true
+    autoPlayDuration: 7000
+
   onLearnMore = (e) ->
     e.preventDefault()
     console.log 'learning more'

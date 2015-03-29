@@ -49,6 +49,124 @@
   padding-right: 0 !important;
 }
 
+/*doc
+---
+title: Responsive Helpers
+name: helpers-1
+category: helpers
+---
+
+Helpers that are triggered by media queries, these are **NOT** device specific helpers (i.e. a desktop device can trigger a mobile responsive helper)
+
+
+```haml_example
+
+.desktop-text-left
+  .label.label-success desktop text-left
+.desktop-text-center
+  .label.label-success desktop text-center
+.desktop-text-right
+  .label.label-success desktop text-right
+
+.devices-text-left
+  .label.label-success devices text-left
+.devices-text-center
+  .label.label-success devices text-center
+.devices-text-right
+  .label.label-success devices text-right
+
+.tablet-text-left
+  .label.label-success tablet text-left
+.tablet-text-center
+  .label.label-success tablet text-center
+.tablet-text-right
+  .label.label-success tablet text-right
+
+.mobile-text-left
+  .label.label-success mobile text-left
+.mobile-text-center
+  .label.label-success mobile text-center
+.mobile-text-right
+  .label.label-success mobile text-right
+```
+Available helpers for: `mobile` `tablet` `devices` `desktop` 
+
+| Helper              | Description
+|:--------------------|:----------
+| `*-text-left`       | Aligns text to the left       
+| `*-text-center`     | Aligns text to the center  
+| `*-right-center`    | Aligns text to the right  
+| `*-left`            | Floats to the left
+| `*-no-float`        | No floats
+| `*-center`          | Centers with margins
+| `*-right`           | Floats to the right
+| `*-block`           | Display to block
+| `*-inline`          | Display to inline
+| `*-inline-block`    | Display to inline-block
+| `*-no-margin`       | Removes all margins
+| `*-no-padding`      | Removes all padding
+| `*-no-top`          | Removes top
+| `*-no-gutter`       | Removes left / right padding
+| `*-no-left-padding` | Removes left padding
+| `*-no-right-padding`| Removes right padding
+| `*-no-space`        | Removes spacer helper
+| `*-no-background`   | Sets background to transparent
+| `no-*`              | Sets display to none
+| `show-*`            | Sets display to block
+| `*-light`           | Sets font to light weight
+| `*-normal`          | Sets font to normal weight
+| `*-bold`            | Sets font to bold weight
+| `*-bolder`          | Sets font to bolder weight
+| `*-boldest`         | Sets font to boldest weight
+*/
+@mixin responsive-helpers($responsive-type) {
+  .#{$responsive-type}-text-left        { text-align: left !important; }
+  .#{$responsive-type}-text-right       { text-align: right !important; }
+  .#{$responsive-type}-text-center      { text-align: center !important; }
+      
+  .#{$responsive-type}-left             { float: left !important; }
+  .#{$responsive-type}-right            { float: right !important; }
+  .#{$responsive-type}-no-float         { float: none !important; }
+  .#{$responsive-type}-center           { margin-left: auto !important; margin-right: auto !important; }
+  
+  .#{$responsive-type}-block            { display: block !important; width: 100% !important; }
+  .#{$responsive-type}-inline           { display: inline !important; }
+  .#{$responsive-type}-inline-block     { display: inline-block !important; }
+      
+  .#{$responsive-type}-no-margin        { margin: 0 !important; }
+  .#{$responsive-type}-no-padding       { padding: 0 !important; }
+  .#{$responsive-type}-no-top           { top: 0 !important; }
+
+  .#{$responsive-type}-no-gutter        { padding-left: 0 !important; padding-right: 0 !important; }
+  .#{$responsive-type}-no-left-padding  { padding-left: 0 !important; }
+  .#{$responsive-type}-no-right-padding { padding-right: 0 !important; }
+  
+
+  .#{$responsive-type}-no-space         { height: 0px !important; }
+  .#{$responsive-type}-no-background    { background-color: $transparent-color !important; background-image: none !important; }
+
+  .no-#{$responsive-type}               { display: none !important; }
+  .show-#{$responsive-type}             { display: block !important; }
+
+  .#{$responsive-type}-light            { font-weight: 100 !important; }
+  .#{$responsive-type}-normal           { font-weight: 300 !important; }
+  .#{$responsive-type}-bold             { font-weight: 400 !important; }
+  .#{$responsive-type}-bolder           { font-weight: 600 !important; }
+  .#{$responsive-type}-boldest          { font-weight: 800 !important; }
+}
+
+@media (min-width: $screen-md-min) {
+  @include responsive-helpers('desktop');
+}
+
+@media (max-width: $screen-sm-max) {
+  @include responsive-helpers('devices');
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  @include responsive-helpers('tablet');
+}
+
 
 @mixin border-radius($radius) {
   @include border-top-radius($radius);

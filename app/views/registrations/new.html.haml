@@ -1,81 +1,88 @@
 %section.cover.cover-landing 
-  .jumbotron-transparent.text-center.no-top-padding
-    = render 'navs/main'
-    
-    .space-xs-50
-
-    .row
-      .col-sm-8.col-sm-offset-2
-        %h2= t('header.registrations.title_html') 
-        %p.normal= t('header.registrations.subtitle')
-
-    .space-xs-30
-
-    .row
-      .col-sm-4.col-sm-offset-2
-        = link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block'
-      .col-sm-4
-        = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'learn-more'
-
-    .space-xs-90
+  .container
+    .jumbotron-transparent.text-center.no-top-padding  
+      = render 'navs/main'
+      
+      .space-xs-50
+  
+      .row
+        .col-sm-8.col-sm-offset-2
+          %h2= t('header.registrations.title_html') 
+          %p.normal= t('header.registrations.subtitle')
+  
+      .space-xs-30
+  
+      .row
+        .col-sm-4.col-sm-offset-2
+          = link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block'
+        .col-sm-4
+          = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'learn-more'
+  
+      .space-xs-90
 
 %section.text-center#learn-more-section
-  .jumbotron.jumbotron-transparent
-    .space-xs-10
-
-    %h1= t('registrations.how.title')  
-
-    .space-xs-40
-
-    .row
-      .col-sm-4
-        .showcase
-          %i.icon-round.icon-xl.icon-community.background-secondary.thick-secondary-shadow
-          %dl
-            %dt= t('registrations.how.showcase.one.title')
-            %dd= t('registrations.how.showcase.one.content')
-
-      .col-sm-4
-        .showcase
-          %i.icon-round.icon-xl.icon-search.background-secondary.thick-secondary-shadow
-          %dl
-            %dt= t('registrations.how.showcase.two.title')
-            %dd= t('registrations.how.showcase.two.content')
-
-      .col-sm-4
-        .showcase
-          %i.icon-round.icon-xl.icon-recommend.background-secondary.thick-secondary-shadow
-          %dl
-            %dt= t('registrations.how.showcase.three.title')
-            %dd= t('registrations.how.showcase.three.content')
-    
-    .space-xs-10        
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+  
+      %h1= t('registrations.how.title')  
+  
+      .space-xs-40
+  
+      .row
+        .col-sm-4
+          .showcase
+            = image_tag ('icon-community.png')
+            %dl
+              %dt= t('registrations.how.showcase.one.title')
+              %dd= t('registrations.how.showcase.one.content')
+  
+        .col-sm-4
+          .showcase
+            = image_tag ('icon-search.png')
+            %dl
+              %dt= t('registrations.how.showcase.two.title')
+              %dd= t('registrations.how.showcase.two.content')
+  
+        .col-sm-4
+          .showcase
+            = image_tag ('icon-recommend.png')
+            %dl
+              %dt= t('registrations.how.showcase.three.title')
+              %dd= t('registrations.how.showcase.three.content')
+      
+      .space-xs-10        
 
 %section.text-center
   .jumbotron
-    %h1= t('registrations.example.title')
-    %h3.normal= t('registrations.example.subtitle')
-
-    .row
-      .col-sm-8.col-sm-offset-2
-        .browser-mockup.browser-mockup-with-url
-          = image_tag 'http://placehold.it/580x400/fff/eee', class: 're'
+    .container
+      %h1= t('registrations.example.title')
+      %h3.normal= t('registrations.example.subtitle')
+  
+      .row
+        .col-sm-8.col-sm-offset-2
+          .browser-mockup.browser-mockup-with-url
+            #skippr
+              = image_tag 'http://placehold.it/480x400/fff/eee'
+              = image_tag 'http://placehold.it/480x400/fff/eee'
+            
 
 %section.text-center
   .jumbotron.jumbotron-primary
-    .space-xs-20
-
-    .row
-      .col-sm-8.col-sm-offset-2
-        %h1= t('registrations.join_now.title')
-    .row
-      .col-sm-10.col-sm-offset-1
-        %p= t('registrations.join_now.content')
-    
-    .space-xs-30
-
-    .row
-      .col-sm-6.col-sm-offset-3
-        = link_to t('registrations.join_now.action'), new_recommendation_path, class: 'btn btn-alternate btn-block btn-outline'
-
-    .space-xs-60
+    .container
+      .space-xs-20
+  
+      .row
+        .col-sm-8.col-sm-offset-2
+          %h1= t('registrations.join_now.title')
+      .row
+        .col-sm-10.col-sm-offset-1
+          %p= t('registrations.join_now.content')
+      
+      .space-xs-30
+  
+      .row
+        .col-sm-6.col-sm-offset-3
+          = link_to t('registrations.join_now.action'), new_recommendation_path, class: 'btn btn-alternate btn-block btn-outline'
+  
+      .space-xs-60  

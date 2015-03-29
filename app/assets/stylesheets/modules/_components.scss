@@ -34,6 +34,9 @@ parent: components
   margin: 2em;
   background-color: $light-color;
   border-color: #ddd;
+  width: 80%;
+  height: 400px;
+  display: inline-block;
 
   img {
     width: 100%;

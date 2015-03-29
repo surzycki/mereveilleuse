@@ -1,0 +1,60 @@
+/*doc
+---
+title: Footer
+name: footer
+category: footer
+---
+
+```haml_example
+%footer
+  .container
+    .row
+      .col-md-6.desktop-text-left
+        .footer-item
+          %a{ href: '#', class: 'btn btn-square'}
+            %i.icon-facebook
+        
+          %a{ href: '#', class: 'btn btn-square'}
+            %i.icon-youtube
+      
+          %a{ href: '#', class: 'btn btn-square'}
+            %i.icon-twitter
+      .col-md-6.desktop-text-right
+        .footer-item
+          &copy; 2014 therapeutes.com Tous droits reserves.
+            
+```
+*/
+
+footer {
+  position: relative;
+  clear: both;
+  background-color: $primary-color;
+  color: $light-color ;
+  font-weight: 300;
+  text-align: center;
+  padding: 10px 0;
+  height: $footer-height;
+
+  @include breakpoint($desktop) {
+    padding: 0;
+  }
+}
+
+.footer-item {
+  position: relative;
+  display: block;
+  height: $footer-height / 2;
+  line-height: $footer-height / 2;
+  font-size: 12px;
+
+  a {
+    padding: 0 10px;
+    color: $light-color;
+  }
+
+  @include breakpoint($desktop) {
+    height: $footer-height;
+    line-height: $footer-height;
+  } 
+}

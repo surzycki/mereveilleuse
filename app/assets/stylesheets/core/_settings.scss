@@ -7,8 +7,8 @@
 
 // ----- Base Colors ----- //
 $primary-color:               #f16272; 
-$secondary-color:             #61c6ec; 
-$alternate-color:             #000000;
+$secondary-color:             #2fc1f8; 
+$alternate-color:             #f7f7f7;
 $minor-color:                 #000000; 
   
 $information-color:           #f2cc62;
@@ -21,11 +21,11 @@ $dark-color:                  #333333;
 $muted-color:                 #666666;
   
 $primary-action-color:        #f16272;
-$secondary-action-color:      #61c6ec;
-$alternate-action-color:      #ffffff;
+$secondary-action-color:      #2fc1f8;
+$alternate-action-color:      #f7f7f7;
 
-$primary-background-color:    #ffffff;
-$secondary-background-color:  #333333;
+$primary-background-color:    #f7f7f7;
+$secondary-background-color:  #ffffff;
 
 $heading-color:               #555555;
 
@@ -50,3 +50,7 @@ $input-height-base:                  36px;
 
 $font-family-sans-serif:             'Open Sans', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 $font-family-serif:                 'Merriweather', serif;   
+
+// ----- Custom Settings ----- //
+
+$footer-height:                      30px;

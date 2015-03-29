@@ -54,14 +54,16 @@ All colors are have a `background-` or `color-` helper.
   }
 }
 
-@include contextual-helper('primary',   $primary-color);
-@include contextual-helper('secondary', $secondary-color);
-@include contextual-helper('alternate', $alternate-color);
-@include contextual-helper('minor',     $minor-color);
-
-@include contextual-helper('light',     $light-color);
-
-@include contextual-helper('google',    $google-color);
-@include contextual-helper('twitter',   $twitter-color);
-@include contextual-helper('facebook',  $facebook-color);
-@include contextual-helper('instagram', $instagram-color);
+@include contextual-helper('primary',             $primary-color);
+@include contextual-helper('secondary',           $secondary-color);
+@include contextual-helper('alternate',           $alternate-color);
+@include contextual-helper('minor',               $minor-color);
+  
+@include contextual-helper('primary-background',  $primary-background-color);
+  
+@include contextual-helper('light',               $light-color);
+  
+@include contextual-helper('google',              $google-color);
+@include contextual-helper('twitter',             $twitter-color);
+@include contextual-helper('facebook',            $facebook-color);
+@include contextual-helper('instagram',           $instagram-color);

@@ -74,7 +74,7 @@ parent: button
 
   &:focus, &:hover, &:active, &:active:focus {
     border-color: $primary-action-color;
-    background-color: lighten($primary-action-color,10%);
+    background-color: darken($primary-action-color,5%);
     color: $light-color;
   }
 }

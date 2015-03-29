@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources :registrations,   only: [ :new, :create, :show ]
   
   get 'practitioners/autocomplete',   to: 'practitioners#autocomplete', as: 'practitioners_autocomplete', constraints: { format: 'json' }
+  
   get 'conditions-generales',         to: 'static_pages#conditions',    as: 'conditions'
+  get 'mentions-legales',             to: 'static_pages#legal',         as: 'legal'
   get 'politique-de-confidentialite', to: 'static_pages#privacy',       as: 'privacy'
 
   # custom error pages

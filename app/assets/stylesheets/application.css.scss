@@ -19,7 +19,7 @@
 @import 'breakpoint';
 @import 'bootstrap';
 @import 'typeahead';
-@import 'jquery.remodal';
+@import 'jquery.skippr';
 
 @import 'core/base';
 @import 'core/helpers';
@@ -35,6 +35,7 @@
 @import 'modules/buttons';
 @import 'modules/flash_notifications';
 @import 'modules/modal';
+@import 'modules/footer';
 
 @import 'theme';
 @import 'inbox';

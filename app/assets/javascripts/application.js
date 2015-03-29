@@ -16,7 +16,7 @@
 //= require typeahead
 //= require typeahead-addresspicker
 //= require pubsub
-// require jquery.scrollTo
+//= require jquery.skippr
 
 // shim for phantomjs < 2.0.0 and react (for circleci)
 //= require es5-shim                

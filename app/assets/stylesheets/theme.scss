@@ -9,4 +9,12 @@
   box-shadow: 2px 1px 0px 2px darken($secondary-action-color,25%);
 }
 
+#skippr {
+  .skippr-nav-element-active {
+    background-color: $heading-color !important;
+  }
 
+  .skippr-nav-element-bubble {
+    background-color: $primary-background-color;
+  }
+}

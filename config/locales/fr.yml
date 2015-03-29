@@ -54,6 +54,12 @@ fr:
     general: Quelque chose a mal tourné
     address_parser:  introuvable
 
+  footer: 
+    legal: Mentions légales
+    conditions: Conditions d'utilisation
+
+  customer_service: Services clients 
+
   nav:
     main:
       blog: blog

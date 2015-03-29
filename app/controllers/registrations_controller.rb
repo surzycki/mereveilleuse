@@ -3,7 +3,6 @@ class RegistrationsController < ApplicationController
 
   # GET registrations/new
   def new
-    
   end 
 
   def catch_exceptions
