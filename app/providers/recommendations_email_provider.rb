@@ -1,5 +1,11 @@
 class RecommendationsEmailProvider
+  attr_reader :delay
+
+  def initialize(delay = 1.seconds)
+    @delay = delay
+  end
+  
   def execute(search)
-    RecommendationsEmailJob.set(wait: 1.minutes).perform_later(search)
+    RecommendationsEmailJob.set(wait: delay).perform_later(search)
   end
 end

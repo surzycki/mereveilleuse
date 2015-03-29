@@ -44,33 +44,22 @@
                   %center
                     %table.container.background-transparent.no-vertical-padding
                       %tr
-                        %td.wrapper.no-gutter
-                          %table.two.columns
-                            %tr
-                              %td.center
-                              %td.expander
-                        %td.wrapper.last
+                        %td.wrapper.offset-by-one.last
                           %table.ten.columns
                             %tr
                               %td
                                 %h2.bold.no-margin
                                   #{ @recommendation.practitioner_fullname }
                                 %h4.no-margin
-                                  #{ @recommendation.profession_name } for a #{ @recommendation.patient_type_name }
+                                  #{ @recommendation.profession_name } pour a #{ @recommendation.patient_type_name }
                                 %p.no-margin
                                   #{ @recommendation.address }
 
                               %td.expander 
                     
                     %table.container.background-transparent.no-vertical-padding
-                      %tr
-                        %td.wrapper.no-gutter
-                          %table.two.columns
-                            %tr
-                              %td.center
-                              %td.expander
-                        
-                        %td.wrapper.last.no-vertical-padding
+                      %tr      
+                        %td.wrapper.last.offset-by-one.no-vertical-padding
                           %table.ten.columns
                             %tr
                               %td
@@ -79,12 +68,7 @@
 
                     %table.container.background-transparent.no-vertical-padding
                       %tr
-                        %td.wrapper.no-gutter
-                          %table.two.columns
-                            %tr
-                              %td.center
-                              %td.expander
-                        %td.wrapper.last.no-vertical-padding
+                        %td.wrapper.last.offset-by-one.no-vertical-padding
                           %table.ten.columns
                             %tr
                               %td.three.sub-columns.center
@@ -110,13 +94,7 @@
 
                     %table.container.background-transparent
                       %tr
-                        %td.wrapper.no-gutter
-                          %table.two.columns
-                            %tr
-                              %td.center
-                              %td.expander
-                        
-                        %td.wrapper.no-vertical-padding
+                        %td.wrapper.no-vertical-padding.offset-by-one
                           %table.five.columns
                             %tr
                               %td
@@ -137,13 +115,13 @@
                   %table.twelve.columns
                     %tr
                       %td.panel
-                        Mereveilluse works well when we give back to the community.  If you found this recommendation helpful. Please help out another mother and leave an good recommendation for your favorite practitioner
+                        Votre contribution est importante pour la communauté MèreVeilleuse. Si vous êtes satisfaite de cette recommandation, merci d'aider les autres MèreVeilleuses mamans en laissant une recommandation sur vos meilleurs professionnels de santé. Merci, vous êtes MèreVeilleuse.
                         
                         %br
                         %br
                         
                         = link_to '#', class: 'btn btn-primary btn-block' do
-                          Recommend a specialist 
+                          Recommender un professionnel de santé. 
               
                       %td.expander  
                   
@@ -156,13 +134,13 @@
                     %tr
                       %td.panel.panel-no-padding
                         %b.small
-                          Found what you were looking for?  
+                          Satisfaite de votre recherche ?  
                         
                         .small
-                          Don't need anymore emails for a(n) #{@search.profession_name} for a #{@search.patient_type_name} near #{@search.address} ?
+                          Vous ne souhaitez plus recevoir de nouvelle alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?
                         %br  
                         = link_to '#', class: 'btn btn-alternate btn-block btn-sm' do
-                          Cancel my search, I am not looking anymore.
+                          Je ne cherche plus.
                        
                       %td.expander 
 
@@ -177,7 +155,7 @@
                             %td.center
                               %hr
                               .small
-                                This email was to #{@user.email}. #{ link_to 'Click here to unsubscribe', '#' }
+                                Cet email a été envoyé à #{@user.email}. #{ link_to 'Cliquez ici pour vous désinscrire.', '#' }  
                   %table.row
                     %tr    
                       %td.wrapper.last

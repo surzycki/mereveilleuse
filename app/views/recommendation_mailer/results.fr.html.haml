@@ -6,10 +6,12 @@
           %td
             %center
               %h2.center
-                #{ @recommender.fullname } recommended a(n) 
+                %b
+                  #{ @recommender.fullname } 
+                a recommendé un(e) 
                 %b
                   #{ @recommendation.profession_name } 
-                for a
+                pour
                 %b
                   = @recommendation.patient_type_name
           
@@ -30,14 +32,13 @@
         %tr
           %td
             %h4
-              You are searching for an #{@search.profession_name}
+              Vous êtes à la recherche d'un(e) #{@search.profession_name}
             %p
-              We have found someone who has recommended to you a(n) #{@search.profession_name} for a #{@search.patient_type_name} near #{@search.address}
+              Une MèreVeilleuse maman a recommandé un(e) #{ @search.profession_name.downcase } pour toute consultation destinée à #{@search.patient_type_name.downcase}, et près de chez vous, au #{@search.address}.
                  
           %td.expander  
 
 %hr
-
 
 %table.row.content
   %tr
@@ -54,22 +55,21 @@
         %tr
           %td
             %h4
-              #{@recommender.fullname} recommended
+              #{@recommender.fullname} recommendé
             
             %p
-              I recommend the #{@recommendation.profession_name} 
-              %b
-                #{@recommendation.practitioner_fullname} 
-              with an overall note of 
+              Je recommande le #{@recommendation.profession_name.downcase} avec une note gobale de
               %b
                 #{ @recommendation.rating }.  
-              Julie has great bedside manner.
+              
             
             %p
               #{@recommendation.comment}
             
             %p
-              Here are Julie’s contact details.
+              Voici les coordonnées de 
+              %b
+                #{@recommendation.practitioner_fullname}.
           
           %td.expander  
 

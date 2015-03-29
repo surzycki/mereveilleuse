@@ -10,7 +10,7 @@ module MailerHelper
     }.merge(options)
  
     query_string =  params.map{|k,v| "#{k}=#{v}"}.join("&")
-    image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string}", alt: location.address
+    image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string}", alt: location.address, class: 'center'
   end
 
   def rating_image(rating)

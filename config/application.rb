@@ -66,7 +66,7 @@ module AppFacebook
       enable_starttls_auto: true
     }
     config.action_mailer.default_url_options = { host: ENV['MEREVEILLEUSE_HOST'] }
-    config.action_mailer.asset_host = ENV['MEREVEILLEUSE_HOST']
-
+  
+    config.roadie.url_options = { host: ENV['MEREVEILLEUSE_HOST'], scheme: ENV['MEREVEILLEUSE_PROTOCOL'] }
   end
 end

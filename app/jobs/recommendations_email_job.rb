@@ -11,7 +11,7 @@ class RecommendationsEmailJob < ActiveJob::Base
       RecommendationMailer.results(search, results).deliver_later
       
       # reschedule email
-      RecommendationsEmailProvider.new.tap do |provider|
+      RecommendationsEmailProvider.new(1.minutes).tap do |provider|
         provider.execute search
       end
     end
