@@ -64,7 +64,8 @@ All colors are have a `background-` or `color-` helper.
 
   
 @include contextual-helper('light',               $light-color);
-  
+@include contextual-helper('transparent',         $transparent-color);
+
 @include contextual-helper('google',              $google-color);
 @include contextual-helper('twitter',             $twitter-color);
 @include contextual-helper('facebook',            $facebook-color);

@@ -15,10 +15,17 @@
 
 @import 'bourbon';
 @import 'ink';
-@import 'bootstrap';
+
+@import 'email/breakpoints';
+
 @import 'core/settings';
 @import 'core/helpers';
-
 @import 'modules/colors';
 
-@import 'email//*';
+@import 'email/base';
+@import 'email/layout';
+@import 'email/typography';
+@import 'email/icons';
+@import 'email/components';
+@import 'email/buttons';
+

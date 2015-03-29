@@ -1,15 +1,20 @@
-= render 'navs/submenu', active: 'search'
-
-.space-xs-20
-
 %section
-  .container-fluid
+  = render 'navs/submenu', active: 'none'
+
+  .container
     .row
-      .col-sm-8.col-sm-offset-2.text-center
-        %h1= t('search.success.title')
-        %h4= t('search.success.subtitle')
-        
+      .col-sm-10.col-sm-offset-1.text-center
         .space-xs-40
-        
+        .panel.panel-display
+          .panel-body
+            %h3.no-margin= t('search.success.title')
+            .space-xs-10
+            %h4.no-margin= t('search.success.subtitle')
+      
+            .space-xs-30
+            = image_tag 'icon-email.png'
+            .space-xs-30
+      
         = link_to t('search.success.action'), '#', class: 'btn btn-primary btn-block', id: 'share'
         %p.small= t('search.success.information')
+    .space-xs-60 

@@ -56,6 +56,10 @@ class Practitioner < ActiveRecord::Base
     Maybe(location).geocoded?._ == true
   end
 
+  def contact_phone
+    self.mobile_phone || self.phone || nil
+  end
+
   private
   def set_uuid
     self.uuid ||= SecureRandom.uuid rescue nil

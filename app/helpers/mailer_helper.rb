@@ -1,8 +1,4 @@
 module MailerHelper
-  def hello
-    'hello'
-  end
-
   def static_map_for(location, options = {})
     
     params = {
@@ -15,5 +11,13 @@ module MailerHelper
  
     query_string =  params.map{|k,v| "#{k}=#{v}"}.join("&")
     image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string}", alt: location.address
+  end
+
+  def rating_image(rating)
+    if rating > 3
+      "#{rating}-rating-checked.png"
+    else
+      "#{rating}-rating-hover.png"
+    end
   end
 end

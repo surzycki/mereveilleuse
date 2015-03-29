@@ -69,7 +69,7 @@ ActiveAdmin.register_page "Dashboard" do
             end
 
             column 'Mother' do |recommendation|
-              link_to_user recommendation.user
+              link_to_user recommendation.recommender
             end
   
             column 'Created' do |recommendation|

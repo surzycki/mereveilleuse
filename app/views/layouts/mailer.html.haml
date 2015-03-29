@@ -38,6 +38,119 @@
       
                   = yield
             
+            %table.row.background-primary-background
+              %tr
+                %td.center
+                  %center
+                    %table.container.background-transparent.no-vertical-padding
+                      %tr
+                        %td.wrapper.no-gutter
+                          %table.two.columns
+                            %tr
+                              %td.center
+                              %td.expander
+                        %td.wrapper.last
+                          %table.ten.columns
+                            %tr
+                              %td
+                                %h2.bold.no-margin
+                                  #{ @recommendation.practitioner_fullname }
+                                %h4.no-margin
+                                  #{ @recommendation.profession_name } for a #{ @recommendation.patient_type_name }
+                                %p.no-margin
+                                  #{ @recommendation.address }
+
+                              %td.expander 
+                    
+                    %table.container.background-transparent.no-vertical-padding
+                      %tr
+                        %td.wrapper.no-gutter
+                          %table.two.columns
+                            %tr
+                              %td.center
+                              %td.expander
+                        %td.wrapper.last.no-vertical-padding
+                          %table.ten.columns
+                            %tr
+                              %td
+                                = static_map_for @recommendation, size: '480x240'
+                              %td.expander   
+
+                    %table.container.background-transparent.no-vertical-padding
+                      %tr
+                        %td.wrapper.no-gutter
+                          %table.two.columns
+                            %tr
+                              %td.center
+                              %td.expander
+                        %td.wrapper.last.no-vertical-padding
+                          %table.ten.columns
+                            %tr
+                              %td.three.sub-columns.center
+                                %label.center{ class: ('bold' if @recommendation.bedside_manner > 3 ) }
+                                  = t('rating.form.bedside_manner.label')
+                                = image_tag rating_image(@recommendation.bedside_manner), class: 'center rating'
+                              
+                              %td.three.sub-columns.center
+                                %label.center{ class: ('bold' if @recommendation.efficacy > 3 ) }
+                                  = t('rating.form.efficacy.label')
+                                = image_tag rating_image(@recommendation.efficacy), class: 'center rating'
+                              
+                              %td.three.sub-columns.center
+                                %label.center{ class: ('bold' if @recommendation.availability > 3 ) }
+                                  = t('rating.form.availability.label')
+                                = image_tag rating_image(@recommendation.availability), class: 'center rating' 
+                              
+                              %td.three.sub-columns.center.last
+                                %label.center{ class: ('bold' if @recommendation.wait_time > 3 ) }
+                                  = t('rating.form.wait_time.label')
+                                = image_tag rating_image(@recommendation.wait_time), class: 'center rating' 
+                              %td.expander    
+
+                    %table.container.background-transparent
+                      %tr
+                        %td.wrapper.no-gutter
+                          %table.two.columns
+                            %tr
+                              %td.center
+                              %td.expander
+                        
+                        %td.wrapper.no-vertical-padding
+                          %table.five.columns
+                            %tr
+                              %td
+                                = link_to t('email.recommendation.email_address'), "mailto:#{@recommendation.email}", class: 'btn btn-secondary btn-block btn-sm' 
+                              %td.expander
+                        
+                        %td.wrapper.last.no-vertical-padding
+                          %table.five.columns
+                            %tr
+                              %td
+                                = link_to @recommendation.contact_phone, class: 'btn btn-secondary btn-block btn-sm' do
+                                  = @recommendation.contact_phone
+                              %td.expander
+
+            %table.container
+              %tr
+                %td.wrapper.no-gutter
+                  %table.two.columns
+                    %tr
+                      %td.center
+                        %center
+                          
+                      %td.expander
+                
+                %td.wrapper.last
+                  %table.ten.columns
+                    %tr
+                      %td
+                        %h4
+                          You are searching for an #{@search.profession_name}
+                        %p
+                          Four score and sever years ago, our forefather brought upon this land a great pizza, one with many toppings. A pizza so grand, so magnificent, it made the italians cry.
+                             
+                      %td.expander  
+
             %table.container.footer     
               %tr
                 %td

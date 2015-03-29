@@ -26,6 +26,7 @@ $alternate-action-color:      #a9a9a9;
 
 $primary-background-color:    #f7f7f7;
 $secondary-background-color:  #ffffff;
+$alternate-cbackground-color: #ececec;
 
 $heading-color:               #555555;
 
@@ -48,7 +49,7 @@ $navbar-default-link-hover-color:    $muted-color;
 
 $input-border-radius:                3px;
 $input-border-focus:                 $primary-action-color;
-$input-bg:                           $primary-background-color;
+$input-bg:                           $alternate-cbackground-color;
 $input-border:                       transparent;
 $input-color-placeholder:            $muted-color;
 

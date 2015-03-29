@@ -1,3 +1,15 @@
+// *************************************
+//
+//   Base
+//
+//   Base rules are the defaults. They are almost exclusively single element selectors
+//   but it could include attribute selectors, pseudo-class selectors, child selectors
+//   or sibling selectors. Essentially, a base style says that wherever this element
+//   is on the page, it should look like this.
+//
+// *************************************
+
+
 body {
   //background-color: #FF00FF;
 }
@@ -18,6 +30,14 @@ table.container {
 
 i {
   font-style: normal;
+}
+
+label {
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
 }
 
 

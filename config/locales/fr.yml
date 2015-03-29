@@ -73,6 +73,7 @@ fr:
   email: 
     recommendation:
       subject: Les %{profession} du %{address}
+      email_address: Email
 
   header:
     registrations: 

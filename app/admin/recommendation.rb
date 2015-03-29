@@ -9,14 +9,14 @@ ActiveAdmin.register Recommendation do
   filter :patient_types_id_eq,  as: :select,      collection: PatientType.order('name ASC'), label: 'Patient Type'
 
   filter :practitioner_lastname_cont, as: :string, label: 'Practitioner Lastname'
-  filter :user_lastname_cont,         as: :string, label: 'Mother Lastname'
+  filter :recommender_lastname_cont,  as: :string, label: 'Mother Lastname'
   
   filter :created_at
 
   controller do
     def edit
       recommendation = scoped_collection.find(params[:id])
-      @page_title = "#{recommendation.user.fullname} for #{recommendation.practitioner.fullname}"
+      @page_title = "#{recommendation.recommender.fullname} for #{recommendation.practitioner.fullname}"
     end
   end
 
@@ -32,7 +32,7 @@ ActiveAdmin.register Recommendation do
     end
 
     column 'Mother' do |recommendation|
-      link_to_user recommendation.user
+      link_to_user recommendation.recommender
     end
 
     column :availability
@@ -40,14 +40,14 @@ ActiveAdmin.register Recommendation do
     column :efficacy
     column :wait_time
     
-    column 'Created at' do |user|
-      I18n.l(user.created_at, format: :short_date)  
+    column 'Created at' do |recommendation|
+      I18n.l(recommendation.created_at, format: :short_date)  
     end
 
     actions
   end
 
-  show title: proc{ |recommendation| "#{recommendation.user.fullname} for #{recommendation.practitioner.fullname}" } do
+  show title: proc{ |recommendation| "#{recommendation.recommender.fullname} for #{recommendation.practitioner.fullname}" } do
     attributes_table do
       row 'Practitioner' do |recommendation|
         link_to_practitioner recommendation.practitioner
@@ -60,7 +60,7 @@ ActiveAdmin.register Recommendation do
       end
   
       row 'Mother' do |recommendation|
-        link_to_user recommendation.user
+        link_to_user recommendation.recommender
       end
   
       row :availability
@@ -69,8 +69,8 @@ ActiveAdmin.register Recommendation do
       row :wait_time
       row :comment
       
-      row 'Created at' do |user|
-        I18n.l(user.created_at, format: :short_date)  
+      row 'Created at' do |recommendation|
+        I18n.l(recommendation.created_at, format: :short_date)  
       end
     end
   end

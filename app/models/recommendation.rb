@@ -6,9 +6,11 @@ class Recommendation < ActiveRecord::Base
   belongs_to :practitioner
   belongs_to :profession
 
-  delegate :latitude,  to: :practitioner, prefix: false, allow_nil: true
-  delegate :longitude, to: :practitioner, prefix: false, allow_nil: true
-  delegate :address,   to: :practitioner, prefix: false, allow_nil: true
+  delegate :latitude,       to: :practitioner, prefix: false, allow_nil: true
+  delegate :longitude,      to: :practitioner, prefix: false, allow_nil: true
+  delegate :address,        to: :practitioner, prefix: false, allow_nil: true
+  delegate :email,          to: :practitioner, prefix: false, allow_nil: true 
+  delegate :contact_phone,  to: :practitioner, prefix: false, allow_nil: true 
 
   delegate :fullname,  to: :practitioner, prefix: true, allow_nil: true
   delegate :fullname,  to: :recommender,  prefix: true, allow_nil: true

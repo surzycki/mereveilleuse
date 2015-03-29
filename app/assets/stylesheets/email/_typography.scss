@@ -24,16 +24,24 @@ h2 {
 h3, h4 {
   font-size: 22px;
   font-weight: 600;
-  margin-bottom: 0px; 
 }
 
 h4 {
   font-size: 16px;
   margin-bottom: 6px;
+  
+  @media only screen and (max-width: 600px) {
+    margin: 0;
+  }
 }
 
 p {
   font-size: 16px;
   font-weight: normal;
+  display: inline-block;
+}
+
+.small {
+  font-size: 14px;
 }
 

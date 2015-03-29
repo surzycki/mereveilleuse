@@ -251,4 +251,38 @@ describe Practitioner do
       end
     end
   end
+
+  describe '#contact_phone' do
+    context 'when ONLY mobile present' do
+      let(:subject) { build_stubbed :practitioner, phone: '' }
+      
+      it 'returns mobile number' do
+        expect(subject.contact_phone).to eq subject.mobile_phone
+      end
+    end
+
+    context 'when mobile and fixed present' do
+      let(:subject) { build_stubbed :practitioner }
+      
+      it 'returns mobile number' do
+        expect(subject.contact_phone).to eq subject.mobile_phone
+      end
+    end
+
+    context 'when mobile not present' do
+      let(:subject) { build_stubbed :practitioner, mobile_phone: nil }
+      
+      it 'returns fixed number' do
+        expect(subject.contact_phone).to eq subject.phone
+      end
+    end
+
+    context 'when neither are present' do
+      let(:subject) { build_stubbed :practitioner, mobile_phone: nil, phone: nil }
+      
+      it 'returns fixed number' do
+        expect(subject.contact_phone).to eq subject.phone
+      end
+    end
+  end
 end

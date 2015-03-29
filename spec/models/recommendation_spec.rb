@@ -78,6 +78,14 @@ describe Recommendation do
     it 'delegates name to profession' do
       expect(subject).to delegate_method(:name).to(:profession).with_prefix(true)
     end
+
+    it 'delegates email to practitioner' do
+      expect(subject).to delegate_method(:email).to(:practitioner)
+    end
+
+    it 'delegates contact_phone to practitioner' do
+      expect(subject).to delegate_method(:contact_phone).to(:practitioner)
+    end 
   end
 
   describe '#coordinates' do

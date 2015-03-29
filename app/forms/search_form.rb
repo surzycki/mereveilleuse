@@ -40,6 +40,7 @@ class SearchForm
     # make sure we generate the md5 hash for the current attributes
     search.valid?
     # check to see if the same search is already in the database   
-    Search.where(md5_hash: search.md5_hash ).present?
+    previous_search = Search.find_by(md5_hash: search.md5_hash )
+    @search = previous_search if previous_search
   end
 end

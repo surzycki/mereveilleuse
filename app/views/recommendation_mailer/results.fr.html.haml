@@ -22,7 +22,7 @@
         %tr
           %td.center
             %center
-              = image_tag @user.profile_image, class: 'icon-round center'
+              = image_tag @user.profile_image, class: 'icon-round center profile-image'
           %td.expander
     
     %td.wrapper.last
@@ -46,7 +46,7 @@
         %tr
           %td.center
             %center
-              = image_tag @recommender.profile_image, class: 'icon-round center'
+              = image_tag @recommender.profile_image, class: 'icon-round center profile-image'
           %td.expander
     
     %td.wrapper.last
@@ -69,17 +69,3 @@
               Here are Julie’s contact details.
           %td.expander  
 
-%hr  
-
-%table.row.content
-  %tr
-    %td.center{ align: 'center' }
-      %center
-        %table.container
-          %tr
-            %td.wrapper.last
-              %table.twelve.columns
-                %tr
-                  %td
-                    = static_map_for @recommendation
-                  %td.expander
