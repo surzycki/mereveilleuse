@@ -17,7 +17,7 @@ a {
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857143;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -37,6 +37,20 @@ a {
   }
 }
 
+.btn-primary {
+  border-bottom-width: 3px;
+  border-top: 0;
+  border-color: darken($primary-action-color,20%);
+  background-color: $primary-action-color;
+  color: $light-color !important;
+
+  &:focus, &:hover, &:active, &:active:focus {
+    border-color: $primary-action-color;
+    background-color: darken($primary-action-color,5%);
+    color: $light-color !important;;
+  }
+}
+
 .btn-secondary {
   border-bottom-width: 3px;
   border-top: 0;
@@ -51,9 +65,25 @@ a {
   }
 }
 
+.btn-alternate {
+  border-bottom-width: 3px;
+  border-top: 0;
+  border-color: darken($alternate-action-color, 10%);
+  background-color: $alternate-action-color;
+  color: $light-color !important;
+  font-size: 13px !important;
+
+  &:focus, &:hover, &:active, &:active:focus {
+    border-color: $alternate-action-color;
+    background-color: lighten($alternate-action-color,10%);
+    color: $light-color !important;;
+  }
+}
+
 .btn-sm {
   padding-top: 12px !important;
   padding-bottom: 10px !important;
+  font-size: 14px !important;
 }
 
 .btn-block {

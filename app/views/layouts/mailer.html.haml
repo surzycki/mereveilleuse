@@ -40,7 +40,7 @@
             
             %table.row.background-primary-background
               %tr
-                %td.center
+                %td.center.results
                   %center
                     %table.container.background-transparent.no-vertical-padding
                       %tr
@@ -69,6 +69,7 @@
                             %tr
                               %td.center
                               %td.expander
+                        
                         %td.wrapper.last.no-vertical-padding
                           %table.ten.columns
                             %tr
@@ -131,25 +132,39 @@
                               %td.expander
 
             %table.container
-              %tr
-                %td.wrapper.no-gutter
-                  %table.two.columns
-                    %tr
-                      %td.center
-                        %center
-                          
-                      %td.expander
-                
+              %tr  
                 %td.wrapper.last
+                  %table.twelve.columns
+                    %tr
+                      %td.panel
+                        Mereveilluse works well when we give back to the community.  If you found this recommendation helpful. Please help out another mother and leave an good recommendation for your favorite practitioner
+                        
+                        %br
+                        %br
+                        
+                        = link_to '#', class: 'btn btn-primary btn-block' do
+                          Recommend a specialist 
+              
+                      %td.expander  
+                  
+                  %hr
+
+            %table.container
+              %tr  
+                %td.wrapper.offset-by-one.last
                   %table.ten.columns
                     %tr
-                      %td
-                        %h4
-                          You are searching for an #{@search.profession_name}
-                        %p
-                          Four score and sever years ago, our forefather brought upon this land a great pizza, one with many toppings. A pizza so grand, so magnificent, it made the italians cry.
-                             
-                      %td.expander  
+                      %td.panel.panel-no-padding
+                        %b.small
+                          Found what you were looking for?  
+                        
+                        .small
+                          Don't need anymore emails for a(n) #{@search.profession_name} for a #{@search.patient_type_name} near #{@search.address} ?
+                        %br  
+                        = link_to '#', class: 'btn btn-alternate btn-block btn-sm' do
+                          Cancel my search, I am not looking anymore.
+                       
+                      %td.expander 
 
             %table.container.footer     
               %tr
@@ -160,8 +175,8 @@
                         %table.twelve.columns
                           %tr
                             %td.center
-                              %center
-                                %hr
+                              %hr
+                              .small
                                 This email was to #{@user.email}. #{ link_to 'Click here to unsubscribe', '#' }
                   %table.row
                     %tr    

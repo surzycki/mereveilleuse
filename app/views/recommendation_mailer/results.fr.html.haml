@@ -32,7 +32,7 @@
             %h4
               You are searching for an #{@search.profession_name}
             %p
-              Four score and sever years ago, our forefather brought upon this land a great pizza, one with many toppings. A pizza so grand, so magnificent, it made the italians cry.
+              We have found someone who has recommended to you a(n) #{@search.profession_name} for a #{@search.patient_type_name} near #{@search.address}
                  
           %td.expander  
 
@@ -55,17 +55,21 @@
           %td
             %h4
               #{@recommender.fullname} recommended
+            
             %p
-              I recommend the osteopath 
+              I recommend the #{@recommendation.profession_name} 
               %b
                 #{@recommendation.practitioner_fullname} 
               with an overall note of 
               %b
                 #{ @recommendation.rating }.  
-              Julie has great bedside manner, is very punctual, and the wait time is correct.
+              Julie has great bedside manner.
+            
             %p
               #{@recommendation.comment}
+            
             %p
               Here are Julie’s contact details.
+          
           %td.expander  
 
