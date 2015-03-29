@@ -1,33 +1,34 @@
-= render 'navs/submenu', active: 'search'
-
 %section
+  = render 'navs/submenu', active: 'search'
+
   .container-fluid
     .row
-      .col-sm-12.text-center
-        %br
+      .col-sm-8.col-sm-offset-2
+        .space-xs-40
         %p= t('search.form.title')
 
-
     .row  
-      .col-sm-6.col-sm-offset-3
-        = form_for(@form, url: search_path, method: :post) do |f|
-          .form-group
-            = f.label :profession_id, t('search.form.profession.label')
-            = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
-
-          .form-group
-            = f.label :patient_type_id, t('search.form.patient_type.label')
-            = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
-      
-          .form-group
-            = f.label :address, t('search.form.address.label')
-            = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('search.form.address.placeholder')))
-           
-          .form-group
-            = f.label :information, t('search.form.information.label')
-            = f.text_area :information, class: 'form-control', rows: 8
-
-          = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
+      .col-sm-8.col-sm-offset-2
+        panel.panel-default
+          .panel-body
+          = form_for(@form, url: search_path, method: :post) do |f|
+            .form-group
+              = f.label :profession_id, t('search.form.profession.label')
+              = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
+  
+            .form-group
+              = f.label :patient_type_id, t('search.form.patient_type.label')
+              = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
+        
+            .form-group
+              = f.label :address, t('search.form.address.label')
+              = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('search.form.address.placeholder')))
+             
+            .form-group
+              = f.label :information, t('search.form.information.label')
+              = f.text_area :information, class: 'form-control', rows: 8
+  
+            = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
          
 
           
