@@ -1,0 +1,61 @@
+/*doc
+---
+title: Form Basics
+name: form
+category: forms
+---
+
+Baisc form inputs
+
+```haml_example
+%form{ role: 'form' }
+  .form-group
+    %label{ for: 'exampleInput' } Input:
+    %input{ type: 'text', class: 'form-control', id: 'exampleInput' }
+  
+  .form-group
+    %label{ for: 'examplePassword' } Password:
+    %input{ type: 'password', class: 'form-control', id: 'examplePassword' }
+
+  .form-group
+    %label{ for: 'exampleText' } Textarea:
+    %textarea{ class: 'form-control', rows: '3', id: 'exampleText' }
+
+  %button{ type: 'submit', class: 'btn btn-primary' } Submit
+    
+```
+*/
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  @include border-radius(0 !important);
+
+  -webkit-appearance: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 10px 12px;
+  height: inherit;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+
+/*doc
+---
+title: Textarea
+name: form-2
+category: forms
+---
+
+```haml_example
+%textarea{ class: 'form-control', rows: '3' } Textarea 
+```
+*/
+
+textarea { 
+  resize:none; 
+}

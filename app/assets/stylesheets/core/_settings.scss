@@ -18,23 +18,25 @@ $success-color:               #58d08b;
 $light-color:                 #ffffff;
 $dark-grey-color:             #666666;
 $dark-color:                  #333333;
-$muted-color:                 #666666;
+$muted-color:                 #b9b9b9;
   
 $primary-action-color:        #f16272;
 $secondary-action-color:      #2fc1f8;
-$alternate-action-color:      #f7f7f7;
+$alternate-action-color:      #a9a9a9;
 
 $primary-background-color:    #f7f7f7;
 $secondary-background-color:  #ffffff;
 
 $heading-color:               #555555;
 
-$transparent-color:         transparent;  
+$transparent-color:           transparent;  
 
 $google-color:                #4d4f54;
 $twitter-color:               #63cdf1;
 $facebook-color:              #507cbe;
 $instagram-color:             #c7c5b3;
+
+$border-color:                #ececec;
 
 // ----- Bootstrap Settings ----- //
 $navbar-border-radius:               0;
@@ -46,11 +48,12 @@ $navbar-default-link-hover-color:    $muted-color;
 
 $input-border-radius:                3px;
 $input-border-focus:                 $primary-action-color;
-$input-height-base:                  36px;
+$input-bg:                           $primary-background-color;
+$input-border:                       transparent;
+$input-color-placeholder:            $muted-color;
 
 $font-family-sans-serif:             'Open Sans', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 $font-family-serif:                 'Merriweather', serif;   
 
 // ----- Custom Settings ----- //
 
-$footer-height:                      30px;

@@ -12,6 +12,7 @@ class PractitionersController < ApplicationController
   private
   def create_json_response
     @results = Practitioner.search( params[:query], fields: [ {fullname: :word_start} ], limit: 10).results
+    
     render :autocomplete
   end
 

@@ -6,21 +6,21 @@
       .space-xs-50
   
       .row
-        .col-sm-8.col-sm-offset-2
+        .col-sm-10.col-sm-offset-1
           %h2= t('header.registrations.title_html') 
           %p.normal= t('header.registrations.subtitle')
   
       .space-xs-30
   
       .row
-        .col-sm-4.col-sm-offset-2
+        .col-sm-5.col-sm-offset-1
           = link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block'
-        .col-sm-4
+        .col-sm-5
           = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'learn-more'
   
       .space-xs-90
 
-%section.text-center#learn-more-section
+%section.text-center.background-secondary-background#learn-more-section
   .container
     .jumbotron.jumbotron-transparent
       .space-xs-10
@@ -56,9 +56,11 @@
 %section.text-center
   .jumbotron
     .container
-      %h1= t('registrations.example.title')
-      %h3.normal= t('registrations.example.subtitle')
-  
+      %h1.no-margin= t('registrations.example.title')
+      %h4.no-margin= t('registrations.example.subtitle')
+      
+      .space-xs-20
+
       .row
         .col-sm-8.col-sm-offset-2
           .browser-mockup.browser-mockup-with-url
@@ -83,6 +85,6 @@
   
       .row
         .col-sm-6.col-sm-offset-3
-          = link_to t('registrations.join_now.action'), new_recommendation_path, class: 'btn btn-alternate btn-block btn-outline'
+          = link_to t('registrations.join_now.action'), new_recommendation_path, class: 'btn btn-block btn-outline'
   
       .space-xs-60  

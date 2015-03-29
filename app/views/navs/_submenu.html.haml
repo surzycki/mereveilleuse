@@ -1,9 +1,10 @@
 - if current_user.registered?
   %section
-    %ul.nav.nav-pills.nav-justified
-      %li{ role: 'presentation' }
-        = link_to t('nav.submenu.invite'), '#', id: 'invite'
-      %li{ role: 'presentation' }
-        = link_to t('nav.submenu.recommend'), new_recommendation_path
-      %li{ role: 'presentation' }
-        = link_to t('nav.submenu.search'), new_search_path
+    .container
+      %ul.nav.nav-pills.nav-justified
+        %li{ role: 'presentation', class: ('active' if (active == 'invite') )}
+          = link_to t('nav.submenu.invite'), '#', id: 'invite'
+        %li{ role: 'presentation', class: ('active' if (active == 'recommendation') )}
+          = link_to t('nav.submenu.recommend'), new_recommendation_path
+        %li{ role: 'presentation', class: ('active' if (active == 'search') )}
+          = link_to t('nav.submenu.search'), new_search_path

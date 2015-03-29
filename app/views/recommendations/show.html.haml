@@ -1,5 +1,29 @@
-= render 'navs/submenu'
+%section
+  = render 'navs/submenu', active: 'recommendation'
 
-.space-xs-40
-
-= render 'invite'
+  .container
+    .row
+      .col-sm-10.col-sm-offset-1.text-center
+        .space-xs-40
+        .panel.panel-display
+          .panel-body
+            %h3.no-margin= t('invite.information.title')
+            %h4.no-margin= t('invite.information.subtitle')
+          
+            .space-xs-30
+            = image_tag 'group-of-mothers-medium.jpg'
+           
+            %p.no-margin= t('invite.information.question')
+            %p.no-margin.bold= t('invite.information.reason')
+            
+            .space-xs-10
+    
+    .row
+      .col-sm-5.col-sm-offset-1
+        = link_to t('invite.information.submit.negative'), new_search_path, class: 'btn btn-alternate btn-block'
+      .col-sm-5
+        = link_to t('invite.information.submit.affirmative'), '#', class: 'btn btn-primary btn-block', id: 'invite'
+    
+    .space-xs-60 
+        
+  

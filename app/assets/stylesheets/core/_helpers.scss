@@ -167,6 +167,14 @@ Available helpers for: `mobile` `tablet` `devices` `desktop`
   @include responsive-helpers('tablet');
 }
 
+@mixin padding-helper() {
+  @for $i from 1 through 10 {
+    .padding-#{$i} { padding: #{$i}px; }
+  }
+}
+
+@include padding-helper();
+
 
 @mixin border-radius($radius) {
   @include border-top-radius($radius);

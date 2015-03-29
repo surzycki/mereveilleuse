@@ -30,3 +30,68 @@ category: nav
   margin-bottom: 0;
 }
 
+
+/*doc
+---
+title: Nav Pills
+name: nav-5
+category: nav
+---
+```haml_example
+%ul.nav.nav-pills
+  %li{ role: 'presentation' }
+    %a{ href: '#' } Pill 1
+  %li{ role: 'presentation' }
+    %a{ href: '#' } Pill 2
+  %li{ role: 'presentation' }
+    %a{ href: '#' } Pill 3
+```
+*/
+
+.nav-pills {
+  li {
+    text-align: center;
+  }
+
+  li a {
+    @include border-radius(0);
+
+    display: inline-block;
+    color: $muted-color;
+    padding: 15px 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 72%;
+
+    &:after {
+      content: "";
+      opacity: 0;
+      visibility: hidden;
+      display: block;
+      position: relative;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: #585858;
+      -webkit-transition: visibility 200ms ease-out,opacity 200ms ease-out;
+      transition: visibility 200ms ease-out,opacity 200ms ease-out;
+    }
+
+    &:focus {
+      background-color: transparent !important;
+      color: $heading-color !important;
+    } 
+
+    &:hover {
+      background-color: transparent;
+      color: $heading-color !important;
+
+      &:after {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,31 @@
+/*doc
+---
+title: Panel
+name: panel-1
+category: panel
+---
+```haml_example
+.panel.panel-default
+  .panel-body
+    Hello world
+
+```
+*/
+
+.panel {
+  margin-bottom: 25px;
+}
+
+.panel-default, .panel-display {
+  @include border-radius(0);
+
+  border-color: $border-color;
+  padding: 30px 50px 10px;
+
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.panel-display {
+  padding: 30px 20px 30px;
+}

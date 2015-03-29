@@ -1,36 +1,41 @@
 = form_for(@form, url: path, method: :post) do |f|
   = f.hidden_field :user_id, value: current_user.id
-  
-  .form-group
-    = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
-    = react_component( 'PractitionerAutocomplete', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
+  .panel.panel-default
+    .panel-body
+      .form-group
+        = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
+        = react_component( 'PractitionerAutocomplete', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
+        
+      .form-group
+        = f.label :profession_id, t('recommendation.form.profession.label')
+        = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
+           
+      .form-group
+        = f.label :patient_type_id, t('recommendation.form.patient_type.label')
+        = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
+        
+      .form-group
+        = f.label :address, t('recommendation.form.address.label')
+        = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('recommendation.form.address.placeholder')))
     
-  .form-group
-    = f.label :profession_id, t('recommendation.form.profession.label')
-    = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
-       
-  .form-group
-    = f.label :patient_type_id, t('recommendation.form.patient_type.label')
-    = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
+  .panel.panel-default  
+    .panel-body
+      .form-group.text-center
+        = render 'recommendations/rating_buttons', f: f, item: 'wait_time'
+         
+      .form-group.text-center
+        = render 'recommendations/rating_buttons', f: f, item: 'availability'
+      
+      .form-group.text-center
+        = render 'recommendations/rating_buttons', f: f, item: 'bedside_manner'
+      
+      .form-group.text-center
+        = render 'recommendations/rating_buttons', f: f, item: 'efficacy'
     
-  .form-group
-    = f.label :address, t('recommendation.form.address.label')
-    = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('recommendation.form.address.placeholder')))
-  
-  .form-group
-    = render 'recommendations/rating_buttons', f: f, item: 'wait_time'
-    
-  .form-group
-    = render 'recommendations/rating_buttons', f: f, item: 'availability'
-  
-  .form-group
-    = render 'recommendations/rating_buttons', f: f, item: 'bedside_manner'
-  
-  .form-group
-    = render 'recommendations/rating_buttons', f: f, item: 'efficacy'
-  
-  .form-group
-    = f.label :comment, t('rating.form.comments.label')
-    = f.text_area :comment, class: 'form-control', rows: 8
+  .panel.panel-default  
+    .panel-body
+      .form-group
+        = f.label :comment, t('rating.form.comments.label')
+        = f.text_area :comment, class: 'form-control', rows: 8
   
   = f.submit t('recommendation.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'

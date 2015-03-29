@@ -96,13 +96,14 @@ parent: button
 .btn-alternate {
   border-bottom-width: 3px;
   border-top: 0;
-  border-color: $alternate-action-color;
+  border-color: darken($alternate-action-color, 10%);
   background-color: $alternate-action-color;
   color: $light-color !important;
+  font-size: 14px !important;
 
   &:focus, &:hover, &:active, &:active:focus {
     border-color: $alternate-action-color;
-    background-color: $alternate-action-color;
+    background-color: lighten($alternate-action-color,10%);
     color: $light-color;
   }
 }
@@ -111,11 +112,12 @@ parent: button
   background-color: transparent;
   border-width: 3px;
   border-top-style: solid;
-
-  color: $dark-color;
+  border-color: $light-color;
+  color: $light-color !important;;
+  font-size: 18px !important;
 
   &:focus, &:hover, &:active, &:active:focus {
-    //background-color: transparent;
+    background-color: $light-color;
     color: $primary-action-color !important;
   }
 }

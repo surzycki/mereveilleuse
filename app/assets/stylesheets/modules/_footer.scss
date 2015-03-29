@@ -34,27 +34,17 @@ footer {
   font-weight: 300;
   text-align: center;
   padding: 10px 0;
-  height: $footer-height;
-
-  @include breakpoint($desktop) {
-    padding: 0;
-  }
 }
 
 .footer-item {
   position: relative;
   display: block;
-  height: $footer-height / 2;
-  line-height: $footer-height / 2;
   font-size: 12px;
-
+  padding: 2px 0;
+  
   a {
     padding: 0 10px;
     color: $light-color;
   }
 
-  @include breakpoint($desktop) {
-    height: $footer-height;
-    line-height: $footer-height;
-  } 
 }
