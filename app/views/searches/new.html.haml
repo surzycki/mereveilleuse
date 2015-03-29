@@ -2,16 +2,14 @@
   = render 'navs/submenu', active: 'search'
 
   .container-fluid
-    .row
-      .col-sm-8.col-sm-offset-2
-        .space-xs-40
-        %p= t('search.form.title')
-
     .row  
       .col-sm-8.col-sm-offset-2
-        panel.panel-default
-          .panel-body
-          = form_for(@form, url: search_path, method: :post) do |f|
+        = form_for(@form, url: search_path, method: :post) do |f|
+          .space-xs-40
+          .panel-heading
+            = t('search.form.title')
+          .panel.panel-default 
+            .panel-body
             .form-group
               = f.label :profession_id, t('search.form.profession.label')
               = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
@@ -28,8 +26,9 @@
               = f.label :information, t('search.form.information.label')
               = f.text_area :information, class: 'form-control', rows: 8
   
-            = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
-         
+          = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
+          
+          .space-xs-60
 
           
 

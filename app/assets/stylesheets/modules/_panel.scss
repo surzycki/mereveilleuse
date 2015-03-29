@@ -26,6 +26,12 @@ category: panel
   box-shadow: none;
 }
 
+.panel-heading {
+  text-align: center;
+  background: $heading-color;
+  color: $light-color;
+}
+
 .panel-display {
   padding: 30px 20px 30px;
 }
