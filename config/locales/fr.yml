@@ -12,6 +12,10 @@ fr:
         bedside_manner: Accueil & suivi
         efficacy: Efficacité
         comment: Expérience avec ce professionnel
+      search_form:
+        address: Adresse
+        patient_type_id: Précisez pour qui
+        profession_id: La spécialité
 
     errors:
       models:
@@ -78,7 +82,7 @@ fr:
   header:
     registrations: 
       title_html: <b>Partageons</b> nos meilleures adresses santé entre mamans du quartier
-      subtitle: Les recommendations des mamans vous aident à protéger votre santé et celles de vos enfants
+      subtitle: Les recommandations des mamans vous aident à protéger votre santé et celles de vos enfants
 
   registrations:
     action:
@@ -98,7 +102,7 @@ fr:
 
         three:
           title: Recommandations
-          content: Je reçois les recommandations de mes amies inscrites et des mamans de mon quartier. (100% mamans garanties ;) )
+          content: Je reçois les recommandations de mes amies inscrites et des mamans de mon quartier. 100% mamans garanties ;)
 
     example: 
       title: Exemple de recherche
@@ -107,7 +111,7 @@ fr:
     join_now: 
       title: Rejoindre la communauté
       content: La communauté MèreVeilleuse est basée sur la réciprocité et l’entraide entre mamans. Pour rejoindre la communauté nous vous demandons d'aider les mamans de votre quartier en recommandant un professionnel. (un ostéopathe, un médecin généraliste, un pédiatre,…, tout ce qui peut aider les mamans)
-      action: Join Now!
+      action: Rejoindre la communauté
 
   not_available: Pas Disponible
 
@@ -127,7 +131,7 @@ fr:
 
   search: 
     form:
-      title: A la recherche d’un MèreVeilleux professionnel?
+      title: Recevoir les meilleurs adresses santé personnalisées à vos besoins !
       profession:
         label: Je recherche
         placeholder: Sélectionnez la spécialité
@@ -176,7 +180,7 @@ fr:
         placeholder: Précisez pour qui
       address:
         label: À
-        placeholder: Rensignez l'adresse
+        placeholder: Renseignez l'adresse
       submit: Rejoindre la communauté
     
     information: 
@@ -196,7 +200,7 @@ fr:
 
   invite: 
     information:
-      title:  Merci pour votre premiére contribution
+      title:  Merci pour votre première contribution
       subtitle: Vous êtes MèreVeilleuse !
       question: Voulez-vous faire connaître MèreVeilleuse à vos amies?
       reason: En invitant vos amies vous pourrez consulter leurs recommandations
