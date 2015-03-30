@@ -7,11 +7,16 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/admin/sidekiq'
   
   resource  :session,         only: [ :new, :create, :show ]
-  resource  :search,          only: [ :new, :create, :show ]
   resource  :help,            only: [ :new, :create, :show ]
+  resource  :search,          only: [ :new, :create, :show ]
   resources :recommendations, only: [ :new, :create, :show ]
   resources :registrations,   only: [ :new, :create, :show ]
   
+  # unsubscribe
+  get 'unsubscribe/search/:id',       to: 'unsubscribes#search',        as: 'unsubscribe_search'
+  get 'unsubscribe/account/:id',      to: 'unsubscribes#account',       as: 'unsubscribe_account'
+
+  # json api
   get 'practitioners/autocomplete',   to: 'practitioners#autocomplete', as: 'practitioners_autocomplete', constraints: { format: 'json' }
   
   get 'conditions-generales',         to: 'static_pages#conditions',    as: 'conditions'

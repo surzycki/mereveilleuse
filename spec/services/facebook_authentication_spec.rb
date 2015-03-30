@@ -2,6 +2,7 @@ describe FacebookAuthentication do
   let(:subject)           { FacebookAuthentication.new signed_request }
 
   let(:signed_request)    { spy('signed_request') }
+  let(:app_data)          { 'app_data' }
   let(:validated_request) { spy('validated_request') }
   
   let(:oauth)             { spy('facebook_oauth') }
@@ -33,6 +34,10 @@ describe FacebookAuthentication do
   describe '#initialize' do
     it 'initializes with signed_request' do
       expect { FacebookAuthentication.new(signed_request) }.to_not raise_error
+    end
+
+    it 'initializes with signed_request and app_data' do
+      expect { FacebookAuthentication.new(signed_request, app_data) }.to_not raise_error
     end
 
     it 'errors without signed_request' do
@@ -71,6 +76,10 @@ describe FacebookAuthentication do
 
     it 'has profile image' do
       expect(subject).to respond_to :profile_image
+    end
+
+    it 'has a redirect_path' do
+      expect(subject).to respond_to :redirect_path
     end
   end
 
@@ -118,6 +127,14 @@ describe FacebookAuthentication do
           expect(subject.address).to be nil
         end
       end   
+    end
+
+    context 'when app_data' do
+      let(:subject) { FacebookAuthentication.new signed_request, app_data }
+      
+      it 'sets redirect_path from app_data' do
+        expect(subject.redirect_path).to eq app_data
+      end
     end
 
     context 'when fail' do

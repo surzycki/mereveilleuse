@@ -10,5 +10,11 @@ FactoryGirl.define do
     status        User.statuses[:registered] 
 
     location
+
+    trait :with_searches do
+      searches do |user|
+        Array.new(1) { user.association :search }
+      end
+    end
   end
 end

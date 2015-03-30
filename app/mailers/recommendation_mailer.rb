@@ -10,10 +10,9 @@ class RecommendationMailer < ApplicationMailer
     @search             = search
     @user               = search.user
     @recommender        = @recommendation.recommender
-    @email              = @user.email
-
+  
     mail(
-      to: @email, 
+      to: @user.email, 
       subject: subject_for_results(search)
     )
   end

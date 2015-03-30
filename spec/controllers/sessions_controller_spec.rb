@@ -59,7 +59,7 @@ describe SessionsController do
 
       it 'authentications with facebook' do
         expect(FacebookAuthentication).to have_received(:new)
-          .with '1234'
+          .with '1234', nil
       end
 
       it 'inits authentication_service' do
@@ -115,6 +115,28 @@ describe SessionsController do
 
         it 'redirects to new registration path' do
           expect(response).to redirect_to new_registration_path
+        end
+      end
+
+      context 'when user registered with redirect' do
+        before do
+          allow(user).to receive(:registered?).and_return true
+          stub_wisper_publisher('AuthenticationService', :authenticate, :success, user, '/redirect_path')
+          
+          post :create, signed_request: '1234', fb_locale: 'en_US', app_data: '/redirect_path'
+        end
+
+        it 'sets warden user' do
+          expect(warden).to have_received(:set_user)
+            .with user, scope: :user
+        end
+
+        it 'returns http redirect' do
+          expect(response).to be_redirect
+        end
+
+        it 'redirects to redirect_path' do
+          expect(response).to redirect_to '/redirect_path'
         end
       end
     end

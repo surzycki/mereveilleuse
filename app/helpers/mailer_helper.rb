@@ -20,4 +20,16 @@ module MailerHelper
       "#{rating}-rating-hover.png"
     end
   end
+
+  def canvas_recommendation_path
+    "#{ENV['FACEBOOK_CANVAS']}?app_data=#{new_recommendation_path}"
+  end
+
+  def canvas_unsubscribe_search_path(search)
+    "#{ENV['FACEBOOK_CANVAS']}?app_data=#{unsubscribe_search_path(search.md5_hash)}"
+  end
+
+  def canvas_unsubscribe_account_path(user)
+    "#{ENV['FACEBOOK_CANVAS']}?app_data=#{unsubscribe_account_path(user.facebook_id)}"
+  end
 end

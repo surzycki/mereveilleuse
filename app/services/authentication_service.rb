@@ -19,11 +19,11 @@ class AuthenticationService
         address: auth.address
       )
 
-      publish :success, account
+      publish :success, account, auth.redirect_path
     
     # catch address name error
     rescue NameError => error
-      publish :success, account  
+      publish :success, account, auth.redirect_path  
     rescue Exception => error
       publish :fail, error
     end

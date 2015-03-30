@@ -39,7 +39,7 @@ describe User do
 
     it 'defines enum for status' do
       expect(subject).to define_enum_for(:status)
-        .with [ :unregistered, :registered ]
+        .with [ :unregistered, :registered, :unsubscribed ]
     end
   end
 
@@ -63,6 +63,27 @@ describe User do
     it 'has many searches' do
       expect(subject).to have_many(:searches)
         .dependent(:destroy)
+    end
+  end
+
+  describe '#unsubscribe' do
+    let(:subject)  { build_stubbed :user }  
+    let(:search)   { spy('search') }
+    let(:searches) { [search] }
+
+    before do
+      allow(subject).to receive(:searches).and_return searches
+      allow(subject).to receive(:unsubscribed!)
+
+      subject.unsubscribe
+    end
+
+    it 'cancels searches' do
+      expect(search).to have_received(:canceled!).once
+    end
+
+    it 'sets status to unsubscribed' do
+      expect(subject).to have_received(:unsubscribed!).once
     end
   end
 end

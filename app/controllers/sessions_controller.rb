@@ -33,13 +33,13 @@ class SessionsController < ApplicationController
 
   private
   def initialize_authentication_service
-    authentication_service.on :success do |account|
+    authentication_service.on :success do |account, redirect_path|
       # set user_id in env for the authentication since we
       # aren't passing these during a via params in a post for warden
       warden.set_user account, scope: :user
       
       if account.registered?
-        redirect_to new_search_path
+        redirect_to(redirect_path || new_search_path)
       else
         redirect_to new_registration_path   
       end
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
 
   # Facebook posts a signed_request to upon arriving to the canvas
   def facebook_authentication
-    @facebook_authentication ||= FacebookAuthentication.new(params[:signed_request])
+    @facebook_authentication ||= FacebookAuthentication.new(params[:signed_request], params[:app_data])
   end
 
   def authentication_service

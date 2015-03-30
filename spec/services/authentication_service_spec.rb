@@ -9,7 +9,7 @@ describe AuthenticationService do
 
   describe '#authenticate' do
     let(:account)  { spy('account') }
-    let(:auth)     { spy('auth') }
+    let(:auth)     { spy('auth', redirect_path: 'redirect_path') }
 
     context 'success' do
       before do
@@ -50,7 +50,7 @@ describe AuthenticationService do
       it 'broadcasts success' do
         expect { 
           subject.authenticate(auth) 
-        }.to broadcast(:success)
+        }.to broadcast(:success, account, auth.redirect_path )
       end
     end
 
@@ -75,7 +75,7 @@ describe AuthenticationService do
       it 'broadcasts success' do
         expect { 
           subject.authenticate(auth) 
-        }.to broadcast(:success)
+        }.to broadcast(:success, account, auth.redirect_path)
       end
     end
   end

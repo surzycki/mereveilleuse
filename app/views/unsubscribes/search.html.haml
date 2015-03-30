@@ -1,0 +1,19 @@
+%section
+  = render 'navs/submenu', active: 'none'
+  .container
+    .row
+      .col-sm-10.col-sm-offset-1.text-center
+        .space-xs-40
+        .panel.panel-display
+          .panel-body
+            %h3.no-margin= t('unsubscribe.search.title')
+            .space-xs-10
+            %h4.no-margin= t('unsubscribe.search.subtitle')
+      
+            .space-xs-30
+            = image_tag 'icon-medal.png'
+            .space-xs-30
+
+            %p= t('unsubscribe.search.information_html', profession_name: @search.profession_name.downcase, patient_type_name: @search.patient_type_name.downcase, address: @search.address )
+    
+    .space-xs-60 
