@@ -44,7 +44,7 @@ a {
   background-color: $primary-action-color;
   color: $light-color !important;
 
-  &:focus, &:hover, &:active, &:active:focus {
+  &:focus, &:hover, &:active, &:active:focus, &:visited {
     border-color: $primary-action-color;
     background-color: darken($primary-action-color,5%);
     color: $light-color !important;;
@@ -58,7 +58,7 @@ a {
   background-color: $secondary-action-color;
   color: $light-color !important;
 
-  &:focus, &:hover, &:active, &:active:focus {
+  &:focus, &:hover, &:active, &:active:focus, &:visited {
     border-color: $secondary-action-color;
     background-color: darken($secondary-action-color,10%);
     color: $light-color !important;;
@@ -73,7 +73,7 @@ a {
   color: $light-color !important;
   font-size: 13px !important;
 
-  &:focus, &:hover, &:active, &:active:focus {
+  &:focus, &:hover, &:active, &:active:focus, &:visited {
     border-color: $alternate-action-color;
     background-color: lighten($alternate-action-color,10%);
     color: $light-color !important;;
