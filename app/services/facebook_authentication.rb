@@ -7,6 +7,7 @@ class FacebookAuthentication
       address:       params.address, 
       facebook_id:   params.facebook_id,
       profile_image: params.profile_image,
+      authenticated: true,
       redirect_path: nil
     )
   end
@@ -27,8 +28,7 @@ class FacebookAuthentication
 
   private 
   def authenticate
-    @authenticated = false
-
+    @authenticated    = false
     oauth             = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
     validated_request = oauth.parse_signed_request(@signed_request)
     facebook_api      = Koala::Facebook::API.new(validated_request['oauth_token'])

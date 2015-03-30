@@ -15,10 +15,12 @@
       .row
         .col-sm-5.col-sm-offset-1
           = link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block'
+          %br
         .col-sm-5
           = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'learn-more'
-  
-      .space-xs-90
+          %br
+
+      .space-xs-40
 
 %section.text-center.background-secondary-background#learn-more-section
   .container

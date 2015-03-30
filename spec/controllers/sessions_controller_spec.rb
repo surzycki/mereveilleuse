@@ -141,6 +141,10 @@ describe SessionsController do
       end
     end
 
+    context 'on request_authentication event' do
+      pending
+    end
+
     context 'on fail event' do
       before do
         allow(TrackError).to receive(:new)

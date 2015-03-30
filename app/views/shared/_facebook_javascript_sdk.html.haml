@@ -10,6 +10,7 @@
 
     FB.Canvas.setAutoGrow(91);
     FB.Canvas.scrollTo(0,0);
+    
     FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
     FB.Event.subscribe('auth.statusChange', onStatusChange);
 
@@ -18,20 +19,26 @@
     }
 
     function loginCallback(response) {
-      console.log('loginCallback',response);
+      debugger
       if(response.status != 'connected') {
-        location.reload();
+        console.log('loginCallback: NOT CONNECTED');
+        // goto app description page
+        top.location.href = 'https://www.facebook.com/games/mereveilleuse/'
       }
     }
 
     function onStatusChange(response) {
+      debugger
       if( response.status != 'connected' ) {
         login(loginCallback);
       } else {
-        $('body').removeClass('blur')
-        console.log('connected');
+        console.log('onStatusChange: CONNECTED')
+        // reload now that we are authenticated
+        if("#{@requesting_authentication}" == 'true') 
+          top.location.href = "#{ENV['FACEBOOK_CANVAS']}"
       }
     }
+    
     function onAuthResponseChange(response) {
       console.log('onAuthResponseChange', response.status);
     }

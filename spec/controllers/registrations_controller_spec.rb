@@ -15,5 +15,9 @@ describe RegistrationsController do
         expect(response).to render_template(:new)
       end
     end
+
+    describe 'requestion authentication' do
+      pending
+    end
   end
 end

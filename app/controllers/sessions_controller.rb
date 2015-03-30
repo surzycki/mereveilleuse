@@ -45,9 +45,13 @@ class SessionsController < ApplicationController
       end
     end
 
+    # display facebook authentication dialog
+    authentication_service.on :request_authentication do |auth|
+      redirect_to new_registration_path(requesting_authentication: true)
+    end
+
     authentication_service.on :fail do |error|
       TrackError.new( error, logger ) if error
-     
       redirect_to not_found_path
     end
   end

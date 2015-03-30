@@ -24,7 +24,7 @@
     = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     <![endif]-->
    
-  %body{ class: apply_blur? }
+  %body
     = render 'shared/facebook_javascript_sdk' unless Rails.env.test?
     = render 'shared/flash'
     = render 'shared/header'
