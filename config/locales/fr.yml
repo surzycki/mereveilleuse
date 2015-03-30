@@ -97,15 +97,15 @@ fr:
       title: Comment ça marche ?
       showcase:
         one:
-          title: Communauté
+          title: 1. Communauté
           content: Je rejoins la communauté en recommandant un professionnel aux mamans de mon quartier. (ostéopathe, médecin généraliste,  pédiatre...)
 
         two:
-          title: Recherche
+          title: 2. Recherche
           content: J’effectue ma recherche en indiquant mon adresse et le type de professionnel qui m’intéresse.
 
         three:
-          title: Recommandations
+          title: 3. Recommandations
           content: Je reçois les recommandations de mes amies inscrites et des mamans de mon quartier. 100% mamans garanties ;)
 
     example: 
