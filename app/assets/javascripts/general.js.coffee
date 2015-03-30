@@ -3,7 +3,7 @@ $ ->
   $('#slider').slippry
     transition: 'vertical'
     captions: 'below'
-  
+    pause: 6000
 
   onLearnMore = (e) ->
     e.preventDefault()
