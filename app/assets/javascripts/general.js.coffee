@@ -2,8 +2,10 @@ $ ->
   
   $('#slider').slippry
     transition: 'vertical'
-    captions: 'below'
+    captions: 'custom'
+    captionsEl: '.browser-mockup-captions'
     pause: 6000
+
 
   onLearnMore = (e) ->
     e.preventDefault()
