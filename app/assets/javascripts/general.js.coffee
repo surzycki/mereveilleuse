@@ -1,11 +1,9 @@
 $ ->
   
-  $('#skippr').skippr
-    childrenElementType: 'img'
-    navType: 'bubble'
-    arrows: false
-    autoPlay: true
-    autoPlayDuration: 7000
+  $('#slider').slippry
+    transition: 'vertical'
+    captions: 'below'
+  
 
   onLearnMore = (e) ->
     e.preventDefault()

@@ -64,9 +64,13 @@
       .row
         .col-sm-8.col-sm-offset-2
           .browser-mockup.browser-mockup-with-url
-            #skippr
-              = image_tag 'http://placehold.it/480x400/fff/eee'
-              = image_tag 'http://placehold.it/480x400/fff/eee'
+            %ul#slider
+              %li
+                = link_to '#slide1' do
+                  = image_tag 'slide-1.jpg', alt: 'Marie valide sa recherche en sollicitant les avis de la communauté'
+              %li
+                = link_to '#slide2' do
+                  = image_tag 'slide-2.jpg', alt: 'Marie reçoit les recommandations de ses amies inscrites et des mamans du quartier et découvre les fiches spécialistes :'
             
 
 %section.text-center
