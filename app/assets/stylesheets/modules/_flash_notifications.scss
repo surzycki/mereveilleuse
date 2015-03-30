@@ -37,11 +37,8 @@ category: flash
     margin-bottom: 0;
     background-color: $success-color;
     color: $light-color;
+    line-height: 72px;
   }
 }
 
-.flash-fixed-top {
-  position: fixed;
-  top: 0px;
-  z-index: 3000;
-}
+

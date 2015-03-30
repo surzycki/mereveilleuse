@@ -1,4 +1,6 @@
 class RecommendationMailer < ApplicationMailer
+  layout 'mailer_without_header'
+
   def results(search, recommendations)
     # don't send if no recommendations
     return if recommendations.empty?
@@ -8,9 +10,10 @@ class RecommendationMailer < ApplicationMailer
     @search             = search
     @user               = search.user
     @recommender        = @recommendation.recommender
+    @email              = @user.email
 
     mail(
-      to: @user.email, 
+      to: @email, 
       subject: subject_for_results(search)
     )
   end

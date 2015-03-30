@@ -1,13 +1,15 @@
 class HelpForm
   include ActiveModel::Model
   
-  attr_accessor :email, :message, :help_topic
+  attr_accessor :email, :help_topic, :message
+
+  validates :email, :help_topic, :message, presence: true 
 
   def process   
-    true
-  end
-
-  def errors
-    'not active, job canceled'
+    if self.valid?
+      true
+    else
+      false
+    end
   end
 end

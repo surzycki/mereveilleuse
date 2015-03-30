@@ -11,7 +11,14 @@
 
 
 body {
-  //background-color: #FF00FF;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  width: 100% !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 img {
@@ -34,7 +41,7 @@ i {
 
 label {
   font-weight: 300;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
   padding: 0;
   display: inline-block;

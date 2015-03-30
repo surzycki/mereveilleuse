@@ -1,4 +1,4 @@
-- if current_user.registered?
+- if current_user.try(:registered?) 
   %section
     .container
       %ul.nav.nav-pills.nav-justified

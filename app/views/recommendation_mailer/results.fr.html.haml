@@ -1,75 +1,177 @@
-%table.row.content
+= render 'shared/mailer/header'
+
+// Title section //
+%table.container
   %tr
+    %td
+      %table.row
+        %tr
+          %td.wrapper.last
+            %table.twelve.columns
+              %tr
+                %td.center
+                  %center
+                    %h2.center
+                      %b
+                        #{ @recommender.fullname } 
+                      a recommendé un(e) 
+                      %b
+                        #{ @recommendation.profession_name } 
+                      pour
+                      %b
+                        = @recommendation.patient_type_name
+                %td.expander
+
+// Mother's section //
+%table.container
+  %tr
+    %td
+      %table.row
+        %tr
+          %td.wrapper.no-gutter
+            %table.two.columns
+              %tr
+                %td.center
+                  %center
+                    = image_tag @user.profile_image, class: 'icon-round center profile-image'
+                %td.expander
+          
+          %td.wrapper.last
+            %table.ten.columns
+              %tr
+                %td
+                  %h4
+                    Vous êtes à la recherche d'un(e) #{@search.profession_name}
+                  %p
+                    Une MèreVeilleuse maman a recommandé un(e) #{ @search.profession_name.downcase } pour toute consultation destinée à #{@search.patient_type_name.downcase}, et près de chez vous, au #{@search.address}.
+                       
+                %td.expander  
+      
+      %hr
+
+// Recommenders section //
+%table.container
+  %tr
+    %td
+      %table.row
+        %tr
+          %td.wrapper.no-gutter
+            %table.two.columns
+              %tr
+                %td.center
+                  %center
+                    = image_tag @recommender.profile_image, class: 'icon-round center profile-image'
+                %td.expander
+          
+          %td.wrapper.last
+            %table.ten.columns
+              %tr
+                %td
+                  %h4
+                    #{@recommender.fullname} recommendé
+                  %p
+                    Je recommande le #{@recommendation.profession_name.downcase} avec une note gobale de
+                    %b
+                      #{ @recommendation.rating }.      
+                  %p
+                    #{@recommendation.comment}   
+                  %p
+                    Voici les coordonnées de 
+                    %b
+                      #{@recommendation.practitioner_fullname}.         
+                %td.expander
+
+// Contact section
+%table.row.background-primary-background{ style: 'display: table !important;'}
+  %tr
+    %td.results.center
+      %table.container.background-transparent.no-vertical-padding
+        %tr
+          %td.wrapper.offset-by-one.last
+            %table.ten.columns
+              %tr
+                %td
+                  %center
+                    %h2.bold.no-margin
+                      #{ @recommendation.practitioner_fullname }
+                    %h4.no-margin
+                      #{ @recommendation.profession_name } pour a #{ @recommendation.patient_type_name }
+                    %p.no-margin
+                      #{ @recommendation.address }
+                %td.expander 
+      
+      %table.container.background-transparent.no-vertical-padding
+        %tr      
+          %td.wrapper.last.offset-by-one.no-vertical-padding
+            %table.ten.columns
+              %tr
+                %td
+                  = static_map_for @recommendation, size: '480x240'
+                %td.expander   
+      
+      %table.container.background-transparent.no-vertical-padding
+        %tr
+          %td.wrapper.last.offset-by-one.no-vertical-padding
+            %table.ten.columns
+              %tr
+                %td.three.sub-columns.center
+                  %label.center{ class: ('bold' if @recommendation.bedside_manner > 3 ) }
+                    = t('rating.form.bedside_manner.label')
+                  = image_tag rating_image(@recommendation.bedside_manner), class: 'center rating'
+                
+                %td.three.sub-columns.center
+                  %label.center{ class: ('bold' if @recommendation.efficacy > 3 ) }
+                    = t('rating.form.efficacy.label')
+                  = image_tag rating_image(@recommendation.efficacy), class: 'center rating'
+                
+                %td.three.sub-columns.center
+                  %label.center{ class: ('bold' if @recommendation.availability > 3 ) }
+                    = t('rating.form.availability.label')
+                  = image_tag rating_image(@recommendation.availability), class: 'center rating' 
+                
+                %td.three.sub-columns.center.last
+                  %label.center{ class: ('bold' if @recommendation.wait_time > 3 ) }
+                    = t('rating.form.wait_time.label')
+                  = image_tag rating_image(@recommendation.wait_time), class: 'center rating' 
+                %td.expander    
+      
+      %table.container.background-transparent
+        %tr
+          - if @recommendation.email && @recommendation.contact_phone
+            = render 'recommendation_mailer/email_and_phone_contact', recommendation: @recommendation
+          - else
+            = render 'recommendation_mailer/email_or_phone_contact', recommendation: @recommendation
+
+// call-to-action section           
+%table.container
+  %tr  
     %td.wrapper.last
       %table.twelve.columns
         %tr
-          %td
-            %center
-              %h2.center
-                %b
-                  #{ @recommender.fullname } 
-                a recommendé un(e) 
-                %b
-                  #{ @recommendation.profession_name } 
-                pour
-                %b
-                  = @recommendation.patient_type_name
-          
-          %td.expander
+          %td.panel
+            Votre contribution est importante pour la communauté MèreVeilleuse. Si vous êtes satisfaite de cette recommandation, merci d'aider les autres MèreVeilleuses mamans en laissant une recommandation sur vos meilleurs professionnels de santé. Merci, vous êtes MèreVeilleuse.
+            %br
+            %br
+            = link_to '#', class: 'btn btn-primary btn-block' do
+              Recommender un professionnel de santé. 
+          %td.expander   
+      %hr
 
-%table.row.content
-  %tr
-    %td.wrapper.no-gutter
-      %table.two.columns
-        %tr
-          %td.center
-            %center
-              = image_tag @user.profile_image, class: 'icon-round center profile-image'
-          %td.expander
-    
-    %td.wrapper.last
+// cancel section 
+%table.container
+  %tr  
+    %td.wrapper.offset-by-one.last
       %table.ten.columns
         %tr
-          %td
-            %h4
-              Vous êtes à la recherche d'un(e) #{@search.profession_name}
-            %p
-              Une MèreVeilleuse maman a recommandé un(e) #{ @search.profession_name.downcase } pour toute consultation destinée à #{@search.patient_type_name.downcase}, et près de chez vous, au #{@search.address}.
-                 
-          %td.expander  
-
-%hr
-
-%table.row.content
-  %tr
-    %td.wrapper.no-gutter
-      %table.two.columns
-        %tr
-          %td.center
-            %center
-              = image_tag @recommender.profile_image, class: 'icon-round center profile-image'
-          %td.expander
-    
-    %td.wrapper.last
-      %table.ten.columns
-        %tr
-          %td
-            %h4
-              #{@recommender.fullname} recommendé
+          %td.panel.panel-no-padding
+            %b.small
+              Satisfaite de votre recherche ?  
             
-            %p
-              Je recommande le #{@recommendation.profession_name.downcase} avec une note gobale de
-              %b
-                #{ @recommendation.rating }.  
-              
-            
-            %p
-              #{@recommendation.comment}
-            
-            %p
-              Voici les coordonnées de 
-              %b
-                #{@recommendation.practitioner_fullname}.
-          
-          %td.expander  
+            .small
+              Vous ne souhaitez plus recevoir de nouvelle alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?
+            %br  
+            = link_to '#', class: 'btn btn-alternate btn-block btn-sm' do
+              Je ne cherche plus.
+           
+          %td.expander 
 

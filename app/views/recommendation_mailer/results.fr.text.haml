@@ -1,1 +1,37 @@
-resutls
+= render 'shared/mailer/header'
+
+#{@recommender.fullname} a recommendé un(e) #{@recommendation.profession_name} pour #{@recommendation.patient_type_name}
+
+Vous êtes à la recherche d'un(e) #{@search.profession_name}
+*******************************
+Une MèreVeilleuse maman a recommandé un(e) #{@search.profession_name.downcase} pour toute consultation destinée à #{@search.patient_type_name.downcase}, et près de chez vous, au #{@search.address}.
+
+*******************************
+#{@recommender.fullname} recommendé
+Je recommande le #{@recommendation.profession_name.downcase} avec une note gobale de #{@recommendation.rating}.
+#{@recommendation.comment} 
+Voici les coordonnées de #{@recommendation.practitioner_fullname}.
+
+*******************************
+#{@recommendation.practitioner_fullname}
+#{@recommendation.profession_name} pour a #{@recommendation.patient_type_name}
+#{@recommendation.address}
+
+#{t('rating.form.bedside_manner.label')} #{@recommendation.bedside_manner}
+#{t('rating.form.efficacy.label')} #{@recommendation.efficacy}
+#{t('rating.form.availability.label')} #{@recommendation.availability}
+#{t('rating.form.wait_time.label')} #{@recommendation.wait_time}
+
+- if @recommendation.email && @recommendation.contact_phone
+  = render 'recommendation_mailer/email_and_phone_contact'
+- else
+  = render 'recommendation_mailer/email_or_phone_contact', recommendation: @recommendation
+
+*******************************
+Votre contribution est importante pour la communauté MèreVeilleuse. Si vous êtes satisfaite de cette recommandation, merci d'aider les autres MèreVeilleuses mamans en laissant une recommandation sur vos meilleurs professionnels de santé. Merci, vous êtes MèreVeilleuse.
+Recommender un professionnel de santé.
+
+*******************************
+Satisfaite de votre recherche ?
+Vous ne souhaitez plus recevoir de nouvelle alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?  
+Je ne cherche plus.

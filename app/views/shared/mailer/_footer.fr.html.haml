@@ -1,0 +1,39 @@
+%table.container
+  %tr
+    %td
+      %hr
+      %table.row
+        %tr
+          %td.wrapper.last
+            %table.twelve.columns
+              %tr
+                %td.center 
+                  .small.center
+                    Cet email a été envoyé à #{@email}. #{ link_to 'Cliquez ici pour vous désinscrire.', '#' }  
+                %td.expander
+      %table.row
+        %tr    
+          %td.wrapper.last
+            %table.twelve.columns  
+              %tr
+                %td.two.sub-columns.center 
+                  
+                %td.two.sub-columns.center 
+                  %i.icon-lg.icon-square.background-google.color-light
+                    = link_to '#' do
+                      = image_tag 'social-icons-google.png'
+                %td.two.sub-columns.center
+                  %i.icon-lg.icon-square.background-twitter.color-light
+                    = link_to 'https://twitter.com/Mere_veilleuse_' do
+                      = image_tag 'social-icons-twitter.png'
+                %td.two.sub-columns.center 
+                  %i.icon-lg.icon-square.background-facebook.color-light
+                    = link_to 'https://www.facebook.com/communaute.mereveilleuse' do
+                      = image_tag 'social-icons-facebook.png'
+                %td.two.sub-columns.center 
+                  %i.icon-lg.icon-square.background-instagram.color-light
+                    = link_to '#' do
+                      = image_tag 'social-icons-instagram.png'
+                %td.two.sub-columns.center 
+                  
+                %td.expander

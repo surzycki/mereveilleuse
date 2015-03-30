@@ -16,6 +16,10 @@ fr:
         address: Adresse
         patient_type_id: Précisez pour qui
         profession_id: La spécialité
+      help_form:
+        email: Adresse email
+        help_topic: Objet
+        message: Message
 
     errors:
       models:
