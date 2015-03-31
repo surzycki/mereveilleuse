@@ -23,7 +23,9 @@ ActiveAdmin.register Profession do
 
   index do
     column :name
-    column :id 
+    column '# of Practitioners' do |profession|
+      profession.occupations.count
+    end
     
     actions
   end

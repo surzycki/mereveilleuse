@@ -8,7 +8,7 @@
         
       .form-group
         = f.label :profession_id, t('recommendation.form.profession.label')
-        = f.collection_select(:profession_id, Profession.all, :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
+        = f.collection_select(:profession_id, Profession.all.order(name: :asc), :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
            
       .form-group
         = f.label :patient_type_id, t('recommendation.form.patient_type.label')
