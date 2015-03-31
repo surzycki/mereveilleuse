@@ -14,7 +14,7 @@
                     %h2.center
                       %b
                         #{ @recommender.fullname } 
-                      a recommendé un(e) 
+                      a recommandé un(e) 
                       %b
                         #{ @recommendation.profession_name } 
                       pour
@@ -68,7 +68,7 @@
               %tr
                 %td
                   %h4
-                    #{@recommender.fullname} recommendé
+                    #{@recommender.fullname} recommande
                   %p
                     Je recommande le #{@recommendation.profession_name.downcase} avec une note gobale de
                     %b
@@ -168,7 +168,7 @@
               Satisfaite de votre recherche ?  
             
             .small
-              Vous ne souhaitez plus recevoir de nouvelle alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?
+              Vous ne souhaitez plus recevoir de nouvelles alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?
             %br  
             = link_to canvas_unsubscribe_search_path(@search), class: 'btn btn-alternate btn-block btn-sm' do
               Je ne cherche plus.
