@@ -33,7 +33,7 @@
               %tr
                 %td.center
                   %center
-                    = image_tag @user.profile_image, class: 'icon-round center profile-image'
+                    = image_tag @user.profile_image, class: 'icon-round center profile-image', alt: @user.fullname
                 %td.expander
           
           %td.wrapper.last
@@ -60,7 +60,7 @@
               %tr
                 %td.center
                   %center
-                    = image_tag @recommender.profile_image, class: 'icon-round center profile-image'
+                    = image_tag @recommender.profile_image, class: 'icon-round center profile-image', alt: @recommender.fullname
                 %td.expander
           
           %td.wrapper.last
@@ -117,22 +117,22 @@
                 %td.three.sub-columns.center
                   %label.center{ class: ('bold' if @recommendation.bedside_manner > 3 ) }
                     = t('rating.form.bedside_manner.label')
-                  = image_tag rating_image(@recommendation.bedside_manner), class: 'center rating'
+                  = image_tag rating_image(@recommendation.bedside_manner), class: 'center rating', alt: @recommendation.bedside_manner
                 
                 %td.three.sub-columns.center
                   %label.center{ class: ('bold' if @recommendation.efficacy > 3 ) }
                     = t('rating.form.efficacy.label')
-                  = image_tag rating_image(@recommendation.efficacy), class: 'center rating'
+                  = image_tag rating_image(@recommendation.efficacy), class: 'center rating', alt: @recommendation.efficacy
                 
                 %td.three.sub-columns.center
                   %label.center{ class: ('bold' if @recommendation.availability > 3 ) }
                     = t('rating.form.availability.label')
-                  = image_tag rating_image(@recommendation.availability), class: 'center rating' 
+                  = image_tag rating_image(@recommendation.availability), class: 'center rating', alt: @recommendation.availability
                 
                 %td.three.sub-columns.center.last
                   %label.center{ class: ('bold' if @recommendation.wait_time > 3 ) }
                     = t('rating.form.wait_time.label')
-                  = image_tag rating_image(@recommendation.wait_time), class: 'center rating' 
+                  = image_tag rating_image(@recommendation.wait_time), class: 'center rating', alt: @recommendation.wait_time
                 %td.expander    
       
       %table.container.background-transparent
