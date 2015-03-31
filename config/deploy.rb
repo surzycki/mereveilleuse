@@ -6,7 +6,7 @@ set :repo_url,        'git@github.com:surzycki/mereveilleuse.git'
 set :deploy_to,       '/var/www/mereveilleuse/app_facebook'
 
 set :scm,             :git
-set :log_level,       :debug
+set :log_level,       :info
 
 set :linked_files,    %w{}
 set :linked_dirs,     %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}

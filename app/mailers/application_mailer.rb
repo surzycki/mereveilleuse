@@ -5,6 +5,7 @@ class ApplicationMailer < ActionMailer::Base
   helper FormattingHelper 
 
   default from: '"Mèreveilleuse" <team@mereveilleuse.com>'
+  
   # see https://github.com/Mange/roadie-rails#known-issues
   self.asset_host = nil
   

@@ -19,6 +19,6 @@ class RecommendationMailer < ApplicationMailer
 
   private
   def subject_for_results(search)
-    I18n.t('email.recommendation.subject', profession: search.profession_name.pluralize, address: search.address )
+    "❤ #{I18n.t('email.recommendation.subject', profession: search.profession_name.pluralize, address: search.address )}"
   end
 end
