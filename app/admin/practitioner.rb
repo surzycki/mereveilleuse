@@ -10,6 +10,11 @@ ActiveAdmin.register Practitioner do
   filter :email_cont,                 as: :string, label: 'Email'
   filter :location_city_cont,         as: :string, label: 'City (geocoded practitioners)'
 
+  member_action :indexed do
+    resource.indexed!
+    redirect_to admin_practitioners_path, notice: 'Indexed!'
+  end
+
   scope :all, default: true
   
   scope :indexed do |practitioner|
@@ -61,7 +66,11 @@ ActiveAdmin.register Practitioner do
       I18n.l(practitioner.created_at, format: :short_date)  
     end
 
-    actions
+    column '' do |practitioner|
+      link_to('Index', indexed_admin_practitioner_path(practitioner))
+    end
+
+    actions 
   end
 
   show title: proc{ |practitioner| "#{practitioner.fullname}" } do

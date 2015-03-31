@@ -183,6 +183,7 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
       menu.add label: 'Configuration',  priority: 1
+      menu.add label: 'Queues',         priority: 10, url: '/admin/sidekiq' 
     end
   end
 
