@@ -24,6 +24,7 @@ require 'capistrano/rails/migrations'
 
 require 'capistrano/puma'
 require 'capistrano/sidekiq'
+require 'airbrake/capistrano3'
 
 # require 'capistrano/passenger'
 

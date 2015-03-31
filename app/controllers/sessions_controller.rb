@@ -68,6 +68,7 @@ class SessionsController < ApplicationController
   def catch_exceptions
     yield
   rescue => error  
+    
     TrackError.new( error, logger )
 
     redirect_to not_found_path

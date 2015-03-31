@@ -11,7 +11,7 @@ gem 'jbuilder',                 '~> 2.0'                  # Create JSON structur
 gem 'puma'                                                # A ruby web server built for concurrency http://puma.io
 gem 'dotenv'                                              # Loads environment variables from `.env`.
 gem 'dalli'                                               # High performance memcached client for Ruby
-gem 'raygun4ruby'                                         # Find bugs before your users do
+gem 'airbrake'                                            # Find bugs before your users do
 gem 'koala',                    '~> 1.11.0rc'             # A lightweight, flexible library for Facebook with support for OAuth authentication
 gem 'rails-settings-cached',    '0.4.1'                   # This is imporved from rails-settings, added caching for all settings
 gem 'warden'                                              # General Rack Authentication Framework

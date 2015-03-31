@@ -18,7 +18,7 @@ class SearchesController < ApplicationController
       flash.now[:alert] = errors.full_messages.join(', ')
       render :new
     end
-
+    
     search_service.execute RecommendationsEmailProvider.new
   end
 

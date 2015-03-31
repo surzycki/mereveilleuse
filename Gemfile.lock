@@ -66,6 +66,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.7)
+    airbrake (4.1.0)
+      builder
+      multi_json
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.0)
@@ -205,9 +208,6 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
-    httparty (0.13.3)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -253,7 +253,6 @@ GEM
     minitest (5.5.1)
     monadic (0.8.1)
     multi_json (1.11.0)
-    multi_xml (0.5.5)
     multipart-post (2.0.0)
     namae (0.9.3)
     nenv (0.2.0)
@@ -323,10 +322,6 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.1)
-    raygun4ruby (1.1.5)
-      httparty (~> 0.11)
-      json
-      rack
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -455,6 +450,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  airbrake
   awesome_print
   bootstrap-sass
   bourbon
@@ -491,7 +487,6 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails-settings-cached (= 0.4.1)
   rails_12factor
-  raygun4ruby
   react-rails (~> 1.0.0.pre)!
   redis
   roadie-rails

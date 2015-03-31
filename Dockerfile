@@ -25,7 +25,7 @@ WORKDIR $APP_HOME
 # update gems
 ADD Gemfile $APP_HOME/Gemfile
 ADD Gemfile.lock $APP_HOME/Gemfile.lock
-RUN bundle install 
+RUN bundle update 
 
 # allow access staging and production servers
 RUN echo "Host staging.therapeutes.com\n\tStrictHostKeyChecking no\n\tForwardAgent yes\n" >> /root/.ssh/config

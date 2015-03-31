@@ -1,10 +1,10 @@
 describe SearchesController do
   let(:user)            { build_stubbed :user }
   let(:form)            { spy('form') }
-  let(:search_service)  { spy('search_service') }
   let(:search)          { spy('search') }
   let(:provider)        { spy('provider') }
   let(:errors)          { spy('errors') }
+  let(:search_service)  { wisper_spy('search_service') }
 
   before do
     allow(SearchForm).to receive(:new).and_return form
@@ -62,7 +62,8 @@ describe SearchesController do
       before do
         allow(RecommendationsEmailProvider).to receive(:new).and_return provider
         allow(SearchService).to receive(:new).and_return search_service
-
+        mock_wisper_publisher(search_service, :execute, :success, search)
+      
         post :create, search_form: params
       end
 
@@ -92,14 +93,6 @@ describe SearchesController do
         expect(search_service).to have_received(:execute)
           .with provider
       end
-    end
-
-    context 'on success event' do
-      before do
-        stub_wisper_publisher('SearchService', :execute, :success, search)
-      
-        post :create, search_form: params
-      end
 
       it 'returns http redirect' do
         expect(response).to be_redirect
@@ -110,10 +103,11 @@ describe SearchesController do
       end
     end
 
-    context 'on fail event' do
+    context 'fail' do
       before do
-        stub_wisper_publisher('SearchService', :execute, :fail, errors)
-    
+        allow(SearchService).to receive(:new).and_return search_service
+        mock_wisper_publisher(search_service, :execute, :fail, errors)
+      
         post :create, search_form: params
       end
 
