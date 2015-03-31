@@ -1,9 +1,9 @@
 class RecommendationForm
   include ActiveModel::Model
 
-  attr_accessor :user_id, :practitioner_name, :patient_type_id, :profession_id, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment 
+  attr_accessor :user_id, :practitioner_name, :patient_type_id, :profession_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment 
 
-  validates :user_id, :practitioner_name, :patient_type_id, :profession_id, :address, :wait_time, :availability, :bedside_manner, :efficacy, presence: true 
+  validates :user_id, :practitioner_name, :patient_type_id, :profession_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, presence: true 
 
   def recommendation
     @recommendation ||= Recommendation.new({

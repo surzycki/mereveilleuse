@@ -8,6 +8,8 @@ root.ProfessionAutocomplete = React.createClass(
     value: null;
   
   componentWillMount: ->
+    PubSub.subscribe( 'practitioner:selected', this.handlePractitionerSelected )
+
     input  = $.parseHTML(this.props.field)
    
     this._props.name        = $(input).attr('name')
@@ -37,6 +39,9 @@ root.ProfessionAutocomplete = React.createClass(
     # send clear event
     #if event.target.value == ''
     #  PubSub.publish( 'practitioner:selected', { address: ''} );
+
+  handlePractitionerSelected: (msg, data) ->
+    this.setState( { value: data.profession_name } )
 
   render: ->
     `<input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }

@@ -187,3 +187,14 @@ Available helpers for: `mobile` `tablet` `devices` `desktop`
   @include border-left-radius($radius);
   @include border-right-radius($radius);
 }
+
+
+@mixin placeholder {
+  $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+  @each $placeholder in $placeholders {
+    &:#{$placeholder}-placeholder {
+      @content;
+    }
+  }
+}
+

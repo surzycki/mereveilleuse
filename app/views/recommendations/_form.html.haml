@@ -7,8 +7,8 @@
         = react_component( 'PractitionerAutocomplete', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
         
       .form-group
-        = f.label :profession_id, t('recommendation.form.profession.label')
-        = f.collection_select(:profession_id, Profession.all.order(name: :asc), :id, :name, { include_blank: t('recommendation.form.profession.placeholder') }, class: 'form-control' )
+        = f.label :profession_name, t('recommendation.form.profession.label')
+        = react_component( 'ProfessionAutocomplete', field: f.text_field(:profession_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
            
       .form-group
         = f.label :patient_type_id, t('recommendation.form.patient_type.label')

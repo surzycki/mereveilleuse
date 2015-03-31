@@ -24,9 +24,9 @@ $primary-action-color:        #f16272;
 $secondary-action-color:      #2fc1f8;
 $alternate-action-color:      #a9a9a9;
 
-$primary-background-color:    #f7f7f7;
-$secondary-background-color:  #ffffff;
-$alternate-cbackground-color: #ececec;
+$primary-background-color:    #ffffff;
+$secondary-background-color:  #f7f7f7;
+$alternate-background-color:  #ececec;
 
 $heading-color:               #555555;
 
@@ -49,8 +49,8 @@ $navbar-default-link-hover-color:    $dark-grey-color;
 
 $input-border-radius:                3px;
 $input-border-focus:                 $primary-action-color;
-$input-bg:                           $alternate-cbackground-color;
-$input-border:                       transparent;
+$input-bg:                           $primary-background-color;
+$input-border:                       #EFEFEF;
 $input-color-placeholder:            $muted-color;
 
 $font-family-sans-serif:             'Open Sans', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;

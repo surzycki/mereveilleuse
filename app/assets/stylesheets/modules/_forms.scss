@@ -59,3 +59,23 @@ category: forms
 textarea { 
   resize:none; 
 }
+
+
+/*doc
+---
+title: Placeholder
+name: form-3
+category: forms
+---
+
+```haml_example
+
+```
+*/
+
+input, select, textarea {
+  @include placeholder {
+    color: $muted-color !important;
+    font-weight: 300;
+  }
+}
