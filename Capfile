@@ -25,7 +25,7 @@ require 'capistrano/rails/migrations'
 require 'capistrano/puma'
 require 'capistrano/sidekiq'
 require 'airbrake/capistrano3'
-
+require 'slackistrano'
 # require 'capistrano/passenger'
 
 # Load custom tasks from `lib/capistrano/tasks' if you have any defined

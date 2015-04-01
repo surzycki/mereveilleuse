@@ -10,6 +10,10 @@ Bundler.require(*Rails.groups)
 require 'dotenv' ; Dotenv.load '.env.local', ".env.#{Rails.env}"
 
 module AppFacebook
+  def self.config
+    Application.config
+  end
+
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/lib/extensions)
     

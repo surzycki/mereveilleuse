@@ -17,6 +17,15 @@ set :normalize_asset_timestamps,  %{public/images public/javascripts public/styl
 
 set :sidekiq_config, File.join(release_path, 'config', 'sidekiq.yml')
 
+set :slack_webhook,         'https://hooks.slack.com/services/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'
+set :slack_channel,         -> { '#mereveilleuse' }
+set :slack_username,        -> { 'mereveilleuse' }
+set :slack_run_starting,    -> { false }
+set :slack_run_finished,    -> { true }
+set :slack_run_failed,      -> { false }
+set :slack_msg_finished,    -> { "There is a new version on #{fetch :rails_env, 'production'}" }
+set :slack_icon_url,        -> { 'https://canvas.mereveilleuse.com/images/mereveilleuse.jpg' }
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do

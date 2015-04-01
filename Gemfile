@@ -51,6 +51,7 @@ group :staging, :development, :test do
   gem 'forgery'                                           # Easy and customizable generation of forged data.
   gem 'byebug'
   gem 'web-console',            '~> 2.0'
+  gem 'slackistrano', require: false                      # Slack integration for Capistrano deployments.
 end
 
 group :development, :test do
