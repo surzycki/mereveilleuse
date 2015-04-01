@@ -44,8 +44,10 @@ module ActiveAdmin::ViewHelpers
     last_sent_in_minutes = TimeDifference.between(search.updated_at,DateTime.now).in_minutes
 
     status = :ok       if last_sent_in_minutes < ( ENV['EMAIL_INTERVAL'].to_i * 2 )
-    status = :pending  if last_sent_in_minutes > ( ENV['EMAIL_INTERVAL'].to_i * 2.1 )
+    status = :no       if last_sent_in_minutes > ( ENV['EMAIL_INTERVAL'].to_i * 2.1 )
     status = :error    if last_sent_in_minutes > ( ENV['EMAIL_INTERVAL'].to_i * 4 )
+
+    status = :pending  if search.canceled?
 
     arbre do
       status_tag(I18n.l(search.updated_at, format: :short), status)
