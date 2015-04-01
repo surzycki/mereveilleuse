@@ -12,7 +12,7 @@
             .panel-body
             .form-group
               = f.label :profession_id, t('search.form.profession.label')
-              = f.collection_select(:profession_id, Profession.all.order(name: :asc), :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
+              = f.collection_select(:profession_id, Profession.indexed.order(name: :asc), :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
   
             .form-group
               = f.label :patient_type_id, t('search.form.patient_type.label')

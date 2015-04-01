@@ -139,7 +139,7 @@ describe 'recommendation' do
           end.to change(Location, :count).by(1)
         end
 
-        it 'has practitioner not indexed' do
+        it 'changes practitioner status' do
           expect do
             post recommendations_path, recommendation_form: form_data
           end.to_not change { Practitioner.first.status }
@@ -228,6 +228,12 @@ describe 'recommendation' do
           end.to_not change(Location, :count)
         end
 
+        it 'does not change status' do
+          expect do
+            post recommendations_path, recommendation_form: form_data
+          end.to_not change { practitioner.reload.status }
+        end
+
         it 'has a correct recommendation' do
           post recommendations_path, recommendation_form: form_data
 
@@ -306,7 +312,7 @@ describe 'recommendation' do
           end.to change(Recommendation, :count).by(1)
         end
 
-        it 'sets not_indexed status' do
+        it 'chages practitioner status' do
           expect do
             post recommendations_path, recommendation_form: form_data
           end.to change { practitioner.reload.status }.to('not_indexed')
@@ -350,7 +356,7 @@ describe 'recommendation' do
           end.to_not change(Profession, :count)
         end
 
-        it 'does NOT set not_indexed status' do
+        it 'does NOT change practitioner status' do
           expect do
             post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
           end.to_not change { practitioner.reload.status }
@@ -401,7 +407,7 @@ describe 'recommendation' do
           end.to change(Recommendation, :count).by(1)
         end
 
-        it 'sets not_indexed status' do
+        it 'changes practitioner status' do
           expect do
             post recommendations_path, recommendation_form: form_data
           end.to change { practitioner.reload.status }.to('not_indexed')
@@ -451,7 +457,7 @@ describe 'recommendation' do
           end.to_not change(Profession, :count)
         end
 
-        it 'does NOT set not_indexed status' do
+        it 'does NOT change practitioner status' do
           expect do
             post recommendations_path, recommendation_form: form_data.merge(patient_type_id: '')
           end.to_not change { practitioner.reload.status }
@@ -502,7 +508,7 @@ describe 'recommendation' do
           end.to change(Recommendation, :count).by(1)
         end
 
-        it 'does not change status' do
+        it 'does not change practitioner status' do
           expect do
             post recommendations_path, recommendation_form: form_data
           end.to_not change { practitioner.reload.status }

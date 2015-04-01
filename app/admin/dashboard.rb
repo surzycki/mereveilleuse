@@ -140,6 +140,24 @@ ActiveAdmin.register_page "Dashboard" do
           strong { link_to 'View All', admin_practitioners_path('q[status_in][]'=> '0', order: 'created_at_desc') }
         end
       end
+
+      column do
+        panel 'New Professions (not indexed)', priority: 1 do
+          table_for Profession.where(status: Profession.statuses[:not_indexed]).order('created_at desc').limit(15) do
+            column 'Status' do |profession|
+              status_tag(profession.status, profession_status(profession))
+            end
+
+            column :name
+            
+            column 'Created' do |profession|
+              I18n.l(profession.created_at, format: :short_date)  
+            end
+          end
+          
+          strong { link_to 'View All', admin_professions_path('q[status_in][]'=> '0', order: 'created_at_desc') }
+        end
+      end
     end
   end
 end

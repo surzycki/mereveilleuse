@@ -13,6 +13,13 @@ module ActiveAdmin::ViewHelpers
     status
   end
 
+  def profession_status(profession)
+    status = :ok      if profession.indexed? 
+    status = :error   if profession.not_indexed?
+  
+    status
+  end
+
   def search_status(search)
     status = :ok      if search.active? 
     status = :error   if search.canceled?
