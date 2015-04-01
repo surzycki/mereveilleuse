@@ -59,6 +59,10 @@ describe Recommendation do
       expect(subject).to delegate_method(:address).to(:practitioner)
     end
 
+    it 'delegates short_address to practitioner' do
+      expect(subject).to delegate_method(:short_address).to(:practitioner)
+    end
+
     it 'delegates latitude to practitioner' do
       expect(subject).to delegate_method(:latitude).to(:practitioner)
     end

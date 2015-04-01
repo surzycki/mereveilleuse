@@ -9,6 +9,7 @@ class Recommendation < ActiveRecord::Base
   delegate :latitude,       to: :practitioner, prefix: false, allow_nil: true
   delegate :longitude,      to: :practitioner, prefix: false, allow_nil: true
   delegate :address,        to: :practitioner, prefix: false, allow_nil: true
+  delegate :short_address,  to: :practitioner, prefix: false, allow_nil: true
   delegate :email,          to: :practitioner, prefix: false, allow_nil: true 
   delegate :contact_phone,  to: :practitioner, prefix: false, allow_nil: true 
 

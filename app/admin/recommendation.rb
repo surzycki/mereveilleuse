@@ -35,11 +35,14 @@ ActiveAdmin.register Recommendation do
       link_to_user recommendation.recommender
     end
 
-    column :availability
-    column :bedside_manner
-    column :efficacy
-    column :wait_time
-    
+    column 'Location' do |recommendation|
+      link_to_location recommendation, :short_address
+    end
+
+    column 'Rating' do |recommendation|
+      recommendation.rating
+    end
+  
     column 'Created at' do |recommendation|
       I18n.l(recommendation.created_at, format: :short_date)  
     end

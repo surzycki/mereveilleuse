@@ -5,6 +5,7 @@ module LocationAttributes
     has_one :location, dependent: :destroy, as: :locatable, autosave: true
 
     delegate :address,          to: :location, prefix: false, allow_nil: true
+    delegate :short_address,    to: :location, prefix: false, allow_nil: true
     delegate :longitude,        to: :location, prefix: false, allow_nil: true
     delegate :latitude,         to: :location, prefix: false, allow_nil: true
     delegate :unparsed_address, to: :location, prefix: false, allow_nil: true

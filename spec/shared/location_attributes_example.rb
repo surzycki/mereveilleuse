@@ -9,6 +9,14 @@ shared_examples 'it has location attributes' do
       expect(subject.address).to be_nil
     end
 
+    it 'delegates short_address to location' do
+      expect(subject).to delegate_method(:short_address).to(:location)
+    end
+
+    it 'delegates short_address to location allow nil' do
+      expect(subject.short_address).to be_nil
+    end
+
     it 'delegates latitude to location' do
       expect(subject).to delegate_method(:latitude).to(:location)
     end
