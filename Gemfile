@@ -27,7 +27,6 @@ gem 'geocoder'                                            # Complete Ruby geocod
 gem 'redis'                                               # A Ruby client library for Redis
 gem 'wisper'                                              # A micro library providing Ruby objects with Publish-Subscribe capabilities
 gem 'sidekiq'                                             # Simple, efficient background processing for Ruby.
-#gem 'roadie-rails'                                        # CSS styled emails without the hassle.
 gem 'premailer-rails'                                     # CSS styled emails without the hassle.
 gem 'monadic'                                             # helps dealing with exceptional situations, 
 gem 'devise'
@@ -61,6 +60,7 @@ end
 
 group :test do
   gem 'capybara'                                          # Acceptance test framework for web application
+  gem 'capybara-email'                                    # Test your ActionMailer and Mailer messages with Capybara
   gem 'turnip'                                            # Gherkin extension for RSpec
   gem 'guard'                                             # Guard is a command line tool to easily handle events on file system modifications
   gem 'rspec'                                             # RSpec for Rails-3+

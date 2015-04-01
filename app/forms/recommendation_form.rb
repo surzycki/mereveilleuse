@@ -1,14 +1,14 @@
 class RecommendationForm
   include ActiveModel::Model
 
-  attr_accessor :user_id, :practitioner_name, :patient_type_id, :profession_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment 
+  attr_accessor :user_id, :practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment 
 
-  validates :user_id, :practitioner_name, :patient_type_id, :profession_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, presence: true 
+  validates :user_id, :practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, presence: true 
 
   def recommendation
     @recommendation ||= Recommendation.new({
       user_id:           user_id, 
-      profession_id:     profession_id,
+      profession_id:     profession.id,
       patient_type_ids:  [ patient_type_id ],
       wait_time:         wait_time,
       availability:      availability,
@@ -24,7 +24,14 @@ class RecommendationForm
     @practitioner ||= Practitioner.find_by_fullname(practitioner_name) || Practitioner.new
   end
 
+  def profession 
+    @profession ||= Profession.where(
+      "lower(name) = ?", profession_name.try(:downcase)
+    ).take || Profession.new(name: profession_name)
+  end
+
   def process
+    
     if self.valid?
       update_practitioner
       recommendation.save
@@ -39,7 +46,8 @@ class RecommendationForm
 
   private
   def update_practitioner
-    input_practitioner  = Digest::MD5.hexdigest("#{practitioner_name}-#{profession_id}-#{address}") 
+    # TODO add hash property to practitioner
+    input_practitioner  = Digest::MD5.hexdigest("#{practitioner_name}-#{profession.id}-#{address}") 
     actual_practitioner = Digest::MD5.hexdigest("#{practitioner.fullname}-#{practitioner.primary_occupation.profession_id}-#{practitioner.address}")
     
     return if input_practitioner == actual_practitioner
@@ -48,8 +56,12 @@ class RecommendationForm
           
     practitioner.address  = address
     practitioner.status   = :not_indexed
-          
-    practitioner.add_occupation profession_id
+    
+    # add new profession
+    profession.save if profession.id.nil?     
+    
+    practitioner.add_occupation profession.id
+    
     practitioner.save
   end
 end

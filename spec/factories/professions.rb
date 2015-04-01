@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :profession do
-    name  'Osteopathe'    
+    name      'Osteopathe'    
+    status    Profession.statuses[:indexed]   
   end
 end

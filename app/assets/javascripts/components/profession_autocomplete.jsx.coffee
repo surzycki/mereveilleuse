@@ -51,8 +51,8 @@ root.ProfessionAutocomplete = React.createClass(
   _props: {}
 
   _initialize_typeahead: ->
-    practitioner_engine = this.engine()
-    practitioner_engine.initialize()
+    profession_engine = this.engine()
+    profession_engine.initialize()
 
     element = this.getDOMNode()
     
@@ -63,7 +63,7 @@ root.ProfessionAutocomplete = React.createClass(
     },
       name: 'profession_name'
       displayKey: 'name'
-      source: practitioner_engine.ttAdapter()
+      source: profession_engine.ttAdapter()
 
   _destroy_typeahead: ->
     element = this.getDOMNode()

@@ -39,7 +39,7 @@ class RecommendationsController < ApplicationController
   private
   def recommendation_params
     params.require(:recommendation_form)
-      .permit(:practitioner_name, :patient_type_id, :profession_id, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment )
+      .permit(:practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment )
       .merge(user_id: current_user.id)
   end
 

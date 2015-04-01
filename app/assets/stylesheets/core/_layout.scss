@@ -37,7 +37,7 @@ category: layout
 }
 
 .cover-landing {
-  @include background-image(image-url('background-top-landing.jpg')); 
+  //@include background-image(image-url('background-top-landing.jpg')); 
 }
 
 /*doc

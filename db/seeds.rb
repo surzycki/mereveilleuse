@@ -149,4 +149,5 @@ end
 puts '-- indexing models...'
 Practitioner.reindex
 Recommendation.reindex
+Profession.reindex
   

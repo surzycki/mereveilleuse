@@ -6,6 +6,8 @@ require File.expand_path('../../config/environment', __FILE__)
 
 require 'rspec/rails'
 require 'shoulda/matchers'
+require 'capybara/email/rspec'
+require 'email_spec'
 
 # Load support files
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }

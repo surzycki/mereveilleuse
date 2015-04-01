@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   # json api
   get 'practitioners/autocomplete',   to: 'practitioners#autocomplete', as: 'practitioners_autocomplete', constraints: { format: 'json' }
+  get 'professions/autocomplete',     to: 'professions#autocomplete',   as: 'professions_autocomplete',   constraints: { format: 'json' }
   
   get 'conditions-generales',         to: 'static_pages#conditions',    as: 'conditions'
   get 'mentions-legales',             to: 'static_pages#legal',         as: 'legal'

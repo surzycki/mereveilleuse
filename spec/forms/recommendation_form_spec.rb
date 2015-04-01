@@ -22,10 +22,6 @@ describe RecommendationForm do
       expect(subject).to respond_to :patient_type_id
     end
 
-    it 'has a profession_id' do 
-      expect(subject).to respond_to :profession_id
-    end
-
     it 'has a profession_name' do 
       expect(subject).to respond_to :profession_name
     end
@@ -66,10 +62,6 @@ describe RecommendationForm do
 
     it 'validates presense of patient_type_id' do
       expect(subject).to validate_presence_of :patient_type_id
-    end
-
-    it 'validates presense of profession_id' do
-      expect(subject).to validate_presence_of :profession_id
     end
 
     it 'validates presense of profession_name' do

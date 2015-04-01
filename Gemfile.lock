@@ -110,6 +110,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-email (2.4.0)
+      capybara (~> 2.4)
+      mail
     celluloid (0.16.0)
       timers (~> 4.0.0)
     cliver (0.3.2)
@@ -461,6 +464,7 @@ DEPENDENCIES
   capistrano-sidekiq
   capistrano3-puma
   capybara
+  capybara-email
   coffee-rails (~> 4.1.0)
   dalli
   database_cleaner
