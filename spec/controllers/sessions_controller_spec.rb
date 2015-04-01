@@ -45,8 +45,6 @@ describe SessionsController do
   end
 
   describe 'POST create' do
-    
-
     context 'handle authenticity token' do
       before {
         mock_wisper_publisher(authentication_service, :authenticate, :success, user) 
@@ -61,10 +59,9 @@ describe SessionsController do
     end
 
     context 'success'  do
-      before { mock_wisper_publisher(authentication_service, :authenticate, :success, user) }
-
       context 'with REGISTERED user' do
         before do
+          mock_wisper_publisher(authentication_service, :authenticate, :login, user)
           allow(user).to receive(:registered?).and_return true
           
           post :create, signed_request: '1234', fb_locale: 'en_US'
@@ -100,7 +97,7 @@ describe SessionsController do
 
       context 'with REGISTERED user REDIRECTED' do
         before do
-          mock_wisper_publisher(authentication_service, :authenticate, :success, user, '/redirect_path')
+          mock_wisper_publisher(authentication_service, :authenticate, :login, user, '/redirect_path')
           allow(user).to receive(:registered?).and_return true
           
           post :create, signed_request: '1234', fb_locale: 'en_US', app_data: '/redirect_path'
@@ -136,6 +133,7 @@ describe SessionsController do
 
       context 'with UNREGISTERED user' do
         before do
+          mock_wisper_publisher(authentication_service, :authenticate, :signup, user)
           allow(user).to receive(:registered?).and_return false
           
           post :create, signed_request: '1234', fb_locale: 'en_US'

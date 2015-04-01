@@ -6,8 +6,7 @@ class AuthenticationService
   def authenticate(auth)
     begin
       if auth.authenticated
-        account = get_account auth 
-        publish :success, account, auth.redirect_path
+        do_authentication auth
       else
         publish :request_authentication, auth
       end
@@ -17,6 +16,15 @@ class AuthenticationService
   end
 
   private 
+  def do_authentication(auth)
+    account = get_account auth 
+    if account.registered?
+      publish :login, account, auth.redirect_path
+    else
+      publish :signup, account
+    end
+  end
+
   def get_account(auth)
     begin 
       account = User.find_or_create_by(facebook_id: auth.facebook_id)
