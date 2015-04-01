@@ -1,4 +1,5 @@
-- if @recommendation.email
+- if @recommendation.email.present?
   #{t('email.recommendation.email_address')} mailto:#{@recommendation.email}
-- else
+
+- if @recommendation.contact_phone.present?
   #{format_french_phone_number(@recommendation.contact_phone)} tel://#{@recommendation.contact_phone}

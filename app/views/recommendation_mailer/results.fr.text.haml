@@ -22,7 +22,7 @@ Voici les coordonnées de #{@recommendation.practitioner_fullname}.
 #{t('rating.form.availability.label')} #{@recommendation.availability}
 #{t('rating.form.wait_time.label')} #{@recommendation.wait_time}
 
-- if @recommendation.email && @recommendation.contact_phone
+- if @recommendation.email.present? && @recommendation.contact_phone.present?
   = render 'recommendation_mailer/email_and_phone_contact'
 - else
   = render 'recommendation_mailer/email_or_phone_contact', recommendation: @recommendation

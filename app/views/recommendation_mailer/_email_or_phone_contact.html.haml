@@ -1,10 +1,13 @@
-%td.wrapper.no-vertical-padding.offset-by-one
-  %table.ten.columns
+- if @recommendation.email.present? || @recommendation.contact_phone.present?
+  %table.container.background-transparent
     %tr
-      %td
-        - if @recommendation.email
-          = link_to t('email.recommendation.email_address'), "mailto:#{@recommendation.email}", class: 'btn btn-secondary btn-block btn-sm' 
-        - else
-          = link_to format_french_phone_number(@recommendation.contact_phone), "tel://#{@recommendation.contact_phone}", class: 'btn btn-secondary btn-block btn-sm' 
-      %td.expander
+      %td.wrapper.no-vertical-padding.offset-by-one
+        %table.ten.columns
+          %tr
+            %td
+              - if @recommendation.email.present?
+                = link_to t('email.recommendation.email_address'), "mailto:#{@recommendation.email}", class: 'btn btn-secondary btn-block btn-sm' 
+              - if @recommendation.contact_phone.present?
+                = link_to format_french_phone_number(@recommendation.contact_phone), "tel://#{@recommendation.contact_phone}", class: 'btn btn-secondary btn-block btn-sm' 
+            %td.expander
 

@@ -57,7 +57,7 @@ class Practitioner < ActiveRecord::Base
   end
 
   def contact_phone
-    self.mobile_phone || self.phone || nil
+    self.mobile_phone.presence || self.phone.presence || nil
   end
 
   private

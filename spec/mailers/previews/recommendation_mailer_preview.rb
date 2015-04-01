@@ -4,6 +4,8 @@ class RecommendationMailerPreview < ActionMailer::Preview
     search = Search.all.sample
     recommendations = [ Recommendation.all.sample ]
     
+    Premailer::Rails.config.merge!(skip_premailer: true)
+
     RecommendationMailer.results search, recommendations
   end
 end

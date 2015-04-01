@@ -82,7 +82,7 @@
                 %td.expander
 
 // Contact section
-%table.row.background-primary-background{ style: 'display: table !important;'}
+%table.row.background-secondary-background{ style: 'display: table !important;'}
   %tr
     %td.results.center
       %table.container.background-transparent.no-vertical-padding
@@ -135,12 +135,10 @@
                   = image_tag rating_image(@recommendation.wait_time), class: 'center rating', alt: @recommendation.wait_time
                 %td.expander    
       
-      %table.container.background-transparent
-        %tr
-          - if @recommendation.email && @recommendation.contact_phone
-            = render 'recommendation_mailer/email_and_phone_contact', recommendation: @recommendation
-          - else
-            = render 'recommendation_mailer/email_or_phone_contact', recommendation: @recommendation
+      - if @recommendation.email.present? && @recommendation.contact_phone.present?
+        = render 'recommendation_mailer/email_and_phone_contact', recommendation: @recommendation
+      - else
+        = render 'recommendation_mailer/email_or_phone_contact', recommendation: @recommendation
 
 // call-to-action section           
 %table.container

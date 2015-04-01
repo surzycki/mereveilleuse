@@ -49,4 +49,8 @@ Rails.application.configure do
 
   # active job adapter
   config.active_job.queue_adapter = :sidekiq
+
+  # allows premailer-rails and rails preview to live together without locking the process
+  # in development
+  config.middleware.delete Rack::Lock
 end

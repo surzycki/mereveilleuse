@@ -253,14 +253,6 @@ describe Practitioner do
   end
 
   describe '#contact_phone' do
-    context 'when ONLY mobile present' do
-      let(:subject) { build_stubbed :practitioner, phone: '' }
-      
-      it 'returns mobile number' do
-        expect(subject.contact_phone).to eq subject.mobile_phone
-      end
-    end
-
     context 'when mobile and fixed present' do
       let(:subject) { build_stubbed :practitioner }
       
@@ -269,7 +261,23 @@ describe Practitioner do
       end
     end
 
-    context 'when mobile not present' do
+    context 'when fixed is nil' do
+      let(:subject) { build_stubbed :practitioner, phone: nil }
+      
+      it 'returns mobile number' do
+        expect(subject.contact_phone).to eq subject.mobile_phone
+      end
+    end
+
+    context 'when fixed is blank' do
+      let(:subject) { build_stubbed :practitioner, phone: '' }
+      
+      it 'returns mobile number' do
+        expect(subject.contact_phone).to eq subject.mobile_phone
+      end
+    end
+
+    context 'when mobile nil' do
       let(:subject) { build_stubbed :practitioner, mobile_phone: nil }
       
       it 'returns fixed number' do
@@ -277,11 +285,27 @@ describe Practitioner do
       end
     end
 
-    context 'when neither are present' do
-      let(:subject) { build_stubbed :practitioner, mobile_phone: nil, phone: nil }
+    context 'when mobile blank' do
+      let(:subject) { build_stubbed :practitioner, mobile_phone: '' }
       
       it 'returns fixed number' do
         expect(subject.contact_phone).to eq subject.phone
+      end
+    end
+
+    context 'when both are nil' do
+      let(:subject) { build_stubbed :practitioner, mobile_phone: nil, phone: nil }
+      
+      it 'returns nil' do
+        expect(subject.contact_phone).to be_nil
+      end
+    end
+
+    context 'when both are blank' do
+      let(:subject) { build_stubbed :practitioner, mobile_phone: '', phone: '' }
+      
+      it 'returns nil' do
+        expect(subject.contact_phone).to be_nil
       end
     end
   end
