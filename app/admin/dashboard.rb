@@ -118,6 +118,10 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel 'Modified Practitioners (not indexed)', priority: 1 do
           table_for Practitioner.where(status: Practitioner.statuses[:not_indexed]).order('created_at desc').limit(15) do
+            column 'Status' do |practitioner|
+              status_tag(practitioner.status, practitioner_status(practitioner))
+            end
+
             column 'Practitioner' do |practitioner|
               link_to_practitioner practitioner
             end
