@@ -53,11 +53,7 @@ ActiveAdmin.register Search do
     end
 
     column 'Last sent' do |search|
-      if search.sent_practitioners.count > 0
-        I18n.l(search.updated_at, format: :short)
-      else
-        '--'
-      end
+      last_sent_search search
     end
 
     column 'Next scheduled' do |search|

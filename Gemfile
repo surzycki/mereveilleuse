@@ -29,8 +29,11 @@ gem 'wisper'                                              # A micro library prov
 gem 'sidekiq'                                             # Simple, efficient background processing for Ruby.
 gem 'premailer-rails'                                     # CSS styled emails without the hassle.
 gem 'monadic'                                             # helps dealing with exceptional situations, 
+gem 'time_difference'                                     # The missing Ruby method to print out time difference (duration) in year, month, week, day, hour, minute, and second.
+gem 'slack-notifier'                                      # A simple wrapper for posting to slack channels
 gem 'devise'
 gem 'unicode_utils'
+
 
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'

@@ -1,4 +1,8 @@
 module ActiveAdmin::ViewHelpers
+  def arbre(&block)
+    Arbre::Context.new(&block).to_s
+  end
+
   def user_status(user)
     status = :ok      if user.registered? 
     status = :error   if user.unregistered?
@@ -32,6 +36,20 @@ module ActiveAdmin::ViewHelpers
     status = :no     if user.searches.empty?
 
     status
+  end
+
+  def last_sent_search(search)
+    return '--' if search.sent_practitioners.count == 0
+    
+    last_sent_in_minutes = TimeDifference.between(search.updated_at,DateTime.now).in_minutes
+
+    status = :ok       if last_sent_in_minutes < ( ENV['EMAIL_INTERVAL'].to_i * 2 )
+    status = :pending  if last_sent_in_minutes > ( ENV['EMAIL_INTERVAL'].to_i * 2.1 )
+    status = :error    if last_sent_in_minutes > ( ENV['EMAIL_INTERVAL'].to_i * 4 )
+
+    arbre do
+      status_tag(I18n.l(search.updated_at, format: :short), status)
+    end
   end
 
   def link_to_location(location, type = :address)
