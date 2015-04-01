@@ -47,8 +47,10 @@ ActiveAdmin.register Practitioner do
     end
 
     column :email
-    column :phone
-    column :mobile_phone
+    
+    column 'phone' do |practitioner|
+      practitioner.contact_phone
+    end
 
     column 'Location' do |practitioner|  
       link_to_location practitioner.location
