@@ -19,7 +19,6 @@
     }
 
     function loginCallback(response) {
-      debugger
       if(response.status != 'connected') {
         console.log('loginCallback: NOT CONNECTED');
         // goto app description page
@@ -28,7 +27,6 @@
     }
 
     function onStatusChange(response) {
-      debugger
       if( response.status != 'connected' ) {
         login(loginCallback);
       } else {
