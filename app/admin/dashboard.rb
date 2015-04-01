@@ -130,8 +130,6 @@ ActiveAdmin.register_page "Dashboard" do
               get_occupation practitioner
             end
             
-            column :email
-
             column 'Location' do |practitioner|  
               link_to_location practitioner.location
             end
