@@ -34,7 +34,6 @@ gem 'slack-notifier'                                      # A simple wrapper for
 gem 'devise'
 gem 'unicode_utils'
 
-
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
 

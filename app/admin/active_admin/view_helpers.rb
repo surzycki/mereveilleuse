@@ -1,4 +1,6 @@
 module ActiveAdmin::ViewHelpers
+  require 'time_difference' 
+
   def arbre(&block)
     Arbre::Context.new(&block).to_s
   end
