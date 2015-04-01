@@ -52,8 +52,20 @@ ActiveAdmin.register Search do
       search.sent_practitioners.count
     end
 
-    column 'Created at' do |search|
-      I18n.l(search.created_at, format: :short_date)  
+    column 'Last sent' do |search|
+      if search.sent_practitioners.count > 0
+        I18n.l(search.updated_at, format: :short)
+      else
+        '--'
+      end
+    end
+
+    column 'Next scheduled' do |search|
+      if search.sent_practitioners.count > 0
+        I18n.l(search.updated_at + ENV['EMAIL_INTERVAL'].to_i.minutes, format: :short)
+      else
+        '--'
+      end
     end
 
     actions defaults: false do |search|
