@@ -50,6 +50,10 @@ ActiveAdmin.register Profession do
       I18n.l(profession.created_at, format: :short_date)  
     end
     
+    column '' do |profession|
+      link_to('Index', indexed_admin_profession_path(profession))
+    end
+
     actions
   end
 
