@@ -46,9 +46,9 @@ describe SessionsController do
 
   describe 'POST create' do
     context 'handle authenticity token' do
-      before {
+      before do
         mock_wisper_publisher(authentication_service, :authenticate, :success, user) 
-      }
+      end
 
       it 'skips authenticity token' do
         allow(controller).to receive (:verify_authenticity_token)
@@ -61,7 +61,7 @@ describe SessionsController do
     context 'success'  do
       context 'with REGISTERED user' do
         before do
-          mock_wisper_publisher(authentication_service, :authenticate, :login, user)
+          mock_wisper_publisher(authentication_service, :authenticate, :login, user, nil)
           allow(user).to receive(:registered?).and_return true
           
           post :create, signed_request: '1234', fb_locale: 'en_US'

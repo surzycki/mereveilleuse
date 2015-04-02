@@ -7,11 +7,11 @@ class RecommendationService
     @form = form
   end
 
-  def submit
+  def create_recommendation
     if form.process
-      publish :success, form.recommendation
+      publish :recommendation_created, form.recommendation
     else
-      publish :fail, form.errors
+      publish :recommendation_create_fail, form.errors
     end
   end
 end

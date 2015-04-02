@@ -1,17 +1,17 @@
-describe RecommendationGeocodeListener do
-  let(:subject)        { RecommendationGeocodeListener.new }
+describe GeocodeListener do
+  let(:subject)        { GeocodeListener.new }
   let(:recommendation) { build_stubbed :recommendation }
   
   describe '#initialize' do
     it 'initializes' do
-      expect { RecommendationGeocodeListener.new }.to_not raise_error
+      expect { GeocodeListener.new }.to_not raise_error
     end
   end 
 
-  describe '#geocode' do
+  describe '#recommendation' do
     before do
       allow(GeocodePractitionerJob).to receive(:perform_later)
-      subject.geocode(recommendation)
+      subject.recommendation(recommendation)
     end
 
     it 'queues practitioner geocode job' do

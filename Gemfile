@@ -36,7 +36,7 @@ gem 'unicode_utils'
 
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
-
+#gem 'wisper-activejob',            github: 'krisleech/wisper-activejob'                                    
 gem 'sinatra', :require => nil
 
 group :production do
@@ -69,7 +69,6 @@ group :test do
   gem 'rspec'                                             # RSpec for Rails-3+
   gem 'rspec-rails'                                       # RSpec for Rails-3+
   gem 'email_spec'                                        # Collection of RSpec/MiniTest matchers and Cucumber steps for testing email in a ruby app using ActionMailer or Pony
-  gem 'rspec-activejob'                                   # RSpec matchers for testing ActiveJob
   gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
   gem 'spring-commands-rspec'
   gem 'spring' 

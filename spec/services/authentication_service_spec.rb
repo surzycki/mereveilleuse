@@ -132,7 +132,7 @@ describe AuthenticationService do
       it 'broadcasts fail' do
         expect { 
           subject.authenticate(auth) 
-        }.to broadcast(:fail)
+        }.to broadcast(:authentication_fail)
       end
     end
 

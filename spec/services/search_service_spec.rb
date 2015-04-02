@@ -26,7 +26,7 @@ describe SearchService do
       it 'broadcasts success' do
         expect { 
           subject.execute(provider) 
-        }.to broadcast(:success)
+        }.to broadcast(:search_success)
       end
 
       it 'executes provider' do
@@ -46,7 +46,7 @@ describe SearchService do
       it 'broadcasts fail' do
         expect { 
           subject.execute(provider) 
-        }.to broadcast(:fail)
+        }.to broadcast(:search_fail)
       end
 
       it 'does NOT execute provider' do

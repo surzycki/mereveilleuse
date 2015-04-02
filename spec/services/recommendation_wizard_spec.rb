@@ -1,4 +1,4 @@
-#describe RecommendationWizard, focus: true do
+#describe RecommendationWizard do
 #  
 #  subject { RecommendationWizard.new form }
 #  

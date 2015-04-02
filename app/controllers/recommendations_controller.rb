@@ -14,22 +14,22 @@ class RecommendationsController < ApplicationController
     # the burden on the system, practitioners are geocoded only when a
     # new recommendation is made.
     recommendation_service.subscribe( 
-      RecommendationGeocodeListener.new,
-      on: :success,
-      with: :geocode 
+      GeocodeListener.new,
+      on: :recommendation_created,
+      with: :recommendation 
     )
 
-    recommendation_service.on :success do |recommendation|
+    recommendation_service.on :recommendation_created do |recommendation|
       current_user.registered!
       redirect_to recommendation_path(recommendation)
     end
 
-    recommendation_service.on :fail do |errors|
+    recommendation_service.on :recommendation_create_fail do |errors|
       flash.now[:alert] = errors.full_messages.join(', ')
       render :new
     end
 
-    recommendation_service.submit
+    recommendation_service.create_recommendation
   end
 
   # GET recommendations

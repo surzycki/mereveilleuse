@@ -131,7 +131,7 @@ unless Rails.env.production?
       user_id:            User.all.sample.id,
       practitioner_name:  practitioner.fullname,
       patient_type_id:    PatientType.all.sample.id,
-      profession_id:      practitioner.primary_occupation.profession_id,
+      profession_name:    practitioner.primary_occupation.name,
       address:            practitioner.address,
       wait_time:          rand(0..4),
       availability:       rand(0..4),

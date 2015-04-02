@@ -10,11 +10,11 @@ class SearchesController < ApplicationController
   def create
     @form = SearchForm.new search_params
 
-    search_service.on :success do |results|
+    search_service.on :search_success do |results|
       redirect_to search_path
     end
 
-    search_service.on :fail do |errors|
+    search_service.on :search_fail do |errors|
       flash.now[:alert] = errors.full_messages.join(', ')
       render :new
     end

@@ -11,9 +11,9 @@ class SearchService
     if form.process
       results = provider.execute form.search
       
-      publish :success, results
+      publish :search_success, results
     else
-      publish :fail, form.errors
+      publish :search_fail, form.errors
     end
   end
 end

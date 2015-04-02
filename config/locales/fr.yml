@@ -180,7 +180,7 @@ fr:
         label: Exerçant en qualité de
         placeholder: Sélectionnez la spécialité
       patient_type:
-        label: Avec
+        label: Pour
         placeholder: Précisez pour qui
       address:
         label: À

@@ -8,6 +8,9 @@ describe SearchesController do
 
   before do
     allow(SearchForm).to receive(:new).and_return form
+    allow(RecommendationsEmailProvider).to receive(:new).and_return provider
+    allow(SearchService).to receive(:new).and_return search_service
+
     stubbed_sign_in user
   end
 
@@ -60,9 +63,7 @@ describe SearchesController do
 
     context 'success' do
       before do
-        allow(RecommendationsEmailProvider).to receive(:new).and_return provider
-        allow(SearchService).to receive(:new).and_return search_service
-        mock_wisper_publisher(search_service, :execute, :success, search)
+        mock_wisper_publisher(search_service, :execute, :search_success, search)
       
         post :create, search_form: params
       end
@@ -105,8 +106,7 @@ describe SearchesController do
 
     context 'fail' do
       before do
-        allow(SearchService).to receive(:new).and_return search_service
-        mock_wisper_publisher(search_service, :execute, :fail, errors)
+        mock_wisper_publisher(search_service, :execute, :search_fail, errors)
       
         post :create, search_form: params
       end

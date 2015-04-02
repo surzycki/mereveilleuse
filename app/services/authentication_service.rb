@@ -11,7 +11,7 @@ class AuthenticationService
         publish :request_authentication, auth
       end
     rescue Exception => error
-      publish :fail, error
+      publish :authentication_fail, error
     end
   end
 
