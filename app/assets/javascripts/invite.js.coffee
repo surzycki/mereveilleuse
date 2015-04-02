@@ -11,11 +11,17 @@ $ ->
       if callback
         callback response
    
-  onInvite = ->
-    sendInvite null, 'Some text that goes here to get people to do stuff', (response) ->
-      console.log 'sendInvite', response
+  onInvite = (e) ->
+    e.preventDefault()
+    location = $(e.currentTarget).data('redirect')
+    
+    sendInvite null, 'Les recommandations des mamans vous aident à protéger votre santé et celles de vos enfants', (response) ->
+      if location && response.request
+        window.location = location
+      
+      
 
 
-  $(document).on 'click', '#invite', onInvite
+  $(document).on 'click', '.x-invite', onInvite
 
  
