@@ -6,21 +6,18 @@ class RecommendationsEmailJob < ActiveJob::Base
   def perform(search)
     @form = EmailSearchForm.new(search) 
 
-    search_service.on :success do |results|
+    search_service.on :search_success do |results|
       # send email
       RecommendationMailer.results(search, results).deliver_later
-      
       # reschedule email (env var temporary)
-      RecommendationsEmailProvider.new(ENV['EMAIL_INTERVAL'].to_i.minutes).tap do |provider|
-        provider.execute search
-      end
-    end
-
-    search_service.on :fail do |errors|
-      # Do nothing search has been canceled
+      provider = RecommendationsEmailProvider.new(ENV['EMAIL_INTERVAL'])
+      
+      provider.execute search
     end
 
     search_service.execute RecommendationSearchProvider.new
+  rescue Exception => e
+    TrackError.new(e)
   end
 
   private 

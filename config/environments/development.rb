@@ -40,7 +40,11 @@ Rails.application.configure do
   
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  
+
+  # allows premailer-rails and rails preview to live together without locking the process
+  # in development
+  config.middleware.delete Rack::Lock
+
   config.web_console.whitelisted_ips = '192.168.59.0/16'
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
@@ -49,8 +53,4 @@ Rails.application.configure do
 
   # active job adapter
   config.active_job.queue_adapter = :sidekiq
-
-  # allows premailer-rails and rails preview to live together without locking the process
-  # in development
-  config.middleware.delete Rack::Lock
 end

@@ -2,6 +2,7 @@ describe SearchesController do
   let(:user)            { build_stubbed :user }
   let(:form)            { spy('form') }
   let(:search)          { spy('search') }
+  let(:results)         { spy('results') }
   let(:provider)        { spy('provider') }
   let(:errors)          { spy('errors') }
   let(:search_service)  { wisper_spy('search_service') }
@@ -63,7 +64,7 @@ describe SearchesController do
 
     context 'success' do
       before do
-        mock_wisper_publisher(search_service, :execute, :search_success, search)
+        mock_wisper_publisher(search_service, :execute, :search_success, results)
       
         post :create, search_form: params
       end
