@@ -4,7 +4,7 @@ class SlackNotifierListener
   end
 
   def signup(account)
-    send_notification "*#{account.fullname}* signed up"
+    send_notification "*#{account.fullname}* is signing up"
   end
 
   def authentication_fail(errors)
