@@ -14,7 +14,13 @@ class SlackNotifierListener
     recommender  = recommendation.recommender
     practitioner = recommendation.practitioner
     
-    send_notification "*#{recommender.fullname}* recommended *#{practitioner.fullname}*"
+    message = if recommender.registered?
+      "*#{recommender.fullname}* recommended *#{practitioner.fullname}*"
+    else
+      "*#{recommender.fullname} signed up* by recommending *#{practitioner.fullname}*"
+    end
+
+    send_notification message
   end
 
   def recommendation_create_fail(errors)
