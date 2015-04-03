@@ -1,4 +1,4 @@
-describe SlackNotifierJob, focus: true do 
+describe SlackNotifierJob do 
   subject { SlackNotifierJob.new }
   
   let(:message)  { 'hello world' }
