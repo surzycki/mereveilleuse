@@ -25,5 +25,23 @@ describe RecommendationMailer do
         "❤ #{I18n.t('email.recommendation.subject', profession: search.profession_name.pluralize, address: search.address )}"
       )
     end
+
+    it 'has a recommend professionsal link' do
+      expect(mail).to have_body_text( 
+        canvas_recommendation_path
+      )
+    end
+
+    it 'has a unsubscribe from search link' do
+      expect(mail).to have_body_text( 
+        canvas_unsubscribe_search_path search
+      )
+    end
+
+    it 'has a unsubscribe from account link' do
+      expect(mail).to have_body_text( 
+        canvas_unsubscribe_account_path user
+      )
+    end
   end
 end

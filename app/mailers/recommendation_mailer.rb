@@ -13,7 +13,8 @@ class RecommendationMailer < ApplicationMailer
   
     mail(
       to: @user.email, 
-      subject: subject_for_results(search)
+      subject: subject_for_results(search),
+      skip_premailer: true
     )
   end
 

@@ -15,7 +15,7 @@ Dir[Rails.root.join("spec/shared/**/*.rb")].each  { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 # For faster specs
-Rails.logger.level = 4
+Rails.logger.level = 1
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

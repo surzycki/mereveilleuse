@@ -4,6 +4,8 @@ module HelperSteps
   end
 
   step 'the application is setup' do
+    clear_emails
+    
     FactoryGirl.create :profession,   name: 'Doctor'
     FactoryGirl.create :patient_type, name: 'Person'
   end
