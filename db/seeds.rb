@@ -18,7 +18,7 @@ end
 
 PREFIXES = ['dr','madame','monsieur']
 
-decoded.each do |data|
+decoded.sample(100).each do |data|
   begin
     
     if data[0].present?
@@ -121,7 +121,7 @@ unless Rails.env.production?
     user.save
   }
 
-  RECOMMENDATION_COUNT = 100
+  RECOMMENDATION_COUNT = 0
   puts '-- creating recommendation users...'
 
   recommendations = Array.new(RECOMMENDATION_COUNT) {

@@ -14,7 +14,7 @@ class SlackNotifierListener
     recommender  = recommendation.recommender
     practitioner = recommendation.practitioner
     
-    message = if recommender.recommendations == 1
+    message = if recommender.recommendations.count == 1
       "*#{recommender.fullname} signed up* by recommending *#{practitioner.fullname}*"
     else
       "*#{recommender.fullname}* recommended *#{practitioner.fullname}*"
