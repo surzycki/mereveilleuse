@@ -5,7 +5,7 @@ namespace :deploy do
       on roles(:app) do |host|
         run_locally do
           info "Pinging #{fetch(:ping_target)}"
-          code = capture "curl -s -o /dev/null -w '%{http_code}' http://#{fetch(:ping_target)}"
+          code = capture "curl -s -o /dev/null -w '%{http_code}' #{fetch(:ping_target)}"
         
           if (code == '200') || (code == '301')
             info "#{fetch(:ping_target)} responded alive #{code}"
