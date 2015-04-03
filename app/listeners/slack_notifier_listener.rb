@@ -14,7 +14,7 @@ class SlackNotifierListener
     recommender  = recommendation.recommender
     practitioner = recommendation.practitioner
     
-    send_notification "*#{recommender.fullname}* recommended #{practitioner.fullname}"
+    send_notification "*#{recommender.fullname}* recommended *#{practitioner.fullname}*"
   end
 
   def recommendation_create_fail(errors)
@@ -28,6 +28,6 @@ class SlackNotifierListener
 
   private 
   def send_notification(message)
-    SlackNotifierJob.perform_later(message)
+    SlackNotifierJob.perform_later("#{Rails.env}: #{message}")
   end
 end
