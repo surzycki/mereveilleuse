@@ -309,4 +309,22 @@ describe Practitioner do
       end
     end
   end
+
+  describe '#phone=' do
+    it 'strips unwanted charaters' do
+      ['11 11 11 11 11','11.11.11.11.11','11 11.11 11..11','(11) 11.11 11.11'].each do |number|
+        subject.phone = number
+        expect(subject.phone).to eq '1111111111'
+      end
+    end
+  end
+
+  describe '#mobile_phone=' do
+    it 'strips unwanted charaters' do
+      ['11 11 11 11 11','11.11.11.11.11','11 11.11 11..11','(11) 11.11 11.11'].each do |number|
+        subject.mobile_phone = number
+        expect(subject.mobile_phone).to eq '1111111111'
+      end
+    end
+  end
 end

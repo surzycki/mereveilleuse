@@ -1,8 +1,11 @@
 $ ->
-  onShare = ->
+  onShare = (e) ->
+    e.preventDefault()
+    share_url = $(e.currentTarget).data('share-url')
+    
     FB.ui {
       method: 'share'
-      href: 'https://apps.facebook.com/mereveilleuse-dev/'
+      href: share_url 
     }, (response) ->
       console.log response
 

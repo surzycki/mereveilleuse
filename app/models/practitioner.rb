@@ -60,6 +60,16 @@ class Practitioner < ActiveRecord::Base
     self.mobile_phone.presence || self.phone.presence || nil
   end
 
+  def phone=(value)
+    value = value.try(:tr,'., ()', '' )
+    write_attribute(:phone, value)
+  end
+
+  def mobile_phone=(value)
+    value = value.try(:tr,'., ()', '' )
+    write_attribute(:mobile_phone, value)
+  end
+
   private
   def set_uuid
     self.uuid ||= SecureRandom.uuid rescue nil

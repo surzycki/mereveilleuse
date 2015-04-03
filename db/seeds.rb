@@ -59,6 +59,7 @@ decoded.sample(100).each do |data|
     if data[6].present?
       profession_name = data[6].titleize
       profession = Profession.find_by(name: profession_name) || Profession.create(name: profession_name)
+      profession.indexed!
     end
 
     practitioner = Practitioner.create({
