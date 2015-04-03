@@ -6,6 +6,8 @@ set :migrate_env,   'staging'
 set :migrate_target, :latest
 set :puma_env,      'staging'
 
+set :ping_target,   'https://staging-canvas.mereveilleuse.com/'
+
 set :ssh_options, {
     keys: %w(/root/.ssh/id_rsa),
     forward_agent: true
