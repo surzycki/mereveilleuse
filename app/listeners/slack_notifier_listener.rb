@@ -27,7 +27,7 @@ class SlackNotifierListener
   end
 
   private 
-  def send_notifiaction(message)
+  def send_notification(message)
     SlackNotifierJob.perform_later(message)
   end
 end
