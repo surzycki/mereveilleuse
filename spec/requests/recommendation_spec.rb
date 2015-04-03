@@ -4,9 +4,9 @@ describe 'recommendation' do
   let!(:patient_type)  { create :patient_type } 
   let!(:practitioner)  { create :practitioner }
 
-  before { integration_sign_in user }
+  describe 'create (authenticated)' do
+    before { integration_sign_in user }
 
-  describe 'create' do
     context 'NEW practitioner' do
       let(:form_data) {{
         practitioner_name:  'New Practitioner',
@@ -526,6 +526,36 @@ describe 'recommendation' do
           expect(Recommendation.first.rating).to be 3.0
         end
       end
+    end
+  end
+
+  describe 'create (un-authenticated)' do
+    let(:form_data) {{
+      practitioner_name:  'New Practitioner',
+      patient_type_id:    patient_type.id,
+      profession_name:    practitioner.primary_occupation.name,
+      address:            '6 rue gobert paris france',
+      wait_time:          2,
+      availability:       2,
+      bedside_manner:     4,
+      efficacy:           4
+    }}
+
+    it 'does NOT create a practitioner' do
+      expect do
+        post recommendations_path, recommendation_form: form_data
+      end.to_not change(Practitioner, :count)
+    end
+
+    it 'does NOT create a recommendation' do
+      expect do
+        post recommendations_path, recommendation_form: form_data
+      end.to_not change(Recommendation, :count)
+    end
+
+    it 'redirects to new registrations' do
+      post recommendations_path, recommendation_form: form_data
+      expect(response).to redirect_to new_registration_path
     end
   end
 end

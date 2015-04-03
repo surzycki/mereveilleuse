@@ -18,6 +18,9 @@ module SignInHelpers
     if resource.nil?
       allow(request.env['warden']).to receive(:authenticate!)
         .and_throw(:warden, scope: :resource)
+
+      allow(request.env['warden']).to receive(:authenticated?)
+        .and_return(false)
       
       allow(controller).to receive("current_#{resource_name}")
         .and_return(nil)
@@ -27,6 +30,9 @@ module SignInHelpers
       
       allow(controller).to receive("current_#{resource_name}")
         .and_return(resource)
+
+      allow(request.env['warden']).to receive(:authenticated?)
+        .and_return(true)
     end
   end
 end

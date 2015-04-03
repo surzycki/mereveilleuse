@@ -36,7 +36,6 @@ gem 'unicode_utils'
 
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
-#gem 'wisper-activejob',            github: 'krisleech/wisper-activejob'                                    
 gem 'sinatra', :require => nil
 
 group :production do

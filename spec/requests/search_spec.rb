@@ -1,14 +1,12 @@
 # spec is dependent upon geocoder stub
 describe 'search' do
-  before do 
-    integration_sign_in user 
-  end
+  let(:user)          { create :user }
+  let(:patient_type)  { create :patient_type } 
+  let(:profession)    { create :profession }
 
-  describe 'create' do
-    let(:user)          { create :user }
-    let(:patient_type)  { create :patient_type } 
-    let(:profession)    { create :profession }
-
+  describe 'create (authenticated)' do
+    before { integration_sign_in user  }
+    
     context 'success' do
       context 'new search' do
         let(:form_data) {{
@@ -255,7 +253,26 @@ describe 'search' do
     end
   end
 
+  describe 'create (un-authenticated)' do
+    let(:form_data) {{
+      address:            '6 rue gobert paris france',
+      profession_id:      profession.id,
+      patient_type_id:    patient_type.id,
+      user_id:            user.id,
+    }}
 
+    it 'does NOT create a search record' do
+      expect do
+        post search_path, search_form: form_data
+      end.to_not change(Search, :count)
+    end
+
+    it 'redirects to new registrations' do
+      post search_path, search_form: form_data
+      expect(response).to redirect_to new_registration_path
+    end
+  
+  end
 
   describe 'destroy' do
     pending

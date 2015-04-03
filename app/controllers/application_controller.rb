@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     warden.user scope: :user
   end
 
+  def authenticated?
+    redirect_to new_registration_path unless warden.authenticated?(:user) 
+  end
+
   private
   # Rails 4 has a problem with iframes, this allows it to display content in an iframe
   def allow_iframe
