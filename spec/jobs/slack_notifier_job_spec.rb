@@ -19,7 +19,7 @@ describe SlackNotifierJob, focus: true do
 
       it 'creates notifier' do
         expect(Slack::Notifier).to have_received(:new)
-          .with AppFacebook.config.slack_webhook_url, channel: AppFacebook.config.slack_channel
+          .with AppFacebook.config.slack_webhook_url, channel: AppFacebook.config.slack_channel, username: 'mereveilleuse'
       end
     end
 
