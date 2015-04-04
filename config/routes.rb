@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   match '/422', to: 'errors#unprocessable_entity',  via: :all, as: :unprocessable_entity
   match '/500', to: 'errors#internal_server_error', via: :all, as: :internal_server_error
 
+  get 'ping' => proc {|env| [200, {}, []] }
+
   root 'errors#not_found'
 end
 

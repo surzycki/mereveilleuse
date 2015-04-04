@@ -27,9 +27,9 @@ namespace :deploy do
 
   after :publishing, :restart
   after :finishing,  :cleanup
-  after :finishing,  'deploy:app:alive'
 
   after 'deploy:finished', 'airbrake:deploy'
+  after 'deploy:restart',  'deploy:ping'
 end
 
 
