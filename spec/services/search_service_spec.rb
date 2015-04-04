@@ -5,6 +5,7 @@ describe SearchService do
   let(:form)     { spy('form') }
   let(:search)   { spy('search') }
   let(:errors)   { spy('errors') }
+  let(:results)  { spy('results') }
 
   describe '#initialize' do
     it 'initializes with form' do
@@ -21,12 +22,13 @@ describe SearchService do
       before do
         allow(form).to receive(:process).and_return true
         allow(form).to receive(:search).and_return search
+        allow(provider).to receive(:execute).and_return results
       end
       
       it 'broadcasts success' do
         expect { 
           subject.execute(provider) 
-        }.to broadcast(:search_success)
+        }.to broadcast(:search_success, results, search)
       end
 
       it 'executes provider' do

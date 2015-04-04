@@ -103,4 +103,12 @@ describe Search do
       end
     end
   end
+
+  describe '#to_s' do
+    let(:subject)  { build_stubbed :search }
+    
+    it 'returns custom string' do
+      expect(subject.to_s).to eq("Search for #{subject.profession_name} in #{subject.short_address}")
+    end
+  end
 end

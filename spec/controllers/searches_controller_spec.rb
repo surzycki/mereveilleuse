@@ -64,7 +64,7 @@ describe SearchesController do
 
     context 'success' do
       before do
-        mock_wisper_publisher(search_service, :execute, :search_success, results)
+        mock_wisper_publisher(search_service, :execute, :search_success, results, search)
       
         post :create, search_form: params
       end

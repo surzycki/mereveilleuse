@@ -20,6 +20,10 @@ class Search < ActiveRecord::Base
     Maybe(patient_types.first).name._
   end
 
+  def to_s
+    "Search for #{Maybe(self).profession_name._} in #{Maybe(self).short_address._}"
+  end
+
   private
   def set_md5_hash
     self.md5_hash = Digest::MD5.hexdigest(

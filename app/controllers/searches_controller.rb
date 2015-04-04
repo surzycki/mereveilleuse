@@ -11,7 +11,7 @@ class SearchesController < ApplicationController
   def create
     @form = SearchForm.new search_params
 
-    search_service.on :search_success do |results|
+    search_service.on :search_success do |results, search|
       redirect_to search_path
     end
 

@@ -14,7 +14,7 @@ class FacebookEventsListener
   def recommendation_create_fail(errors)
   end
 
-  def search_success(results)
+  def search_success(results, search)
   end
 
   def search_fail(errors)

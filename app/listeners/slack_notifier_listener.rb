@@ -8,6 +8,7 @@ class SlackNotifierListener
   end
 
   def authentication_fail(errors)
+    send_notification('authentication error')
   end
 
   def recommendation_created(recommendation)
@@ -24,12 +25,21 @@ class SlackNotifierListener
   end
 
   def recommendation_create_fail(errors)
+    send_notification('recommendation create fail')
   end
 
-  def search_success(results)
+  def search_success(results, search)
+    username = Maybe(search.user).fullname._
+    
+    if results.is_a? ActiveJob::Base
+      "*#{username}* queued #{search}"
+    else
+      "*#{username}* was sent #{search}" unless results.count.zero?
+    end
   end
 
   def search_fail(errors)
+    send_notification('search failed')
   end
 
   private 

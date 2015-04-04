@@ -6,7 +6,7 @@ class RecommendationsEmailJob < ActiveJob::Base
   def perform(search)
     @form = EmailSearchForm.new(search) 
 
-    search_service.on :search_success do |results|
+    search_service.on :search_success do |results, search|
       # send email
       RecommendationMailer.results(search, results).deliver_later
       # reschedule email (env var temporary)
