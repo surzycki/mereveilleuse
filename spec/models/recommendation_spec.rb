@@ -113,7 +113,7 @@ describe Recommendation do
 
   describe '#max_rating' do
     it 'returns max rating' do
-      expect(subject.max_rating).to eq 20.0
+      expect(subject.max_rating).to eq 20
     end
   end
 

@@ -30,11 +30,11 @@ class Recommendation < ActiveRecord::Base
       self.send(attr.to_sym)
     end.instance_eval { reduce(:+) }
 
-    (dividend * max_rating)  / (dimensions.count * dimensions.count)
+    (dividend.to_f * max_rating.to_f)  / (dimensions.count * dimensions.count)
   end
 
   def max_rating
-    20.to_f
+    20
   end
 
   def search_data
