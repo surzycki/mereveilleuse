@@ -25,9 +25,10 @@ namespace :deploy do
     invoke 'sidekiq:rolling_restart'
   end
 
-  after :finishing,  :cleanup
   after :publishing, :restart
-  after :finished,   'airbrake:deploy', 'deploy:ping'
+  #after :finished,   'airbrake:deploy'
 end
 
 
+after 'deploy:finishing',  'deploy:cleanup'
+after 'deploy:finished', 'deploy:ping'
