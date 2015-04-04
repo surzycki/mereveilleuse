@@ -26,7 +26,7 @@ namespace :deploy do
   end
 
   after :publishing, :restart
-  #after :finished,   'airbrake:deploy'
+  after :finished,   'airbrake:deploy'
 end
 
 
