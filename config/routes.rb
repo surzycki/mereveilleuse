@@ -25,14 +25,14 @@ Rails.application.routes.draw do
   get 'politique-de-confidentialite', to: 'static_pages#privacy',       as: 'privacy'
 
   # custom error pages
-  match '/404', to: 'errors#not_found',             via: :all, as: :not_found,            status: 404
+  match '/404', to: 'errors#not_found',             via: :all, as: :not_found
   match '/422', to: 'errors#unprocessable_entity',  via: :all, as: :unprocessable_entity
   match '/500', to: 'errors#internal_server_error', via: :all, as: :internal_server_error
 
   # ping for capistrano deploy
   get 'ping', to: proc { [200, {}, []] }
 
-  root 'errors#not_found', status: 404
+  root 'errors#not_found'
 end
 
 
