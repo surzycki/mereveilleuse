@@ -13,7 +13,7 @@ Feature: Search Form
     And I modify the 'search form' address with '6 rue gobert paris france'
     And I submit the form 
     Then I should be on the search success page
-    And there :whether_to be an email queued
+    And there should be an email queued
     
   Scenario: New Recommendation Search (validation error)
     Given I am on the 'new search' page

@@ -107,8 +107,14 @@ describe Recommendation do
       subject.bedside_manner  = 4
       subject.efficacy        = 4
       
-      expect(subject.rating).to be 3.0
+      expect(subject.rating).to be 15.0
     end 
+  end
+
+  describe '#max_rating' do
+    it 'returns max rating' do
+      expect(subject.max_rating).to eq 20.0
+    end
   end
 
   describe '#search_data' do

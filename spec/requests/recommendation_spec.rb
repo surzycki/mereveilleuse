@@ -53,7 +53,7 @@ describe 'recommendation' do
         it 'has a correct recommendation' do
           post recommendations_path, recommendation_form: form_data
 
-          expect(Recommendation.first.rating).to be 3.0
+          expect(Recommendation.first.rating).to be 15.0
         end
 
         it 'does NOT create a profession' do
@@ -148,7 +148,7 @@ describe 'recommendation' do
         it 'has a correct recommendation' do
           post recommendations_path, recommendation_form: form_data
 
-          expect(Recommendation.first.rating).to be 3.0
+          expect(Recommendation.first.rating).to be 15.0
         end
       end
 
@@ -237,7 +237,7 @@ describe 'recommendation' do
         it 'has a correct recommendation' do
           post recommendations_path, recommendation_form: form_data
 
-          expect(Recommendation.first.rating).to be 3.0
+          expect(Recommendation.first.rating).to be 15.0
         end
       end
 
@@ -327,7 +327,7 @@ describe 'recommendation' do
         it 'has a correct recommendation' do
           post recommendations_path, recommendation_form: form_data
 
-          expect(Recommendation.first.rating).to be 3.0
+          expect(Recommendation.first.rating).to be 15.0
         end
       end
 
@@ -422,7 +422,7 @@ describe 'recommendation' do
         it 'has a correct recommendation' do
           post recommendations_path, recommendation_form: form_data
 
-          expect(Recommendation.first.rating).to be 3.0
+          expect(Recommendation.first.rating).to be 15.0
         end
       end
 
@@ -523,7 +523,7 @@ describe 'recommendation' do
         it 'has a correct recommendation' do
           post recommendations_path, recommendation_form: form_data
 
-          expect(Recommendation.first.rating).to be 3.0
+          expect(Recommendation.first.rating).to be 15.0
         end
       end
     end

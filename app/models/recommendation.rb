@@ -24,9 +24,17 @@ class Recommendation < ActiveRecord::Base
   end
 
   def rating
-    %w(wait_time availability bedside_manner efficacy).map do |attr|
+    dimensions = %w(wait_time availability bedside_manner efficacy)
+    
+    dividend = dimensions.map do |attr|
       self.send(attr.to_sym)
-    end.instance_eval { reduce(:+) / size.to_f }
+    end.instance_eval { reduce(:+) }
+
+    (dividend * max_rating)  / (dimensions.count * dimensions.count)
+  end
+
+  def max_rating
+    20.to_f
   end
 
   def search_data
