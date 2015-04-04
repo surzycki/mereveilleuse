@@ -1,3 +1,6 @@
+# Load environment vars
+require 'dotenv' ; Dotenv.load '.env.production'
+
 set :stage,         :production
 set :branch,        'master'
 set :rails_env,     'production'
