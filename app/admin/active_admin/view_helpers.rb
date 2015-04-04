@@ -80,6 +80,15 @@ module ActiveAdmin::ViewHelpers
     end
   end
 
+  def link_to_facebook_profile(user)
+    if user.present?
+      link_to(user.fullname, "https://www.facebook.com/#{user.facebook_id}")
+    else
+      I18n.t('not_available')
+    end
+  end
+
+
   def get_occupation(practitioner)
     occupations = practitioner.occupations.map { |x| x.name }
     occupations.join(', ')

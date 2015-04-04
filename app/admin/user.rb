@@ -35,7 +35,7 @@ ActiveAdmin.register User do
     end
 
     column 'Name' do |user|
-      user.fullname
+      link_to_facebook_profile user
     end
     
     column :email
