@@ -1,6 +1,17 @@
 namespace :deploy do
   task :ping do
-    system "curl --silent #{fetch(:ping_url)}"
+    on roles(:app) do |host|
+      run_locally do
+        info "Pinging #{fetch(:ping_url)}"
+        code = capture "curl -s -o /dev/null -w '%{http_code}' #{fetch(:ping_url)}"
+      
+        if (code == '200') || (code == '301')
+          info "#{fetch(:ping_url)} responded alive #{code}"
+        else
+          error "#{fetch(:ping_url)} is dead #{code}"
+        end
+      end
+    end
   end
 
   #desc 'Ensures that the app is alive'

@@ -29,7 +29,7 @@ namespace :deploy do
   after :finishing,  :cleanup
 
   after 'deploy:finished', 'airbrake:deploy'
-  after 'deploy:restart',  'deploy:ping'
+  after 'deploy:finished', 'deploy:ping'
 end
 
 
