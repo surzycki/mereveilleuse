@@ -17,14 +17,6 @@ set :normalize_asset_timestamps,  %{public/images public/javascripts public/styl
 
 set :sidekiq_config, File.join(release_path, 'config', 'sidekiq.yml')
 
-set :slack_webhook,         ENV['SLACK_WEB_HOOK_URL']
-set :slack_channel,         -> { ENV['SLACK_CHANNEL'] }
-set :slack_username,        -> { 'mereveilleuse' }
-set :slack_run_starting,    -> { false }
-set :slack_run_finished,    -> { true }
-set :slack_run_failed,      -> { false }
-set :slack_msg_finished,    -> { "There is a new version on #{fetch :rails_env, 'production'}" }
-set :slack_icon_url,        -> { ENV['SLACK_ICON'] }
 
 namespace :deploy do
   desc 'Restart application'
