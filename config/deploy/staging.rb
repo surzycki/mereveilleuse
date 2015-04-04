@@ -1,3 +1,6 @@
+# Load environment vars
+require 'dotenv' ; Dotenv.load '.env.staging'
+
 set :stage,         :staging
 set :branch,        'develop'
 set :rails_env,     'staging'
