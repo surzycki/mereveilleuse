@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # ping for capistrano deploy
   get 'ping', to: proc { [200, {}, []] }
 
-  root 'errors#not_found'
+  root 'errors#not_found', status: 404
 end
 
 
