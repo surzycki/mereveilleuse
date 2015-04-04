@@ -7,7 +7,6 @@ namespace :deploy do
         
         if (code == '200') || (code == '301')
           info "#{fetch(:ping_url)} responded alive #{code}"
-          exit 0
         else
           error "#{fetch(:ping_url)} is dead #{code}"
           exit 1
