@@ -3,7 +3,8 @@ describe 'ErrorsRouting' do
     it 'has route to 404' do
       expect(get: '/404').to route_to(
         controller:    'errors',
-        action:        'not_found'
+        action:        'not_found',
+        status:        404
       )
     end
 
