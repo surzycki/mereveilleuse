@@ -34,6 +34,6 @@ class SlackNotifierListener
 
   private 
   def send_notification(message)
-    SlackNotifierJob.perform_later("#{Rails.env}: #{message}")
+    SlackNotifierJob.perform_later message
   end
 end
