@@ -2,11 +2,11 @@ class SlackNotifierJob < ActiveJob::Base
   queue_as :default
 
   def perform(message)
-    notifier = Slack::Notifier.new AppFacebook.config.slack_webhook_url, 
-      channel: AppFacebook.config.slack_channel,
+    notifier = Slack::Notifier.new ENV['SLACK_WEB_HOOK_URL'], 
+      channel: ENV['SLACK_CHANNEL'],
       username: 'mereveilleuse'
     
-    notifier.ping message, icon_url: AppFacebook.config.slack_icon_url
+    notifier.ping message, icon_url: ENV['SLACK_ICON']
   
   rescue Exception => e
     TrackError.new e

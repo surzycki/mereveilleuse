@@ -30,3 +30,6 @@ require 'slackistrano'
 
 # Load custom tasks from `lib/capistrano/tasks' if you have any defined
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
+
+# Load environment vars
+require 'dotenv' ; Dotenv.load '.env.local', ".env.#{Rails.env}"

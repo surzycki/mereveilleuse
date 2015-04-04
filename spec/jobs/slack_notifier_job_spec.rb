@@ -14,12 +14,12 @@ describe SlackNotifierJob do
 
       it 'sends message' do
         expect(notifier).to have_received(:ping)
-          .with message, icon_url: AppFacebook.config.slack_icon_url
+          .with message, icon_url: ENV['SLACK_ICON']
       end
 
       it 'creates notifier' do
         expect(Slack::Notifier).to have_received(:new)
-          .with AppFacebook.config.slack_webhook_url, channel: AppFacebook.config.slack_channel, username: 'mereveilleuse'
+          .with ENV['SLACK_WEB_HOOK_URL'], channel: ENV['SLACK_CHANNEL'], username: 'mereveilleuse'
       end
     end
 
