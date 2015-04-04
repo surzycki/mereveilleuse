@@ -218,9 +218,9 @@ describe 'search' do
         end
   
         it 'does NOT schedule an email' do
-          post search_path, search_form: form_data 
-          
-          expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to be_empty
+          expect do
+            post search_path, search_form: form_data 
+          end.to_not enqueue_a(RecommendationsEmailJob)
         end
       end
 
@@ -245,9 +245,9 @@ describe 'search' do
         end
   
         it 'does NOT schedule an email' do
-          post search_path, search_form: form_data 
-          
-          expect(ActiveJob::Base.queue_adapter.enqueued_jobs).to be_empty
+          expect do
+            post search_path, search_form: form_data 
+          end.to_not enqueue_a(RecommendationsEmailJob)
         end
       end
     end
