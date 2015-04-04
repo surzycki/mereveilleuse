@@ -56,6 +56,16 @@ module ActiveAdmin::ViewHelpers
     end
   end
 
+  def friend_count_status(user)
+    return :error if user.friend_count.nil?
+
+    status = :ok       if user.friend_count > 200
+    status = :no       if user.friend_count < 200
+    status = :error    if user.friend_count < 50
+
+    status
+  end
+
   def link_to_location(location, type = :address)
     if location.present?
       link_to(location.send(type), edit_admin_location_path(location))
@@ -82,7 +92,7 @@ module ActiveAdmin::ViewHelpers
 
   def link_to_facebook_profile(user)
     if user.present?
-      link_to(user.fullname, "https://www.facebook.com/#{user.facebook_id}")
+      link_to(user.fullname, "https://www.facebook.com/#{user.facebook_id}", target: '_blank')
     else
       I18n.t('not_available')
     end

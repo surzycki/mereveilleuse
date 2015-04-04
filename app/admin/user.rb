@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  config.sort_order = 'lastname_asc'
+  config.sort_order = 'created_at_desc'
 
   menu label: 'Mothers', priority: 2
 
@@ -30,6 +30,8 @@ ActiveAdmin.register User do
   end
 
   index title: 'Mothers' do
+    column :verified
+
     column 'Status' do |user|
       status_tag(user.status, user_status(user))
     end
@@ -44,6 +46,10 @@ ActiveAdmin.register User do
       link_to_location user.location
     end
 
+    column 'Friend Count' do |user|  
+      status_tag(user.friend_count, friend_count_status(user))
+    end
+    
     column :has_invited
     
     column 'Member Since' do |user|
@@ -55,6 +61,8 @@ ActiveAdmin.register User do
 
   show title: proc{ |user| "#{user.fullname} (#{user.email})" } do
     attributes_table do
+      row :verified
+
       row 'Status' do |user|
         status_tag(user.status, user_status(user))
       end
@@ -69,6 +77,7 @@ ActiveAdmin.register User do
         link_to_location user.location
       end
   
+      row :friend_count
       row :has_invited
       
       row 'Member Since' do |user|

@@ -53,6 +53,16 @@ describe AuthenticationService do
           .with hash_including(address: anything)
       end
 
+      it 'updates friend_count' do
+        expect(account).to have_received(:update)
+          .with hash_including(friend_count: anything)
+      end
+
+      it 'updates verified' do
+        expect(account).to have_received(:update)
+          .with hash_including(verified: anything)
+      end
+
       it 'broadcasts login' do
         expect { 
           subject.authenticate(auth) 
@@ -91,6 +101,16 @@ describe AuthenticationService do
       it 'updates profile_image' do
         expect(account).to have_received(:update)
           .with hash_including(profile_image: anything)
+      end
+
+      it 'updates friend_count' do
+        expect(account).to have_received(:update)
+          .with hash_including(friend_count: anything)
+      end
+
+      it 'updates verified' do
+        expect(account).to have_received(:update)
+          .with hash_including(verified: anything)
       end
 
       it 'updates address' do

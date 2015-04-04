@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331232735) do
+ActiveRecord::Schema.define(version: 20150404205941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,8 @@ ActiveRecord::Schema.define(version: 20150331232735) do
     t.boolean  "has_invited",   default: false
     t.integer  "status",        default: 0
     t.string   "profile_image"
+    t.boolean  "verified"
+    t.integer  "friend_count"
   end
 
 end

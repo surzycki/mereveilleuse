@@ -37,6 +37,14 @@ describe User do
       expect(subject).to respond_to :profile_image
     end
 
+    it 'has a friend_count' do
+      expect(subject).to respond_to :friend_count
+    end
+
+    it 'has a verified' do
+      expect(subject).to respond_to :verified
+    end
+
     it 'defines enum for status' do
       expect(subject).to define_enum_for(:status)
         .with [ :unregistered, :registered, :unsubscribed ]

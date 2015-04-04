@@ -28,12 +28,14 @@ class AuthenticationService
   def get_account(auth)
     begin 
       account = User.find_or_create_by(facebook_id: auth.facebook_id)
-    
+      
       account.update(
         firstname:     auth.firstname,
         lastname:      auth.lastname,
         email:         auth.email,
-        profile_image: auth.profile_image
+        profile_image: auth.profile_image,
+        friend_count:  auth.friend_count,
+        verified:      auth.verified
       )
       
       # isolate update of address in case address not found error.  

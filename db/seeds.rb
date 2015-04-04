@@ -119,10 +119,12 @@ unless Rails.env.production?
     user.lastname      = Forgery(:name).last_name
     user.email         = Forgery(:internet).email_address
     user.location      = Location.new( street: Forgery(:address).street_address, city: Forgery(:address).city, postal_code: Forgery(:address).zip, country: Forgery(:address).country)
+    user.verified      = [true,false].sample
+    user.friend_count  = rand(0..400)
     user.save
   }
 
-  RECOMMENDATION_COUNT = 0
+  RECOMMENDATION_COUNT = 3
   puts '-- creating recommendation users...'
 
   recommendations = Array.new(RECOMMENDATION_COUNT) {

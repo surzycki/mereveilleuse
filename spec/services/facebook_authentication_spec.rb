@@ -2,13 +2,14 @@ describe FacebookAuthentication do
   let(:subject)           { FacebookAuthentication.new signed_request }
 
   let(:signed_request)    { spy('signed_request') }
-  let(:app_data)          { 'app_data' }
   let(:validated_request) { spy('validated_request') }
-  
   let(:oauth)             { spy('facebook_oauth') }
   let(:facebook_api)      { spy('facebook_api') }
-  let(:profile_image)     { 'http://facebook.com/profile/image' }
   
+  let(:app_data)          { 'app_data' }
+  let(:profile_image)     { 'http://facebook.com/profile/image' }
+  let(:friend_count)      { 10 }
+
   let(:facebook_me) { 
     {
       'id': '111111111', 
@@ -18,7 +19,8 @@ describe FacebookAuthentication do
       'location': {
         'id': '110774245616525', 
         'name': 'Paris, France'
-      }
+      },
+      'verified': true
     }
   }
 
@@ -29,6 +31,8 @@ describe FacebookAuthentication do
     allow(oauth).to receive(:parse_signed_request).and_return validated_request
     allow(facebook_api).to receive(:get_object).and_return facebook_me
     allow(facebook_api).to receive(:get_picture).and_return profile_image
+    
+    allow(facebook_api).to receive_message_chain(:get_connections, :raw_response, :[], :[]).and_return friend_count
   end
 
   describe '#initialize' do
@@ -81,6 +85,14 @@ describe FacebookAuthentication do
     it 'has a redirect_path' do
       expect(subject).to respond_to :redirect_path
     end
+
+    it 'has a verified' do
+      expect(subject).to respond_to :verified
+    end
+
+    it 'has a friend_count' do
+      expect(subject).to respond_to :friend_count
+    end
   end
 
   describe 'authentication' do
@@ -113,6 +125,14 @@ describe FacebookAuthentication do
         expect(subject.profile_image).to eq profile_image
       end 
 
+      it 'set verified' do
+        expect(subject.verified).to eq true
+      end
+
+      it 'set friend_count' do
+        expect(subject.friend_count).to eq friend_count
+      end
+
       context 'no location' do
         let(:facebook_me) { 
           {
@@ -127,6 +147,35 @@ describe FacebookAuthentication do
           expect(subject.address).to be nil
         end
       end   
+
+      context 'no verified' do
+        let(:facebook_me) { 
+          {
+            'id': '111111111', 
+            'first_name': 'Bob',
+            'last_name': 'Hope',
+            'email': 'test@example.com'
+          }
+        }
+
+        it 'sets verified to false' do 
+          expect(subject.verified).to be false
+        end
+      end
+    end
+
+    context 'when NO friend_list permission' do
+      before do
+        allow(facebook_api).to receive_message_chain(:get_connections).and_return []
+      end
+
+      it 'is authenticated' do
+        expect(subject.authenticated).to be true
+      end
+
+      it 'sets friend_count to 0' do
+        expect(subject.friend_count).to eq 0
+      end
     end
 
     context 'when app_data' do
