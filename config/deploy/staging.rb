@@ -9,7 +9,7 @@ set :migrate_env,   'staging'
 set :migrate_target, :latest
 set :puma_env,      'staging'
 
-set :ping_url,      'https://staging-canvas.mereveilleuse.com/pding'
+set :ping_url,      'https://staging-canvas.mereveilleuse.com/ping'
 
 set :slack_webhook,         ENV['SLACK_WEB_HOOK_URL']
 set :slack_channel,         -> { ENV['SLACK_CHANNEL'] }
