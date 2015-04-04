@@ -12,6 +12,7 @@ describe SlackNotifierJob do
         subject.perform message
       end
 
+
       it 'sends message' do
         expect(notifier).to have_received(:ping)
           .with message, icon_url: ENV['SLACK_ICON']
