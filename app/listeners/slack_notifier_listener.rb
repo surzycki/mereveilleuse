@@ -31,15 +31,17 @@ class SlackNotifierListener
   def search_success(results, search)
     username = Maybe(search.user).fullname._
     
-    if results.is_a? ActiveJob::Base
+    message = if results.is_a? ActiveJob::Base
       "*#{username}* queued #{search}"
     else
       "*#{username}* was sent #{search}" unless results.count.zero?
     end
+
+    send_notification message
   end
 
-  def search_fail(errors)
-    send_notification('search failed')
+  def search_fail(errors) 
+    send_notification(errors.full_messages.join(', '))
   end
 
   private 

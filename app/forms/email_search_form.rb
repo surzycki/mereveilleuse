@@ -12,6 +12,6 @@ class EmailSearchForm
   end
 
   def errors
-    'not active, job canceled'
+    OpenStruct.new(full_messages: ['not active, job canceled'])
   end
 end
