@@ -1,20 +1,21 @@
 = form_for(@form, url: path, method: :post) do |f|
-  =# f.hidden_field :user_id, value: current_user.id
+  
   .panel.panel-default
     .panel-body
-      .form-group
+      .form-group.has-feedback
         = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
         = react_component( 'PractitionerAutocomplete', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
         
-      .form-group
+      .form-group.has-feedback
         = f.label :profession_name, t('recommendation.form.profession.label')
         = react_component( 'ProfessionAutocomplete', field: f.text_field(:profession_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
            
-      .form-group
+      .form-group.has-feedback
         = f.label :patient_type_id, t('recommendation.form.patient_type.label')
         = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
-        
-      .form-group
+        %i.icon-ok.hidden
+
+      .form-group.has-feedback
         = f.label :address, t('recommendation.form.address.label')
         = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('recommendation.form.address.placeholder')))
     

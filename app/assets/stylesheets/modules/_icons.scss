@@ -19,6 +19,13 @@ Icons use the `<i>` element followed by a specific class
   line-height: 1;
 }
 
+%icon-fontawesome {
+  font-size: 30px;
+  font-family: FontAwesome;
+  line-height: 1;
+}
+
+
 /*doc
 ---
 title: Sizes
@@ -112,3 +119,11 @@ category: icons
     content: '\e66c';
   }
 }
+
+.icon-ok {
+  @extend %icon-fontawesome;
+  &:before {
+    content: '\f08a' !important;
+  }  
+}
+

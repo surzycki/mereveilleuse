@@ -5,7 +5,8 @@ root.PractitionerAutocomplete = React.createClass(
     field:  React.PropTypes.string
 
   getInitialState: ->
-    value: null;
+    value: null
+    icon: 'icon-ok hidden'
   
   componentWillMount: ->
     input  = $.parseHTML(this.props.field)
@@ -33,23 +34,33 @@ root.PractitionerAutocomplete = React.createClass(
     )
 
   handleChange: ->
-    this.setState( { value: event.target.value } ) 
+    this.setState(
+      value: event.target.value
+      icon: 'icon-ok'
+    ) 
     # send clear event
-    if event.target.value == ''
-      PubSub.publish( 'practitioner:selected', { address: ''} );
+    this._clear(event.target.value)
 
   render: ->
-    `<input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }
-        className={ this._props.className } placeholder={ this._props.placeholder } value={this.state.value} onChange={this.handleChange}  />`
+    `<div>
+      <input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }
+        className={ this._props.className } placeholder={ this._props.placeholder } value={this.state.value} onChange={this.handleChange}  />
+      <i className={this.state.icon}/>
+    </div>`
    
 
   _props: {}
+
+  _clear: (value) ->
+    if value == ''
+      this.setState(icon: 'icon-ok hidden')
+      PubSub.publish( 'practitioner:selected', { address: '', profession_name: ''} )
 
   _initialize_typeahead: ->
     practitioner_engine = this.engine()
     practitioner_engine.initialize()
 
-    element = this.getDOMNode()
+    element = this.refs.input.getDOMNode()
     
     $(element).typeahead { 
       hint: true
@@ -61,7 +72,6 @@ root.PractitionerAutocomplete = React.createClass(
       source: practitioner_engine.ttAdapter()
 
     $(element).on 'typeahead:selected', (jquery, option) ->
-      console.log(option)
       PubSub.publish( 'practitioner:selected', option );
 
   _destroy_typeahead: ->

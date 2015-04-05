@@ -27,6 +27,24 @@ Baisc form inputs
 */
 .form-group {
   margin-bottom: 20px;
+
+  .icon-ok {
+    display: none;
+  }
+}
+
+.has-feedback {
+  .form-control {
+    padding-right: 40px !important;
+  }
+
+  .icon-ok {
+    display: inline-block;
+    position: absolute;
+    top: 32px;
+    right: 10px;
+    color: $primary-action-color;
+  }
 }
 
 .form-control {

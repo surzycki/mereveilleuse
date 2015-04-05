@@ -1,4 +1,5 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,800|Raleway:100);
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
 @include font-face(Pe-icon-7-stroke, 'Pe-icon-7-stroke', normal, $asset-pipeline: true, $file-formats: eot woff ttf svg);
 
@@ -33,10 +34,12 @@ h1, h2, h3, h4, h5 {
 
 h1 {
   font-size: rem(42px);
+
 }
 
 h2 {
-  font-size: rem(36px);
+  font-size: rem(40px);
+  font-family: Raleway !important;
 }
 
 h3 {

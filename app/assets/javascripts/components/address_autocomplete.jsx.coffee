@@ -5,7 +5,8 @@ root.AddressAutocomplete = React.createClass(
     field:  React.PropTypes.string
 
   getInitialState: ->
-    value: null;
+    value: null
+    icon: 'icon-ok hidden'
 
   componentWillMount: ->
     PubSub.subscribe( 'practitioner:selected', this.handlePractitionerSelected )
@@ -36,21 +37,38 @@ root.AddressAutocomplete = React.createClass(
           country: 'FR'
 
   handleChange: ->
-    this.setState( { value: event.target.value } ) 
+    this.setState(
+      value: event.target.value
+      icon: 'icon-ok'
+    ) 
+    # send clear event
+    this._clear(event.target.value)
 
   handlePractitionerSelected: (msg, data) ->
-    this.setState( { value: data.address } )
+    this.setState(
+      value: data.profession_name
+      icon: 'icon-ok'
+    )
+    
+    this._clear(data.profession_name)
     
   render: ->
-    `<input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }
-        className={ this._props.className } placeholder={ this._props.placeholder } value={this.state.value} onChange={this.handleChange}  />`
+    `<div>
+    <input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }
+        className={ this._props.className } placeholder={ this._props.placeholder } value={this.state.value} onChange={this.handleChange}  />
+    <i className={this.state.icon}/>
+    </div>` 
   
   _props: {}
+
+  _clear: (value) ->
+    if value == ''
+      this.setState(icon: 'icon-ok hidden')
 
   _initialize_typeahead: ->
     addressPicker = this.engine()
     
-    element = this.getDOMNode()
+    element = this.refs.input.getDOMNode()
     
     $(element).typeahead { 
       hint: true
