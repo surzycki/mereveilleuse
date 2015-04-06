@@ -13,6 +13,9 @@ ENV HOSTNAME app_facebook
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
+# update npm
+RUN npm install npm -g
+
 # update gems
 ADD Gemfile $APP_HOME/Gemfile
 ADD Gemfile.lock $APP_HOME/Gemfile.lock
