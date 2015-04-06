@@ -2,8 +2,8 @@
 require 'csv'
 require 'unicode_utils'
 
-puts '-- import psychomotricien database...'
-file_contents = CSV.read("spec/fixtures/psychomotricien.csv", col_sep: ",")
+puts '-- import practitioner database...'
+file_contents = CSV.read("spec/fixtures/alternative_practitioners.csv", col_sep: ",")
 
 decoded = file_contents.map do |line|
   line.map do |entry|
@@ -37,24 +37,31 @@ decoded.each do |data|
       mobile = data[3].delete(' ')
     end
 
-    if data[4].present?
-      email = data[4]
+    if data[5].present?
+      profession_name = data[5].titleize
+      profession = Profession.find_by(name: profession_name) || Profession.create(name: profession_name)
+      profession.indexed!
+      profession.save
     end
 
-    profession_name = 'Psychomotricien'
-    profession = Profession.find_by(name: profession_name) || Profession.create(name: profession_name)
-    profession.indexed!
-    profession.save
+    if data[6].present?
+      federation_name = data[6].titleize
+      federation = Federation.find_by(name: federation_name) || Federation.create(name: federation_name)
+      federation.save
+    end
 
     practitioner = Practitioner.new({
       fullname:     name,
       mobile_phone: mobile,
-      phone:        phone,
-      email:        email
+      phone:        phone
     })
 
     if profession
       practitioner.add_occupation profession.id
+    end
+
+    if federation
+      practitioner.federations << federation
     end
 
     if address
@@ -66,9 +73,12 @@ decoded.each do |data|
       puts practitioner.fullname
       puts profession.name
       puts practitioner.contact_phone
-      puts practitioner.email
       puts address
       
+      if federation
+        puts federation.name
+      end
+
       practitioner.indexed!
       practitioner.save
     else
@@ -84,4 +94,3 @@ end
 Practitioner.reindex
 Profession.reindex
 
-#AdminUser.create!(email: 'ops@mereveilleuse.com', password: 'thinkbigger', password_confirmation: 'thinkbigger')
