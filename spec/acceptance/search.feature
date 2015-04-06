@@ -5,7 +5,6 @@ Feature: Search Form
     And the application is setup
     And a search service is running for recommendation
 
-  @wip
   Scenario: New Recommendation Search
     Given I am on the 'new search' page
     When I select 'Doctor' from profession_id on 'search form' 
