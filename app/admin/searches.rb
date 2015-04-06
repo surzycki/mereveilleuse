@@ -58,7 +58,7 @@ ActiveAdmin.register Search do
 
     column 'Next scheduled' do |search|
       if search.sent_practitioners.count > 0
-        I18n.l(search.updated_at + ENV['EMAIL_INTERVAL'].to_i.minutes, format: :short)
+        I18n.l(search.updated_at + ENV['EMAIL_INTERVAL'].to_i.seconds, format: :short)
       else
         '--'
       end

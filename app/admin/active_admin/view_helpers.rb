@@ -43,11 +43,11 @@ module ActiveAdmin::ViewHelpers
   def last_sent_search(search)
     return '--' if search.sent_practitioners.count == 0
     
-    last_sent_in_minutes = TimeDifference.between(search.updated_at,DateTime.now).in_minutes
+    last_sent_in_seconds = TimeDifference.between(search.updated_at,DateTime.now).in_seconds
 
-    status = :ok       if last_sent_in_minutes < ( ENV['EMAIL_INTERVAL'].to_i * 2 )
-    status = :no       if last_sent_in_minutes > ( ENV['EMAIL_INTERVAL'].to_i * 2.1 )
-    status = :error    if last_sent_in_minutes > ( ENV['EMAIL_INTERVAL'].to_i * 4 )
+    status = :ok       if last_sent_in_seconds < ( ENV['EMAIL_INTERVAL'].to_i * 2 )
+    status = :no       if last_sent_in_seconds > ( ENV['EMAIL_INTERVAL'].to_i * 2.1 )
+    status = :error    if last_sent_in_seconds > ( ENV['EMAIL_INTERVAL'].to_i * 4 )
 
     status = :pending  if search.canceled?
 
