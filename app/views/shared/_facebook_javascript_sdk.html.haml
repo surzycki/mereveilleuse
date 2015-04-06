@@ -32,7 +32,7 @@
       } else {
         console.log('onStatusChange: CONNECTED')
         // send login event
-        FB.AppEvents.activateApp()
+        FB.AppEvents.logEvent('Logged In')
         // reload now that we are authenticated
         if("#{@requesting_authentication}" == 'true') 
           top.location.href = "#{ENV['FACEBOOK_CANVAS']}"
