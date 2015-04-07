@@ -56,14 +56,6 @@ ActiveAdmin.register Search do
       last_sent_search search
     end
 
-    column 'Next scheduled' do |search|
-      if search.sent_practitioners.count > 0
-        I18n.l(search.updated_at + ENV['EMAIL_INTERVAL'].to_i.seconds, format: :short)
-      else
-        '--'
-      end
-    end
-
     actions defaults: false do |search|
       link_to('Cancel', cancel_admin_search_path(search))
     end
