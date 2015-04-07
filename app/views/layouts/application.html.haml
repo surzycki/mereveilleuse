@@ -24,6 +24,7 @@
     = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     <![endif]-->
     = render 'shared/analytics'
+    = yield :marketing_pixels
 
   %body
     = render 'shared/facebook_javascript_sdk' unless Rails.env.test?
