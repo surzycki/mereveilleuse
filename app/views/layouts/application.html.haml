@@ -2,30 +2,23 @@
 !!!  Strict
 %html{html_attrs('fr')}
   %head
-    %title
+    %title=page_title  
+    
     = stylesheet_link_tag :application, media: 'screen'
-    
-    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
-    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0'}
-    %meta{charset: 'utf-8'}
-    
-    %meta{ property: 'og:title',       content: t('open_graph.title') }
-    %meta{ property: 'og:description', content: t('open_graph.description') }
-    %meta{ property: 'og:site_name',   content: t('open_graph.site_name') }
-    
 
+    = render 'layouts/meta_tags'
+    = render 'layouts/open_graph_meta_tags'
 
-    %link(href='http://canvas.merevielleuse.com/' rel='canonical')
+    %link(href='http://www.merevielleuse.com/' rel='canonical')
+    
     = favicon_link_tag 'favicon.ico'
-     
-    = csrf_meta_tags
 
     <!--[if lt IE 9]>
     = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     <![endif]-->
+    
     = render 'shared/analytics'
-    = yield :marketing_pixels
-
+    
   %body
     = render 'shared/facebook_javascript_sdk' unless Rails.env.test?
     = render 'shared/flash'

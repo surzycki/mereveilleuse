@@ -10,4 +10,8 @@ module ApplicationHelper
   def customer_service
     link_to I18n.t('customer_service'), help_path
   end
+
+  def page_title
+    t('open_graph.title')
+  end
 end
