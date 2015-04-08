@@ -32,7 +32,7 @@ class HelpsController < ApplicationController
   def catch_exceptions
     yield
   rescue => error  
-    TrackError.new( error, logger )
+    TrackError.new( error, env )
     redirect_to not_found_path
   end
 end

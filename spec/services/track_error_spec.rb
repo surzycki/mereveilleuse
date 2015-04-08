@@ -2,17 +2,20 @@ describe TrackError do
   subject { TrackError.new error, logger }
   
   let(:exception)  { spy ('error') }
-  let(:logger)     { spy ('logger') }
+  let(:env)        { spy ('env') }
     
   before do
-    allow(logger).to receive(:error)
     allow(Airbrake).to receive(:notify_or_ignore)
-    allow(ENV).to receive(:to_hash)
+    allow(Rails).to receive_message_chain(:logger, :error)
   end
 
   describe 'initialize' do
-    it 'initializes with error and logger' do
-      expect { TrackError.new exception, logger }.to_not raise_error
+    it 'initializes with exception and environemnt' do
+      expect { TrackError.new exception, env }.to_not raise_error
+    end 
+
+    it 'initializes with no environment' do
+      expect { TrackError.new exception }.to_not raise_error
     end  
 
     it 'errors without parameters' do
@@ -22,12 +25,8 @@ describe TrackError do
 
   describe 'tracking' do
     before {
-      TrackError.new exception, logger
+      TrackError.new exception, env
     }
-
-    it 'tracks env with Airbrake' do
-      expect(ENV).to have_received(:to_hash)
-    end
 
     it 'tracks exception with Airbrake' do
       expect(Airbrake).to have_received(:notify_or_ignore)
@@ -35,7 +34,7 @@ describe TrackError do
     end
 
     it 'log with logger' do
-      expect(logger).to have_received(:error)
+      expect(Rails.logger).to have_received(:error)
     end
   end
 end

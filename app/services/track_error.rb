@@ -1,11 +1,12 @@
 class TrackError
-  def initialize(exception, logger=nil)
+  def initialize(exception, env={})
+    
     Airbrake.notify_or_ignore(
       exception,
       parameters: {},
-      cgi_data: ENV.to_hash
+      rack_env: env
     )
  
-    logger.error("EXCEPTION CAUGHT: #{exception}") if logger
+    Rails.logger.error("EXCEPTION CAUGHT: #{exception}")
   end
 end

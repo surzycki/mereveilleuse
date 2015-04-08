@@ -41,7 +41,7 @@ class SearchesController < ApplicationController
   def catch_exceptions
     yield
   rescue => error  
-    TrackError.new( error, logger )
+    TrackError.new( error, env )
     
     redirect_to internal_server_error_path
   end

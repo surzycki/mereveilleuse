@@ -19,7 +19,7 @@ class ProfessionsController < ApplicationController
   def catch_exceptions
     yield
   rescue => error  
-    TrackError.new( error, logger )
+    TrackError.new( error, env )
     render json: {error: [ error ]}, status: :internal_server_error
   end
 end

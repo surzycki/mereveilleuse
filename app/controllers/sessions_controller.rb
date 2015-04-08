@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
 
 
     authentication_service.on :fail do |error|
-      TrackError.new( error, logger ) if error
+      TrackError.new( error, env ) if error
       redirect_to not_found_path
     end
   end
@@ -59,7 +59,7 @@ class SessionsController < ApplicationController
   def catch_exceptions
     yield
   rescue => error  
-    TrackError.new( error, logger )
+    TrackError.new( error, env )
     redirect_to not_found_path
   end
 end
