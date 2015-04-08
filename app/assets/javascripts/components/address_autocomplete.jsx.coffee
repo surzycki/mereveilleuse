@@ -36,7 +36,7 @@ root.AddressAutocomplete = React.createClass(
         componentRestrictions:
           country: 'FR'
 
-  handleChange: ->
+  handleChange: (event) ->
     this.setState(
       value: event.target.value
       icon: 'icon-ok'
@@ -85,6 +85,6 @@ root.AddressAutocomplete = React.createClass(
   _destroy_typeahead: ->
     element = this.getDOMNode()
     $(element).typeahead('destroy')
-    PubSub.unsubscribe( this.handlePractitionerSelected );
+    PubSub.unsubscribe( this.handlePractitionerSelected )
 
 )

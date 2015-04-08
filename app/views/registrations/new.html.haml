@@ -14,7 +14,9 @@
   
       .row
         .col-sm-5.col-sm-offset-1
-          = link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block'
+          .div#test
+          =# link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block' 
+          = react_component('FacebookLoginButton')
           %br
         .col-sm-5
           = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'learn-more'

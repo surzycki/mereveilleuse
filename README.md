@@ -139,5 +139,22 @@ Could still be potentially interesting
     \c app_web_development
     \dt
     
+** Remote NFS Setup
+
+*On ubuntu server*
+
+    apt-get install nfs-kernel-server
+
+Edit /etc/exports
+
+    /var/www/mereveilleuse *(rw,sync,insecure,all_squash,no_subtree_check)
+
+Restart and export
+
+    service nfs-kernel-server restart
+    exportfs -ra
 
 
+*On OSX client*
+
+    sudo mount -t nfs staging.therapeutes.com:/var/www/mereveilleuse /Users/stefan/mount

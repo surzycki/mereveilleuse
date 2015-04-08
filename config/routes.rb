@@ -6,12 +6,15 @@ Rails.application.routes.draw do
   
   mount Sidekiq::Web, at: '/admin/sidekiq'
   
-  resource  :session,         only: [ :new, :create, :show ]
+  resource  :session,         only: [ :create, :show ]
   resource  :help,            only: [ :new, :create, :show ]
   resource  :search,          only: [ :new, :create, :show ]
   resources :recommendations, only: [ :new, :create, :show ]
   resources :registrations,   only: [ :new, :create, :show ]
   
+  # facebook canvas app entry
+  post 'session/canvas',              to: 'sessions#canvas',            as: 'session_canvas'
+
   # unsubscribe
   get 'unsubscribe/search/:id',       to: 'unsubscribes#search',        as: 'unsubscribe_search'
   get 'unsubscribe/account/:id',      to: 'unsubscribes#account',       as: 'unsubscribe_account'
@@ -32,7 +35,7 @@ Rails.application.routes.draw do
   # ping for capistrano deploy
   get 'ping', to: proc { [200, {}, []] }
 
-  root 'errors#not_found'
+  root 'registrations#new'
 end
 
 

@@ -1,5 +1,15 @@
 $ ->
   
+  try 
+    if window.self != window.top
+      $('#test').append( "<h1>Facebook Window</h1>" )
+    else
+      $('#test').append( "<h1>Normal Window</h1>" )
+  
+  catch e 
+    $('#test').append( "<h1>Facebook Window</h1>" )
+   
+
   $('#slider').slippry
     transition: 'vertical'
     captions: 'custom'

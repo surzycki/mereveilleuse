@@ -33,7 +33,7 @@ root.PractitionerAutocomplete = React.createClass(
         url: '/practitioners/autocomplete?query=%QUERY'
     )
 
-  handleChange: ->
+  handleChange: (event) ->
     this.setState(
       value: event.target.value
       icon: 'icon-ok'

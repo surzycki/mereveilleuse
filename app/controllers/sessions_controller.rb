@@ -1,20 +1,20 @@
 class SessionsController < ApplicationController
   around_filter      :catch_exceptions, unless: 'Rails.env.development?'
-  before_filter      :initialize_authentication_service, only: [:new, :create]
+  before_filter      :initialize_authentication_service, only: [:canvas]
   
   # non facebook canvas entry point
   # GET /session/new
-  def new 
-    if Rails.env.production?
-      redirect_to not_found_path
-    else 
-      authentication_service.authenticate FacebookAuthentication.stub(User.first)
-    end
-  end
+  #def new 
+    #if Rails.env.production?
+    #  redirect_to not_found_path
+    #else 
+    #  authentication_service.authenticate FacebookAuthentication.stub(User.first)
+    #end
+  #end
 
-  # POST /session
-  def create 
-    authentication_service.authenticate facebook_authentication
+  # POST /session/canvas
+  def canvas 
+    authentication_service.authenticate facebook_canvas_authentication
   end
 
   private
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
       # set user_id in env for the authentication since we
       # aren't passing these during a via params in a post for warden
       warden.set_user account, scope: :user
-      
+      byebug
       redirect_to(redirect_path || new_search_path)
     end
 
@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
   end
 
   # Facebook posts a signed_request to upon arriving to the canvas
-  def facebook_authentication
+  def facebook_canvas_authentication
     @facebook_authentication ||= FacebookAuthentication.new(params[:signed_request], params[:app_data])
   end
 

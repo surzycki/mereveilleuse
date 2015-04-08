@@ -8,8 +8,12 @@
       version    : 'v2.2'
     });
 
-    FB.Canvas.setAutoGrow(91);
-    FB.Canvas.scrollTo(0,0);
+    try {
+      FB.Canvas.setAutoGrow(91);
+      FB.Canvas.scrollTo(0,0);
+    } catch(err) {
+      console.log('Facebook calls only permitted on canvas')
+    }
     
     FB.Event.subscribe('auth.authResponseChange', onAuthResponseChange);
     FB.Event.subscribe('auth.statusChange', onStatusChange);
@@ -30,9 +34,15 @@
       if( response.status != 'connected' ) {
         login(loginCallback);
       } else {
+        
         console.log('onStatusChange: CONNECTED')
         // send login event
-        FB.AppEvents.logEvent('Logged In')
+        try {
+          FB.AppEvents.logEvent('Logged In')
+        } catch (error) {
+          console.log('FB.AppEvents only available for Canvas apps')
+        }
+
         // reload now that we are authenticated
         if("#{@requesting_authentication}" == 'true') 
           top.location.href = "#{ENV['FACEBOOK_CANVAS']}"
@@ -51,5 +61,7 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+
 
   
