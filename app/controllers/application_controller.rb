@@ -1,6 +1,9 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-  
+class ApplicationController < ActionController::Base  
+  # For the entry point we have to skip the authenticity validations, as the post is coming from facebook
+  # In general for the moment we are going to ignore everything as it seems there are issues
+  skip_before_filter :verify_authenticity_token
+  #protect_from_forgery with: :null_session
+
   before_filter :set_p3p
   after_filter :allow_iframe
   

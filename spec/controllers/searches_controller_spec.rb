@@ -62,6 +62,20 @@ describe SearchesController do
       information:      'hello'
     }}
 
+    context 'handle authenticity token' do
+      before do
+        mock_wisper_publisher(search_service, :execute, :search_success, results, search)
+      end
+
+      it 'skips authenticity token' do
+        allow(controller).to receive (:verify_authenticity_token)
+        post :create, search_form: params
+
+        expect(controller).to_not have_received(:verify_authenticity_token)
+      end
+    end
+
+
     context 'success' do
       before do
         mock_wisper_publisher(search_service, :execute, :search_success, results, search)

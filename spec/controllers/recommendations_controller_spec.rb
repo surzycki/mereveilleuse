@@ -66,9 +66,22 @@ describe RecommendationsController do
       efficacy:           '1'
     }}
 
+    context 'handle authenticity token' do
+      before do
+        mock_wisper_publisher(recommendation_service, 
+          :create_recommendation, :recommendation_created, recommendation)
+      end
+
+      it 'skips authenticity token' do
+        allow(controller).to receive (:verify_authenticity_token)
+        post :create, recommendation_form: params
+
+        expect(controller).to_not have_received(:verify_authenticity_token)
+      end
+    end
+
     context 'success' do
       before do
-        
         mock_wisper_publisher(recommendation_service, 
           :create_recommendation, :recommendation_created, recommendation)
         
