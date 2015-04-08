@@ -46,11 +46,11 @@ root.AddressAutocomplete = React.createClass(
 
   handlePractitionerSelected: (msg, data) ->
     this.setState(
-      value: data.profession_name
+      value: data.address
       icon: 'icon-ok'
     )
     
-    this._clear(data.profession_name)
+    this._clear(data.address)
     
   render: ->
     `<div>
