@@ -1,8 +1,7 @@
 dev:
   build: .
   command: bin/rails server --port 3000 --binding 0.0.0.0
-  ports:
-    - '3000:3000'
+  
   volumes:
     - .:/var/www
   links:
@@ -10,10 +9,12 @@ dev:
     - memcached
     - redis
     - elasticsearch
-    - nginx
   environment:
-    RAILS_ENV: development
-  
+    RAILS_ENV: development  
+  hostname: appfacebook_dev
+  expose: 
+    - '3000'
+
 test: 
   build: .
   command: bin/rspec
@@ -42,6 +43,8 @@ elasticsearch:
   image: elasticsearch
 
 nginx: 
-  image: surzycki/nginx.stable
+  image: surzycki/nginx.stable-dev
   ports:
-    - '80:80'
+    - '443:443'
+  external_links:
+    - appfacebook_dev_run_1:dev  

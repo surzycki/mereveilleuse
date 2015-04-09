@@ -45,7 +45,7 @@ Rails.application.configure do
   # in development
   config.middleware.delete Rack::Lock
 
-  config.web_console.whitelisted_ips = '83.156.174.60/16'
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
   # react js
