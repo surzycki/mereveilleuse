@@ -2,7 +2,7 @@ dev:
   build: .
   command: bin/rails server --port 3000 --binding 0.0.0.0
   ports:
-    - '80:3000'
+    - '3000:3000'
   volumes:
     - .:/var/www
   links:
@@ -10,6 +10,7 @@ dev:
     - memcached
     - redis
     - elasticsearch
+    - nginx
   environment:
     RAILS_ENV: development
   
@@ -40,4 +41,7 @@ redis:
 elasticsearch:
   image: elasticsearch
 
-
+nginx: 
+  image: surzycki/nginx.stable
+  ports:
+    - '80:80'

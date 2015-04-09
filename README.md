@@ -155,6 +155,16 @@ Restart and export
     exportfs -ra
 
 
+
 *On OSX client*
 
-    sudo mount -t nfs staging.therapeutes.com:/var/www/mereveilleuse /Users/stefan/mount
+    sudo mount -t nfs dev.mereveilleuse.com:/var/www/mereveilleuse /Users/stefan/mount
+
+
+*Remote Rsync*
+
+    fswatch app_facebook | xargs -n1 -I{} ~/rsync-mereveilleuse
+
+rsync-mereveilleuse
+
+    rsync -rave "ssh -l ubuntu" --exclude "app_facebook/.git" --exclude="app_facebook/tmp" /Users/stefan/Code/mereveilleuse/ dev.mereveilleuse.com:/home/ubuntu/code/mereveilleuse
