@@ -10,21 +10,21 @@
             = t('search.form.title')
           .panel.panel-default 
             .panel-body
-            .form-group
-              = f.label :profession_id, t('search.form.profession.label')
-              = f.collection_select(:profession_id, Profession.indexed.order(name: :asc), :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
-  
-            .form-group
-              = f.label :patient_type_id, t('search.form.patient_type.label')
-              = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
-        
-            .form-group
-              = f.label :address, t('search.form.address.label')
-              = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('search.form.address.placeholder')))
-             
-            .form-group
-              = f.label :information, t('search.form.information.label')
-              = f.text_area :information, class: 'form-control', rows: 8
+              .form-group
+                = f.label :profession_id, t('search.form.profession.label')
+                = f.collection_select(:profession_id, Profession.indexed.order(name: :asc), :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
+    
+              .form-group
+                = f.label :patient_type_id, t('search.form.patient_type.label')
+                = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
+          
+              .form-group
+                = f.label :address, t('search.form.address.label')
+                = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('search.form.address.placeholder')))
+               
+              .form-group
+                = f.label :information, t('search.form.information.label')
+                = f.text_area :information, class: 'form-control', rows: 8
   
           = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'commit'
           

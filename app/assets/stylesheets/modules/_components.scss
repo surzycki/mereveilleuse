@@ -60,6 +60,10 @@ parent: components
   font-size: 16px;
   text-align: center;
   margin-top: 4px;
+
+  @include breakpoint($mobile) {
+    height: 90px;
+  }
 }
 
 /*doc

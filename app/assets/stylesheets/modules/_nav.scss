@@ -28,6 +28,13 @@ category: nav
 */
 .navbar {
   margin-bottom: 0;
+  
+  @include breakpoint($mobile) {
+    .navbar-brand {
+      float: none !important;
+      display: inline-block !important;
+    }
+  }
 }
 
 
