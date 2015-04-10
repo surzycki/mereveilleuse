@@ -35,7 +35,8 @@ class AuthenticationService
         email:         auth.email,
         profile_image: auth.profile_image,
         friend_count:  auth.friend_count,
-        verified:      auth.verified
+        verified:      auth.verified,
+        platform:      auth.platform
       )
       
       # isolate update of address in case address not found error.  

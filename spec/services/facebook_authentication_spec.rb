@@ -1,7 +1,8 @@
 describe FacebookAuthentication do 
-  let(:subject)           { FacebookAuthentication.new cookies }
+  let(:subject)           { FacebookAuthentication.new(cookies: cookies) }
 
   let(:cookies)           { spy('cookies') }
+  let(:signed_request)    { spy('signed_request') }
   let(:user_info)         { spy('user_info') }
   let(:oauth)             { spy('facebook_oauth') }
   let(:facebook_api)      { spy('facebook_api') }
@@ -36,22 +37,50 @@ describe FacebookAuthentication do
   end
 
   describe '#initialize' do
-    it 'initializes with cookies' do
-      expect { FacebookAuthentication.new(cookies) }.to_not raise_error
+    it 'initializes with arguments' do
+      expect do 
+        FacebookAuthentication.new(
+          cookies:        cookies,
+          app_data:       app_data,
+          signed_request: signed_request
+        )
+      end.to_not raise_error
     end
 
     it 'initializes with cookies and app_data' do
-      expect { FacebookAuthentication.new(cookies, app_data) }.to_not raise_error
+      expect do 
+        FacebookAuthentication.new(
+          cookies:        cookies,
+          app_data:       app_data
+        )
+      end.to_not raise_error
+    end
+
+     it 'initializes with cookies' do
+      expect do 
+        FacebookAuthentication.new(
+          cookies:        cookies
+        )
+      end.to_not raise_error
     end
 
     it 'errors without cookies' do
-      expect { FacebookAuthentication.new }.to raise_error
+      expect do 
+        FacebookAuthentication.new(
+          app_data:       app_data,
+          signed_request: signed_request
+        )
+      end.to raise_error
     end
   end
 
   describe 'attributes' do
-    it 'has a cookies' do
+    it 'has cookies' do
       expect(subject).to respond_to :cookies
+    end
+
+    it 'has a platform' do
+      expect(subject).to respond_to :platform
     end
 
     it 'has a firstname' do
@@ -99,6 +128,10 @@ describe FacebookAuthentication do
     context 'when success' do
       it 'is authenticated' do
         expect(subject.authenticated).to be true
+      end
+
+      it 'sets platform' do
+        expect(subject.platform).to eq 'web'
       end
 
       it 'sets firstname' do
@@ -179,7 +212,7 @@ describe FacebookAuthentication do
     end
 
     context 'when app_data' do
-      let(:subject) { FacebookAuthentication.new cookies, app_data }
+      let(:subject) { FacebookAuthentication.new(cookies: cookies, app_data: app_data) }
       
       it 'sets redirect_path from app_data' do
         expect(subject.redirect_path).to eq app_data
@@ -203,6 +236,28 @@ describe FacebookAuthentication do
 
       it 'is NOT authenticated' do
         expect(subject.authenticated).to be false
+      end
+    end
+
+    context 'when login from web' do
+      it 'is authenticated' do
+        expect(subject.authenticated).to be true
+      end
+
+      it 'sets platform' do
+        expect(subject.platform).to eq 'web'
+      end
+    end
+
+    context 'when login fom canvas' do
+      let(:subject)  { FacebookAuthentication.new(cookies: cookies, signed_request: signed_request) }
+
+      it 'is authenticated' do
+        expect(subject.authenticated).to be true
+      end
+
+      it 'sets platform' do
+        expect(subject.platform).to eq 'canvas'
       end
     end
   end 

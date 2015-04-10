@@ -1,4 +1,5 @@
 class FacebookAuthentication
+  # DEPRECIATED
   def self.stub(params)
     OpenStruct.new(
       firstname:     params.firstname,
@@ -14,17 +15,20 @@ class FacebookAuthentication
     )
   end
 
-  attr_reader :cookies, :redirect_path, :firstname, :lastname, :email, :facebook_id, :address, :authenticated, :profile_image, :verified, :friend_count
+  attr_reader :cookies, :redirect_path, :firstname, :lastname, :email, :facebook_id, :address, :authenticated, :profile_image, :verified, :friend_count, :platform
 
   # Authenticates user to facebook using signed requests
   # FACEBOOK_APP_ID and FACEBOOK_SECRET should be set in the ENV vars 
   #
-  # @param cookies [Cookies] the facebook
-  def initialize(cookies, app_data=nil)
+  # @param cookies        [Cookies] the facebook
+  # @param signed_request [String]  Posted during canvas authentication
+  # @param app_data       [String]  Appended to url for redirection in canvas apps 
+  def initialize(cookies: raise(ArgumentError), app_data: nil, signed_request: nil )
     @cookies = cookies
     
-    process_app_data app_data
-    
+    process_app_data  app_data
+    set_platform      signed_request
+
     authenticate
   end
 
@@ -33,7 +37,7 @@ class FacebookAuthentication
     @authenticated    = false
     oauth             = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
    
-    user_info         = oauth.get_user_info_from_cookies(@cookies)
+    user_info         = oauth.get_user_info_from_cookies(cookies)
     facebook_api      = Koala::Facebook::API.new(user_info['access_token'])
 
     set_attributes      facebook_api
@@ -69,5 +73,13 @@ class FacebookAuthentication
 
   def process_app_data(app_data)
     @redirect_path = app_data
+  end
+
+  def set_platform(signed_request)
+    @platform = if signed_request.nil? 
+      User.platforms.key(User.platforms['web']) 
+    else 
+      User.platforms.key(User.platforms['canvas']) 
+    end
   end
 end

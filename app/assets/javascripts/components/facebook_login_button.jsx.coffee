@@ -1,9 +1,6 @@
 root = exports ? this
 
-root.FacebookLoginButton = React.createClass(
-  getInitialState: ->
-    signed_request: ''
-    
+root.FacebookLoginButton = React.createClass(  
   # The user is clicking to join, we will ask facebook what is
   # thier status, it can be one of three possibilities
   #
@@ -17,18 +14,19 @@ root.FacebookLoginButton = React.createClass(
     event.preventDefault()
     form = this.refs.form.getDOMNode()
     
-    FB.login ((response) =>
-      this._handleFacebookConnect(response, form)
-    ), scope: 'public_profile, user_friends, email, user_location'
+    if window.is_canvas()
+      window.location = this.props.canvas_redirect
+    else
+      FB.login ((response) =>
+        this._handleFacebookConnect(response, form)
+      ), scope: 'public_profile, user_friends, email, user_location'
 
   render: ->
-    `<form ref='form' action='session/canvas' method='post' onSubmit={this.handleSubmit}>
-      <input type='submit' value='Submit' className='btn btn-primary btn-block'/>
-      <input type='hidden' name='signed_request' value={this.state.signed_request}/>
+    `<form ref='form' action={this.props.facebook_connect_path} method='post' onSubmit={this.handleSubmit}>
+      <input type='submit' value={this.props.value} className={this.props.class}/>
     </form>`
 
   _handleFacebookConnect: (response, form) ->
-    this.setState(signed_request: response.authResponse.signedRequest)
     form.submit()
 )
   

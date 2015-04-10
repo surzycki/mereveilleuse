@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404205941) do
+ActiveRecord::Schema.define(version: 20150410102955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 20150404205941) do
     t.string   "profile_image"
     t.boolean  "verified"
     t.integer  "friend_count"
+    t.integer  "platform",      default: 0
   end
 
 end

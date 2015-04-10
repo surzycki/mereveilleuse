@@ -49,6 +49,11 @@ describe User do
       expect(subject).to define_enum_for(:status)
         .with [ :unregistered, :registered, :unsubscribed ]
     end
+
+    it 'defines enum for platform' do
+      expect(subject).to define_enum_for(:platform)
+        .with [ :canvas, :web ]
+    end
   end
 
   describe 'associations' do

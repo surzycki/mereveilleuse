@@ -4,6 +4,8 @@ describe SessionsController do
   let(:user)                     { spy('user') }
   let(:error)                    { spy('error') }
   let(:cookies)                  { spy('cookies') }
+  let(:signed_request)           { '1234' }
+  let(:app_data)                 { 'redirect_path' }
   let(:authentication_service)   { wisper_spy('authentication_service') }
 
   before do
@@ -21,7 +23,7 @@ describe SessionsController do
 
       it 'skips authenticity token' do
         allow(controller).to receive (:verify_authenticity_token)
-        post :create, signed_request: '1234', fb_locale: 'en_US'
+        post :create, signed_request: signed_request, fb_locale: 'en_US'
 
         expect(controller).to_not have_received(:verify_authenticity_token)
       end
@@ -33,7 +35,7 @@ describe SessionsController do
           mock_wisper_publisher(authentication_service, :authenticate, :login, user, nil)
           allow(user).to receive(:registered?).and_return true
           
-          post :create, signed_request: '1234', fb_locale: 'en_US'
+          post :create, signed_request: signed_request, fb_locale: 'en_US'
         end
         
         it 'sets warden user' do
@@ -49,9 +51,14 @@ describe SessionsController do
           expect(response).to redirect_to new_search_path
         end
 
-        it 'authentications with facebook' do
+        it 'facebook authentication recieves cookies' do
           expect(FacebookAuthentication).to have_received(:new)
-            .with cookies, nil
+            .with hash_including(cookies: cookies)
+        end
+
+        it 'facebook authentication recieves signed_request' do
+          expect(FacebookAuthentication).to have_received(:new)
+            .with hash_including(signed_request: signed_request)
         end
   
         it 'inits authentication_service' do
@@ -66,10 +73,10 @@ describe SessionsController do
 
       context 'with REGISTERED user REDIRECTED' do
         before do
-          mock_wisper_publisher(authentication_service, :authenticate, :login, user, '/redirect_path')
+          mock_wisper_publisher(authentication_service, :authenticate, :login, user, app_data)
           allow(user).to receive(:registered?).and_return true
           
-          post :create, signed_request: '1234', fb_locale: 'en_US', app_data: '/redirect_path'
+          post :create, signed_request: signed_request, fb_locale: 'en_US', app_data: app_data
         end
 
         it 'sets warden user' do
@@ -82,14 +89,24 @@ describe SessionsController do
         end
 
         it 'redirects to redirect_path' do
-          expect(response).to redirect_to '/redirect_path'
+          expect(response).to redirect_to app_data
         end
 
-        it 'authentications with facebook' do
+        it 'facebook authentication recieves cookies' do
           expect(FacebookAuthentication).to have_received(:new)
-            .with cookies, '/redirect_path'
+            .with hash_including(cookies: cookies)
         end
-  
+
+        it 'facebook authentication recieves signed_request' do
+          expect(FacebookAuthentication).to have_received(:new)
+            .with hash_including(signed_request: signed_request)
+        end
+
+        it 'facebook authentication recieves app_data' do
+          expect(FacebookAuthentication).to have_received(:new)
+            .with hash_including(app_data: app_data)
+        end
+
         it 'inits authentication_service' do
           expect(AuthenticationService).to have_received(:new)
         end
@@ -105,7 +122,7 @@ describe SessionsController do
           mock_wisper_publisher(authentication_service, :authenticate, :signup, user)
           allow(user).to receive(:registered?).and_return false
           
-          post :create, signed_request: '1234', fb_locale: 'en_US'
+          post :create, signed_request: signed_request, fb_locale: 'en_US'
         end
 
         it 'sets warden user' do
@@ -121,9 +138,14 @@ describe SessionsController do
           expect(response).to redirect_to new_registration_path
         end
 
-        it 'authentications with facebook' do
+        it 'facebook authentication recieves cookies' do
           expect(FacebookAuthentication).to have_received(:new)
-            .with cookies, nil
+            .with hash_including(cookies: cookies)
+        end
+
+        it 'facebook authentication recieves signed_request' do
+          expect(FacebookAuthentication).to have_received(:new)
+            .with hash_including(signed_request: signed_request)
         end
   
         it 'inits authentication_service' do
@@ -140,7 +162,7 @@ describe SessionsController do
         before do
           mock_wisper_publisher(authentication_service, :authenticate, :request_authentication, facebook_authentication)
           
-          post :create, signed_request: '1234', fb_locale: 'en_US', app_data: '/redirect_path'
+          post :create, signed_request: signed_request, fb_locale: 'en_US', app_data: '/redirect_path'
         end
 
         it 'returns http redirect' do
@@ -158,7 +180,7 @@ describe SessionsController do
         mock_wisper_publisher(authentication_service, :authenticate, :fail, error)
         allow(TrackError).to receive(:new)
 
-        post :create, signed_request: '1234', fb_locale: 'en_US'
+        post :create, signed_request: signed_request, fb_locale: 'en_US'
       end
 
       it 'does NOT set warden user' do
@@ -184,7 +206,7 @@ describe SessionsController do
         allow(AuthenticationService).to receive(:new).and_raise :error
         allow(TrackError).to receive(:new)
 
-        post :create, signed_request: '1234', fb_locale: 'en_US'
+        post :create, signed_request: signed_request, fb_locale: 'en_US'
       end
 
       it 'returns http redirect' do

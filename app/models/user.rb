@@ -7,11 +7,11 @@ class User < ActiveRecord::Base
   has_many :recommendations, dependent: :destroy
   has_many :referals, through: :recommendations, source: :practitioner
 
-  enum status: [ :unregistered, :registered, :unsubscribed ] 
+  enum status:   [ :unregistered, :registered, :unsubscribed ] 
+  enum platform: [ :canvas, :web ]
 
   def unsubscribe
     self.searches.each(&:canceled!)
-     
     self.unsubscribed!
   end
 end

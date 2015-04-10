@@ -22,6 +22,14 @@ ActiveAdmin.register User do
     user.where(status: User.statuses[:unregistered])
   end
 
+  scope :web do |user|
+    user.where(platform: User.platforms[:web])
+  end
+
+  scope :canvas do |user|
+    user.where(platform: User.platforms[:canvas])
+  end
+
   controller do
     def edit
       user = scoped_collection.find(params[:id])
@@ -51,9 +59,13 @@ ActiveAdmin.register User do
     end
     
     column :has_invited
-    
+
     column 'Member Since' do |user|
       I18n.l(user.created_at, format: :short_date)  
+    end
+
+    column 'Logged in from' do |user|
+      user.platform.try(:capitalize)
     end
 
     actions

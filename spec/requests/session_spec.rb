@@ -8,7 +8,8 @@ describe 'session'  do
         address:       'paris',
         facebook_id:   'facebook_id_123',
         profile_image: 'image.png',
-        authenticated: true
+        authenticated: true,
+        platform:      'web'
     )}
 
     before do

@@ -14,9 +14,12 @@
   
       .row
         .col-sm-5.col-sm-offset-1
-          .div#test
-          =# link_to t('registrations.action.primary'), new_recommendation_path, class: 'btn btn-primary btn-block' 
-          = react_component('FacebookLoginButton')
+          = react_component('FacebookLoginButton', 
+              value: t('registrations.action.primary'),
+              class: 'btn btn-primary btn-block', 
+              canvas_redirect: new_recommendation_path,
+              facebook_connect_path: session_path )
+          
           %br
         .col-sm-5
           = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'learn-more'
@@ -93,6 +96,10 @@
   
       .row
         .col-sm-6.col-sm-offset-3
-          = link_to t('registrations.join_now.action'), new_recommendation_path, class: 'btn btn-block btn-outline'
-  
+          = react_component('FacebookLoginButton', 
+              value: t('registrations.join_now.action'),
+              class: 'btn btn-block btn-outline', 
+              canvas_redirect: new_recommendation_path,
+              facebook_connect_path: session_path )
+
       .space-xs-60  
