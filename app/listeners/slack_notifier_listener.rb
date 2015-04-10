@@ -2,7 +2,6 @@ class SlackNotifierListener
   def login(account, redirect_path)
     return if account.nil?
 
-
     send_notification "*#{account.fullname}* logged in from #{account.platform}"
   end
 
