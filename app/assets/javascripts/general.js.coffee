@@ -8,7 +8,11 @@ $ ->
 
   onLearnMore = (e) ->
     e.preventDefault()
-    console.log 'learning more'
-    FB.Canvas.scrollTo(0,$('#learn-more-section').position().top + 42)
+    
+    if window.is_canvas()
+      FB.Canvas.scrollTo(0,$('#learn-more-section').position().top + 42)
+    else
+      $.scrollTo($('#learn-more-section'), 300)
+
 
   $(document).on 'click', '#learn-more', onLearnMore
