@@ -65,7 +65,7 @@ ActiveAdmin.register User do
     end
 
     column 'Logged in from' do |user|
-      user.platform.try(:capitalize)
+      status_tag(user.platform, user_platform(user))
     end
 
     actions

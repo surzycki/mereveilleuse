@@ -7,6 +7,10 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel 'New Mothers', priority: 1 do
           table_for User.where(status: User.statuses[:registered]).order('created_at desc').limit(15) do
+            column 'Platform' do |user|
+              status_tag(user.platform, user_platform(user))
+            end
+
             column 'Search' do |user|
               status_tag(user_search_status(user), user_search_status(user))
             end
@@ -33,6 +37,9 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel 'Abandoned Mothers', priority: 1 do
           table_for User.where.not(status: User.statuses[:registered]).order('created_at desc').limit(15) do
+            column 'Platform' do |user|
+              status_tag(user.platform, user_platform(user))
+            end
             
             column 'Mother' do |user|
               link_to_user user

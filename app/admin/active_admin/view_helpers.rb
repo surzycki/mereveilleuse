@@ -40,6 +40,13 @@ module ActiveAdmin::ViewHelpers
     status
   end
 
+  def user_platform(user)
+    status = :platform   if user.web?
+    status = :platform   if user.canvas?
+
+    status
+  end
+
   def last_sent_search(search)
     return '--' if search.sent_practitioners.count == 0
     
