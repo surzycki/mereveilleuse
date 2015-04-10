@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :registrations,   only: [ :new, :create, :show ]
   
   # facebook canvas app entry
-  post 'session/canvas',              to: 'sessions#canvas',            as: 'session_canvas'
+  # post 'session/canvas',              to: 'sessions#canvas',            as: 'session_canvas'
 
   # unsubscribe
   get 'unsubscribe/search/:id',       to: 'unsubscribes#search',        as: 'unsubscribe_search'

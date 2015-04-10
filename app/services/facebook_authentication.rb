@@ -14,14 +14,14 @@ class FacebookAuthentication
     )
   end
 
-  attr_reader :signed_request, :redirect_path, :firstname, :lastname, :email, :facebook_id, :address, :authenticated, :profile_image, :verified, :friend_count
+  attr_reader :cookies, :redirect_path, :firstname, :lastname, :email, :facebook_id, :address, :authenticated, :profile_image, :verified, :friend_count
 
   # Authenticates user to facebook using signed requests
   # FACEBOOK_APP_ID and FACEBOOK_SECRET should be set in the ENV vars 
   #
-  # @param signed_request [SignedRequest] the facebook
-  def initialize(signed_request, app_data=nil)
-    @signed_request = signed_request
+  # @param cookies [Cookies] the facebook
+  def initialize(cookies, app_data=nil)
+    @cookies = cookies
     
     process_app_data app_data
     
@@ -32,8 +32,9 @@ class FacebookAuthentication
   def authenticate
     @authenticated    = false
     oauth             = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
-    validated_request = oauth.parse_signed_request(@signed_request)
-    facebook_api      = Koala::Facebook::API.new(validated_request['oauth_token'])
+   
+    user_info         = oauth.get_user_info_from_cookies(@cookies)
+    facebook_api      = Koala::Facebook::API.new(user_info['access_token'])
 
     set_attributes      facebook_api
     set_profile_image   facebook_api

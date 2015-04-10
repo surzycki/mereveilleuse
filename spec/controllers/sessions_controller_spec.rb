@@ -3,45 +3,14 @@ describe SessionsController do
   let(:warden)                   { spy('warden') }
   let(:user)                     { spy('user') }
   let(:error)                    { spy('error') }
+  let(:cookies)                  { spy('cookies') }
   let(:authentication_service)   { wisper_spy('authentication_service') }
 
   before do
     allow(AuthenticationService).to  receive(:new).and_return authentication_service
     allow(FacebookAuthentication).to receive(:new).and_return facebook_authentication
     allow(controller).to receive(:warden).and_return warden
-  end
-
-  describe 'GET new' do
-    context 'in production' do
-      before do 
-        allow(Rails.env).to receive(:production?).and_return true
-        get :new 
-      end
-
-      it 'returns http redirect' do
-        expect(response).to be_redirect
-      end
-
-      it 'does NOT authenticate' do
-        expect(authentication_service).to_not have_received(:authenticate)
-      end
-
-      it 'redirects to not_found_path' do
-        expect(response).to redirect_to not_found_path
-      end
-    end
-
-    context 'NOT in production' do
-      before do
-        allow(User).to receive(:first).and_return user
-        mock_wisper_publisher(authentication_service, :authenticate, :success, user)
-        get :new
-      end
-
-      it 'does authenticates' do
-        expect(authentication_service).to have_received(:authenticate) 
-      end
-    end
+    allow(controller).to receive(:cookies).and_return cookies
   end
 
   describe 'POST create' do
@@ -82,7 +51,7 @@ describe SessionsController do
 
         it 'authentications with facebook' do
           expect(FacebookAuthentication).to have_received(:new)
-            .with '1234', nil
+            .with cookies, nil
         end
   
         it 'inits authentication_service' do
@@ -118,7 +87,7 @@ describe SessionsController do
 
         it 'authentications with facebook' do
           expect(FacebookAuthentication).to have_received(:new)
-            .with '1234', '/redirect_path'
+            .with cookies, '/redirect_path'
         end
   
         it 'inits authentication_service' do
@@ -154,7 +123,7 @@ describe SessionsController do
 
         it 'authentications with facebook' do
           expect(FacebookAuthentication).to have_received(:new)
-            .with '1234', nil
+            .with cookies, nil
         end
   
         it 'inits authentication_service' do

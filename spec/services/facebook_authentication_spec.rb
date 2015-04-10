@@ -1,8 +1,8 @@
 describe FacebookAuthentication do 
-  let(:subject)           { FacebookAuthentication.new signed_request }
+  let(:subject)           { FacebookAuthentication.new cookies }
 
-  let(:signed_request)    { spy('signed_request') }
-  let(:validated_request) { spy('validated_request') }
+  let(:cookies)           { spy('cookies') }
+  let(:user_info)         { spy('user_info') }
   let(:oauth)             { spy('facebook_oauth') }
   let(:facebook_api)      { spy('facebook_api') }
   
@@ -28,7 +28,7 @@ describe FacebookAuthentication do
     allow(Koala::Facebook::OAuth).to receive(:new).and_return oauth
     allow(Koala::Facebook::API).to   receive(:new).and_return facebook_api
     
-    allow(oauth).to receive(:parse_signed_request).and_return validated_request
+    allow(oauth).to receive(:get_user_info_from_cookies).and_return user_info
     allow(facebook_api).to receive(:get_object).and_return facebook_me
     allow(facebook_api).to receive(:get_picture).and_return profile_image
     
@@ -36,22 +36,22 @@ describe FacebookAuthentication do
   end
 
   describe '#initialize' do
-    it 'initializes with signed_request' do
-      expect { FacebookAuthentication.new(signed_request) }.to_not raise_error
+    it 'initializes with cookies' do
+      expect { FacebookAuthentication.new(cookies) }.to_not raise_error
     end
 
-    it 'initializes with signed_request and app_data' do
-      expect { FacebookAuthentication.new(signed_request, app_data) }.to_not raise_error
+    it 'initializes with cookies and app_data' do
+      expect { FacebookAuthentication.new(cookies, app_data) }.to_not raise_error
     end
 
-    it 'errors without signed_request' do
+    it 'errors without cookies' do
       expect { FacebookAuthentication.new }.to raise_error
     end
   end
 
   describe 'attributes' do
-    it 'has a signed_request' do
-      expect(subject).to respond_to :signed_request
+    it 'has a cookies' do
+      expect(subject).to respond_to :cookies
     end
 
     it 'has a firstname' do
@@ -179,7 +179,7 @@ describe FacebookAuthentication do
     end
 
     context 'when app_data' do
-      let(:subject) { FacebookAuthentication.new signed_request, app_data }
+      let(:subject) { FacebookAuthentication.new cookies, app_data }
       
       it 'sets redirect_path from app_data' do
         expect(subject.redirect_path).to eq app_data
@@ -198,7 +198,7 @@ describe FacebookAuthentication do
 
     context 'when exception' do
       before do
-        allow(oauth).to receive(:parse_signed_request).and_raise :exception
+        allow(oauth).to receive(:get_user_info_from_cookies).and_raise :exception
       end
 
       it 'is NOT authenticated' do
