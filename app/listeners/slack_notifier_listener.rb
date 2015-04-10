@@ -2,13 +2,14 @@ class SlackNotifierListener
   def login(account, redirect_path)
     return if account.nil?
 
-    send_notification "*#{account.fullname}* logged in"
+
+    send_notification "*#{account.fullname}* logged in from #{account.platform}"
   end
 
   def signup(account)
     return if account.nil?
 
-    send_notification "*#{account.fullname}* is signing up"
+    send_notification "*#{account.fullname}* accepted permissions from #{account.platform}"
   end
 
   def authentication_fail(errors)
