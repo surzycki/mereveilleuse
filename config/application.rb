@@ -69,7 +69,7 @@ module AppFacebook
       authentication:  :plain,
       enable_starttls_auto: true
     }
-    config.action_mailer.default_url_options = { host: ENV['MEREVEILLEUSE_HOST'] }
+    config.action_mailer.default_url_options = { host: ENV['MEREVEILLEUSE_HOST'], protocol: ENV['MEREVEILLEUSE_PROTOCOL'] }
     config.action_mailer.asset_host = "#{ENV['MEREVEILLEUSE_PROTOCOL']}://#{ENV['MEREVEILLEUSE_HOST']}"
     
     # silence warnings

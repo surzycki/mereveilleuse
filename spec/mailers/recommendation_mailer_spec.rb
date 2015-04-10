@@ -1,4 +1,4 @@
-describe RecommendationMailer do
+describe RecommendationMailer, focus: true do
   describe 'results' do
     let(:search)          { create :search }
     let(:recommendation)  { build_stubbed :recommendation }
@@ -28,13 +28,13 @@ describe RecommendationMailer do
 
     it 'has a recommend professionsal link' do
       expect(mail).to have_body_text( 
-        new_recommendation_path
+        new_recommendation_url(protocol: 'https')
       )
     end
 
     it 'has a unsubscribe from search link' do
       expect(mail).to have_body_text( 
-        unsubscribe_search_path search
+        unsubscribe_search_url(search, protocol: 'https')
       )
     end
 
