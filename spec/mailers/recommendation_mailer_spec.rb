@@ -28,13 +28,13 @@ describe RecommendationMailer do
 
     it 'has a recommend professionsal link' do
       expect(mail).to have_body_text( 
-        canvas_recommendation_path
+        new_recommendation_path
       )
     end
 
     it 'has a unsubscribe from search link' do
       expect(mail).to have_body_text( 
-        canvas_unsubscribe_search_path search
+        unsubscribe_search_path search
       )
     end
 
