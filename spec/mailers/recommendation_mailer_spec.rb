@@ -1,4 +1,4 @@
-describe RecommendationMailer, focus: true do
+describe RecommendationMailer do
   describe 'results' do
     let(:search)          { create :search }
     let(:recommendation)  { build_stubbed :recommendation }
@@ -40,7 +40,7 @@ describe RecommendationMailer, focus: true do
 
     it 'has a unsubscribe from account link' do
       expect(mail).to have_body_text( 
-        canvas_unsubscribe_account_path user
+        unsubscribe_account_url(user, protocol: 'https')
       )
     end
   end

@@ -10,33 +10,6 @@ module HelperSteps
     FactoryGirl.create :patient_type, name: 'Person'
   end
 
-  step 'I am on the :path page' do |path|
-    action, route = path.split(' ')
-    case action
-    when 'new'
-      visit route_helpers.send([action,route,'path'].join('_'))
-    when 'show'
-      visit route_helpers.send([route,'path'].join('_'), '1')
-    end 
-  end
-
-  step 'I :whether_to be on the :path page' do |positive, path|
-    expectation = positive ? :to : :not_to
-    
-    action, route = path.split(' ')
-    case action
-    when 'new'
-      path = [action,route,'path'].join('_')
-      expect(current_path).send expectation, eq(route_helpers.send(path))
-    when 'show'
-      path = [route.pluralize,'path'].join('_')
-      route = route_helpers.send(path)
-      regex = Regexp.new("^#{route}/\\d+$")
-     
-      expect(current_path).send expectation, match(regex)
-    end 
-  end
-
   step 'I modify the :model :attribute with :value' do |model_name, attribute, value|
     id = "#{underscoreize(model_name)}_#{underscoreize(attribute)}"
     fill_in "#{id}", with: value
@@ -63,23 +36,6 @@ module HelperSteps
 
   step 'there :are :count :model' do |are, count, model|
     expect(translate_model(model).count).to eq count.to_i
-  end
-
-  step 'I :whether_to see an error message' do |positive|
-    expectation = positive ? :to : :not_to
-
-    expect(page).send expectation, have_css('.alert.flash-fixed-top.flash-notification')
-  end
-
-  step 'I :whether_to see a success message' do |positive|
-    expectation = positive ? :to : :not_to
-
-    expect(page).send expectation, have_css('.flash-fixed-top.flash-notification.notice')
-  end
-
-  step 'I :whether_to see :text' do |positive, text|
-    expectation = positive ? :to : :not_to
-    expect(page.body).send expectation, include(text)
   end
 
   step 'show page' do
@@ -114,10 +70,6 @@ module HelperSteps
 
   def form_modifications
     @form_modifications ||= {}
-  end
-
-  def route_helpers
-    Rails.application.routes.url_helpers
   end
 
   def translate_model(value)

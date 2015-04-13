@@ -1,4 +1,4 @@
-@acceptance @js  @wip 
+@acceptance @js
 Feature: Marketing Pixels
   Background: 
     Given the application is setup

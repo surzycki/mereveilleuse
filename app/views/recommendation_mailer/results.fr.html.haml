@@ -150,7 +150,7 @@
             Votre contribution est importante pour la communauté MèreVeilleuse. Si vous êtes satisfaite de cette recommandation, merci d'aider les autres MèreVeilleuses mamans en laissant une recommandation sur vos meilleurs professionnels de santé. Merci, vous êtes MèreVeilleuse.
             %br
             %br
-            = link_to new_recommendation_url, class: 'btn btn-primary btn-block' do
+            = link_to new_recommendation_url, class: 'btn btn-primary btn-block', id: 'new-recomendation' do
               Recommender un professionnel de santé. 
           %td.expander   
       %hr
@@ -168,7 +168,7 @@
             .small
               Vous ne souhaitez plus recevoir de nouvelles alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?
             %br  
-            = link_to unsubscribe_search_url(@search), class: 'btn btn-alternate btn-block btn-sm' do
+            = link_to unsubscribe_search_url(@search), class: 'btn btn-alternate btn-block btn-sm', id: 'unsubscribe-search' do
               Je ne cherche plus.
            
           %td.expander 
