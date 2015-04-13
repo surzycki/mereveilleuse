@@ -1,12 +1,11 @@
 @acceptance @js 
 Feature: Recommendation Form
   Background: 
-    Given I am logged in 
-    And the application is setup
-
-
+    Given the application is setup  
+    And I am logged in
+    
   Scenario: Recommend NEW Practitioner
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     When I modify the 'recommendation form' practitioner_name with 'Bob Jones'
     And I modify the 'recommendation form' profession_name with 'Doctor'
     And I select 'Person' from patient_type_id on 'recommendation form' 
@@ -17,11 +16,11 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'show recommendation' page
+    Then I should be on the 'recommendation' page for the recommendation
     
-    
+  
   Scenario: Recommend NEW Practitioner (new profession)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     When I modify the 'recommendation form' practitioner_name with 'Bob Jones'
     And I modify the 'recommendation form' profession_name with 'New Type of Doctor'
     And I select 'Person' from patient_type_id on 'recommendation form' 
@@ -32,11 +31,11 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'show recommendation' page
+    Then I should be on the 'recommendation' page for the recommendation
 
 
   Scenario: Recommend NEW Practitioner (validation error)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     When I modify the 'recommendation form' practitioner_name with 'Bob Jones'
     And I modify the 'recommendation form' profession_name with 'Doctor'
     And I submit the form
@@ -44,7 +43,7 @@ Feature: Recommendation Form
 
 
   Scenario: Recommend NEW Practitioner (bad address)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     When I modify the 'recommendation form' practitioner_name with 'Bob Jones'
     And I modify the 'recommendation form' profession_name with 'Doctor'
     And I select 'Person' from patient_type_id on 'recommendation form' 
@@ -60,7 +59,7 @@ Feature: Recommendation Form
 
   
   Scenario: Recommend EXISTING Practitioner (no change)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     And a practitioner 'Homer Simpson' exists
     When I modify the 'recommendation form' practitioner_name with 'Homer Simpson'
     And I modify the 'recommendation form' profession_name with 'Doctor'
@@ -72,11 +71,11 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'show recommendation' page
+    Then I should be on the 'recommendation' page for the recommendation
     
  
   Scenario: Recommend EXISTING Practitioner (new address)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     And a practitioner 'Homer Simpson' exists
     When I modify the 'recommendation form' practitioner_name with 'Homer Simpson'
     And I modify the 'recommendation form' profession_name with 'Doctor'
@@ -88,11 +87,11 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'show recommendation' page
+    Then I should be on the 'recommendation' page for the recommendation
     
 
   Scenario: Recommend EXISTING Practitioner (new profession)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     And a practitioner 'Homer Simpson' exists
     When I modify the 'recommendation form' practitioner_name with 'Homer Simpson'
     And I modify the 'recommendation form' profession_name with 'New type of doctor'
@@ -104,11 +103,11 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'show recommendation' page
+    Then I should be on the 'recommendation' page for the recommendation
 
 
   Scenario: Recommend EXISTING Practitioner (bad address)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     And a practitioner 'Homer Simpson' exists
     When I modify the 'recommendation form' practitioner_name with 'Homer Simpson'
     And I modify the 'recommendation form' profession_name with 'Doctor'
@@ -123,8 +122,9 @@ Feature: Recommendation Form
     Then I should see an error message
     And recommendation_form_address should be marked as invalid
 
+
   Scenario: Recommend EXISTING Practitioner (blank profession)
-    Given I am on the 'new recommendation' page
+    Given I goto the 'new recommendation' page
     And a practitioner 'Homer Simpson' exists
     When I modify the 'recommendation form' practitioner_name with 'Homer Simpson'
     And I modify the 'recommendation form' profession_name with ''

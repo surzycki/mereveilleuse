@@ -13,6 +13,7 @@ module PageSteps
   end
 
   step 'I :whether_to be on the :path page for the :model' do |positive, path, model|
+    
     expectation = positive ? :to : :not_to
     
     path     = "#{path.downcase.tr(' ', '_')}_path"

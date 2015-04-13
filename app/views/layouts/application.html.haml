@@ -17,12 +17,16 @@
     = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     <![endif]-->
     
-    = render 'shared/analytics'
+    = render 'shared/analytics' 
     
   %body
-    = render 'shared/facebook_javascript_sdk' unless Rails.env.test?
+    - unless Rails.env.test?
+      = render 'shared/facebook_javascript_sdk'
+      = react_component( 'FacebookCanvasLogin', facebook_canvas: ENV['FACEBOOK_CANVAS'], facebook_permissions_dialog: @requesting_authentication )
+    
     = render 'shared/flash'
     = render 'shared/header'
+    
     = yield
     
      

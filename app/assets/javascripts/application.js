@@ -29,4 +29,4 @@
 //= require forms
 //= require invite
 //= require share
-//= require facebook_events
+

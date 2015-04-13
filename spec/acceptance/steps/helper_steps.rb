@@ -34,31 +34,31 @@ module HelperSteps
     expect(expectation).to eq 'true'
   end
 
-  step 'there :are :count :model' do |are, count, model|
-    expect(translate_model(model).count).to eq count.to_i
-  end
+  #step 'there :are :count :model' do |are, count, model|
+  #  expect(translate_model(model).count).to eq count.to_i
+  #end
 
   step 'show page' do
     save_page
   end
 
-  step 'there :whether_to be a :model with :attribute :value' do |positive ,model, attribute, value|
-    expectation = positive ? :to : :not_to
-    klass = translate_model(model)
-    expect(klass.send "find_by_#{attribute}", value).send expectation, be_truthy 
-  end
+  #step 'there :whether_to be a :model with :attribute :value' do |positive ,model, attribute, value|
+  #  expectation = positive ? :to : :not_to
+  #  klass = translate_model(model)
+  #  expect(klass.send "find_by_#{attribute}", value).send expectation, be_truthy 
+  #end
 
-  step 'there :whether_to be a :association for :model with :attribute :value' do |positive, association, model, attribute, value|
-    expectation  = positive ? :to : :not_to
-    klass        = translate_model(model)
-    clause       = Hash[attribute, value.downcase]
-    result       = klass.joins(association.pluralize.to_sym).where clause
-    expect(result.count).send expectation, eq(1)
-  end
+  #step 'there :whether_to be a :association for :model with :attribute :value' do |positive, association, model, attribute, value|
+  #  expectation  = positive ? :to : :not_to
+  #  klass        = translate_model(model)
+  #  clause       = Hash[attribute, value.downcase]
+  #  result       = klass.joins(association.pluralize.to_sym).where clause
+  #  expect(result.count).send expectation, eq(1)
+  #end
 
-  step 'a :model exists' do |model|
-    FactoryGirl.create(model.downcase.to_sym)
-  end
+  #step 'a :model exists' do |model|
+  #  FactoryGirl.create(model.downcase.to_sym)
+  #end
 
   step 'take a screenshot' do 
     screenshot

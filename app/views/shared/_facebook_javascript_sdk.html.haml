@@ -20,50 +20,10 @@
       version    : 'v2.2'
     });
 
+    
     if(window.is_canvas()) {
       FB.Canvas.setAutoGrow(91);
       FB.Canvas.scrollTo(0,0);
-
-      FB.Event.subscribe('auth.statusChange', onStatusChange);
-
-      function login(callback) {
-        // We either
-        // 1. login
-        // 2. display permissions
-
-        FB.login(callback, { scope: 'public_profile, user_friends, email, user_location'} );
-      }
-      
-      function loginCallback(response) {
-        // We either:
-        // 1. accepted facebook permissions and logged in
-        // 2. denined facebook permissions and are redirected
-
-        console.log('CANVAS:loginCallback:' + response.status);
-        if(response.status != 'connected') {
-          top.location.href = 'https://www.facebook.com/games/mereveilleuse/'
-        }
-      }
-
-      function onStatusChange(response) {
-        // Facebook sent us a status
-        // 1. NOT connected (not_authorized), so go login
-        // 2. connected, decided in what phase we are
-        //    * accepting facebook permissions
-        //    * accepted facebook permissions
-
-        console.log('CANVAS:onStatusChange: ' + response.status);
-        if( response.status != 'connected' ) {
-          login(loginCallback);
-        } else {
-          // 1. accepting facebook permission (requesting_authentication == true)
-          // 2. already accepted facebook permissions
-          if("#{@requesting_authentication}" == 'true') {
-            console.log('CANVAS:onStatusChange: reload page');
-            top.location.href = "#{ENV['FACEBOOK_CANVAS']}"
-          }
-        }
-      }
     }
   };
 
