@@ -553,9 +553,9 @@ describe 'recommendation' do
       end.to_not change(Recommendation, :count)
     end
 
-    it 'redirects to new registrations' do
+    it 'redirects to not_found_path' do
       post recommendations_path, recommendation_form: form_data
-      expect(response).to redirect_to new_registration_path
+      expect(response).to redirect_to not_found_path
     end
   end
 end
