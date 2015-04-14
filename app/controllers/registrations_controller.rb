@@ -3,7 +3,7 @@ class RegistrationsController < ApplicationController
 
   # GET registrations/new
   def new
-    @requesting_authentication = params[:requesting_authentication]
+    #@requesting_authentication = params[:requesting_authentication]
   end 
 
   def catch_exceptions
