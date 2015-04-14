@@ -10,13 +10,13 @@ root.FacebookCanvasLogin = React.createClass(
   #     * accepted facebook permissions
   getInitialState: ->
     is_loaded: 'unloaded'
-    property: 'not_connected'
+    status: 'not_connected'
 
   componentWillMount: ->
-    PubSub.subscribe( 'facebook:skd:status:changed', this._handleStatusChange )
+    PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChange )
       
   render: ->
-    `<meta property='FacebookCanvasLogin' content={this.state.is_loaded} property={this.state.property}/>`
+    `<meta property='FacebookCanvasLogin' content={this.state.is_loaded} name={this.state.status}/>`
 
   login: (callback) ->
     # We either
@@ -24,15 +24,17 @@ root.FacebookCanvasLogin = React.createClass(
     # 2. display permissions
     FB.login callback, scope: 'public_profile, user_friends, email, user_location'
 
-  _handleStatusChange: (response) ->
+  _handleStatusChange: (msg, response) ->
     this.setState
       is_loaded: 'loaded'
-      property: response.status
+      status: response.status
 
     if response.status != 'connected'
       this.login this._handleLogin
     else
       # 1. accepting facebook permission (requesting_authentication == true)
+      #    in which case we need to reload to page to pass the new
+      #    signed request to the backend
       # 2. already accepted facebook permissions
       if this.props.facebook_permissions_dialog == 'true'
         console.log 'CANVAS:onStatusChange: reload page'

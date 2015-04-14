@@ -21,9 +21,8 @@ root.FacebookSDK = React.createClass(
         FB.Canvas.setAutoGrow(91)
         FB.Canvas.scrollTo(0,0)
         FB.Event.subscribe 'auth.statusChange', this._onStatusChange
-
         this.setState(platform: 'canvas')
-
+      
       this.setState(is_loaded: 'loaded')
 
     # Load the SDK asynchronously
@@ -40,10 +39,10 @@ root.FacebookSDK = React.createClass(
     ) document, 'script', 'facebook-jssdk' 
 
   render: ->
-    `<meta property='FacebookSDK' content={this.state.is_loaded} property={this.state.platform}/>` 
+    `<meta property='FacebookSDK' content={this.state.is_loaded} name={this.state.platform}/>` 
 
   _onStatusChange: (response) ->
     # broadcast to interested components
-    PubSub.publish( 'facebook:skd:status:changed', response )
+    PubSub.publish( 'facebook:sdk:status:changed', response )
 )
 

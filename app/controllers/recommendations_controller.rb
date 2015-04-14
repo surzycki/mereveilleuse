@@ -1,9 +1,9 @@
 class RecommendationsController < ApplicationController
-  before_filter :authenticated?
   around_filter :catch_exceptions, unless: 'Rails.env.development?'
 
   # GET recommendations/new
   def new
+    @requesting_authentication = params[:requesting_authentication]
     @form = RecommendationForm.new
   end
 

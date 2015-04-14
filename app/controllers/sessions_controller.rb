@@ -25,20 +25,12 @@ class SessionsController < ApplicationController
       # aren't passing these during a via params in a post for warden
       warden.set_user account, scope: :user
       
-      # There are two cases based on the platform
-      #
-      # 1. canvas, we keep the people on the landing (automated login/signup)
-      # 2. web, users click to join so we take them to another page
-      #if account.canvas?
-      #  redirect_to new_registration_path
-      #else
       redirect_to new_recommendation_path
-      #end
     end
 
     # display facebook authentication dialog
     authentication_service.on :request_authentication do |auth|
-      redirect_to new_registration_path(requesting_authentication: true)
+      redirect_to new_recommendation_path(requesting_authentication: true) 
     end
 
 
