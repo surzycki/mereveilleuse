@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include PersonNameAttributes
   include LocationAttributes
   
-  after_initialize :generate_login_token
+  before_create :generate_login_token
   
   has_many :searches, dependent: :destroy
 

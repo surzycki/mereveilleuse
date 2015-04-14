@@ -87,7 +87,7 @@ describe User do
     context 'after_initialize' do
       it 'call generate_login_token' do
         allow_any_instance_of(User).to receive(:generate_login_token)
-        expect(User.new).to have_received(:generate_login_token)
+        expect(User.create).to have_received(:generate_login_token)
       end
     end
   end
