@@ -61,7 +61,7 @@ class FacebookAuthentication
   end
 
   def get_facebook_api
-    oauth             = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
+    oauth = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
 
     token = if signed_request.nil?
       Rails.logger.info('FACEBOOK AUTHENTICATION METHOD: COOKIE')

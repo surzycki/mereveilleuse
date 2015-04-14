@@ -121,9 +121,7 @@ describe FacebookAuthentication do
 
     it 'has a friend_count' do
       expect(subject).to respond_to :friend_count
-    end
-
-    
+    end    
   end
 
   describe 'authentication' do
