@@ -134,8 +134,8 @@ describe SessionsController do
           expect(response).to be_redirect
         end
 
-        it 'redirects to new registration path' do
-          expect(response).to redirect_to new_registration_path
+        it 'redirects to new recommendation path' do
+          expect(response).to redirect_to new_recommendation_path
         end
 
         it 'facebook authentication recieves cookies' do
@@ -169,8 +169,8 @@ describe SessionsController do
           expect(response).to be_redirect
         end
 
-        it 'redirects to new registration path' do
-          expect(response).to redirect_to new_registration_path(requesting_authentication: true)
+        it 'redirects to new reommendation path' do
+          expect(response).to redirect_to new_reommendation_path(requesting_authentication: true)
         end
       end
     end
