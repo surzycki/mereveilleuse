@@ -23,6 +23,15 @@ class ApplicationController < ActionController::Base
     redirect_to new_registration_path unless warden.authenticated?(:user) 
   end
 
+  def token_authentication!
+    # until we move authentication into warden this is how
+    # we handle token authentication, when we move facebook authentication
+    # into warden we can use warden to try each strategy and authenticate accordinly
+    # CAVEAT: this could lead to folks with multiple account not being able to 
+    # properly de register unless we handle token authentication first before facebook authentication
+    warden.authenticate!(:token)
+  end
+
   private
   # Rails 4 has a problem with iframes, this allows it to display content in an iframe
   def allow_iframe

@@ -1,7 +1,8 @@
 class UnsubscribesController < ApplicationController
+  before_filter :token_authentication!
   around_filter :catch_exceptions, unless: 'Rails.env.development?'
   
-  # GET unsubscribe/search/:id
+  # GET unsubscribe/search/:token
   def search
     if load_search
       @search.canceled!
@@ -10,22 +11,20 @@ class UnsubscribesController < ApplicationController
     end
   end
 
-  # GET unsubscribe/account/:id
+  # GET unsubscribe/account/:token
   def account
-    if load_user
-      @user.unsubscribe
+    if current_user
+      current_user.unsubscribe
     else
       redirect_to not_found_path
     end
   end
 
+  
+
   private
   def load_search
     @search ||= Search.find_by(md5_hash: params[:id])
-  end
-
-  def load_user
-    @user ||= User.find_by(facebook_id: params[:id])
   end
 
   def catch_exceptions

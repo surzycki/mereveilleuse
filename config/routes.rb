@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   # post 'session/canvas',              to: 'sessions#canvas',            as: 'session_canvas'
 
   # unsubscribe
-  get 'unsubscribe/search/:id',       to: 'unsubscribes#search',        as: 'unsubscribe_search'
-  get 'unsubscribe/account/:id',      to: 'unsubscribes#account',       as: 'unsubscribe_account'
+  get 'unsubscribe/search/:token/:id',  to: 'unsubscribes#search',        as: 'unsubscribe_search'
+  get 'unsubscribe/account/:token',     to: 'unsubscribes#account',       as: 'unsubscribe_account', param: :token
 
   # json api
   get 'practitioners/autocomplete',   to: 'practitioners#autocomplete', as: 'practitioners_autocomplete', constraints: { format: 'json' }

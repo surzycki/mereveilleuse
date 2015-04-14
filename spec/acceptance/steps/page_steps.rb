@@ -13,13 +13,24 @@ module PageSteps
   end
 
   step 'I :whether_to be on the :path page for the :model' do |positive, path, model|
-    
     expectation = positive ? :to : :not_to
     
     path     = "#{path.downcase.tr(' ', '_')}_path"
     instance = (model.capitalize.constantize).all.first
 
     url  = route_helpers.send(path, instance)
+
+    expect(current_path).send expectation, eq(url)
+  end
+
+  step 'I :whether_to be on the :path page for the :model identified by :property' do |positive, path, model, property|
+    expectation = positive ? :to : :not_to
+    
+    path     = "#{path.downcase.tr(' ', '_')}_path"
+    instance = (model.capitalize.constantize).all.first
+    property = instance.send(property)
+
+    url  = route_helpers.send(path, property)
 
     expect(current_path).send expectation, eq(url)
   end

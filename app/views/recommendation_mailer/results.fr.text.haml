@@ -36,4 +36,4 @@ Recommender un professionnel de santé.
 Satisfaite de votre recherche ?
 Vous ne souhaitez plus recevoir de nouvelles alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?  
 Je ne cherche plus.
-#{unsubscribe_search_url(@search)}
+#{unsubscribe_search_url(@user.login_token, @search)}

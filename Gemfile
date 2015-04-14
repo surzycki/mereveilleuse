@@ -31,7 +31,7 @@ gem 'premailer-rails'                                     # CSS styled emails wi
 gem 'monadic'                                             # helps dealing with exceptional situations, 
 gem 'time_difference'                                     # The missing Ruby method to print out time difference (duration) in year, month, week, day, hour, minute, and second.
 gem 'slack-notifier'                                      # A simple wrapper for posting to slack channels
-gem 'devise'
+gem 'devise'                                              # (necessary for activeadmin)
 gem 'unicode_utils'
 
 

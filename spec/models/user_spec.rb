@@ -54,6 +54,10 @@ describe User do
       expect(subject).to define_enum_for(:platform)
         .with [ :canvas, :web ]
     end
+
+    it 'has login_token' do
+      expect(subject).to respond_to :login_token
+    end
   end
 
   describe 'associations' do
@@ -76,6 +80,15 @@ describe User do
     it 'has many searches' do
       expect(subject).to have_many(:searches)
         .dependent(:destroy)
+    end
+  end
+
+  describe 'callbacks' do
+    context 'after_initialize' do
+      it 'call generate_login_token' do
+        allow_any_instance_of(User).to receive(:generate_login_token)
+        expect(User.new).to have_received(:generate_login_token)
+      end
     end
   end
 

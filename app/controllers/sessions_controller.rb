@@ -11,6 +11,10 @@ class SessionsController < ApplicationController
     authentication_service.authenticate facebook_canvas_authentication
   end
 
+  def fail
+    redirect_to new_registration_path
+  end
+
   private
   def initialize_authentication_service
     authentication_service.on :login do |account, redirect_path|
@@ -29,11 +33,11 @@ class SessionsController < ApplicationController
       #
       # 1. canvas, we keep the people on the landing (automated login/signup)
       # 2. web, users click to join so we take them to another page
-      if account.canvas?
-        redirect_to new_registration_path
-      else
-        redirect_to new_recommendation_path
-      end
+      #if account.canvas?
+      #  redirect_to new_registration_path
+      #else
+      redirect_to new_recommendation_path
+      #end
     end
 
     # display facebook authentication dialog
