@@ -15,7 +15,7 @@ root.FacebookLoginButton = React.createClass(
     form = this.refs.form.getDOMNode()
     
     if window.is_canvas()
-      window.location = this.props.canvas_redirect
+      window.location = this.props.canvas_link
     else
       FB.login ((response) =>
         this._handleFacebookConnect(response, form)
