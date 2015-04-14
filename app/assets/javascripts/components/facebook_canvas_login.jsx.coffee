@@ -10,14 +10,13 @@ root.FacebookCanvasLogin = React.createClass(
   #     * accepted facebook permissions
   getInitialState: ->
     is_loaded: 'unloaded'
+    property: 'not_connected'
 
-  componentDidMount: ->
-    if window.is_canvas()
-      this.setState(is_loaded: 'loaded')
-      FB.Event.subscribe 'auth.statusChange', this.onStatusChange
-
+  componentWillMount: ->
+    PubSub.subscribe( 'facebook:skd:status:changed', this._handleStatusChange )
+      
   render: ->
-    `<meta property='FacebookCanvasLogin' content={this.state.is_loaded}/>`
+    `<meta property='FacebookCanvasLogin' content={this.state.is_loaded} property={this.state.property}/>`
 
   login: (callback) ->
     # We either
@@ -25,10 +24,13 @@ root.FacebookCanvasLogin = React.createClass(
     # 2. display permissions
     FB.login callback, scope: 'public_profile, user_friends, email, user_location'
 
-  onStatusChange: (response) ->
-    console.log response
+  _handleStatusChange: (response) ->
+    this.setState
+      is_loaded: 'loaded'
+      property: response.status
+
     if response.status != 'connected'
-      this.login this._loginCallback
+      this.login this._handleLogin
     else
       # 1. accepting facebook permission (requesting_authentication == true)
       # 2. already accepted facebook permissions
@@ -36,11 +38,10 @@ root.FacebookCanvasLogin = React.createClass(
         console.log 'CANVAS:onStatusChange: reload page'
         top.location.href = this.props.facebook_canvas
 
-  _loginCallback: (response) ->
+  _handleLogin: (response) ->
     # We either
     # 1. accepted facebook permissions and logged in
-    # 2. denined facebook permissions and are redirected
-    
+    # 2. denied facebook permissions and are redirected 
     console.log('CANVAS:loginCallback:' + response.status);
     if response.status != 'connected' 
       top.location.href = 'https://www.facebook.com/games/mereveilleuse/'
