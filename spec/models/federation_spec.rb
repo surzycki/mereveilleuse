@@ -5,6 +5,7 @@ describe Federation, focus: true do
     end
   end
 
+
   describe 'attributes' do
     it 'has a name' do
       expect(subject).to respond_to :name
