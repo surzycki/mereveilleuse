@@ -2,13 +2,9 @@ class SessionsController < ApplicationController
   around_filter      :catch_exceptions, unless: 'Rails.env.development?'
   before_filter      :initialize_authentication_service, only: [:create]
   
-  # POST /session/canvas
-  #def create
-  #end
-
   # POST /session
   def create 
-    authentication_service.authenticate facebook_canvas_authentication
+    authentication_service.authenticate facebook_authentication
   end
 
   def fail
@@ -55,7 +51,7 @@ class SessionsController < ApplicationController
   # Facebook saves a cookie with a signed request that can be parsed
   # Facebook canvas apps post a signed_request that which we can use to 
   # determine the plaform
-  def facebook_canvas_authentication
+  def facebook_authentication
     @facebook_authentication ||= FacebookAuthentication.new(
       cookies: cookies,
       app_data: params[:app_data],

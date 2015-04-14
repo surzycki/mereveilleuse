@@ -1,12 +1,16 @@
 describe UnsubscribesController do
+  let(:user)  { build_stubbed :user } 
+
+  before { stubbed_sign_in user }
+
   describe 'GET search' do
     let(:search) { spy('search') }
-
+      
     describe 'success' do
       before do
         allow(Search).to receive(:find_by).and_return search
 
-        get :search, id: 'md5_hash_of_search'
+        get :search, id: 'id_of_search', token: 'login_token'
       end
 
       it 'returns http success' do
@@ -23,7 +27,7 @@ describe UnsubscribesController do
 
       it 'retrieves correct search' do
         expect(Search).to have_received(:find_by)
-          .with hash_including(md5_hash: 'md5_hash_of_search') 
+          .with hash_including(id: 'id_of_search') 
       end
 
       it 'assigns search' do
@@ -39,7 +43,7 @@ describe UnsubscribesController do
       before do
         allow(Search).to receive(:find_by).and_return nil
 
-        get :search, id: 'not_found_hash'
+        get :search, id: 'not_found', token: 'login_token'
       end
 
       it 'redirects to not_found_path' do
@@ -56,7 +60,7 @@ describe UnsubscribesController do
         allow(Search).to receive(:find_by).and_raise :error
         allow(TrackError).to receive(:new)
 
-        get :search, id: 'md5_hash_of_search'
+        get :search, id: 'not_found', token: 'login_token'
       end
 
       it 'redirects to not_found_path' do
@@ -70,13 +74,13 @@ describe UnsubscribesController do
   end
 
   describe 'GET account' do
-    let(:user)   { spy('user') }
-    
+    before do
+      allow(user).to receive(:unsubscribe)
+    end
+
     describe 'success' do
       before do
-        allow(User).to receive(:find_by).and_return user
-        
-        get :account, id: '12345'
+        get :account, token: 'login_token'
       end
 
       it 'returns http success' do
@@ -91,15 +95,6 @@ describe UnsubscribesController do
         expect(response).to render_template(:account)
       end
 
-      it 'retrieves correct user' do
-        expect(User).to have_received(:find_by)
-          .with hash_including(facebook_id: '12345') 
-      end
-
-      it 'assigns user' do
-        expect(assigns[:user]).to eq user
-      end
-
       it 'unsubscribes user' do
         expect(user).to have_received(:unsubscribe)
       end 
@@ -107,9 +102,9 @@ describe UnsubscribesController do
 
     describe 'failure' do
       before do
-        allow(User).to receive(:find_by).and_return nil
+        allow(controller).to receive(:current_user).and_return nil
 
-        get :account, id: 'not_found_facebook_id'
+        get :account, token: 'login_token'
       end
 
       it 'redirects to not_found_path' do
@@ -123,10 +118,10 @@ describe UnsubscribesController do
 
     describe 'exception' do
       before do
-        allow(User).to receive(:find_by).and_raise :error
+        allow(controller).to receive(:current_user).and_raise :error
         allow(TrackError).to receive(:new)
 
-        get :account, id: 'exception'
+        get :account, token: 'exception'
       end
 
       it 'redirects to not_found_path' do

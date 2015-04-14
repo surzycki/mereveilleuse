@@ -1,8 +1,6 @@
 Rails.configuration.middleware.use Warden::Manager do |manager|
-  manager.default_strategies :facebook_javascript
-  manager.scope_defaults :user, strategies: [:facebook_javascript, :token]
-  
-  manager.failure_app = lambda { |env| SessionsController.action(:fail).call(env) }
+  # defined in devise otherwise wokiness and hilarlity ensues bc active admin
+  # uses devise and devise uses warden
 end
 
 # Setup Session Serialization
@@ -35,12 +33,16 @@ Warden::Strategies.add(:token) do
 
   def authenticate!
     # try user
-    user = User.find_by(login_token: params[:token])
+    user = User.authenticate_with_token params[:token]
 
     if user
       success!(user)
     else
-      halt!
+      redirect! config[:redirect_url]
     end
+  end
+
+  def config
+    env['warden'].config[:scope_defaults][:user]
   end
 end

@@ -248,6 +248,8 @@ Devise.setup do |config|
   # change the failure app, you can configure them inside the config.warden block.
   #
   config.warden do |manager|
+    manager.scope_defaults :user, strategies: [:facebook_javascript, :token], redirect_url: Rails.application.routes.url_helpers.new_registration_path
+
     manager.failure_app = lambda { |env| SessionsController.action(:fail).call(env) }
   end
 

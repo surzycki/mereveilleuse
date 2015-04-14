@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     # into warden we can use warden to try each strategy and authenticate accordinly
     # CAVEAT: this could lead to folks with multiple account not being able to 
     # properly de register unless we handle token authentication first before facebook authentication
-    warden.authenticate!(:token)
+    warden.authenticate!(:token, scope: :user)
   end
 
   private

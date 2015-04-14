@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   # unsubscribe
   get 'unsubscribe/search/:token/:id',  to: 'unsubscribes#search',        as: 'unsubscribe_search'
-  get 'unsubscribe/account/:token',     to: 'unsubscribes#account',       as: 'unsubscribe_account', param: :token
+  get 'unsubscribe/account/:token',     to: 'unsubscribes#account',       as: 'unsubscribe_account'
 
   # json api
   get 'practitioners/autocomplete',   to: 'practitioners#autocomplete', as: 'practitioners_autocomplete', constraints: { format: 'json' }

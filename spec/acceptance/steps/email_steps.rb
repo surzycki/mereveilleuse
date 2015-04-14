@@ -8,8 +8,9 @@ module EmailSteps
   end
 
   step 'a recommendation email was sent' do 
-    search          = FactoryGirl.create :search
-    recommendation  = FactoryGirl.create :recommendation
+    search          = FactoryGirl.create(:search)
+    recommendation  = FactoryGirl.create :recommendation, recommender: search.user
+    
     email = RecommendationMailer.results(search, [recommendation] )
     email.header['skip_premailer'] = true
 

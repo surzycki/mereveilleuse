@@ -34,13 +34,13 @@ describe RecommendationMailer do
 
     it 'has a unsubscribe from search link' do
       expect(mail).to have_body_text( 
-        unsubscribe_search_url(search, protocol: 'https')
+        unsubscribe_search_url(user.login_token, search.id, protocol: 'https')
       )
     end
 
     it 'has a unsubscribe from account link' do
       expect(mail).to have_body_text( 
-        unsubscribe_account_url(user, protocol: 'https')
+        unsubscribe_account_url(user.login_token, protocol: 'https')
       )
     end
   end

@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   enum status:   [ :unregistered, :registered, :unsubscribed ] 
   enum platform: [ :canvas, :web ]
 
+  def self.authenticate_with_token(token)
+    find_by(login_token: token)
+  end
+
   def unsubscribe
     self.searches.each(&:canceled!)
     self.unsubscribed!

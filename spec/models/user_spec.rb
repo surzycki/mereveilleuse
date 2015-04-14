@@ -112,4 +112,16 @@ describe User do
       expect(subject).to have_received(:unsubscribed!).once
     end
   end
+
+  describe '#authenticate_with_token' do
+    before do
+      allow(User).to receive(:find_by)
+      User.authenticate_with_token ('token')
+    end
+
+    it 'finds by login_token' do
+      expect(User).to have_received(:find_by)
+        .with(hash_including(login_token: 'token'))
+    end
+  end
 end

@@ -30,7 +30,7 @@ Voici les coordonnées de #{@recommendation.practitioner_fullname}.
 *******************************
 Votre contribution est importante pour la communauté MèreVeilleuse. Si vous êtes satisfaite de cette recommandation, merci d'aider les autres MèreVeilleuses mamans en laissant une recommandation sur vos meilleurs professionnels de santé. Merci, vous êtes MèreVeilleuse.
 Recommender un professionnel de santé.
-#{new_recommendation_url}
+#{new_recommendation_url(token: @user.login_token)}
 
 *******************************
 Satisfaite de votre recherche ?

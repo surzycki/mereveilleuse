@@ -2,7 +2,7 @@ class UnsubscribesController < ApplicationController
   before_filter :token_authentication!
   around_filter :catch_exceptions, unless: 'Rails.env.development?'
   
-  # GET unsubscribe/search/:token
+  # GET unsubscribe/search/:token/:id
   def search
     if load_search
       @search.canceled!
@@ -20,11 +20,9 @@ class UnsubscribesController < ApplicationController
     end
   end
 
-  
-
   private
   def load_search
-    @search ||= Search.find_by(md5_hash: params[:id])
+    @search ||= Search.find_by(id: params[:id])
   end
 
   def catch_exceptions
