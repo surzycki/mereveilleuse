@@ -111,6 +111,13 @@ Or if only acceptance tests
 
 Deployment is done through circleci to staging.mereveilleuse.com via capistrano
 
+**Puma configuration**
+
+Puma has some problems letting go of the gemfile when doing rolling restarts
+to fix this add the following to the puma.rb file on the server
+
+    ENV["BUNDLE_GEMFILE"] = File.join('/var/www/mereveilleuse/app_facebook', 'current', 'Gemfile')
+
 
 
 ## TODO ##
