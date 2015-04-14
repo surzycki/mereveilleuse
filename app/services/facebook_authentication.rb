@@ -15,7 +15,7 @@ class FacebookAuthentication
     )
   end
 
-  attr_reader :cookies, :signed_request, :redirect_path, :firstname, :lastname, :email, :facebook_id, :address, :authenticated, :profile_image, :verified, :friend_count, :platform
+  attr_reader :cookies, :redirect_path, :firstname, :lastname, :email, :facebook_id, :address, :authenticated, :profile_image, :verified, :friend_count, :platform
 
   # Authenticates user to facebook using signed requests
   # FACEBOOK_APP_ID and FACEBOOK_SECRET should be set in the ENV vars 
@@ -25,8 +25,7 @@ class FacebookAuthentication
   # @param app_data       [String]  Appended to url for redirection in canvas apps 
   def initialize(cookies: raise(ArgumentError), app_data: nil, signed_request: nil )
     @cookies        = cookies
-    @signed_request = signed_request
-
+    
     process_app_data  app_data
     set_platform      signed_request
 
@@ -61,19 +60,10 @@ class FacebookAuthentication
   end
 
   def get_facebook_api
-    oauth = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
-
-    token = if signed_request.nil?
-      Rails.logger.info('FACEBOOK AUTHENTICATION METHOD: COOKIE')
-      user_info = oauth.get_user_info_from_cookies(cookies)
-      user_info['access_token']
-    else
-      Rails.logger.info('FACEBOOK AUTHENTICATION METHOD: SIGNED REQUEST')
-      user_info = oauth.parse_signed_request(signed_request)
-      user_info['oauth_token']
-    end
-
-    facebook_api = Koala::Facebook::API.new(token)
+    oauth     = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'])
+    user_info = oauth.get_user_info_from_cookies(cookies)
+    
+    facebook_api = Koala::Facebook::API.new(user_info['access_token'])
   end
 
   def set_profile_image(api)
