@@ -218,7 +218,7 @@ Devise.setup do |config|
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
-  config.default_scope = :user
+  config.default_scope = :admin_user
 
   # Set this configuration to false if you want /users/sign_out to sign out
   # only the current scope. By default, Devise signs out all scopes.
@@ -249,8 +249,6 @@ Devise.setup do |config|
   #
   config.warden do |manager|
     manager.scope_defaults :user, strategies: [:facebook_javascript, :token], redirect_url: Rails.application.routes.url_helpers.new_registration_path
-
-    manager.failure_app = lambda { |env| SessionsController.action(:fail).call(env) }
   end
 
   # ==> Mountable engine configurations

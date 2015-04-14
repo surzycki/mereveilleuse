@@ -11,10 +11,7 @@ Rails.application.routes.draw do
   resource  :search,          only: [ :new, :create, :show ]
   resources :recommendations, only: [ :new, :create, :show ]
   resources :registrations,   only: [ :new, :create, :show ]
-  
-  # facebook canvas app entry
-  # post 'session/canvas',              to: 'sessions#canvas',            as: 'session_canvas'
-
+    
   # unsubscribe
   get 'unsubscribe/search/:token/:id',  to: 'unsubscribes#search',        as: 'unsubscribe_search'
   get 'unsubscribe/account/:token',     to: 'unsubscribes#account',       as: 'unsubscribe_account'
