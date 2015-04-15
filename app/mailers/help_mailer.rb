@@ -7,7 +7,7 @@ class HelpMailer < ApplicationMailer
     @message      = message
 
     mail(
-      to: 'info@therapeutes.com', 
+      to: 'contact@mereveilleuse.com', 
       subject: subject
     )
   end

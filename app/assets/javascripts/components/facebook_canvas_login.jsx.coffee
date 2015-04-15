@@ -8,12 +8,15 @@ root.FacebookCanvasLogin = React.createClass(
   # 2. connected, decided in what phase we are:
   #     * accepting facebook permissions
   #     * accepted facebook permissions
+  mixins: [CanvasUtilsMixin]
+
   getInitialState: ->
     is_loaded: 'unloaded'
     status: 'not_connected'
 
   componentWillMount: ->
-    PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChange )
+    if this.isFacebookCanvas()
+      PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChange )
       
   render: ->
     `<meta property='FacebookCanvasLogin' content={this.state.is_loaded} name={this.state.status}/>`
@@ -37,14 +40,12 @@ root.FacebookCanvasLogin = React.createClass(
       #    signed request to the backend
       # 2. already accepted facebook permissions
       if this.props.facebook_permissions_dialog == 'true'
-        console.log 'CANVAS:onStatusChange: reload page'
         top.location.href = this.props.facebook_canvas
 
   _handleLogin: (response) ->
     # We either
     # 1. accepted facebook permissions and logged in
     # 2. denied facebook permissions and are redirected 
-    console.log('CANVAS:loginCallback:' + response.status);
     if response.status != 'connected' 
       top.location.href = 'https://www.facebook.com/games/mereveilleuse/'
 

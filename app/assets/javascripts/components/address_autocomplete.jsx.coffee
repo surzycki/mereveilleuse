@@ -80,7 +80,7 @@ root.AddressAutocomplete = React.createClass(
       source: addressPicker.ttAdapter()
 
     $(element).on 'typeahead:selected', (jquery, option) ->
-      console.log(option)
+      
 
   _destroy_typeahead: ->
     element = this.getDOMNode()

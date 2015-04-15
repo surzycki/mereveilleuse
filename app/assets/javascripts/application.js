@@ -25,6 +25,7 @@
 //= require es5-shim                
 //= require react
 //= require react_ujs
+//= require_tree ./mixins
 //= require_tree ./components
 
 //= require general

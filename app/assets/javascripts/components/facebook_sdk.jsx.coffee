@@ -4,11 +4,14 @@ root.FacebookSDK = React.createClass(
   # Creating and loading the facebook js sdk in a react component
   # we want to tie this all together in react so the async loading nature
   # of the js-sdk does not cause random undefined errors
+  mixins: [CanvasUtilsMixin]
+
   getInitialState: ->
     is_loaded: 'unloaded'
     platform: 'web'
+    status: 'not_connected'
 
-  componentDidMount: ->
+  componentWillMount: ->
     window.fbAsyncInit = =>
       FB.init
         appId: this.props.app_id
@@ -17,12 +20,13 @@ root.FacebookSDK = React.createClass(
         status: true
         version: 'v2.2'
     
-      if(window.is_canvas())
+      if this.isFacebookCanvas()
         FB.Canvas.setAutoGrow(91)
         FB.Canvas.scrollTo(0,0)
-        FB.Event.subscribe 'auth.statusChange', this._onStatusChange
         this.setState(platform: 'canvas')
       
+      FB.Event.subscribe 'auth.statusChange', this._onStatusChange
+      FB.Event.subscribe 'auth.login', this._onLogin
       this.setState(is_loaded: 'loaded')
 
     # Load the SDK asynchronously
@@ -39,10 +43,14 @@ root.FacebookSDK = React.createClass(
     ) document, 'script', 'facebook-jssdk' 
 
   render: ->
-    `<meta property='FacebookSDK' content={this.state.is_loaded} name={this.state.platform}/>` 
+    `<meta property='FacebookSDK' content={this.state.is_loaded} name={this.state.platform} itemProp={this.state.status}/>` 
 
   _onStatusChange: (response) ->
-    # broadcast to interested components
+    this.setState(status: response.status)
     PubSub.publish( 'facebook:sdk:status:changed', response )
+
+  _onLogin: (response) ->
+    this.setState(status: response.status)
+    PubSub.publish( 'facebook:sdk:status:login', response )
 )
 
