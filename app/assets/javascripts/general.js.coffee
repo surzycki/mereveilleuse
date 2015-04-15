@@ -1,4 +1,5 @@
 $ ->
+  # landing image slider
   $('#slider').slippry
     transition: 'vertical'
     captions: 'custom'

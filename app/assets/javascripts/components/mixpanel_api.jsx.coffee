@@ -71,6 +71,9 @@ root.MixpanelAPI = React.createClass(
 
     location = infomation.location if infomation.location
 
+    console.log this.isFacebookCanvas() 
+    console.log platform
+
     mixpanel.register
       'Gender': infomation.gender
       'Location': location.name

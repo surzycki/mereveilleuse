@@ -5,6 +5,7 @@ $ ->
       if e.keyCode == 13
         return false
 
+    # add hearts to complete forms
     $('#recommendation_form_patient_type_id').change ->
       if this.value == ''
         $(this).closest('.form-group').find('i').addClass('hidden')
