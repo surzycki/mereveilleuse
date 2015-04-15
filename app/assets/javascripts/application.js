@@ -30,5 +30,5 @@
 
 //= require general
 //= require forms
-//= require share
+
 
