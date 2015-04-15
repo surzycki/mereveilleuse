@@ -45,7 +45,8 @@ root.MixpanelAPI = React.createClass(
 
   _handleMixpanelEvents: (msg, event) ->
     mixpanel.track(event)
-    
+  
+  
   _getFacebookData: (response) ->
     deferred = $.Deferred()
 
@@ -61,8 +62,6 @@ root.MixpanelAPI = React.createClass(
   _registerProperties: (infomation) ->
     # link previous behaviour to this account 
     distinct_id = mixpanel.get_distinct_id()
-    console.log '_registerProperties'
-    console.log distinct_id
     mixpanel.alias(infomation.id, distinct_id)
       
     if this.isFacebookCanvas() 
@@ -77,11 +76,8 @@ root.MixpanelAPI = React.createClass(
       'Location': location.name
       'Platform': platform
 
-  _createProfile: (information) ->
-    distinct = mixpanel.get_distinct_id()
-    console.log '_createProfile'
-    console.log distinct
 
+  _createProfile: (information) ->
     mixpanel.identify(information.id)
     mixpanel.people.set
       $email: information.email
