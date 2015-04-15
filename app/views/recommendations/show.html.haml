@@ -23,8 +23,12 @@
         = link_to t('invite.information.submit.negative'), new_search_path, class: 'btn btn-alternate btn-block'
         %br
       .col-sm-5
-        = link_to t('invite.information.submit.affirmative'), '#dialog', class: 'btn btn-primary btn-block x-invite', data: { redirect: new_search_path } 
-    
+        = react_component('FacebookInviteButton', 
+            value: t('invite.information.submit.affirmative'),
+            class: 'btn btn-primary btn-block', 
+            redirect: new_search_path,
+            message: t('invite.message'))
+        
     .space-xs-60 
         
   

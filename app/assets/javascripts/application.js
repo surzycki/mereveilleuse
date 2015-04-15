@@ -30,6 +30,5 @@
 
 //= require general
 //= require forms
-//= require invite
 //= require share
 

@@ -203,6 +203,7 @@ fr:
     site_name: MèreVeilleuse
 
   invite: 
+    message: Les recommandations des mamans vous aident à protéger votre santé et celles de vos enfants
     information:
       title:  Merci pour votre première contribution
       subtitle: Vous êtes MèreVeilleuse !

@@ -92,6 +92,7 @@ category: nav
     &:hover {
       background-color: transparent;
       color: $heading-color !important;
+      text-decoration: none;
 
       &:after {
         visibility: visible;

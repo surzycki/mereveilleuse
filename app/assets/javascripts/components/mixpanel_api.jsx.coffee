@@ -46,7 +46,6 @@ root.MixpanelAPI = React.createClass(
   _handleMixpanelEvents: (msg, event) ->
     mixpanel.track(event)
   
-  
   _getFacebookData: (response) ->
     deferred = $.Deferred()
 
@@ -70,9 +69,6 @@ root.MixpanelAPI = React.createClass(
       platform = 'web'
 
     location = infomation.location if infomation.location
-
-    console.log this.isFacebookCanvas() 
-    console.log platform
 
     mixpanel.register
       'Gender': infomation.gender

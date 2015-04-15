@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
 
   # Facebook saves a cookie with a signed request that can be parsed
   # Facebook canvas apps post a signed_request that which we can use to 
-  # determine the plaform
+  # determine the platform
   def facebook_authentication
     @facebook_authentication ||= FacebookAuthentication.new(
       cookies: cookies,
