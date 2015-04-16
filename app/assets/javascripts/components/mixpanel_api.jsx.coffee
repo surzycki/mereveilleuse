@@ -29,6 +29,9 @@ root.MixpanelAPI = React.createClass(
     `<meta property='MixpanelAPI' content={this.state.is_loaded} name={this.state.identity}/>`
 
   _handleStatusChanged: (msg, response) ->
+    console.log '_handleStatusChanged'
+    console.log response
+
     $.when(this._getFacebookData(response)).done (response) =>
       this.setState(identity: response.id)
       this._registerProperties(response)
@@ -40,6 +43,8 @@ root.MixpanelAPI = React.createClass(
       mixpanel.track('acquisition:unauthenticated')      
 
   _handleStatusLogin: (msg, response) ->
+    console.log '_handleStatusLogin'
+    console.log response
     mixpanel.track('acquisition:permissions:dialog')
 
   _handleMixpanelEvents: (msg, event) ->
