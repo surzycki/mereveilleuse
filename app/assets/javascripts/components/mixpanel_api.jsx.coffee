@@ -15,14 +15,13 @@ root.MixpanelAPI = React.createClass(
     is_loaded: 'unloaded'
     identity: 'unknown'
 
-  componentWillMount: ->
-    PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChanged )
-    PubSub.subscribe( 'facebook:sdk:status:login', this._handleStatusLogin )
-    PubSub.subscribe( 'mixpanel:sdk:track:event', this._handleMixpanelEvents )
 
   componentDidMount: ->
     if window.mixpanel 
       this.setState(is_loaded: 'loaded')
+      PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChanged )
+      PubSub.subscribe( 'facebook:sdk:status:login', this._handleStatusLogin )
+      PubSub.subscribe( 'mixpanel:sdk:track:event', this._handleMixpanelEvents )
       mixpanel.track_forms('#new_recommendation_form', 'activation:recommend')
       mixpanel.track_forms('#new_search_form','activation:search')
 
