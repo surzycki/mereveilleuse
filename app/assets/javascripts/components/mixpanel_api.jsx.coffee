@@ -36,6 +36,7 @@ root.MixpanelAPI = React.createClass(
       this.setState(identity: response.id)
       this._registerProperties(response)
       this._createProfile(response)
+      debugger
       mixpanel.people.increment('page views', 1)
       mixpanel.track('retention:page:view')
     
@@ -62,22 +63,22 @@ root.MixpanelAPI = React.createClass(
     deferred.promise()
   
 
-  _registerProperties: (infomation) ->
+  _registerProperties: (information) ->
     # link previous behaviour to this account 
     distinct_id = mixpanel.get_distinct_id()
     console.log "_registerProperties: #{distinct_id}"
-    console.log "_registerProperties: #{infomation.id}"
-    mixpanel.alias(infomation.id, distinct_id)
+    console.log "_registerProperties: #{information.id}"
+    mixpanel.alias(information.id, distinct_id)
       
     if this.isFacebookCanvas() 
       platform = 'canvas'
     else
       platform = 'web'
 
-    location = infomation.location if infomation.location
+    location = information.location if information.location
 
     mixpanel.register
-      'Gender': infomation.gender
+      'Gender': information.gender
       'Location': location.name
       'Platform': platform
 
@@ -85,7 +86,7 @@ root.MixpanelAPI = React.createClass(
   _createProfile: (information) ->
     distinct_id = mixpanel.get_distinct_id()
     console.log "_createProfile: #{distinct_id}"
-    console.log "_createProfile: #{infomation.id}"
+    console.log "_createProfile: #{information.id}"
 
     mixpanel.identify(information.id)
     mixpanel.people.set
