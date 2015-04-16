@@ -125,7 +125,7 @@ unless Rails.env.production?
     user.save
   }
 
-  RECOMMENDATION_COUNT = 200
+  RECOMMENDATION_COUNT = 100
   puts '-- creating recommendation users...'
 
   recommendations = Array.new(RECOMMENDATION_COUNT) {

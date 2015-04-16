@@ -60,6 +60,8 @@ root.MixpanelAPI = React.createClass(
   _registerProperties: (infomation) ->
     # link previous behaviour to this account 
     distinct_id = mixpanel.get_distinct_id()
+    console.log "_registerProperties: #{distinct_id}"
+    console.log "_registerProperties: #{infomation.id}"
     mixpanel.alias(infomation.id, distinct_id)
       
     if this.isFacebookCanvas() 
@@ -76,6 +78,10 @@ root.MixpanelAPI = React.createClass(
 
 
   _createProfile: (information) ->
+    distinct_id = mixpanel.get_distinct_id()
+    console.log "_createProfile: #{distinct_id}"
+    console.log "_createProfile: #{infomation.id}"
+
     mixpanel.identify(information.id)
     mixpanel.people.set
       $email: information.email
