@@ -12,6 +12,16 @@ root.FacebookLoginButton = React.createClass(
   # These three cases are handled in the callback function.
   mixins: [CanvasUtilsMixin]
 
+
+  # Either we are:
+  #
+  # 1. On the canvas, so redirect, we are already logged in
+  # 2. We are not on the canvas and we need to be logged in, after which
+  #    a POST happens to the session controller to login the user from an app
+  #    perspective
+  #    NOTE:  There is no guarentee that any chain of events begun by the 
+  #           logging into facbeook will complete before the submit to the controller happens
+  #           if this is the case then you can forget whatever was happening in that chain, it is gone
   handleSubmit: (event) ->
     event.preventDefault()
     form = this.refs.form.getDOMNode()
@@ -25,13 +35,16 @@ root.FacebookLoginButton = React.createClass(
         this._handleFacebookConnect(response, form)
       ), scope: 'public_profile, user_friends, email, user_location'
 
+
   render: ->
     `<form ref='form' action={this.props.facebook_connect_path} method='post' onSubmit={this.handleSubmit} id={this.props.id}>
       <input type='submit' value={this.props.value} className={this.props.class} />
     </form>`
 
+
   _handleFacebookConnect: (response, form) ->
     form.submit()
+
 
   _trackEvent: () ->
     if this.props.id == 'x-join-top'
