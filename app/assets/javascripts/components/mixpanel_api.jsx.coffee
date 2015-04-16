@@ -36,7 +36,6 @@ root.MixpanelAPI = React.createClass(
       this.setState(identity: response.id)
       this._registerProperties(response)
       this._createProfile(response)
-      debugger
       mixpanel.people.increment('page views', 1)
       mixpanel.track('retention:page:view')
     
