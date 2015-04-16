@@ -9,8 +9,8 @@ $ ->
 
   onLearnMore = (e) ->
     e.preventDefault()
-    mixpanel.track('acquisition:learn') 
-
+    PubSub.publish( 'mixpanel:sdk:track:event', 'acquisition:learn' )
+ 
     if window.is_canvas()
       FB.Canvas.scrollTo(0,$('#learn-more-section').position().top + 42)
     else
