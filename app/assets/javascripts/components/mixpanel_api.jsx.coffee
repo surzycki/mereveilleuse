@@ -16,18 +16,33 @@ root.MixpanelAPI = React.createClass(
     identity: 'unknown'
 
 
-  componentDidMount: ->
-    if window.mixpanel 
-      this.setState(is_loaded: 'loaded')
-      PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChanged )
-      PubSub.subscribe( 'facebook:sdk:status:login', this._handleStatusLogin )
-      PubSub.subscribe( 'mixpanel:sdk:track:event', this._handleMixpanelEvents )
-      mixpanel.track_forms('#new_recommendation_form', 'activation:recommend')
-      mixpanel.track_forms('#new_search_form','activation:search')
+  componentWillMount: ->
+    return unless window.mixpanel 
+
+    this.setState(is_loaded: 'loaded')
+    PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChanged )
+    PubSub.subscribe( 'facebook:sdk:status:login', this._handleStatusLogin )
+    PubSub.subscribe( 'mixpanel:sdk:track:event', this._handleMixpanelEvents )
+    mixpanel.track_forms('#new_recommendation_form', 'activation:recommend')
+    mixpanel.track_forms('#new_search_form','activation:search')
+
 
   render: ->
     `<meta property='MixpanelAPI' content={this.state.is_loaded} name={this.state.identity}/>`
 
+
+  getPlatform: ->
+    if this.isFacebookCanvas() 
+      platform = 'canvas'
+    else
+      platform = 'web'
+
+    platform   
+
+
+  # Called on every page including the facebook sdk
+  # It helps to determin the current status of the user
+  # vis-a-vis facebook
   _handleStatusChanged: (msg, response) ->
     console.log '_handleStatusChanged'
     console.log response
@@ -42,14 +57,26 @@ root.MixpanelAPI = React.createClass(
     if response.status == 'not_authorized'
       mixpanel.track('acquisition:unauthenticated')      
 
+
+  # Called when logging in for the first time
+  # generally happening when signing up for the first time
   _handleStatusLogin: (msg, response) ->
     console.log '_handleStatusLogin'
     console.log response
+    
+    mixpanel.register
+      'Platform': this.getPlatform()
+
     mixpanel.track('acquisition:permissions:dialog')
 
+
+  # Called by other components to register an event, in this way
+  # other components don't have to track the existance (or not)
+  # of the mixpanel object
   _handleMixpanelEvents: (msg, event) ->
     mixpanel.track(event)
   
+
   _getFacebookData: (response) ->
     deferred = $.Deferred()
 
@@ -69,17 +96,12 @@ root.MixpanelAPI = React.createClass(
     console.log "_registerProperties: #{information.id}"
     mixpanel.alias(information.id, distinct_id)
       
-    if this.isFacebookCanvas() 
-      platform = 'canvas'
-    else
-      platform = 'web'
-
     location = information.location if information.location
 
     mixpanel.register
       'Gender': information.gender
       'Location': location.name
-      'Platform': platform
+      'Platform': this.getPlatform()
 
 
   _createProfile: (information) ->
@@ -92,5 +114,5 @@ root.MixpanelAPI = React.createClass(
       $email: information.email
       $first_name: information.first_name
       $last_name: information.last_name
-      gender: information.gender
+      gender: information.gender 
 )
