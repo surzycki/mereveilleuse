@@ -17,14 +17,14 @@ class RecommendationSearchProvider
     Hash.new
   end
 
-  def perform_search
-    
+  def perform_search    
     Recommendation.search( '*', { 
       where: { 
         location: { near: [ search.latitude, search.longitude ], within: '60km' },
         profession_id: search.professions.map(&:id).join(','),
         patient_type_ids: search.patient_types.map(&:id),
         practitioner_id: { not: search.sent_practitioners }
+        # TODO not recommended by self
       },
 
       order: { 

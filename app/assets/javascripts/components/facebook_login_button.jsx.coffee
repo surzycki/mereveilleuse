@@ -43,7 +43,10 @@ root.FacebookLoginButton = React.createClass(
 
 
   _handleFacebookConnect: (response, form) ->
-    form.submit()
+    if response.status != 'connected' 
+      window.location.href = 'https://www.facebook.com/games/mereveilleuse/'
+    else
+      form.submit()
 
 
   _trackEvent: () ->
