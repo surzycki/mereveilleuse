@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.scrollTo
+//= require jquery.cookie
 //= require bootstrap-sprockets
 //= require typeahead
 //= require typeahead-addresspicker
