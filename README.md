@@ -119,6 +119,22 @@ to fix this add the following to the puma.rb file on the server
     ENV["BUNDLE_GEMFILE"] = File.join('/var/www/mereveilleuse/app_facebook', 'current', 'Gemfile')
 
 
+*development*
+
+In Rails 4.2 the default for the server is to bind to localhost.  To override add the following to boot.rb
+
+    
+    require 'rails/commands/server'
+    module Rails
+      class Server
+        alias :default_options_alias :default_options
+        def default_options
+          default_options_alias.merge!(:Host => '0.0.0.0')
+        end
+      end
+    end
+
+
 
 ## TODO ##
 

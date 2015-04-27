@@ -80,4 +80,4 @@ group :test do
   gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)
 end
 
-ruby '2.2.1'
+ruby '2.2.2'
