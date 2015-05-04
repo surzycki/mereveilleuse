@@ -1,7 +1,7 @@
 # Mereveilleuse development
 #
 # VERSION               0.0.1
-FROM surzycki/rails4.2.0-dev
+FROM quay.io/surzycki/rails4.2.1-dev
 MAINTAINER Stefan Surzycki <stefan.surzycki@gmail.com>
 
 # set environment vars
