@@ -30,5 +30,5 @@ namespace :deploy do
 end
 
 
-after 'deploy:finishing',  'deploy:cleanup'
+after 'deploy:finishing', 'deploy:cleanup'
 after 'deploy:finished', 'deploy:ping'
