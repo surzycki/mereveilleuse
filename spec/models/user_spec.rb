@@ -1,7 +1,7 @@
 describe User do
   it_behaves_like 'it has person name attributes'
   it_behaves_like 'it has location attributes'
-
+  
   describe '#initialize' do
     it 'initializes' do
       expect{ User.new }.to_not raise_error
@@ -88,6 +88,22 @@ describe User do
       it 'call generate_login_token' do
         allow_any_instance_of(User).to receive(:generate_login_token)
         expect(User.create).to have_received(:generate_login_token)
+      end
+    end
+  end
+
+  describe 'uris' do
+    let(:subject) { build_stubbed :user }
+
+    context 'unsubscribe_account' do
+      it 'has correct path' do
+        path = "/unsubscribe/account/#{subject.login_token}"
+        expect(subject.unsubscribe_account_path).to eq(path)
+      end
+
+      it 'has correct url' do
+        url = "http://#{ENV['MEREVEILLEUSE_HOST']}/unsubscribe/account/#{subject.login_token}"
+        expect(subject.unsubscribe_account_url).to eq(url)
       end
     end
   end

@@ -6,7 +6,8 @@ FactoryGirl.define do
     facebook_id   '1111111'
     has_invited   false
     profile_image 'http://riverboatsmusic.com.au/wp-content/uploads/2014/09/1shuu4q3.wizardchan.test_.png'
-    
+    login_token   'login_token_generic'
+
     status        User.statuses[:registered] 
 
     location

@@ -1,6 +1,6 @@
 describe Search do
   it_behaves_like 'it has location attributes'
-
+  
   describe '#initialize' do
     it 'initializes' do
       expect{ Search.new }.to_not raise_error

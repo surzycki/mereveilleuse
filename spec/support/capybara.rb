@@ -14,6 +14,6 @@ end
 
 Capybara.javascript_driver = :poltergeist
 
-def screenshot
-  page.save_screenshot('tmp/capybara/screenshot.png')
-end
+# set the app_host so we can click urls in our integration tests
+Capybara.server_port = 3001
+Capybara.app_host = "http://#{ENV['MEREVEILLEUSE_HOST']}:3001"

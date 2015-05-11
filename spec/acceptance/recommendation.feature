@@ -16,7 +16,7 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'recommendation' page for the recommendation
+    Then I should be on the 'recommendation' show page
     
   
   Scenario: Recommend NEW Practitioner (new profession)
@@ -31,7 +31,7 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'recommendation' page for the recommendation
+    Then I should be on the 'recommendation' show page
 
 
   Scenario: Recommend NEW Practitioner (validation error)
@@ -57,7 +57,7 @@ Feature: Recommendation Form
     Then I should see an error message
     And recommendation_form_address should be marked as invalid
 
-  
+
   Scenario: Recommend EXISTING Practitioner (no change)
     Given I goto the 'new recommendation' page
     And a practitioner 'Homer Simpson' exists
@@ -71,7 +71,7 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'recommendation' page for the recommendation
+    Then I should be on the 'recommendation' show page
     
  
   Scenario: Recommend EXISTING Practitioner (new address)
@@ -87,7 +87,7 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'recommendation' page for the recommendation
+    Then I should be on the 'recommendation' show page
     
 
   Scenario: Recommend EXISTING Practitioner (new profession)
@@ -103,7 +103,7 @@ Feature: Recommendation Form
     And I rate 'efficacy' 1 on the 'recommendation form'
     And I modify the 'recommendation form' comment with 'It is great'
     And I submit the form
-    Then I should be on the 'recommendation' page for the recommendation
+    Then I should be on the 'recommendation' show page
 
 
   Scenario: Recommend EXISTING Practitioner (bad address)

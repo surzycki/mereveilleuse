@@ -71,7 +71,7 @@ group :test do
   gem 'email_spec'                                        # Collection of RSpec/MiniTest matchers and Cucumber steps for testing email in a ruby app using ActionMailer or Pony
   gem 'database_cleaner'                                  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
   gem 'spring-commands-rspec'
-  gem 'spring' 
+  gem 'spring',                     '1.3.5' 
   gem 'poltergeist'                                       # A PhantomJS driver for Capybara
   gem 'webmock'                                           # Library for stubbing and setting expectations on HTTP requests in Ruby.
   gem 'rspec-activejob'                                   # RSpec matchers for testing ActiveJob

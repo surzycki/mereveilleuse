@@ -19,7 +19,7 @@ patient_types = PatientType.create([
   { name: 'Une future maman'},
   { name: 'Une maman'},
   { name: 'Un nourisson (0 - 3)'},
-  { name: 'Un bébé (4 - 11)'},
+  { name: 'Un enfant (4 - 11)'},
   { name: 'Un adolescent (12 ans +)'}
 ])
 

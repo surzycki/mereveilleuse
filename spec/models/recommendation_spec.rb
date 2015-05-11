@@ -1,4 +1,6 @@
 describe Recommendation do
+  it_behaves_like 'it has default has uris'
+
   describe '#initialize' do
     it 'initializes' do
       expect{ Recommendation.new }.to_not raise_error

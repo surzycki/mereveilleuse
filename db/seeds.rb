@@ -19,7 +19,7 @@ end
 PREFIXES = ['dr','madame','monsieur']
 
 
-decoded.sample(2000).each do |data|
+decoded.sample(200).each do |data|
   begin
     
     if data[0].present?
@@ -102,15 +102,16 @@ patient_types = PatientType.create([
   { name: 'Une future maman'},
   { name: 'Une maman'},
   { name: 'Un nourisson (0 - 3)'},
-  { name: 'Un bébé (4 - 11)'},
+  { name: 'Un enfant (4 - 11)'},
   { name: 'Un adolescent (12 ans +)'}
 ])
 
 
+RECOMMENDATION_COUNT = 100
+USER_COUNT           = 10
+SEARCH_COUNT         = 20
 
 unless Rails.env.production? 
-  
-  USER_COUNT = 10
   puts '-- creating generic users...'
   users = Array.new(USER_COUNT) {
     user = User.create()
@@ -125,9 +126,8 @@ unless Rails.env.production?
     user.save
   }
 
-  RECOMMENDATION_COUNT = 100
-  puts '-- creating recommendation users...'
-
+  
+  puts '-- creating user recommendations...'
   recommendations = Array.new(RECOMMENDATION_COUNT) {
     practitioner = Practitioner.joins(:location).where("unparsed_address LIKE '%Paris'").sample
 
@@ -148,6 +148,19 @@ unless Rails.env.production?
 
     GeocodePractitionerJob.perform_later practitioner
   }
+
+  puts '-- creating user searches...'
+  searches = Array.new(SEARCH_COUNT) {
+    form = SearchForm.new({
+      address:          Practitioner.all.sample.address,
+      profession_id:    Profession.all.sample.id,
+      patient_type_id:  PatientType.all.sample.id,
+      user_id:          User.all.sample.id,
+      information:      Forgery(:lorem_ipsum).words(rand(5..10))
+    })
+
+    form.process
+  } 
 end
 
 puts '-- indexing models...'

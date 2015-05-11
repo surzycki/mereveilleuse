@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
   include PersonNameAttributes
   include LocationAttributes
-  
+  include Links
+
+  uris :unsubscribe_account
+
   before_create :generate_login_token
   
   has_many :searches, dependent: :destroy
@@ -23,5 +26,9 @@ class User < ActiveRecord::Base
 
   def generate_login_token
     self.login_token ||= SecureRandom.urlsafe_base64(15).tr('lIO0', 'sxyz')
+  end
+
+  def unsubscribe_account_parameterize
+    { token: self.login_token }
   end
 end

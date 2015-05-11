@@ -1,4 +1,6 @@
 class Recommendation < ActiveRecord::Base
+  include Links
+  
   has_and_belongs_to_many :patient_types
   
   belongs_to :recommender, class_name: :User, foreign_key: 'user_id'

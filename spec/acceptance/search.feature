@@ -1,11 +1,11 @@
-@acceptance @js  
+@acceptance @js @wip
 Feature: Search Form
   Background: 
     Given I am logged in 
     And the application is setup
     And a search service is running for recommendation
 
-
+  
   Scenario: New Recommendation Search
     Given I goto the 'new search' page
     When I select 'Doctor' from profession_id on 'search form' 

@@ -6,33 +6,39 @@ module PageSteps
 
   step 'I :whether_to be on the :path page' do |positive, path|
     expectation = positive ? :to : :not_to
-    path = "#{path.downcase.tr(' ', '_')}_path"
-    url  = route_helpers.send(path)
+    
+    path = route_helpers.send "#{path.downcase.tr(' ', '_')}_path"
+    
+    expect(current_path).send expectation, eq(path)
+  end
 
-    expect(current_path).send expectation, eq(url)
+  step 'I goto the :model show page' do |model|
+    model    = model.capitalize.constantize
+    instance = model.first
+    
+    path = "#{model.downcase}_path"
+    path  = route_helpers.send(path)
+
+    visit path
+  end
+
+  step 'I :whether_to be on the :model show page' do |positive, model|
+    expectation = positive ? :to : :not_to
+
+    model    = model.capitalize.constantize
+    instance = model.first
+    
+    expect(current_path).send expectation, eq(instance.path)
   end
 
   step 'I :whether_to be on the :path page for the :model' do |positive, path, model|
     expectation = positive ? :to : :not_to
-    
-    path     = "#{path.downcase.tr(' ', '_')}_path"
-    instance = (model.capitalize.constantize).all.first
 
-    url  = route_helpers.send(path, instance)
+    model    = model.capitalize.constantize
+    instance = model.first
+    path     = instance.send "#{path.downcase.tr(' ', '_')}_path"
 
-    expect(current_path).send expectation, eq(url)
-  end
-
-  step 'I :whether_to be on the :path page for the :model identified by :property' do |positive, path, model, property|
-    expectation = positive ? :to : :not_to
-    
-    path     = "#{path.downcase.tr(' ', '_')}_path"
-    instance = (model.capitalize.constantize).all.first
-    property = instance.send(property)
-
-    url  = route_helpers.send(path, property)
-
-    expect(current_path).send expectation, eq(url)
+    expect(current_path).send expectation, eq(path)
   end
 
   step 'I :whether_to see :text' do |positive, text|
