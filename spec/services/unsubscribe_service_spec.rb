@@ -95,6 +95,10 @@ describe UnsubscribeService do
   end
 
   describe '#unsubscribe_account' do
+    before do
+      allow(UnsubscribeMailer).to receive(:account).and_return mailer
+    end
+
     context 'success' do
       context 'with active search' do
         before do
@@ -115,6 +119,11 @@ describe UnsubscribeService do
   
         it 'cancels searches' do
           expect(search).to have_received(:canceled!).once
+        end
+
+        it 'sends email' do
+          expect(UnsubscribeMailer).to have_received(:account).
+            with user
         end
       end
     end

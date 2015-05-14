@@ -4,7 +4,7 @@ class UnsubscribeService
   def unsubscribe_search(search)
     # send remider email to come back to site in 48hrs if this search was active
     if search.active?
-      RecommendationMailer.reciprocate(search.user).deliver_later(wait: 5.minutes) 
+      RecommendationMailer.reciprocate(search.user).deliver_later(wait: 48.hours) 
     end
 
     search.canceled!

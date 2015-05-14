@@ -8,11 +8,11 @@
         
       .form-group.has-feedback
         = f.label :profession_name, t('recommendation.form.profession.label')
-        = react_component( 'ProfessionAutocomplete', field: f.text_field(:profession_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
+        = react_component( 'ProfessionAutocomplete', field: f.text_field(:profession_name, class: 'form-control', placeholder: t('recommendation.form.profession.placeholder')) )
            
       .form-group.has-feedback
         = f.label :patient_type_id, t('recommendation.form.patient_type.label')
-        = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
+        = f.collection_select(:patient_type_id, PatientType.order(id: :asc), :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
         %i.icon-ok.hidden
 
       .form-group.has-feedback

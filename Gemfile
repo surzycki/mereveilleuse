@@ -75,7 +75,6 @@ group :test do
   gem 'poltergeist'                                       # A PhantomJS driver for Capybara
   gem 'webmock'                                           # Library for stubbing and setting expectations on HTTP requests in Ruby.
   gem 'rspec-activejob'                                   # RSpec matchers for testing ActiveJob
-  gem 'timecop'                                           # A gem providing "time travel", "time freezing", and "time acceleration"
   gem 'capybara-screenshot'
   gem 'wisper-rspec',               require: false        # RSpec matchers and stubbing for Wisper
   gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes

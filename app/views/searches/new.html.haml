@@ -16,7 +16,7 @@
     
               .form-group
                 = f.label :patient_type_id, t('search.form.patient_type.label')
-                = f.collection_select(:patient_type_id, PatientType.all, :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
+                = f.collection_select(:patient_type_id, PatientType.order(id: :asc), :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
           
               .form-group
                 = f.label :address, t('search.form.address.label')

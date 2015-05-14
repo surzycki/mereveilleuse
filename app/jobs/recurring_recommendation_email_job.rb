@@ -18,7 +18,10 @@ class RecurringRecommendationEmailJob < ActiveJob::Base
   end
 
   def reschedule
-    unless search.canceled?
+    # to prevent infinite looks in integration testing
+    return if Rails.env.test?
+
+    unless search.canceled? 
       self.class.set(wait: interval).perform_later(search)
     end
   end

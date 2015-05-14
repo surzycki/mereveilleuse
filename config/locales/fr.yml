@@ -4,6 +4,7 @@ fr:
       recommendation_form:
         practitioner_name: Je recommande
         profession_id: La spécialité
+        profession_name: La profession
         patient_type_id: Précisez pour qui
         address: À l'adresse
         user_id: utilisateur
@@ -33,12 +34,16 @@ fr:
               blank: doit être rempli
             address: 
               blank: doit être rempli
+            profession_name: 
+              blank: doit être rempli
 
         recommendation_form:
           attributes:
             practitioner_name:
               blank: doit être rempli
             profession_id: 
+              blank: doit être rempli
+            profession_name: 
               blank: doit être rempli
             patient_type_id: 
               blank: doit être rempli
@@ -56,6 +61,7 @@ fr:
               blank: doit être rempli
             comment:  
               blank: doit être rempli
+
 
 
   errors: 
@@ -178,7 +184,7 @@ fr:
         placeholder: Entrez le nom du professionnel   
       profession:
         label: Exerçant en qualité de
-        placeholder: Sélectionnez la spécialité
+        placeholder: Entrez la profession
       patient_type:
         label: Pour
         placeholder: Précisez pour qui
@@ -220,6 +226,6 @@ fr:
       information_html: Vous ne recevoir plus des alertes email pour <strong>un(e) %{profession_name}</strong> qui pourra dispenser des soins <strong>%{patient_type_name}</strong>, et près de chez vous à/au <strong>%{address}</strong>.
       not_found: Acune recherche était en cours
     account:
-      title: Nous sommes désolés de vous voir partir
-      subtitle: À la prochaine fois !
+      title: Nous vous confirmons votre désinscription aux emails
+      subtitle: A bientôt sur MèreVeilleuse !
       

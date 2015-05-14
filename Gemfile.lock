@@ -425,7 +425,6 @@ GEM
     tilt (1.4.1)
     time_difference (0.4.2)
       activesupport
-    timecop (0.7.3)
     timers (4.0.1)
       hitimes
     turnip (1.2.4)
@@ -517,7 +516,6 @@ DEPENDENCIES
   state_machine
   therubyracer
   time_difference
-  timecop
   turnip
   uglifier (>= 1.3.0)
   unicode_utils
