@@ -141,6 +141,10 @@ describe Recommendation do
     it 'has rating' do
       expect(subject.search_data).to include(rating: subject.rating )
     end
+
+    it 'has recommender_id' do
+      expect(subject.search_data).to include(recommender_id: subject.recommender.id )
+    end
   end
 
   describe '#should_index?' do

@@ -14,13 +14,13 @@ module HelperSteps
   step 'there :whether_to be an email of type :email_type queued' do |positive, email_type|
     expectation  = positive ?  :not_to : :to 
     email_type = "#{email_type.downcase.tr(' ', '_')}"
-
+    
     expect(active_job_find_by_arg(email_type)).send expectation, be_empty
   end
 
   step 'there :whether_to be a :job_type queued' do |positive, job_type|
     expectation  = positive ?  :not_to : :to 
- 
+    
     job_type = "#{job_type.downcase.tr(' ', '_')}_job".camelize
     
     expect(active_job_find(job_type)).send expectation, be_empty

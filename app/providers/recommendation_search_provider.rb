@@ -3,12 +3,11 @@ class RecommendationSearchProvider
 
   def execute(search)
     @search = search
-    
     results = perform_search
     
     # save unique sent_practitioners to search so we don't send the same practitioners
-    @search.sent_practitioners = (@search.sent_practitioners + results.map(&:practitioner_id)).uniq
-    @search.save
+    practitioners = (@search.sent_practitioners + results.map(&:practitioner_id)).uniq
+    @search.update(sent_practitioners: practitioners)
   
     results
   rescue Exception => e
@@ -20,11 +19,11 @@ class RecommendationSearchProvider
   def perform_search    
     Recommendation.search( '*', { 
       where: { 
-        location: { near: [ search.latitude, search.longitude ], within: '60km' },
-        profession_id: search.professions.map(&:id).join(','),
+        location:         { near: [ search.latitude, search.longitude ], within: '60km' },
+        profession_id:    search.professions.map(&:id).join(','),
         patient_type_ids: search.patient_types.map(&:id),
-        practitioner_id: { not: search.sent_practitioners }
-        # TODO not recommended by self
+        practitioner_id:  { not: search.sent_practitioners },
+        recommender_id:   { not: search.user_id }
       },
 
       order: { 

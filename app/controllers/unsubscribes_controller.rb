@@ -4,24 +4,38 @@ class UnsubscribesController < ApplicationController
   
   # GET unsubscribe/search/:token/:id
   def search
-    if load_search
-      @search.canceled!
-    else
+    unsubscribe_service.on :unsubscribe_search_success do |search|
+      render :search
+    end
+
+    unsubscribe_service.on :unsubscribe_search_fail do |message|
+      flash.now[:alert] = message
       redirect_to not_found_path
     end
+
+    unsubscribe_service.unsubscribe_search current_search
   end
 
   # GET unsubscribe/account/:token
   def account
-    if current_user
-      current_user.unsubscribe
-    else
+    unsubscribe_service.on :unsubscribe_account_success do |user|
+      render :account
+    end
+
+    unsubscribe_service.on :unsubscribe_account_fail do |message|
+      flash.now[:alert] = message
       redirect_to not_found_path
     end
+
+    unsubscribe_service.unsubscribe_account current_user
   end
 
   private
-  def load_search
+  def unsubscribe_service
+    @unsubscribe_service ||= UnsubscribeService.new
+  end
+
+  def current_search
     @search ||= Search.find_by(id: params[:id])
   end
 

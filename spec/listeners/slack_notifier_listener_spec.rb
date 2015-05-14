@@ -3,7 +3,7 @@ describe SlackNotifierListener do
   
   let(:account)  { spy('account') }
   let(:results)  { spy('results') }
-  let(:errors)   { spy('errors') }
+  let(:errors)   { spy('errors', full_messages: ['error'] ) }
   let(:search)   { build_stubbed(:search) }
 
   describe '#initialize' do

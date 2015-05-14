@@ -45,7 +45,8 @@ class Recommendation < ActiveRecord::Base
       profession_id:    self.profession_id,
       patient_type_ids: patient_types.map(&:id),
       practitioner_id:  practitioner.id,
-      rating:           self.rating
+      rating:           self.rating,
+      recommender_id:   recommender.id
     }
   end
 

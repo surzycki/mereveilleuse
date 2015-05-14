@@ -9,11 +9,37 @@ RSpec.configure do |config|
 
   config.before(:each) do
     # searchkick handshake when searchkick is instantiated
-    stub_request(:get, /.*www.example.com:9200.*/).
+    handshake_response = File.open('spec/fixtures/json/elasticsearch/handshake_response.json').read
+    stub_request(:get, /^www.example.com:9200$/).
       to_return(
         status: 200, 
-        body: '{"status":200,"name":"mereveilleuse-stefan","version":{"number":"1.4.4","build_hash":"c88f77ffc81301dfa9dfd81ca2232f09588bd512","build_timestamp":"2015-02-19T13:05:36Z","build_snapshot":false,"lucene_version":"4.10.3"},"tagline":"You Know, for Search"}'
+        body: handshake_response
       )
+    
+    # Search recommendations with default query (patient_type: 1) and return a recommendation
+    recommendation_defaut_query = File.open('spec/fixtures/json/elasticsearch/recommendation_default_query.json').read
+    recommendation_response     = File.open('spec/fixtures/json/elasticsearch/recommendation_response.json').read
+    
+    stub_request(:get, "http://www.example.com:9200/mereveilleuse-test_recommendations_test/_search").
+      with(body: recommendation_defaut_query).
+      to_return(
+        headers: { 'Content-Type' => 'application/json' },
+        status: 200, 
+        body: recommendation_response
+      )
+
+    # Search recommendations with secondary query (patient_type: 2) and return no recommendations
+    recommendation_secondary_query = File.open('spec/fixtures/json/elasticsearch/recommendation_secondary_query.json').read
+    recommendation_empty_response  = File.open('spec/fixtures/json/elasticsearch/recommendation_empty_response.json').read
+    
+    stub_request(:get, "http://www.example.com:9200/mereveilleuse-test_recommendations_test/_search").
+      with(body: recommendation_secondary_query).
+      to_return(
+        headers: { 'Content-Type' => 'application/json' },
+        status: 200, 
+        body: recommendation_empty_response
+      )
+
 
     stub_request(:put, /.*www.example.com:9200.*/).
       to_return(

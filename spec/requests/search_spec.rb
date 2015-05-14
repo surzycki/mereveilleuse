@@ -31,7 +31,7 @@ describe 'search' do
         it 'schedules an email' do
           expect do
             post search_path, search_form: form_data 
-          end.to enqueue_a(RecommendationsEmailJob)
+          end.to enqueue_a(RecurringRecommendationEmailJob)
         end
       end
   
@@ -62,7 +62,7 @@ describe 'search' do
           it 'schedules an email' do
             expect do
               post search_path, search_form: form_data 
-            end.to enqueue_a(RecommendationsEmailJob)
+            end.to enqueue_a(RecurringRecommendationEmailJob)
           end
         end
     
@@ -84,7 +84,7 @@ describe 'search' do
           it 'schedules an email' do
             expect do
               post search_path, search_form: form_data 
-            end.to enqueue_a(RecommendationsEmailJob)
+            end.to enqueue_a(RecurringRecommendationEmailJob)
           end
         end
         
@@ -106,7 +106,7 @@ describe 'search' do
           it 'schedules an email' do
             expect do
               post search_path, search_form: form_data 
-            end.to enqueue_a(RecommendationsEmailJob)
+            end.to enqueue_a(RecurringRecommendationEmailJob)
           end
         end
   
@@ -128,7 +128,7 @@ describe 'search' do
           it 'schedules an email' do
             expect do
               post search_path, search_form: form_data 
-            end.to enqueue_a(RecommendationsEmailJob)
+            end.to enqueue_a(RecurringRecommendationEmailJob)
           end
         end
   
@@ -148,7 +148,7 @@ describe 'search' do
           it 'schedules an email' do
             expect do
               post search_path, search_form: form_data 
-            end.to enqueue_a(RecommendationsEmailJob)
+            end.to enqueue_a(RecurringRecommendationEmailJob)
           end
         end 
   
@@ -170,7 +170,7 @@ describe 'search' do
           it 'schedules an email' do
             expect do
               post search_path, search_form: form_data 
-            end.to enqueue_a(RecommendationsEmailJob)
+            end.to enqueue_a(RecurringRecommendationEmailJob)
           end
         end 
   
@@ -190,7 +190,7 @@ describe 'search' do
           it 'schedules an email' do
             expect do
               post search_path, search_form: form_data 
-            end.to enqueue_a(RecommendationsEmailJob)
+            end.to enqueue_a(RecurringRecommendationEmailJob)
           end
         end
       end
@@ -220,7 +220,7 @@ describe 'search' do
         it 'does NOT schedule an email' do
           expect do
             post search_path, search_form: form_data 
-          end.to_not enqueue_a(RecommendationsEmailJob)
+          end.to_not enqueue_a(RecurringRecommendationEmailJob)
         end
       end
 
@@ -247,7 +247,7 @@ describe 'search' do
         it 'does NOT schedule an email' do
           expect do
             post search_path, search_form: form_data 
-          end.to_not enqueue_a(RecommendationsEmailJob)
+          end.to_not enqueue_a(RecurringRecommendationEmailJob)
         end
       end
     end

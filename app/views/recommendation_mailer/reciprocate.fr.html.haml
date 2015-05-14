@@ -1,0 +1,34 @@
+%table.container
+  %tr
+    %td
+      %table.row
+        %tr
+          %td.wrapper.last
+            %table.twelve.columns
+              %tr
+                %td
+                  %p
+                    Bonjour #{@user.fullname},
+                  %p
+                    Les MèreVeilleuses vous ont envoyé leurs recommandations pour votre recherche, maintenant c’est à votre tour d’être MèreVeilleuse :)
+                
+                %td.expander
+
+// call-to-action section           
+%table.container
+  %tr  
+    %td.wrapper.last
+      %table.twelve.columns
+        %tr
+          %td.center
+            %center
+              = link_to new_recommendation_url(token: @user.login_token), class: 'btn btn-primary btn-block', id: 'new-recomendation' do
+                Recommander un professionnel de santé. 
+              
+              %br
+              
+              %p.center
+                Votre avis est important pour aider les mamans à faire les bons choix santé pour elles et leurs enfants
+          
+          %td.expander   
+      %hr

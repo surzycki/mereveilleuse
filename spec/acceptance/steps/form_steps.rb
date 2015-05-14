@@ -28,6 +28,12 @@ module FormSteps
     find(:xpath, '//input[@type="submit"]').click
   end
 
+  step 'I submit the form and execute async jobs' do
+    perform_enqueued_jobs do
+      find(:xpath, '//input[@type="submit"]').click
+    end
+  end
+
   step ':field should be marked as invalid' do |field|
     expectation = find("label[for='#{field}']")['data-error']
     expect(expectation).to eq 'true'

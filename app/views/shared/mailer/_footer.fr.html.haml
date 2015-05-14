@@ -9,7 +9,7 @@
               %tr
                 %td.center 
                   .small.center
-                    Cet email a été envoyé à #{@user.email}. #{ link_to('Cliquez ici pour vous désinscrire.', unsubscribe_account_url(@user.login_token), id: 'unsubscribe-account') }  
+                    Cet email a été envoyé à #{@user.email}. #{ link_to('Cliquez ici pour vous désinscrire.', @user.unsubscribe_account_url, id: 'unsubscribe-account') }  
                 %td.expander
       %table.row
         %tr    

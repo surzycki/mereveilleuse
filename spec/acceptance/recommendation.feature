@@ -1,9 +1,10 @@
-@acceptance @js 
+@acceptance @js
 Feature: Recommendation Form
   Background: 
     Given the application is setup  
     And I am logged in
-    
+
+  
   Scenario: Recommend NEW Practitioner
     Given I goto the 'new recommendation' page
     When I modify the 'recommendation form' practitioner_name with 'Bob Jones'

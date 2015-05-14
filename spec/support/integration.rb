@@ -20,8 +20,12 @@ module IntegrationHelpers
   def underscoreize(value)
     value.split(' ').join('_')
   end
+
+  def get_model_instance(model_name) 
+    model_name.capitalize.constantize.first
+  end
 end
 
-RSpec.configure do |config| 
-  config.include IntegrationHelpers
+RSpec.configure do |config|
+  config.include IntegrationHelpers, type: :acceptance, file_path: %r(spec/acceptance) 
 end

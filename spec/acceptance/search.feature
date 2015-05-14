@@ -1,21 +1,21 @@
-@acceptance @js @wip
+@acceptance @js 
 Feature: Search Form
   Background: 
-    Given I am logged in 
-    And the application is setup
-    And a search service is running for recommendation
-
+    Given the application is setup
+    And I am logged in 
+    
   
   Scenario: New Recommendation Search
     Given I goto the 'new search' page
     When I select 'Doctor' from profession_id on 'search form' 
     And I select 'Person' from patient_type_id on 'search form' 
     And I modify the 'search form' address with '6 rue gobert paris france'
-    And I submit the form 
+    And I submit the form and execute async jobs
     Then I should be on the 'search' page
-    And there should be a 'recommendations email' queued
+    And I open email sent to 'user.person@example.com'
+    And I should see 'Les Doctors du 6 Rue Gobert, 75011, Paris' in the subject line
   
-  
+
   Scenario: New Recommendation Search (validation error)
     Given I goto the 'new search' page
     When I modify the 'search form' address with '6 rue gobert paris france'
@@ -30,3 +30,15 @@ Feature: Search Form
     And I submit the form
     Then I should see an error message
     And there should not be a 'recommendations email' queued
+
+  
+  Scenario: Expanded Recommendation Search
+    Given I goto the 'new search' page
+    When I select 'Doctor' from profession_id on 'search form' 
+    And I select 'Another Person' from patient_type_id on 'search form' 
+    And I modify the 'search form' address with '6 rue gobert paris france'
+    And I submit the form and execute async jobs
+    Then I should be on the 'search' page
+    And I open email sent to 'user.person@example.com'
+    
+    #And I should see 'Vous êtes à la recherche' in the subject line

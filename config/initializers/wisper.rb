@@ -1,3 +1,4 @@
 # Setup global listeners
-Wisper.subscribe(FacebookEventsListener.new)
-Wisper.subscribe(SlackNotifierListener.new)
+unless Rails.env.test?
+  Wisper.subscribe(SlackNotifierListener.new)
+end

@@ -1,9 +1,12 @@
 class Search < ActiveRecord::Base
   include LocationAttributes
+  include Links
 
   store :settings, accessors: [ :sent_practitioners ], coder: JSON
 
   after_validation :set_md5_hash
+
+  uris :unsubscribe_search
 
   belongs_to :user
 
@@ -20,8 +23,16 @@ class Search < ActiveRecord::Base
     Maybe(patient_types.first).name._
   end
 
+  def patient_type_id
+    Maybe(patient_types.first).id._
+  end
+
   def to_s
     "Search for #{Maybe(self).profession_name._} in #{Maybe(self).short_address._}"
+  end
+
+  def unsubscribe_search_parameterize
+    { token: self.user.login_token, id: self.id }
   end
 
   private

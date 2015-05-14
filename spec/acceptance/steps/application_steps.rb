@@ -1,6 +1,6 @@
 module ApplicationSteps
   step 'I am logged in' do
-    integration_sign_in(User.first || FactoryGirl.create(:user))
+    integration_sign_in(User.first)
   end
 
   step 'I am logged in as admin' do
@@ -11,8 +11,16 @@ module ApplicationSteps
   step 'the application is setup' do
     clear_emails
     
-    FactoryGirl.create :profession,   name: 'Doctor'
-    FactoryGirl.create :patient_type, name: 'Person'
+    user                = FactoryGirl.create :user, id: 100
+    profession          = FactoryGirl.create :profession,   name: 'Doctor', id: 100
+    first_patient_type  = FactoryGirl.create :patient_type, name: 'Person', id: 1
+    second_patient_type = FactoryGirl.create :patient_type, name: 'Another Person', id: 2
+    
+    FactoryGirl.create :recommendation, 
+      id: 100,
+      profession: profession,
+      recommender: user,
+      patient_types: [first_patient_type]
   end
 
   step 'a user :fullname exists' do |fullname|
@@ -41,15 +49,6 @@ module ApplicationSteps
     open_email(email.to.first)
   end
 
-  step 'a search service is running for recommendation' do 
-    recommendation = FactoryGirl.create :recommendation
-    allow(Recommendation).to receive(:search).and_return(OpenStruct.new results: [recommendation])
-  end
-
-  step 'I should be on the search success page' do
-    expect(current_path).to eq(search_path)
-  end
-
   step 'a practitioner :fullname exists' do |fullname|
     @practitioner = FactoryGirl.create :practitioner
     @practitioner.fullname = fullname
@@ -59,17 +58,6 @@ module ApplicationSteps
   step 'the practitioner :fullname address is :address' do |fullname, address|
     practitioner = Practitioner.find_by_fullname fullname
     expect(practitioner.address).to eq address
-  end
-
-  step 'I :whether_to be on search unsubscribe location' do |positive|
-    expectation = positive ? :to : :not_to
-
-    search = Search.first
-  
-    user   = search.user
-    url    = unsubscribe_search_path(user.login_token,search)
-
-    expect(current_path).send expectation, eq(url)
   end
 
   step 'the Facebook :pixel_type conversion pixel :whether_to be fired' do |pixel_type, positive|

@@ -1,10 +1,12 @@
-= render 'shared/mailer/header'
-
 #{@recommender.fullname} a recommandé un(e) #{@recommendation.profession_name.downcase} pour #{@recommendation.patient_type_name.downcase}
 
 Vous êtes à la recherche d'un(e) #{@search.profession_name.downcase}
 *******************************
-Une MèreVeilleuse maman a recommandé un(e) #{@search.profession_name.downcase} pour toute consultation destinée à #{@search.patient_type_name.downcase}, près de chez vous, au #{@search.address}.
+- if @is_expanded_search
+  Une MèreVeilleuse maman a recommandé un(e) #{ @search.profession_name.downcase } près de chez vous, au #{ @search.address }. Il ne s’agit pas d’une consultation destinée à #{ @search.patient_type_name.downcase } mais à #{ @recommendation.patient_type_name.downcase }, nous avons pensé qu’elle pourrait tout de même vous aider.
+- else
+  Une MèreVeilleuse maman a recommandé un(e) #{ @search.profession_name.downcase } pour toute consultation destinée à #{ @search.patient_type_name.downcase }, près de chez vous, au #{ @search.address }.
+                   
 
 *******************************
 #{@recommender.fullname} recommande
@@ -37,4 +39,4 @@ Merci, vous êtes MèreVeilleuse.
 Satisfaite de votre recherche ?
 Vous ne souhaitez plus recevoir de nouvelles alerte email pour un(e) #{@search.profession_name.downcase} qui pourra dispenser des soins à #{@search.patient_type_name.downcase}, et près de chez vous à/au #{@search.address} ?  
 Je ne cherche plus.
-#{unsubscribe_search_url(@user.login_token, @search)}
+#{@search.unsubscribe_search_url}

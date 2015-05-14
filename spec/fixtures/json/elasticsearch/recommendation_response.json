@@ -1,0 +1,33 @@
+{
+   "took":2,
+   "timed_out":false,
+   "_shards":{
+      "total":5,
+      "successful":5,
+      "failed":0
+   },
+   "hits":{
+      "total":1,
+      "max_score":1.0,
+      "hits":[
+         {
+            "_index":"mereveilleuse-test_recommendations_test_20150511105504731",
+            "_type":"recommendation",
+            "_id":"100",
+            "_score":1.0,
+            "_source":{
+               "location":[
+                  0.0,
+                  0.0
+               ],
+               "profession_id": 100,
+               "patient_type_ids":[
+                  1
+               ],
+               "practitioner_id": 1,
+               "rating":8.75
+            }
+         }
+      ]
+   }
+}

@@ -62,6 +62,22 @@ describe Search do
     end
   end
 
+  describe 'uris' do
+    let(:subject) { build_stubbed :search }
+    
+    context 'unsubscribe' do
+      it 'has correct path' do
+        path = "/unsubscribe/search/#{subject.user.login_token}/#{subject.id}"
+        expect(subject.unsubscribe_search_path).to eq(path)
+      end
+
+      it 'has correct url' do
+        url = "http://#{ENV['MEREVEILLEUSE_HOST']}/unsubscribe/search/#{subject.user.login_token}/#{subject.id}"
+        expect(subject.unsubscribe_search_url).to eq(url)
+      end
+    end
+  end
+
   describe 'settings' do
     before do
       subject.settings[:sent_practitioners] = '1,2,3'

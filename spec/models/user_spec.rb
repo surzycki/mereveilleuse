@@ -94,8 +94,8 @@ describe User do
 
   describe 'uris' do
     let(:subject) { build_stubbed :user }
-
-    context 'unsubscribe_account' do
+    
+    context 'unsubscribe' do
       it 'has correct path' do
         path = "/unsubscribe/account/#{subject.login_token}"
         expect(subject.unsubscribe_account_path).to eq(path)
@@ -105,28 +105,7 @@ describe User do
         url = "http://#{ENV['MEREVEILLEUSE_HOST']}/unsubscribe/account/#{subject.login_token}"
         expect(subject.unsubscribe_account_url).to eq(url)
       end
-    end
-  end
-
-  describe '#unsubscribe' do
-    let(:subject)  { build_stubbed :user }  
-    let(:search)   { spy('search') }
-    let(:searches) { [search] }
-
-    before do
-      allow(subject).to receive(:searches).and_return searches
-      allow(subject).to receive(:unsubscribed!)
-
-      subject.unsubscribe
-    end
-
-    it 'cancels searches' do
-      expect(search).to have_received(:canceled!).once
-    end
-
-    it 'sets status to unsubscribed' do
-      expect(subject).to have_received(:unsubscribed!).once
-    end
+    end 
   end
 
   describe '#authenticate_with_token' do

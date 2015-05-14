@@ -1,14 +1,21 @@
 describe UnsubscribesController do
-  let(:user)  { build_stubbed :user } 
+  let(:user)                { build_stubbed :user } 
+  let(:search)              { spy('search') }
+  let(:message)             { spy('message') }
+  let(:unsubscribe_service) { wisper_spy('unsubscribe_service') }
+  
+  before do 
+    allow(UnsubscribeService).to receive(:new).and_return unsubscribe_service
+    stubbed_sign_in user 
+  end
 
-  before { stubbed_sign_in user }
-
-  describe 'GET search' do
-    let(:search) { spy('search') }
-      
+  describe 'GET search' do 
     describe 'success' do
       before do
         allow(Search).to receive(:find_by).and_return search
+
+        mock_wisper_publisher(unsubscribe_service, 
+          :unsubscribe_search, :unsubscribe_search_success, search)
 
         get :search, id: 'id_of_search', token: 'login_token'
       end
@@ -33,15 +40,14 @@ describe UnsubscribesController do
       it 'assigns search' do
         expect(assigns[:search]).to eq search
       end
-
-      it 'cancels search' do
-        expect(search).to have_received(:canceled!)
-      end 
     end
 
     describe 'failure' do
       before do
         allow(Search).to receive(:find_by).and_return nil
+
+        mock_wisper_publisher(unsubscribe_service, 
+          :unsubscribe_search, :unsubscribe_search_fail, message)
 
         get :search, id: 'not_found', token: 'login_token'
       end
@@ -50,8 +56,8 @@ describe UnsubscribesController do
         expect(response).to redirect_to not_found_path
       end
 
-      it 'does NOT cancel search' do
-        expect(search).to_not have_received(:canceled!)
+      it 'sets flash' do
+        expect(flash[:alert]).to eq message
       end 
     end
 
@@ -74,12 +80,11 @@ describe UnsubscribesController do
   end
 
   describe 'GET account' do
-    before do
-      allow(user).to receive(:unsubscribe)
-    end
-
     describe 'success' do
       before do
+        mock_wisper_publisher(unsubscribe_service, 
+          :unsubscribe_account, :unsubscribe_account_success, user)
+
         get :account, token: 'login_token'
       end
 
@@ -94,15 +99,14 @@ describe UnsubscribesController do
       it 'renders the account template' do
         expect(response).to render_template(:account)
       end
-
-      it 'unsubscribes user' do
-        expect(user).to have_received(:unsubscribe)
-      end 
     end
 
     describe 'failure' do
       before do
         allow(controller).to receive(:current_user).and_return nil
+
+        mock_wisper_publisher(unsubscribe_service, 
+          :unsubscribe_account, :unsubscribe_account_fail, message)
 
         get :account, token: 'login_token'
       end
@@ -111,9 +115,9 @@ describe UnsubscribesController do
         expect(response).to redirect_to not_found_path
       end
 
-      it 'does NOT unsubscribe user' do
-        expect(user).to_not have_received(:unsubscribe)
-      end 
+      it 'sets flash' do
+        expect(flash[:alert]).to eq message
+      end
     end
 
     describe 'exception' do

@@ -19,7 +19,7 @@ end
 PREFIXES = ['dr','madame','monsieur']
 
 
-decoded.sample(200).each do |data|
+decoded.sample(100).each do |data|
   begin
     
     if data[0].present?
@@ -107,9 +107,9 @@ patient_types = PatientType.create([
 ])
 
 
-RECOMMENDATION_COUNT = 100
+RECOMMENDATION_COUNT = 10
 USER_COUNT           = 10
-SEARCH_COUNT         = 20
+SEARCH_COUNT         = 0
 
 unless Rails.env.production? 
   puts '-- creating generic users...'

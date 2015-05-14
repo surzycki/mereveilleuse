@@ -42,10 +42,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   
-  # for https protocol in test env for properly testing email urls
-  # without setting MEREVEILLEUSE_PROTOCOL to https
-  config.action_mailer.default_url_options = { host: ENV['MEREVEILLEUSE_HOST'], protocol: 'https' }
-
   # active job adapter
   config.active_job.queue_adapter = :test
 end

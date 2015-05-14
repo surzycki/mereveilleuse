@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails',                    '4.2.0'
+gem 'rails',                    '4.2.1'
 gem 'coffee-rails',             '~> 4.1.0'
-gem 'sass-rails',               '~> 5.0'
+gem 'sass-rails',               '5.0.3'
 gem 'jquery-rails'
 gem 'pg'                                                  # Pg is the Ruby interface to the PostgreSQL RDBMS.
 gem 'haml-rails'                                          # HTML Abstraction Markup Language - A Markup Haiku http://haml.info
@@ -75,6 +75,8 @@ group :test do
   gem 'poltergeist'                                       # A PhantomJS driver for Capybara
   gem 'webmock'                                           # Library for stubbing and setting expectations on HTTP requests in Ruby.
   gem 'rspec-activejob'                                   # RSpec matchers for testing ActiveJob
+  gem 'timecop'                                           # A gem providing "time travel", "time freezing", and "time acceleration"
+  gem 'capybara-screenshot'
   gem 'wisper-rspec',               require: false        # RSpec matchers and stubbing for Wisper
   gem 'shoulda-matchers',           require: false        # Makes tests easy on the fingers and the eyes
   gem 'guard-rspec',                require: false        # Guard::RSpec automatically run your specs (much like autotest)

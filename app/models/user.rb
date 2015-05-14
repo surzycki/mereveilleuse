@@ -19,11 +19,6 @@ class User < ActiveRecord::Base
     find_by(login_token: token)
   end
 
-  def unsubscribe
-    self.searches.each(&:canceled!)
-    self.unsubscribed!
-  end
-
   def generate_login_token
     self.login_token ||= SecureRandom.urlsafe_base64(15).tr('lIO0', 'sxyz')
   end

@@ -11,6 +11,6 @@ class RecommendationsEmailProvider
   end
 
   def execute(search)
-    RecommendationsEmailJob.set(wait: delay).perform_later(search)
+    RecurringRecommendationEmailJob.set(wait: delay).perform_later(search)
   end
 end

@@ -218,7 +218,8 @@ fr:
       title: Merci pour la confiance que vous accordez à la communauté !
       subtitle: Nous espérons que vous avez trouvé ce que vous cherchez !
       information_html: Vous ne recevoir plus des alertes email pour <strong>un(e) %{profession_name}</strong> qui pourra dispenser des soins <strong>%{patient_type_name}</strong>, et près de chez vous à/au <strong>%{address}</strong>.
+      not_found: Acune recherche était en cours
     account:
       title: Nous sommes désolés de vous voir partir
       subtitle: À la prochaine fois !
-
+      
