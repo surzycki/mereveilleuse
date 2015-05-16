@@ -8,7 +8,7 @@ class EmailSearchForm
   end
 
   def process   
-    search.active?
+    !search.canceled?
   end
 
   def errors
