@@ -9,11 +9,20 @@ class SearchService
 
   def execute(provider)
     if form.process
-      results = provider.execute form.search
-      
-      publish :search_success, results, form.search
+      do_search provider
     else
       publish :search_fail, form.errors
+    end
+  end
+
+  private
+  def do_search(provider)
+    results = provider.execute form.search
+    
+    if results.present?
+      publish :search_success, results, form.search
+    else
+      publish :search_no_results, form.search
     end
   end
 end

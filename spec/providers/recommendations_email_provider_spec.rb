@@ -48,17 +48,21 @@ describe RecommendationsEmailProvider do
   describe '#execute' do
     let(:job)  { spy('job') }
 
+    before do
+      allow(RecurringRecommendationEmailJob).to receive(:set).and_return job
+      subject.execute search
+    end
+
     it 'queues RecurringRecommendationEmailJob with search' do
-      expect {
-        subject.execute search
-      }.to enqueue_a(RecurringRecommendationEmailJob).with(search)
+      expect(job).to have_received(:perform_later).
+        with search
+    end
+
+    it 'returns empty hash' do
+      expect(subject.execute search).to eq Hash.new
     end
 
     it 'sets wait time for queue' do
-      allow(RecurringRecommendationEmailJob).to receive(:set).and_return job
-      
-      subject.execute search
-
       expect(RecurringRecommendationEmailJob).to have_received(:set)
         .with hash_including(wait: subject.delay) 
     end

@@ -1,15 +1,13 @@
 class RecommendationMailer < ApplicationMailer
   layout 'mailer_with_header'
   
-  def results(search, recommendations, is_expanded_search = false)
+  def results(search, recommendations)
     @recommendation     = recommendations.first
     
     @search             = search
     @user               = search.user
     @recommender        = @recommendation.recommender
   
-    @is_expanded_search = is_expanded_search
-
     mail(
       to: @user.email, 
       subject: subject_for_results(search)

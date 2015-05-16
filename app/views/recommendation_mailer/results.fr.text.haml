@@ -2,7 +2,7 @@
 
 Vous êtes à la recherche d'un(e) #{@search.profession_name.downcase}
 *******************************
-- if @is_expanded_search
+- if @search.expanded?
   Une MèreVeilleuse maman a recommandé un(e) #{ @search.profession_name.downcase } près de chez vous, au #{ @search.address }. Il ne s’agit pas d’une consultation destinée à #{ @search.patient_type_name.downcase } mais à #{ @recommendation.patient_type_name.downcase }, nous avons pensé qu’elle pourrait tout de même vous aider.
 - else
   Une MèreVeilleuse maman a recommandé un(e) #{ @search.profession_name.downcase } pour toute consultation destinée à #{ @search.patient_type_name.downcase }, près de chez vous, au #{ @search.address }.

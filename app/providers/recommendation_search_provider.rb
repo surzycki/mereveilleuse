@@ -3,6 +3,8 @@ class RecommendationSearchProvider
 
   def execute(search)
     @search = search
+    @search.active!
+
     results = perform_search
     
     # save unique sent_practitioners to search so we don't send the same practitioners
@@ -12,8 +14,6 @@ class RecommendationSearchProvider
     results
   rescue Exception => e
     TrackError.new e
-    # return empty results so we try again later
-    Hash.new
   end
 
   def perform_search    

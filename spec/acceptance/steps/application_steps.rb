@@ -13,9 +13,10 @@ module ApplicationSteps
     
     user                = FactoryGirl.create :user, id: 100
     profession          = FactoryGirl.create :profession,   name: 'Doctor', id: 100
-    first_patient_type  = FactoryGirl.create :patient_type, name: 'Person', id: 1
-    second_patient_type = FactoryGirl.create :patient_type, name: 'Another Person', id: 2
+    first_patient_type  = FactoryGirl.create :patient_type, name: 'Person', search_alternatives: '2', id: 1 
+    second_patient_type = FactoryGirl.create :patient_type, name: 'Another Person', search_alternatives: '1', id: 2
     
+
     FactoryGirl.create :recommendation, 
       id: 100,
       profession: profession,
@@ -65,6 +66,17 @@ module ApplicationSteps
     text = "facebook conversion code for #{pixel_type.downcase}"
     
     expect(page.body).send expectation, include(text)
+  end
+
+  step 'there are no relevant recommendations' do
+    recommendation_empty_response  = File.open('spec/fixtures/json/elasticsearch/recommendation_empty_response.json').read
+    
+    stub_request(:get, "http://www.example.com:9200/mereveilleuse-test_recommendations_test/_search").
+      to_return(
+        headers: { 'Content-Type' => 'application/json' },
+        status: 200, 
+        body: recommendation_empty_response
+      )
   end
 end
 

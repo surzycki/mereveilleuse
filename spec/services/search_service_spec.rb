@@ -25,17 +25,42 @@ describe SearchService do
         allow(provider).to receive(:execute).and_return results
       end
       
-      it 'broadcasts success' do
-        expect { 
-          subject.execute(provider) 
-        }.to broadcast(:search_success, results, search)
+      context 'with results' do
+        before do
+          allow(results).to receive(:present?).and_return true
+        end
+
+        it 'broadcasts search_success' do
+          expect { 
+            subject.execute(provider) 
+          }.to broadcast(:search_success, results, search)
+        end
+  
+        it 'executes provider' do
+          subject.execute(provider)
+  
+          expect(provider).to have_received(:execute)
+            .with search
+        end
       end
 
-      it 'executes provider' do
-        subject.execute(provider)
+      context 'with NO results' do
+        before do
+          allow(results).to receive(:present?).and_return false
+        end
 
-        expect(provider).to have_received(:execute)
-          .with search
+        it 'broadcasts search_no_results' do
+          expect { 
+            subject.execute(provider) 
+          }.to broadcast(:search_no_results, search)
+        end
+  
+        it 'executes provider' do
+          subject.execute(provider)
+  
+          expect(provider).to have_received(:execute)
+            .with search
+        end
       end
     end
 

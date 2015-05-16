@@ -9,9 +9,8 @@ class RecurringRecommendationEmailJob < ActiveJob::Base
     @search = search
     @form   = EmailSearchForm.new(search) 
 
-    search_service.subscribe( EmailSearchListener.new )
-    search_service.subscribe( EmailExpandedSearchListener.new )
-  
+    search_service.subscribe(RecommendationSearchListener.new(self))
+
     search_service.execute RecommendationSearchProvider.new
   rescue Exception => e
     TrackError.new(e)
@@ -26,11 +25,11 @@ class RecurringRecommendationEmailJob < ActiveJob::Base
     end
   end
 
-  private 
   def search_service
     @search_service ||= SearchService.new(form)
   end
 
+  private 
   def interval
     ENV['EMAIL_INTERVAL'].to_i.seconds
   end

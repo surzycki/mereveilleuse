@@ -1,4 +1,4 @@
-describe Federation, focus: true do
+describe Federation do
   describe '#initialize' do
     it 'initializes' do
       expect{ described_class.new }.to_not raise_error

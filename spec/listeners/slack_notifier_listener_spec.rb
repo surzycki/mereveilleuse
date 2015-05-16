@@ -132,40 +132,14 @@ describe SlackNotifierListener do
 
   describe '#search_success' do
     context 'success' do
-      context 'results is ActiveJob' do
-
-        it 'queues a notifier' do
-          allow(results).to receive(:is_a?).and_return true
-
-          expect {
-            subject.search_success results, search
-          }.to enqueue_a(SlackNotifierJob).with(
-            "*#{search.user.fullname}* queued #{search}"
-          )
-        end
+      it 'queues a notifier' do
+        expect {
+          subject.search_success results, search
+        }.to enqueue_a(SlackNotifierJob).with(
+          "*#{search.user.fullname}* searched #{search}"
+        )
       end
-
-      context 'results NOT an ActiveJob' do
-        context 'when count NOT zero' do
-          it 'queues a notifier' do
-            allow(results).to receive(:count).and_return 1
-            
-            expect {
-              subject.search_success results, search
-            }.to enqueue_a(SlackNotifierJob).with(
-              "*#{search.user.fullname}* was sent #{search}"
-            )
-          end
-        end
-        
-        context 'when count zero' do
-          it 'queues a notifier' do
-            expect {
-              subject.search_success results, search
-            }.to_not enqueue_a(SlackNotifierJob)
-          end
-        end
-      end
+      
     end
 
     context 'without search object' do

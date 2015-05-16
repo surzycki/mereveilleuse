@@ -11,7 +11,7 @@ class SearchesController < ApplicationController
   def create
     @form = SearchForm.new search_params
 
-    search_service.on :search_success do |results, search|
+    search_service.on :search_no_results do |search|
       redirect_to search_path
     end
 
@@ -20,6 +20,8 @@ class SearchesController < ApplicationController
       render :new
     end
     
+    # this provider will only fire 'search_no_results' as results are
+    # defered until the email is sent
     search_service.execute RecommendationsEmailProvider.new
   end
 

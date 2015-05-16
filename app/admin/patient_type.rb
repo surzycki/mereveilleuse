@@ -5,7 +5,7 @@ ActiveAdmin.register PatientType do
   actions :all, except: [:destroy]
   menu label: 'Patient Types', parent: 'Configuration'
 
-  permit_params :name
+  permit_params :name, :search_alternatives
 
   controller do
     def update
@@ -22,16 +22,17 @@ ActiveAdmin.register PatientType do
   end
 
   index do
-    column :name
     column :id 
-    
+    column :name
+    column :search_alternatives
     actions
   end
 
   show do
     attributes_table do
-      row :name
       row :id 
+      row :name
+      row :search_alternatives
     end
   end
 
@@ -40,6 +41,7 @@ ActiveAdmin.register PatientType do
 
     f.inputs do
       f.input :name 
+      f.input :search_alternatives
     end
 
     f.actions

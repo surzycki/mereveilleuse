@@ -17,15 +17,15 @@ RSpec.configure do |config|
       )
     
     # Search recommendations with default query (patient_type: 1) and return a recommendation
-    recommendation_defaut_query = File.open('spec/fixtures/json/elasticsearch/recommendation_default_query.json').read
-    recommendation_response     = File.open('spec/fixtures/json/elasticsearch/recommendation_response.json').read
+    recommendation_defaut_query     = File.open('spec/fixtures/json/elasticsearch/recommendation_default_query.json').read
+    recommendation_default_response = File.open('spec/fixtures/json/elasticsearch/recommendation_default_response.json').read
     
     stub_request(:get, "http://www.example.com:9200/mereveilleuse-test_recommendations_test/_search").
       with(body: recommendation_defaut_query).
       to_return(
         headers: { 'Content-Type' => 'application/json' },
         status: 200, 
-        body: recommendation_response
+        body: recommendation_default_response
       )
 
     # Search recommendations with secondary query (patient_type: 2) and return no recommendations
@@ -38,6 +38,18 @@ RSpec.configure do |config|
         headers: { 'Content-Type' => 'application/json' },
         status: 200, 
         body: recommendation_empty_response
+      )
+
+    # Search recommendations with expanded query (patient_type: 1,2) and return default response
+    recommendation_expanded_query   = File.open('spec/fixtures/json/elasticsearch/recommendation_expanded_query.json').read
+    recommendation_default_response = File.open('spec/fixtures/json/elasticsearch/recommendation_default_response.json').read
+    
+    stub_request(:get, "http://www.example.com:9200/mereveilleuse-test_recommendations_test/_search").
+      with(body: recommendation_expanded_query).
+      to_return(
+        headers: { 'Content-Type' => 'application/json' },
+        status: 200, 
+        body: recommendation_default_response
       )
 
 

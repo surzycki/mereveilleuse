@@ -64,7 +64,7 @@ describe SearchesController do
 
     context 'handle authenticity token' do
       before do
-        mock_wisper_publisher(search_service, :execute, :search_success, results, search)
+        mock_wisper_publisher(search_service, :execute, :search_no_results, search)
       end
 
       it 'skips authenticity token' do
@@ -78,7 +78,7 @@ describe SearchesController do
 
     context 'success' do
       before do
-        mock_wisper_publisher(search_service, :execute, :search_success, results, search)
+        mock_wisper_publisher(search_service, :execute, :search_no_results, search)
       
         post :create, search_form: params
       end

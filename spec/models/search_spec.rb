@@ -22,7 +22,7 @@ describe Search do
 
     it 'defines enum for status' do
       expect(subject).to define_enum_for(:status)
-        .with [ :active, :canceled ]
+        .with [ :active, :canceled, :expanded ]
     end
   end
 

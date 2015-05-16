@@ -42,13 +42,17 @@ class SlackNotifierListener
     return if results.nil? || search.nil?
 
     username = Maybe(search.user).fullname._
-    
-    message = if results.is_a? ActiveJob::Base
-      "*#{username}* queued #{search}"
-    else
-      "*#{username}* was sent #{search}" unless results.count.zero?
-    end
+    message  = "*#{username}* searched #{search}"
+   
+    send_notification message
+  end
 
+  def search_no_results(search)
+    return if search.nil?
+
+    username = Maybe(search.user).fullname._
+    message  = "*#{username}* trying expanded search #{search}"
+   
     send_notification message
   end
 

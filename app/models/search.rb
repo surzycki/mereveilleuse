@@ -13,18 +13,22 @@ class Search < ActiveRecord::Base
   has_and_belongs_to_many :patient_types, join_table: 'searches_patient_types'
   has_and_belongs_to_many :professions,   join_table: 'searches_professions'
 
-  enum status: [ :active, :canceled ]
+  enum status: [ :active, :canceled, :expanded ]
 
   def profession_name
     Maybe(professions.first).name._
   end
 
+  def patient_type
+    Maybe(patient_types.first)._
+  end
+
   def patient_type_name
-    Maybe(patient_types.first).name._
+    Maybe(patient_type).name._
   end
 
   def patient_type_id
-    Maybe(patient_types.first).id._
+    Maybe(patient_type).id._
   end
 
   def to_s

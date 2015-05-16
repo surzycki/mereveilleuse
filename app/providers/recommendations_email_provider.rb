@@ -12,5 +12,8 @@ class RecommendationsEmailProvider
 
   def execute(search)
     RecurringRecommendationEmailJob.set(wait: delay).perform_later(search)
+    
+    # return empty results as they are defered
+    Hash.new
   end
 end

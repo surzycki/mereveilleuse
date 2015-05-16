@@ -9,7 +9,7 @@ Feature: Recommendation Email
     And I modify the 'search form' address with '6 rue gobert paris france'
     And I submit the form and execute async jobs
     
-  @wip
+    
   Scenario: Unsubscribe from search email
     Given I open email sent to 'user.person@example.com'
     When I click 'unsubscribe-search' in the email

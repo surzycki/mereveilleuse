@@ -23,7 +23,8 @@ describe RecommendationSearchProvider do
       end
   
       it 'saves sent practitioners' do
-        expect(search).to have_received(:sent_practitioners=)
+        expect(search).to have_received(:update).
+          with(sent_practitioners: anything)
       end
 
       it 'retrieves sent practitioners' do
@@ -43,10 +44,6 @@ describe RecommendationSearchProvider do
         subject.execute search
       end
 
-      it 'returns empty hash' do
-        expect(subject.execute search).to eq Hash.new
-      end
-  
       it 'tracks the error' do
         expect(TrackError).to have_received(:new)
       end
