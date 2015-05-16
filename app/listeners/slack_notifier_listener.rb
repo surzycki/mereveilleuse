@@ -42,7 +42,7 @@ class SlackNotifierListener
     return if results.nil? || search.nil?
 
     username = Maybe(search.user).fullname._
-    message  = "*#{username}* searched #{search}"
+    message  = "*#{username}*  #{search}"
    
     send_notification message
   end
@@ -51,7 +51,7 @@ class SlackNotifierListener
     return if search.nil?
 
     username = Maybe(search.user).fullname._
-    message  = "*#{username}* trying expanded search #{search}"
+    message  = "*#{username}* trying expanded #{search}"
    
     send_notification message
   end

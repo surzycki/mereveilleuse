@@ -13,11 +13,13 @@
   @include border-radius(50%);
   padding: 0;
   display: inline-block;
-  
+  width: 66% !important;
+
   @media only screen and (min-width: 599px) {
     width: 52px !important;
     height: 52px !important;
   }
+
 
   @media only screen and (max-width: 600px) {
     width: 150px !important;
