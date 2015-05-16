@@ -136,7 +136,7 @@ describe SlackNotifierListener do
         expect {
           subject.search_success results, search
         }.to enqueue_a(SlackNotifierJob).with(
-          "*#{search.user.fullname}* searched #{search}"
+          "*#{search.user.fullname}* #{search}"
         )
       end
       
