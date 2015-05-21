@@ -100,19 +100,19 @@ fr:
       secondary: En savoir plus
 
     how:
-      title: Comment ça marche ?
+      title: Comment ça marche&nbsp;?
       showcase:
         one:
-          title: 1. Communauté
-          content: Je rejoins la communauté en recommandant un professionnel aux mamans de mon quartier. (ostéopathe, médecin généraliste,  pédiatre...)
+          title: 1. Authentification
+          content: Lors de ma première utilisation <b>je m'authentifie avec facebook</b> pour garantir mes recommandations et lutter contre les faux avis. 
 
         two:
-          title: 2. Recherche
-          content: J’effectue ma recherche en indiquant mon adresse et le type de professionnel qui m’intéresse.
+          title: 2. Recommandation
+          content: MèreVeilleuse est basée sur la réciprocité et l'entraide entre mamans <b>je recommande mes professionnels de santé préférés</b>
 
         three:
-          title: 3. Recommandations
-          content: Je reçois les recommandations de mes amies inscrites et des mamans de mon quartier. 100% mamans garanties ;)
+          title: 3. Recherche
+          content: Pour ma santé et celle de mes enfants, je fais des recherches personalisées et découvre <b>les recommandations des mamans de mon quartier</b>
 
     example: 
       title: Exemple de recherche

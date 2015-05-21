@@ -36,31 +36,31 @@
     .jumbotron.jumbotron-transparent
       .space-xs-10
   
-      %h1= t('registrations.how.title')  
+      %h1= t('registrations.how.title').html_safe  
   
       .space-xs-40
   
       .row
         .col-sm-4
           .showcase
-            = image_tag ('icon-community.png')
+            = image_tag ('icon-authenticate.png')
             %dl
               %dt= t('registrations.how.showcase.one.title')
-              %dd= t('registrations.how.showcase.one.content')
-  
-        .col-sm-4
-          .showcase
-            = image_tag ('icon-search.png')
-            %dl
-              %dt= t('registrations.how.showcase.two.title')
-              %dd= t('registrations.how.showcase.two.content')
+              %dd= t('registrations.how.showcase.one.content').html_safe
   
         .col-sm-4
           .showcase
             = image_tag ('icon-recommend.png')
             %dl
+              %dt= t('registrations.how.showcase.two.title')
+              %dd= t('registrations.how.showcase.two.content').html_safe
+  
+        .col-sm-4
+          .showcase
+            = image_tag ('icon-search.png')
+            %dl
               %dt= t('registrations.how.showcase.three.title')
-              %dd= t('registrations.how.showcase.three.content')
+              %dd= t('registrations.how.showcase.three.content').html_safe
       
       .space-xs-10        
 
