@@ -1,0 +1,98 @@
+%section.cover.cover-landing 
+  .container
+    .jumbotron-transparent.text-center.no-top-padding  
+      = render 'navs/main'
+
+      .space-sm-50
+  
+      .row
+        .col-sm-10.col-sm-offset-1
+          %h2.normal
+            Découvrez le classement Avril 2015 des meilleurs diététiciens pour mamans de Paris
+
+  
+      .space-xs-30
+
+%section.background-secondary-background
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+      .row.text-center
+        .col-sm-12
+          %h3
+            Classement établi par le vote des internautes
+          %h4
+            Période du 1er au 30 Avril 2015
+
+      .space-xs-30
+
+      .row
+        .col-sm-10.col-sm-offset-1
+          %table.table.table-striped
+            %tr
+              %td.bold
+                Charles Antoine Winter (75001)
+              %td
+                Meilleure qualité de prestation
+              %td
+                168 recommandations
+            
+            %tr
+              %td.bold
+                Caroline Gayet (75003)
+              %td
+                Meilleur suivi
+              %td
+                135 recommandations
+
+            %tr
+              %td.bold
+                Laetitia Willerval (75010)
+              %td
+                Meilleur accueil et écoute
+              %td
+                87 recommandations
+
+            %tr
+              %td.bold
+                Laure Verdier (75020)
+              %td
+                Meilleurs résultats
+              %td
+                164 recommandations
+
+            %tr
+              %td.bold
+                Valérie Jacquier (75011)
+              %td
+                Meilleure note globale
+              %td
+                92 recommandations
+        
+
+%section.text-center.background-primary
+  .container
+    .jumbotron.jumbotron-transparent
+      .row
+        .col-sm-12
+          %h3.color-light
+            %b
+              Vous êtes diététicien ?
+            Vous aussi découvrez ce que les clients pensent de vous, développez votre réputation auprès d’une clientèle fidèle et qualitative de mamans 
+
+      .space-xs-20
+
+      .row  
+        %h4.color-light
+          Remplissez votre email, nous vous contactons sous 24H pour une présentation
+        
+        .space-xs-10
+
+        = form_for('', url: '', method: :post ) do |f|
+          .col-sm-6.col-sm-offset-2
+            .form-group
+              = f.text_field(:address, class: 'form-control input-lg input-outline', placeholder: 'Email')
+          .col-sm-2
+            = f.submit "I'm in!", class: 'btn btn-outline btn-block'
+
+       

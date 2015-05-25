@@ -1,0 +1,150 @@
+%section.cover.cover-landing 
+  .container
+    .jumbotron-transparent.text-center.no-top-padding  
+      = render 'navs/main'
+
+      .space-sm-50
+  
+      .row
+        .col-sm-10.col-sm-offset-1
+          %h4.bold
+            Spécial diététique
+          %h2.normal
+            Comment développez votre réputation auprès d’une clientèle qualitative et fidèle: les mamans
+
+  
+      .space-xs-30
+
+%section.text-center.background-secondary-background
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+      .row
+        .col-sm-4
+          .showcase
+            %dl
+              %dt
+                19 Millions de mamans en France
+        
+        .col-sm-4
+          .showcase
+            %dl
+              %dt
+                800 000 nouvelles mamans chaque année
+        
+        .col-sm-4
+          .showcase
+            %dl
+              %dt
+                Près d’1 million de consultations diététiques par an
+      
+
+%section.text-center.background-primary
+  .container
+    .jumbotron.jumbotron-transparent
+      .row
+        .col-sm-12
+          %h3.color-light
+            %b
+              Rejoignez
+            un réseau de qualité qui travaille exclusivement avec les mamans
+
+          %h4.color-light
+            Mereveilleuse.com: le site réservé aux mamans, qui fonctionne par recommandations
+
+      .row
+        .col-sm-8.col-sm-offset-2
+          %p.color-light
+            Les mamans s’échangent des recommandations sur leurs meilleures adresses de diététiciens dans leur quartier.
+
+      .row
+        .col-md-4
+          .showcase
+            %dl
+              %dd.color-light
+                %hr
+                Avril 2015 Date de lancement
+
+        
+        .col-md-4
+          .showcase
+            %dl
+              %dd.color-light
+                %hr.no-devices
+                9 600 Recommandations échangées
+
+        
+        .col-md-4
+          .showcase
+            %dl
+              %dd.color-light
+                %hr.no-devices
+                300 Professionnels inscrits
+
+%section.text-center.background-secondary-background
+  .container
+    .jumbotron.jumbotron-transparent
+      .row
+        .col-sm-6
+          .panel-heading
+            Gratuit
+
+          .panel.panel-display
+            .panel-body
+              %ul
+                %b
+                  Vous rejoignez le réseau:
+                %li
+                  Les mamans peuvent vous recommander
+                %li
+                  Les mamans peuvent vous contacter
+                %li
+                  Nous déposons des flyers à votre cabinet
+  
+                .space-xs-20
+  
+              %p
+                Condition:
+                %br
+                Vous devez obtenir au moins une recommandation de maman pour rejoindre le réseau
+
+
+        .col-sm-6
+          .panel-heading
+            Abonnement
+          .panel.panel-display
+            .panel-body
+              %ul
+                %b
+                  Devenez expert périnatalité:
+                %li
+                  Outils pros pour développez votre réputation
+                %li
+                  &nbsp;
+                %li
+                  &nbsp;
+  
+                .space-xs-20
+  
+              %p
+                Condition:
+                %br
+                Vous devez obtenir au moins une recommandation de maman pour rejoindre le réseau
+
+%section.text-center.background-primary
+  .container
+    .jumbotron.jumbotron-transparent
+      .row  
+        %h2.color-light
+          Remplissez votre email, nous vous contactons sous 24H pour une présentation
+        
+        .space-xs-20
+
+        = form_for('', url: '', method: :post ) do |f|
+          .col-sm-6.col-sm-offset-2
+            .form-group
+              = f.text_field(:address, class: 'form-control input-lg input-outline', placeholder: 'Email')
+          .col-sm-2
+            = f.submit 'Ok', class: 'btn btn-outline btn-block'
+
+

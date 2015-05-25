@@ -37,7 +37,10 @@ gem 'unicode_utils'
 
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'activeadmin',                 github: 'activeadmin'
-gem 'sinatra', :require => nil
+gem 'canonical-rails',             github: 'jumph4x/canonical-rails'
+
+gem 'sinatra',           require: nil
+gem 'google-api-client', require: 'google/api_client'
 
 group :production do
   gem 'rails_12factor'                                    # Heroku, Makes running your Rails app easier. Based on the ideas behind 12factor.net

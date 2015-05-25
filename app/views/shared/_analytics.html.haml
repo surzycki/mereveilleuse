@@ -19,7 +19,10 @@
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   
     ga('create', "#{ENV['GOOGLE_ANALYTICS_TRACKING_ID']}", 'auto');
-    ga('send', 'pageview');
+    
     <!-- end GoogleAnalytics -->
 
+  = @experiment.report if @experiment.present?
 
+  :javascript
+    ga('send', 'pageview');

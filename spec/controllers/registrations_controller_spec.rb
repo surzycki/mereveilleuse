@@ -7,8 +7,8 @@ describe RegistrationsController do
         expect(response).to be_success
       end
   
-      it 'renders the registrations layout' do
-        expect(response).to render_template(layout: 'registrations')
+      it 'renders the application_only_footer layout' do
+        expect(response).to render_template(layout: 'application_only_footer')
       end
   
       it 'renders the new template' do

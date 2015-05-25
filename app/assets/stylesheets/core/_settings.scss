@@ -50,7 +50,7 @@ $navbar-default-link-hover-color:    $dark-grey-color;
 $input-border-radius:                3px;
 $input-border-focus:                 $dark-grey-color;
 $input-bg:                           $primary-background-color;
-$input-border:                       #EFEFEF;
+$input-border:                       $dark-grey-color;
 $input-color-placeholder:            $muted-color;
 
 $font-family-sans-serif:             'Open Sans', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -58,5 +58,7 @@ $font-family-serif:                  'Merriweather', serif;
 
 $grid-gutter-width:                  10px; 
 
+$table-bg-accent:                    $light-color;
+$table-cell-padding:                 12px;
 // ----- Custom Settings ----- //
 

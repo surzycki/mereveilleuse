@@ -59,6 +59,18 @@ Baisc form inputs
   &:focus {
     box-shadow: none;
   }
+
+  &.input-lg {
+    padding: 17px;
+    font-size: 18px;
+  }
+
+  &.input-outline {
+    border-width: 3px;
+    border-top-style: solid;
+    border-color: $light-color;
+    font-size: 18px !important;
+  }
 }
 
 
