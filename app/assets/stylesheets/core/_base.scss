@@ -12,6 +12,7 @@
 // ----- Breakpoints ---- //
 
 $mobile: max-width $screen-xs-max;
+$not-mobile: min-width $screen-xs-max;
 $tablet: $screen-sm-min $screen-sm-max;
 $devices: max-width $screen-sm-max;
 $desktop: $screen-md-min;

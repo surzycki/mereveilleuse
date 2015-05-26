@@ -84,6 +84,49 @@ category: layout
 
 /*doc
 ---
+title: Bullet List
+name: layout-4a
+category: layout
+parent: layout-4
+---
+
+```haml_example
+.container
+  .row
+    .col-md-5
+      .list-bullet
+        %ul
+          %li
+            %a{ href: '#' } List Item 1
+          %li
+            %a{ href: '#' } List Item 2
+          %li
+            %a{ href: '#' } List Item 3
+          %li
+            %form.button_to{ action: '#', method: 'get' }
+              %div
+                %input{type: 'submit', value: 'List Item 4'}  
+    
+```
+*/
+
+.list-bullet {
+  padding: 0;
+
+  li {
+    line-height: 44px;
+    font-size: rem(22px);
+    
+    &:before {
+      @extend .icon-xs;
+      padding-right: 11px;
+    }
+  }
+}
+
+
+/*doc
+---
 title: Responsive Spacer
 name: layout-8
 category: layout

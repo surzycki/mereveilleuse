@@ -1,1 +1,272 @@
-Variation 2
+%section.cover.cover-landing 
+  .container
+    .jumbotron-transparent.text-center.no-top-padding  
+      %nav.navbar.navbar-default{role: 'navigation'}
+  
+        .navbar-header
+          = link_to new_registration_path, class: 'navbar-brand' do
+            = brand
+      
+        .navbar-collapse.collapse#collapse-1
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %p.navbar-text
+                Plus d’informations au 01 56 62 13 34
+           
+%section.background-secondary
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+      .row.text-center
+        .col-sm-12
+          %h2.color-light
+            Développez votre <b>notoriété</b> auprès des mamans & des enfants
+      
+      .space-xs-40
+      
+      .row
+        .col-sm-6.col-sm-offset-3
+          = link_to "Obtenir plus d’Informations", '#', class: 'btn btn-outline btn-block', id: 'x-more-information'
+
+%section.text-center#more-information
+  .container
+    .jumbotron.jumbotron-transparent
+      .row
+        .col-md-3
+          .showcase
+            = link_to '#', id: 'x-join' do
+              = image_tag ('icon-squeeze-1.jpg')
+              %dl
+                %dd
+                  Rejoignez la première plateforme des mamans
+
+        .col-md-3
+          .showcase
+            = link_to '#', id: 'x-develop' do
+              = image_tag ('icon-squeeze-2.jpg')
+              %dl
+                %dd
+                  Développez une patientèle de qualité
+
+
+        .col-md-3
+          .showcase
+            = link_to '#', id: 'x-benefit' do
+              = image_tag ('icon-squeeze-3.jpg')
+              %dl
+                %dd
+                  Bénéficiez des avantages Club MèreVeilleuse
+
+        .col-md-3
+          .showcase
+            = link_to '#', id: 'x-contact' do
+              = image_tag ('icon-squeeze-4.jpg')
+              %dl
+                %dd
+                  Nous-contacter et s'inscrire
+
+%section.text-center.background-secondary-background#join
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+      
+      %h2
+        Rejoignez la première plateforme des mamans
+  
+      .space-xs-40
+
+      .row
+        .col-sm-6.col-md-5
+          = image_tag 'product-iphone.png'
+        .col-sm-6.col-md-7
+          %hr
+          %h4.color-muted
+            La 1er plateform santé et sociale
+          %h1.bold
+            100% mamans
+          %hr
+
+          .space-sm-30
+
+          %ul.list-bullet
+            %li
+              Une plateforme basée sur le bouche-à-oreille
+            %li
+              Des recommandations vérifiées et authentifiées
+            %li
+              Disponible sur ordinateur, tablette et téléphone mobile
+
+          .space-sm-80.space-xs-20
+            
+          %p.bold.no-margin 
+            Visiter le site
+          %h3.no-margin 
+            = link_to 'www.mereveilleuse.com', root_path, target: '_blank'
+
+%section.text-center#develop
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+      
+      %h2
+        Développez une patientèle de qualité
+
+      .space-xs-40
+
+      .row
+        .col-sm-6.col-md-5
+          %hr
+          %h4.color-muted
+            Les mamans prennent
+          %h1.bold
+            80%
+          %h4.color-muted
+            des décisions santé dans une famille
+          %hr
+
+          %ul.list-bullet
+            %li
+              Les mamans et les enfants ont des besoins indispensables
+            %li
+              Souvent ils ont besoin du bon professionnel pour assurer plusieurs consultations
+            %li
+              Les consultations sont essentielles au bonheur de la famille
+        
+        .col-sm-6.col-md-7
+          .space-xs-20
+          = image_tag 'product-chart.png'
+          .space-xs-20
+          %p.small
+            En rose le pourcentage de décisions relatives à la santé prise par les mamans dans une famille.  En bleu les décisions prises par les autres membres de la famille
+
+%section.text-center.background-secondary-background#benefit
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+      
+      %h2
+        Bénéficiez des avantages du club MèreVeilleuse
+        
+    .row
+      .col-sm-12
+        %ul.price-list
+          %li
+            %ul.price-list-wrapper
+              %li
+                .price-list-header
+                  %h2
+                    Pro
+                  .price-list-price
+                    %span.price-list-value
+                      Gratuit
+
+                .price-list-body
+                  %ul.price-list-features
+                    %li
+                      Référencement sur la plateforme   
+                    %li
+                      Recommandation
+                    %li
+                      Profil
+                    %li
+                      &nbsp;
+                    %li
+                      &nbsp;
+                    %li
+                      &nbsp;
+                .price-list-footer
+                  = link_to "Plus D’Informations", '#', class: 'price-list-select', id: 'x-squeeze-conversion'
+
+
+          %li.price-list-popular
+            %ul.price-list-wrapper
+              %li
+                %header.price-list-header
+                  %h2
+                    Expert
+                  .price-list-price
+                    %span.price-list-currency
+                      €
+                    %span.price-list-value
+                      4,99
+                    %span.price-list-duration
+                      appel
+
+                .price-list-body
+                  %ul.price-list-features
+                    %li
+                      Référencement sur la plateforme   
+                    %li
+                      Recommandation
+                    %li
+                      Profil
+                    %li
+                      Appel
+                    %li
+                      Message Direct
+                    %li
+                      Flyers à disposition
+                .price-list-footer
+                  = link_to "Plus D’Informations", '#', class: 'price-list-select', id: 'x-squeeze-conversion'
+
+          %li
+            %ul.price-list-wrapper
+              %li
+                %header.price-list-header
+                  %h2
+                    Club Expert
+                  .price-list-price
+                    %span.price-list-currency
+                      €
+                    %span.price-list-value
+                      24,99
+                    %span.price-list-duration
+                      mois
+
+                .price-list-body
+                  %ul.price-list-features
+                    %li
+                      Référencement sur la plateforme   
+                    %li
+                      Recommandation
+                    %li
+                      Profil
+                    %li
+                      Appel
+                    %li
+                      Message Direct
+                    %li
+                      Flyers à disposition
+                .price-list-footer
+                  = link_to "Plus D’Informations", '#', class: 'price-list-select', id: 'x-squeeze-conversion'
+
+    .space-xs-80
+
+%section.text-center.background-primary#squeeze-conversion
+  .container
+    .jumbotron.jumbotron-transparent
+      .row  
+        %h2.color-light
+          Faites vous appeler directement
+        
+        .space-xs-20
+
+        .col-sm-8.col-sm-offset-2
+          = form_for(:squeeze_form, url: squeeze_form_path, method: :post ) do |f|
+            .form-group
+              = f.text_field(:name, class: 'form-control input-lg input-outline', placeholder: 'Nom et Prénom')
+            .form-group
+              = f.text_field(:phone, class: 'form-control input-lg input-outline', placeholder: 'Téléphone')
+            .form-group
+              = f.text_field(:time, class: 'form-control input-lg input-outline', placeholder: 'Créneaux (exemple : mardi 11h-15h)')
+         
+            = f.submit 'Se Faire Appeler', class: 'btn btn-outline btn-block'
+
+%section.text-center.background-secondary-background#contact
+  .container
+    .jumbotron.jumbotron-transparent
+      %h2
+        Contactez-nous
+      %p
+        Contactez-nous pour plus d’information au <b>01 56 62 13 34</b> ou <b>pierre.conreaux@mereveilleuse.com</b>    
+

@@ -131,4 +131,258 @@ parent: components
 }
 
 
+/*doc
+---
+title: Price list
+name: components-3
+category: components
+parent: components
+---
+
+```haml_example
+  
+
+```
+
+*/
+
+.price-list {
+  margin: 2em 0 0;
+  
+  > li {
+    position: relative;
+    margin-bottom: 1em;
+  }
+
+  @include breakpoint($not-mobile) {
+    margin: 3em 0 0;
+    
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    > li {
+      width: 33%;
+      float: left;
+      position: relative;
+      
+    }
+  }
+}
+
+.price-list-popular {
+  .price-list-header {
+    background-color: $primary-action-color;
+  }
+
+  .price-list-currency, .price-list-duration {
+    color: lighten($primary-color,20%);
+  }
+
+  @include breakpoint($not-mobile) {
+    color: lighten($primary-color,10%);
+
+    .price-list-wrapper > li { 
+      @include background(linear-gradient(to top, $primary-color, lighten($primary-color,10%)));
+    }
+  
+  }
+}
+
+.price-list-wrapper {
+  position: relative;
+
+  > li {
+    background-color: $primary-background-color;
+  }
+
+  @include breakpoint($not-mobile) {
+    > li {
+      @include background(linear-gradient(to top, $secondary-color, lighten($secondary-color,10%)));
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      outline: 1px solid transparent;
+    }
+  }
+}
+
+.price-list-header {
+  position: relative;
+  height: 80px;
+  padding: 1em;
+  pointer-events: none;
+  background-color: $secondary-action-color;
+  color: $light-color;
+  text-align: left;
+
+  h2 {
+    font-size: 1em; 
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $light-color;
+  }
+
+  @include breakpoint($not-mobile) {
+
+    height: auto;
+    padding: 1.9em 0.9em 1.6em;
+    pointer-events: auto;
+    text-align: center;
+    background-color: transparent;
+    
+    h2 {
+      font-size: 1.2em; 
+    }
+  }
+}
+
+.price-list-currency, .price-list-value {
+  font-size: 2em;
+  font-weight: 300;
+  color: $light-color;
+  margin: 0;
+  padding: 0;
+
+  @include breakpoint($not-mobile) {
+    font-weight: 600;
+    font-size: 1.4em;
+    margin-top: 10px;
+    display: inline-block;
+  }
+}
+
+.price-list-currency {
+  @include breakpoint($not-mobile) {
+    vertical-align: top;
+  }
+}
+
+.price-list-value {
+  @include breakpoint($not-mobile) {
+    font-weight: 300;
+    font-size: 3em;
+  }
+}
+
+.price-list-duration {
+  font-size: .8em;
+  color: darken($secondary-color,20%);
+
+  &:before {
+    content: '/';
+    margin-right: 2px;
+  }
+}
+
+.price-list-body {
+  overflow-x: visible;
+  /* smooth scrolling on touch devices */
+  -webkit-overflow-scrolling: touch;
+}
+
+.price-list-features {
+  width: 100%;
+
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  > li {
+    width: 16.6666%;
+    float: left;
+    padding: 1.6em 1em;
+    font-size: .9em;
+    text-align: center;
+    
+    @include breakpoint($not-mobile) {
+      margin: 0;
+      float: none;
+      width: auto;
+      padding: .8em;
+      font-size: .9em;
+      font-weight: 300;
+      color: $light-color;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.price-list-footer {
+  position: absolute;
+  z-index: 1;
+  height: 80px;
+  width: 100%;
+  top: 0;
+  left: 0;
+ 
+
+  @include breakpoint($mobile) {
+    &:after {
+      content: '\f105';
+      position: absolute;
+      right: 1em;
+      top: 50%;
+      bottom: auto;
+      @include transform(translateY(-50%));
+      height: 20px;
+      width: 20px;
+      font-size: 20px;
+      font-family: FontAwesome;
+      line-height: 1;
+      color: $light-color;
+    }
+  }
+
+  @include breakpoint($not-mobile) {
+    position: relative;
+    height: auto;
+    padding: 1.8em 0;
+    text-align: center; 
+  }
+}
+
+.price-list-select {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  color: transparent;
+
+  @include breakpoint($not-mobile) {
+    position: static;
+    display: inline-block;
+    height: auto;
+    padding: 1.5em 1.5em;
+    color: $light-color;
+    border-radius: 2px;
+    font-size: .6em;
+    text-indent: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: 2px solid $light-color;
+  
+    &:visited {
+      color: $light-color;
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: $primary-color;
+      background-color: $light-color;
+    }
+  }
+}
 

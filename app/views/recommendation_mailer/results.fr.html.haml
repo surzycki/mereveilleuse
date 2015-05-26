@@ -38,7 +38,7 @@
             %table.ten.columns
               %tr
                 %td
-                  %h4
+                  %h5
                     Vous êtes à la recherche d'un(e) #{@search.profession_name.downcase}
                   %p
                     - if @search.expanded?
@@ -68,7 +68,7 @@
             %table.ten.columns
               %tr
                 %td
-                  %h4
+                  %h5
                     #{@recommender.fullname} recommande
                   %p
                     Je recommande le #{@recommendation.profession_name.downcase} avec une note gobale de
@@ -95,7 +95,7 @@
                   %center
                     %h2.bold.no-margin
                       #{ @recommendation.practitioner_fullname }
-                    %h4.no-margin
+                    %h5.no-margin
                       #{ @recommendation.profession_name } pour a #{ @recommendation.patient_type_name.downcase }
                     %p.no-margin
                       #{ @recommendation.address }

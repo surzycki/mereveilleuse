@@ -7,7 +7,7 @@
   
       .row
         .col-sm-10.col-sm-offset-1
-          %h4.bold
+          %h5.bold
             Spécial diététique
           %h2.normal
             Comment développez votre réputation auprès d’une clientèle qualitative et fidèle: les mamans
@@ -49,7 +49,7 @@
               Rejoignez
             un réseau de qualité qui travaille exclusivement avec les mamans
 
-          %h4.color-light
+          %h5.color-light
             Mereveilleuse.com: le site réservé aux mamans, qui fonctionne par recommandations
 
       .row
@@ -140,10 +140,10 @@
         
         .space-xs-20
 
-        = form_for('', url: '', method: :post ) do |f|
+        = form_for(:squeeze_form, url: squeeze_form_path, method: :post ) do |f|
           .col-sm-6.col-sm-offset-2
             .form-group
-              = f.text_field(:address, class: 'form-control input-lg input-outline', placeholder: 'Email')
+              = f.text_field(:email, class: 'form-control input-lg input-outline', placeholder: 'Email')
           .col-sm-2
             = f.submit 'Ok', class: 'btn btn-outline btn-block'
 

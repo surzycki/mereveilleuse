@@ -58,7 +58,8 @@ All colors are have a `background-` or `color-` helper.
 @include contextual-helper('secondary',           $secondary-color);
 @include contextual-helper('alternate',           $alternate-color);
 @include contextual-helper('minor',               $minor-color);
-  
+@include contextual-helper('muted',               $muted-color); 
+
 @include contextual-helper('primary-background',    $primary-background-color);
 @include contextual-helper('secondary-background',  $secondary-background-color);
 

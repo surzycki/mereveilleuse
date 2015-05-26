@@ -24,7 +24,10 @@ Rails.application.routes.draw do
   get 'mentions-legales',             to: 'static_pages#legal',         as: 'legal'
   get 'politique-de-confidentialite', to: 'static_pages#privacy',       as: 'privacy'
 
-  get 'praticiens',                   to: 'squeezes#index'
+  get  'praticiens/merci',            to: 'squeezes#show',              as: 'squeeze_thanks'
+  get  'praticiens/(:id)',            to: 'squeezes#index'
+  post 'praticiens',                  to: 'squeezes#create',            as: 'squeeze_form'
+ 
 
   # custom error pages
   match '/404', to: 'errors#not_found',             via: :all, as: :not_found

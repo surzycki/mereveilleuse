@@ -21,7 +21,7 @@
         .col-sm-12
           %h3
             Classement établi par le vote des internautes
-          %h4
+          %h5
             Période du 1er au 30 Avril 2015
 
       .space-xs-30
@@ -83,15 +83,15 @@
       .space-xs-20
 
       .row  
-        %h4.color-light
+        %h5.color-light
           Remplissez votre email, nous vous contactons sous 24H pour une présentation
         
         .space-xs-10
 
-        = form_for('', url: '', method: :post ) do |f|
+        = form_for(:squeeze_form, url: squeeze_form_path, method: :post ) do |f|
           .col-sm-6.col-sm-offset-2
             .form-group
-              = f.text_field(:address, class: 'form-control input-lg input-outline', placeholder: 'Email')
+              = f.text_field(:email, class: 'form-control input-lg input-outline', placeholder: 'Email')
           .col-sm-2
             = f.submit "I'm in!", class: 'btn btn-outline btn-block'
 

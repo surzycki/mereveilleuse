@@ -1,3 +1,37 @@
+%icon-stroke-icons {
+  font-family: Pe-icon-7-stroke;
+  font-size: 30px;
+  line-height: 1;
+}
+
+%icon-fontawesome {
+  font-size: 30px;
+  font-family: FontAwesome;
+  line-height: 1;
+}
+
+/*doc
+---
+title: Sizes
+name: icon-1
+category: icons
+parent: icon
+---
+
+```haml_example
+%i.icon-carret.icon-xs
+%i.icon-carret.icon-sm
+%i.icon-carret
+%i.icon-carret.icon-lg
+%i.icon-carret.icon-xl
+```
+*/
+
+.icon-xs {
+  font-size: 14px;
+}
+
+
 .icon-lg {
   font-size: 30px;
 }
@@ -26,3 +60,4 @@
     height: 150px !important;
   }
 }
+

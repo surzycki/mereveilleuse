@@ -9,7 +9,7 @@ describe SqueezesController do
 
 
     context 'success' do
-      before { get :index }
+      before { get :index, id: 'blurg' }
     
       it 'returns http success' do
         expect(response).to be_success
@@ -35,7 +35,7 @@ describe SqueezesController do
           allow(Experiments).to receive(:new).and_throw :error 
           allow(TrackError).to receive(:new)
           
-          get :index 
+          get :index, id: 'blurg' 
         end
 
         it 'redirects to internal_server_error' do

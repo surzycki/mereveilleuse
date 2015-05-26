@@ -96,7 +96,7 @@ category: icons
 | Icon                                | Class               | Icon                                       |  Class         
 |:-----------------------------------:| ------------------- |:------------------------------------------:| ---------------
 | <i class="icon-community"></i>      | `icon-community`    | <i class="icon-search"></i>                | `icon-search`
-| <i class="icon-recommend"></i>      | `icon-recommend`    |                                            | 
+| <i class="icon-recommend"></i>      | `icon-recommend`    | <i class="icon-carret"></i>                | <i class="icon-carret"></i>  
 */
 
 .icon-community {
@@ -124,6 +124,14 @@ category: icons
   @extend %icon-fontawesome;
   &:before {
     content: '\f08a' !important;
+  }  
+}
+
+.icon-carret {
+  @extend %icon-fontawesome;
+  
+  &:before {
+    content: '\f105';
   }  
 }
 
