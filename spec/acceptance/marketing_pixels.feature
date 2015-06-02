@@ -6,7 +6,7 @@ Feature: Marketing Pixels
     
   Scenario: Completed Recommendation
     Given I goto the 'new recommendation' page
-    When I modify the 'recommendation form' practitioner_name with 'Bob Jones'
+    When I modify the 'recommendation form' practitioner_name with 'Bob Jojo'
     And I modify the 'recommendation form' profession_name with 'Doctor'
     And I select 'Person' from patient_type_id on 'recommendation form' 
     And I modify the 'recommendation form' address with '6 rue gobert paris france'
