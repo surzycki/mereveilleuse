@@ -29,7 +29,7 @@
 
 - if Rails.env.production?
   :javascript
-    <!-- start Inspectley -->
+    <!-- start Inspectlet -->
     window.__insp = window.__insp || [];
     __insp.push(['wid', 1602465284]);
     (function() {
@@ -37,4 +37,14 @@
     if (window.attachEvent) window.attachEvent('onload', __ldinsp);
     else window.addEventListener('load', __ldinsp, false);
     })();
+
+    <!-- Hotjar Tracking Code for www.mereveilleuse.com -->
+    (function(f,b){
+        var c;
+        f.hj=f.hj||function(){(f.hj.q=f.hj.q||[]).push(arguments)};
+        f._hjSettings={hjid:40426, hjsv:4};
+        c=b.createElement("script");c.async=1;
+        c.src="//static.hotjar.com/c/hotjar-"+f._hjSettings.hjid+".js?sv="+f._hjSettings.hjsv;
+        b.getElementsByTagName("head")[0].appendChild(c); 
+    })(window,document);
   
