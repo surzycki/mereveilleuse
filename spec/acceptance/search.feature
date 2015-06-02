@@ -1,4 +1,4 @@
-@acceptance @js @wip
+@acceptance @js 
 Feature: Search Form
   Background: 
     Given the application is setup
