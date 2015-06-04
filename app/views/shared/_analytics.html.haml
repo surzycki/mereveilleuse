@@ -28,14 +28,12 @@
     ga('send', 'pageview');
 
 - if Rails.env.production?
-  :javascript
-    <!-- Hotjar Tracking Code for www.mereveilleuse.com -->
-    (function(f,b){
-        var c;
-        f.hj=f.hj||function(){(f.hj.q=f.hj.q||[]).push(arguments)};
-        f._hjSettings={hjid:40426, hjsv:4};
-        c=b.createElement("script");c.async=1;
-        c.src="//static.hotjar.com/c/hotjar-"+f._hjSettings.hjid+".js?sv="+f._hjSettings.hjsv;
-        b.getElementsByTagName("head")[0].appendChild(c); 
-    })(window,document);
+  <!-- Begin Inspectlet Embed Code -->
+  window.__insp = window.__insp || [];
+  __insp.push(['wid', 1602465284]);
+  (function() {
+  function __ldinsp(){var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); }
+  if (window.attachEvent) window.attachEvent('onload', __ldinsp);
+  else window.addEventListener('load', __ldinsp, false);
+  })();
   
