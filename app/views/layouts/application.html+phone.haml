@@ -21,7 +21,7 @@
     
   %body
     - unless Rails.env.test?
-      #fb-root
+      = react_component( 'FacebookCanvasLogin', facebook_canvas: ENV['FACEBOOK_CANVAS'], facebook_permissions_dialog: @requesting_authentication )
       = react_component( 'FacebookSDK', app_id: ENV['FACEBOOK_APP_ID'] )
       = react_component( 'MixpanelAPI' )
       
