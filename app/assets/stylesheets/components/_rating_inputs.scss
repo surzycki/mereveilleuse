@@ -1,0 +1,63 @@
+/*doc
+---
+title: Rating Inputs
+name: rating-inputs
+category: components
+parent: components
+---
+
+```haml_example
+  
+
+```
+
+*/
+.rating-input {
+  margin:5px rem(12px) 0 0;
+  display: inline-block;
+
+  input[type="radio"] {
+    visibility: hidden;
+    position: absolute;
+  }
+  
+  input[type="radio"] + label {
+    color: #333;  
+  }
+  
+  input[type="radio"] + label span {
+    display:inline-block;
+    width: 54px;
+    height: 54px;
+    margin: 0px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+  }
+  
+  @mixin rating-values() {
+    @for $i from 0 through 4 {
+      
+      input[type="radio"] + label .rating-#{$i} {
+        @include background-image(image-url('#{$i}-rating.png')); 
+      }
+      
+      input[type="radio"]:checked + label .rating-#{$i} {
+        @include background-image(image-url('#{$i}-rating-checked.png'));
+      }
+
+      input[type="radio"]:hover:checked + label .rating-#{$i} {
+        @include background-image(image-url('#{$i}-rating-checked.png'));
+      }
+
+      input[type="radio"]:hover + label .rating-#{$i} {
+        @include background-image(image-url('#{$i}-rating-hover.png'));
+      }
+
+      //.space-#{$prefix}-#{$i * 10} { height: #{$i * 10}px; }
+    }
+  }
+
+  @include rating-values();
+}

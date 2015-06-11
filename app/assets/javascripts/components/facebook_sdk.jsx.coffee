@@ -12,6 +12,7 @@ root.FacebookSDK = React.createClass(
     status: 'not_connected'
 
   componentWillMount: ->
+    
     window.fbAsyncInit = =>
       FB.init
         appId: this.props.app_id
@@ -37,13 +38,13 @@ root.FacebookSDK = React.createClass(
         return
       js = d.createElement(s)
       js.id = id
-      js.src = '//connect.facebook.net/en_US/sdk.js'
+      js.src = "//connect.facebook.net/en_US/sdk.js"
       fjs.parentNode.insertBefore js, fjs
       return
     ) document, 'script', 'facebook-jssdk' 
 
   render: ->
-    `<meta property='FacebookSDK' content={this.state.is_loaded} name={this.state.platform} itemProp={this.state.status}/>` 
+    `<div id='fb-root'></div>` 
 
   _onStatusChange: (response) ->
     this.setState(status: response.status)

@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  around_filter      :catch_exceptions, unless: 'Rails.env.development?'
-  before_filter      :initialize_authentication_service, only: [:create]
+  around_action      :catch_exceptions, unless: 'Rails.env.development?'
+  before_action      :initialize_authentication_service, only: [:create]
   
   # POST /session
   def create 

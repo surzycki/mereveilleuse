@@ -6,12 +6,9 @@ Rails.application.routes.draw do
   
   mount Sidekiq::Web, at: '/admin/sidekiq'
   
-  resource  :session,         only: [ :create, :show ]
-  resource  :help,            only: [ :new, :create, :show ]
-  resource  :search,          only: [ :new, :create, :show ]
-  resources :recommendations, only: [ :new, :create, :show ]
-  resources :registrations,   only: [ :new, :create, :show ]
-    
+  # registrations
+  get 'registrations/invite',           to: 'registrations#invite',       as: 'registration_invite' 
+
   # unsubscribe
   get 'unsubscribe/search/:token/:id',  to: 'unsubscribes#search',        as: 'unsubscribe_search'
   get 'unsubscribe/account/:token',     to: 'unsubscribes#account',       as: 'unsubscribe_account'
@@ -29,6 +26,13 @@ Rails.application.routes.draw do
   post 'praticiens',                  to: 'squeezes#create',            as: 'squeeze_form'
  
 
+  resource  :session,         only: [ :create, :show ]
+  resource  :help,            only: [ :new, :create, :show ]
+  resource  :search,          only: [ :new, :create, :show ]
+  resources :recommendations, only: [ :new, :create, :show ]
+  resources :registrations,   only: [ :new, :create, :show ]
+  
+
   # custom error pages
   match '/404', to: 'errors#not_found',             via: :all, as: :not_found
   match '/422', to: 'errors#unprocessable_entity',  via: :all, as: :unprocessable_entity
@@ -37,7 +41,7 @@ Rails.application.routes.draw do
   # ping for capistrano deploy
   get 'ping', to: proc { [200, {}, []] }
 
-  root 'registrations#new'
+  root 'landings#index'
 end
 
 

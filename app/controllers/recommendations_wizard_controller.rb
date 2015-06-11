@@ -1,8 +1,8 @@
 # wip
 class RecommendationsWizardController < ApplicationController
-  before_filter :load_form, only: [ :edit, :update ]
+  before_action :load_form, only: [ :edit, :update ]
 
-  around_filter :catch_exceptions, unless: 'Rails.env.development?'
+  around_action :catch_exceptions, unless: 'Rails.env.development?'
 
   # GET recommendations_wizard/new
   def new

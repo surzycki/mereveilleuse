@@ -16,31 +16,19 @@
 
 /* Libraries */
 @import 'bourbon';
-@import 'breakpoint';
 @import 'bootstrap';
-@import 'typeahead';
-@import 'slippry';
+@import 'plugins/page_transitions';
 
 
-@import 'core/base';
+@import 'phone/base';
+
 @import 'core/helpers';
 @import 'core/layout';
 
-@import 'modules/typography';
-@import 'modules/typeahead';
 @import 'modules/colors';
-@import 'modules/nav';
-@import 'modules/components';
 @import 'modules/icons';
-@import 'modules/jumbotron';
 @import 'modules/buttons';
-@import 'modules/panel';
-@import 'modules/forms';
-@import 'modules/flash_notifications';
-@import 'modules/modal';
-@import 'modules/footer';
 
-@import 'theme';
+@import 'components/rating_inputs';
+
 @import 'inbox';
-
-@import 'core/state';

@@ -1,0 +1,31 @@
+!!!  XML
+!!!  Strict
+%html{html_attrs('fr')}
+  %head
+    %title=page_title  
+    
+    = stylesheet_link_tag 'application_phone', media: 'screen'
+
+    = render 'layouts/meta_tags'
+    = render 'layouts/open_graph_meta_tags'
+
+    = canonical_tag
+    
+    = favicon_link_tag 'favicon.ico'
+
+    <!--[if lt IE 9]>
+    = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
+    <![endif]-->
+    
+    = render 'shared/analytics' 
+    
+  %body
+    - unless Rails.env.test?
+      #fb-root
+      = react_component( 'FacebookSDK', app_id: ENV['FACEBOOK_APP_ID'] )
+      = react_component( 'MixpanelAPI' )
+      
+    #main
+      = yield
+    
+    = javascript_include_tag :application_phone

@@ -58,8 +58,8 @@ root.MixpanelAPI = React.createClass(
   # It helps to determin the current status of the user
   # vis-a-vis facebook
   _handleStatusChanged: (msg, response) ->
-    console.log '_handleStatusChanged'
-    console.log response
+    #console.log '_handleStatusChanged'
+    #console.log response
 
     $.when(this._getFacebookData(response)).done (response) =>
       this.setState(identity: response.id)
@@ -106,8 +106,8 @@ root.MixpanelAPI = React.createClass(
   _registerProperties: (information) ->
     # link previous behaviour to this account 
     distinct_id = mixpanel.get_distinct_id()
-    console.log "_registerProperties: #{distinct_id}"
-    console.log "_registerProperties: #{information.id}"
+    #console.log "_registerProperties: #{distinct_id}"
+    #console.log "_registerProperties: #{information.id}"
     mixpanel.alias(information.id, distinct_id)
       
     location = information.location if information.location
@@ -120,8 +120,8 @@ root.MixpanelAPI = React.createClass(
 
   _createProfile: (information) ->
     distinct_id = mixpanel.get_distinct_id()
-    console.log "_createProfile: #{distinct_id}"
-    console.log "_createProfile: #{information.id}"
+    #console.log "_createProfile: #{distinct_id}"
+    #console.log "_createProfile: #{information.id}"
 
     mixpanel.identify(information.id)
     mixpanel.people.set

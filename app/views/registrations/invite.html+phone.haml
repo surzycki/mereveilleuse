@@ -1,0 +1,18 @@
+.page-transition#page-transition-pages
+  .page-transition-page.page-5.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+    %section.cover.text-center
+      .container
+        .row
+          .col-sm-12
+            %h2
+              Je connais mamans qui on des bons plans
+            %p
+              Invite
+            
+            = react_component('FacebookInviteButton', 
+                value: 'Invite to Reg',
+                class: 'btn btn-primary btn-block', 
+                message: 'come')
+
+            %p
+              = link_to 'Go Back', root_path, class: 'btn btn-primary', id: 'registration-back'

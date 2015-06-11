@@ -2,10 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   # For the entry point we have to skip the authenticity validations, as the post is coming from facebook
   # In general for the moment we are going to ignore everything as it seems there are issues
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
   
-  before_filter :set_p3p
-  after_filter :allow_iframe
+  before_action :set_p3p, :set_device_type
+  after_action :allow_iframe
   
   helper_method :current_user
 
@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
   def set_p3p  
     headers['P3P'] = 'CP="ALL DSP COR CURa ADMa DEVa OUR IND COM NAV"'  
   end 
+
+  def set_device_type
+    request.variant = :phone if browser.mobile?
+  end
 
   def catch_error(exception)
     TrackError.new(exception)

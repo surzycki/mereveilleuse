@@ -1,0 +1,35 @@
+= form_for(:form, url: '#', method: :post,  html: { class: 'cover', id: 'registration_form' }) do |f| 
+  .page-transition#page-transition-pages
+    .page-transition-page.page-3.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .container
+          .row
+            .col-sm-12
+              %h2
+                Aide une maman et une maman t'adiera
+              %p
+                Who better than a mother that can recommend the good addresses in the neighboorhood
+              %p
+                = link_to 'Go', '#', class: 'btn btn-primary', id: 'registration-influencer-next'
+    
+              %p
+                = link_to 'Go Back', root_path, class: 'btn btn-primary', id: 'registration-back'
+
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .container
+          .row
+            .col-sm-12
+              %h2
+                Bon Plans
+              %p= link_to 'Go', '#', class: 'btn btn-primary', id: 'registration-influencer-next'
+    
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .container
+          .row
+            .col-sm-12 
+              %p= render 'recommendations/rating_buttons', f: f, item: 'wait_time'          
+
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %h1 Page D    

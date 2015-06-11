@@ -1,5 +1,5 @@
 class ProfessionsController < ApplicationController
-  around_filter :catch_exceptions, unless: 'Rails.env.development?'
+  around_action :catch_exceptions, unless: 'Rails.env.development?'
 
   # GET professions/autocomplete?query={query}
   def autocomplete

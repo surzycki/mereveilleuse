@@ -1,5 +1,5 @@
 class HelpsController < ApplicationController
-  around_filter :catch_exceptions, unless: 'Rails.env.development?'
+  around_action :catch_exceptions, unless: 'Rails.env.development?'
 
   def new
     @form = HelpForm.new

@@ -4,6 +4,7 @@ gem 'rails',                    '4.2.1'
 gem 'coffee-rails',             '~> 4.1.0'
 gem 'sass-rails',               '5.0.3'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'pg'                                                  # Pg is the Ruby interface to the PostgreSQL RDBMS.
 gem 'haml-rails'                                          # HTML Abstraction Markup Language - A Markup Haiku http://haml.info
 gem 'uglifier',                 '>= 1.3.0'                # Ruby wrapper for UglifyJS JavaScript compressor.
@@ -32,6 +33,8 @@ gem 'monadic'                                             # helps dealing with e
 gem 'time_difference'                                     # The missing Ruby method to print out time difference (duration) in year, month, week, day, hour, minute, and second.
 gem 'slack-notifier'                                      # A simple wrapper for posting to slack channels
 gem 'devise'                                              # (necessary for activeadmin)
+gem 'browser'                                             # Do some browser detection with Ruby. Includes ActionController integration.
+gem 'omniauth-facebook'                                   # Facebook OAuth2 Strategy for OmniAuth 
 gem 'unicode_utils'
 
 
