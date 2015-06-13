@@ -7,6 +7,69 @@ h1, h2, h3, p {
   color: #fff;
 }
 
+select {
+  font-size: 20px !important;
+  -webkit-appearance: none;
+  text-indent: 20%;
+}
+
+textarea {
+  resize: none;
+  font-size: 20px !important;
+}
+
+input, select, textarea {
+  @include placeholder {
+    color: $muted-color !important;
+    font-weight: 300;
+    text-align: center;
+  }
+}
+
+
+.form-control {
+  height: 50px;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.flex-container {
+  height: 100%;
+  
+  @include display(flex);
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include align-items(stretch);
+  @include align-content(center);
+  @include justify-content(space-around);
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
+.flex-item {
+  @include flex(0 1 auto);
+}
+
+
 .page-1 {
   background: #0ac2d2;
 }

@@ -730,7 +730,7 @@
             dropdown: '<span class="tt-dropdown-menu"></span>',
             dataset: '<div class="tt-dataset-%CLASS%"></div>',
             suggestions: '<span class="tt-suggestions"></span>',
-            suggestion: '<div class="tt-suggestion"></div>'
+            suggestion: '<div class="tt-suggestion needsclick"></div>'
         };
     }();
     var css = function() {
@@ -1204,7 +1204,7 @@
                     nodes = _.map(suggestions, getSuggestionNode);
                     $suggestions.append.apply($suggestions, nodes);
                     that.highlight && highlight({
-                        className: "tt-highlight",
+                        className: "tt-highlight needsclick",
                         node: $suggestions[0],
                         pattern: query
                     });
@@ -1276,7 +1276,7 @@
                 suggestion: templates.suggestion || suggestionTemplate
             };
             function suggestionTemplate(context) {
-                return "<p>" + displayFn(context) + "</p>";
+                return "<p class='needsclick'>" + displayFn(context) + "</p>";
             }
         }
         function isValidName(str) {
@@ -1662,6 +1662,8 @@
             });
             $input.addClass("tt-input").attr({
                 autocomplete: "off",
+                autocorrect: 'off',
+                autocapitalize: 'off',
                 spellcheck: false
             }).css(withHint ? css.input : css.inputWithNoHint);
             try {

@@ -1,10 +1,20 @@
 $ ->
+  # load facebook sdk
+  $.ajaxSetup cache: true
+  $.getScript '//connect.facebook.net/en_US/sdk.js'
+
   # remove 300ms wait in ios
   FastClick.attach(document.body)
   # prevent elastic scroll in mobile
   $(document).bind 'touchmove', (e) ->
     e.preventDefault()
   
+  # setup clicks to change pages
+  $('body').on 'click', '#registration-start, #registration-influencer-next, .rating-input label', (e) ->
+    $('#page-transition-pages').pageTransitions()
+    $('#page-transition-pages').pageTransitions('nextPage')
+
+
   # allow smooth transitions between page loads
   $('#main').smoothState(
     prefetch: false
@@ -31,17 +41,15 @@ $ ->
     onAfter: (container, newContent) ->
       # clean up and re-init
       container.removeClass('scaleUp')
-      $('#registration_form').swipe swipe: (event, direction, distance, duration, fingerCount, fingerData) ->
+      $('#new_recommendation_form').swipe swipe: (event, direction, distance, duration, fingerCount, fingerData) ->
         if (direction == 'up')
           $('#page-transition-pages').pageTransitions('previousPage')
   )
 
-  $('body').on 'click', '#registration-start, #registration-influencer-next', (e) ->
-    $('#page-transition-pages').pageTransitions()
-    $('#page-transition-pages').pageTransitions('nextPage')
-      
+  
+     
 
- 
+
 
   
   

@@ -15,7 +15,7 @@
 //= require jquery.scrollTo
 //= require jquery.cookie
 //= require bootstrap-sprockets
-//= require typeahead
+//= require typeahead-mobile
 //= require typeahead-addresspicker
 //= require pubsub
 //= require slippry.min

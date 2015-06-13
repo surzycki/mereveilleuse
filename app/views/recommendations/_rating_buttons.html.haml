@@ -1,9 +1,10 @@
-.text-left= f.label item, t("rating.form.#{item}.label")
+.text-center= f.label item, t("rating.form.#{item}.label")
 
-- (0..4).each do |value|
-  .rating-input
-    = f.radio_button item, value
-    %label{ for: "#{f.object_name}_#{item}_#{value}"}
-      %span{ class: "rating-#{value}"}
+.flex-container.flex-item{ style: 'max-height: 420px'}
+  - (0..4).each do |value|
+    .rating-input.needsclick.flex-item
+      = f.radio_button item, value, class: 'needsclick'
+      %label{ for: "#{f.object_name}_#{item}_#{value}", class: 'needsclick'}
+        %span{ class: "rating-#{value} needsclick"}
 
-.space-xs-10
+

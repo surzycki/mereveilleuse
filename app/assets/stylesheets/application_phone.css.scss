@@ -17,18 +17,22 @@
 /* Libraries */
 @import 'bourbon';
 @import 'bootstrap';
+@import 'typeahead';
 @import 'plugins/page_transitions';
 
 
+@import 'core/helpers';
+
 @import 'phone/base';
 
-@import 'core/helpers';
 @import 'core/layout';
 
 @import 'modules/colors';
 @import 'modules/icons';
 @import 'modules/buttons';
-
+@import 'modules/typeahead';
 @import 'components/rating_inputs';
+
+@import 'phone/typeahead';
 
 @import 'inbox';

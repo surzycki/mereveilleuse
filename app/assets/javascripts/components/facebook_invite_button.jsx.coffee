@@ -18,6 +18,10 @@ root.FacebookInviteButton = React.createClass(
       method: 'apprequests'
       message: this.props.message
 
+    FB.init
+      appId: '869143069794965'
+      version: 'v2.2'
+
     FB.ui options, this._onResponse
 
   _onResponse: (response) ->

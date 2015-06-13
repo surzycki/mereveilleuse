@@ -45,8 +45,8 @@ elasticsearch:
   image: elasticsearch
 
 nginx: 
-  image: surzycki/nginx.stable-dev
+  image: quay.io/surzycki/nginx.stable-dev
   ports:
     - '443:443'
   external_links:
-    - appfacebook_dev_run_1:dev  
+    - appfacebook_dev_run_51:dev  

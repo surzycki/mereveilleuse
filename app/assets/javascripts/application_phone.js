@@ -20,6 +20,8 @@
 //= require jquery.touchSwipe
 //= require jquery.smoothState
 //= require bootstrap-sprockets
+//= require typeahead-mobile
+//= require typeahead-addresspicker
 //= require pubsub
 
 // Fastclick might bork other stuff, so if that is the case disable and see what happens

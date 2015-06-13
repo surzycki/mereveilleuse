@@ -181,10 +181,10 @@ fr:
       title: Pour vous inscrire et rejoindre la communauté, partagez votre adresse santé préférée
       practitioner_name:
         label: Je recommande
-        placeholder: Entrez le nom du professionnel   
+        placeholder: Nom du professionnel   
       profession:
         label: Exerçant en qualité de
-        placeholder: Entrez la profession
+        placeholder: La profession
       patient_type:
         label: Pour
         placeholder: Précisez pour qui
