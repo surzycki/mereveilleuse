@@ -7,17 +7,6 @@ root.PractitionerAutocomplete = React.createClass(
   getInitialState: ->
     value: null
     
-  componentWillMount: ->
-    input  = $.parseHTML(this.props.field)
-   
-    this._props.name        = $(input).attr('name')
-    this._props.id          = $(input).attr('id')
-    this._props.className   = "#{$(input).attr('class')} typeahead"
-    this._props.placeholder = $(input).attr('placeholder')
-    this._props.data_error  = $(input).attr('data-error')
-    
-    this.setState( { value: $(input).attr('value') } ) 
-
   componentDidMount: ->
     this._initialize_typeahead()
     
@@ -39,14 +28,17 @@ root.PractitionerAutocomplete = React.createClass(
     # send clear event
     this._clear(event.target.value)
 
+  handleKey: (event) ->
+    if event.keyCode == 13
+      this.refs.input.getDOMNode().blur()
+    
+
   render: ->
     `<div>
-      <input type='search' name={ this._props.name } id={ this._props.id } ref='input' data-error={ this._props.data_error }
-        className={ this._props.className } placeholder={ this._props.placeholder } value={this.state.value} onChange={this.handleChange}  />
+      <input type='text' name={ this.props.name } id={ this.props.id } ref='input' 
+        className={ this.props.className } placeholder={ this.props.placeholder } value={this.state.value} onChange={this.handleChange} onKeyUp={this.handleKey}  />
     </div>`
    
-
-  _props: {}
 
   _clear: (value) ->
     if value == ''
@@ -68,12 +60,15 @@ root.PractitionerAutocomplete = React.createClass(
       source: practitioner_engine.ttAdapter()
       
 
+    $(element).on 'typeahead:selected', (jquery, option) =>
+      @setState(
+        value: option.fullname
+      ) 
 
-    $(element).on 'typeahead:selected', (jquery, option) ->
       PubSub.publish( 'practitioner:selected', option );
 
   _destroy_typeahead: ->
-    element = this.getDOMNode()
+    element = @getDOMNode()
     $(element).typeahead('destroy')
     
 

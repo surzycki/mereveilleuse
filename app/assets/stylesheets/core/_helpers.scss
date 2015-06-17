@@ -185,6 +185,28 @@ Available helpers for: `mobile` `tablet` `devices` `desktop`
 @include padding-helper();
 
 
+
+@mixin height-vh-helper() {
+  @for $i from 1 through 40 {
+    .height-#{$i * 5}-vh { height: #{$i * 5}vh; }
+  }
+}
+
+@include height-vh-helper();
+
+
+@mixin height-percent-helper() {
+  @for $i from 1 through 40 {
+    .height-#{$i * 5}-percent { height: #{$i * 5%}; }
+  }
+}
+
+@include height-percent-helper();
+
+
+
+
+
 @mixin border-radius($radius) {
   @include border-top-radius($radius);
   @include border-bottom-radius($radius);

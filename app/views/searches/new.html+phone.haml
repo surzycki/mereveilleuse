@@ -1,0 +1,37 @@
+= form_for(@form, url: search_path, method: :post, html: { class: 'cover' }) do |f|
+  .page-transition#page-transition-pages
+    .page-transition-page.page-3.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .container
+          .row
+            .col-sm-12
+              %h2
+                Search for practitioners
+              %p
+                Our recomendations are based on blah blah blah
+              %p
+                = link_to 'Start Searching', '#', class: 'btn btn-primary', id: 'search-start'
+    
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .mobile-stretch-page
+          .mobile-stretch-wrapper
+            %h2
+              Do a search
+
+            .form-group.mobile-stretch-content 
+              =# f.label :profession_id, t('search.form.profession.label')
+              = f.collection_select(:profession_id, Profession.indexed.order(name: :asc), :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
+
+            .form-group.mobile-stretch-content 
+              =# f.label :patient_type_id, t('search.form.patient_type.label')
+              = f.collection_select(:patient_type_id, PatientType.order(id: :asc), :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
+
+            .form-group.mobile-stretch-content
+              =# f.label :address, t('search.form.address.label')
+              =# react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('search.form.address.placeholder')))
+              = react_component('AddressAutocomplete', className: 'form-control', name: 'search_form[address]', id: 'search_form_address', placeholder: t('search.form.address.placeholder') )
+
+            .form-group.mobile-stretch-content
+              = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'search-commit'
+

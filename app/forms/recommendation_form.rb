@@ -1,13 +1,12 @@
 class RecommendationForm
   include ActiveModel::Model
 
-  attr_accessor :user_id, :practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment 
+  attr_accessor :practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment 
 
-  validates :user_id, :practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, presence: true 
+  validates :practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, presence: true 
 
   def recommendation
     @recommendation ||= Recommendation.new({
-      user_id:           user_id, 
       profession_id:     profession.id,
       patient_type_ids:  [ patient_type_id ],
       wait_time:         wait_time,
@@ -15,8 +14,7 @@ class RecommendationForm
       bedside_manner:    bedside_manner,
       efficacy:          efficacy,
       comment:           comment,
-      practitioner:      practitioner,
-      state:             'completed'   
+      practitioner:      practitioner   
     })
   end
 
@@ -30,8 +28,7 @@ class RecommendationForm
     ).take || Profession.new(name: profession_name)
   end
 
-  def process
-    
+  def process 
     if self.valid?
       update_practitioner
       recommendation.save

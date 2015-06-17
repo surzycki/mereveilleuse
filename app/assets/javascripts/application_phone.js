@@ -10,16 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery_ujs
-//= require jquery-ui/core
-//= require jquery-ui/widget
-//= require jquery-ui/mouse
-//= require jquery-ui/position
 //= require jquery.cookie
-//= require jquery.touchSwipe
 //= require jquery.smoothState
-//= require bootstrap-sprockets
 //= require typeahead-mobile
 //= require typeahead-addresspicker
 //= require pubsub
@@ -33,7 +26,7 @@
 //= require plugins/page_transitions
 
 //= require helpers
-//= require react
+// require react
 //= require react_ujs
 //= require_tree ./mixins
 //= require_tree ./components

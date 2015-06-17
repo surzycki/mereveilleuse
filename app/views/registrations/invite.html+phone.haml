@@ -9,9 +9,11 @@
             %p
               Invite
             = react_component('FacebookInviteButton', 
-              value: 'Invite bitch',
-              message: 'Hello come',
-              class: 'btn btn-primary')
+                app_id: ENV['FACEBOOK_APP_ID'],
+                value: 'Invite bitch',
+                message: 'Hello come',
+                class: 'btn btn-primary',
+                redirect: registration_identity_path(registration_type: 'invite'))
             
             %p
               = link_to 'Go Back', root_path, class: 'btn btn-primary', id: 'registration-back'

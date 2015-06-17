@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/admin/sidekiq'
   
   # registrations
-  get 'registrations/invite',           to: 'registrations#invite',       as: 'registration_invite' 
+  get 'registration/invite',            to: 'registrations#invite',       as: 'registration_invite' 
+  get 'registration/identity',          to: 'registrations#identity',     as: 'registration_identity'
+  get 'registration',                   to: 'registrations#identity'
 
   # unsubscribe
   get 'unsubscribe/search/:token/:id',  to: 'unsubscribes#search',        as: 'unsubscribe_search'
@@ -25,12 +27,15 @@ Rails.application.routes.draw do
   get  'praticiens/(:id)',            to: 'squeezes#index'
   post 'praticiens',                  to: 'squeezes#create',            as: 'squeeze_form'
  
+  get  '/auth/:provider/callback',    to: 'identities#create'
+  get  '/auth/failure',               to: 'identities#failure'
 
-  resource  :session,         only: [ :create, :show ]
+  #resource  :session,         only: [ :create, :show ]
   resource  :help,            only: [ :new, :create, :show ]
   resource  :search,          only: [ :new, :create, :show ]
+  resource  :registration,    only: [ :new, :create ]
   resources :recommendations, only: [ :new, :create, :show ]
-  resources :registrations,   only: [ :new, :create, :show ]
+  
   
 
   # custom error pages

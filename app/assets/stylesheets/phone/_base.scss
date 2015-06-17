@@ -3,14 +3,9 @@ html, body, #main {
   background: #333;
 }
 
-h1, h2, h3, p {
-  color: #fff;
-}
-
 select {
   font-size: 20px !important;
   -webkit-appearance: none;
-  text-indent: 20%;
 }
 
 textarea {
@@ -20,19 +15,29 @@ textarea {
 
 input, select, textarea {
   @include placeholder {
-    color: $muted-color !important;
-    font-weight: 300;
-    text-align: center;
+    color: $muted-color  !important;
+    text-align: left;
   }
 }
 
+.container {
+  padding: 0 6px;
+}
 
 .form-control {
   height: 50px;
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  color: $muted-color !important;
+  @include transition(none)
+  
 }
+
+.form-group.validation-error input, .form-group.validation-error select {
+  border: 3px solid $primary-color !important;
+}
+
 
 .flex-container {
   height: 100%;
@@ -69,6 +74,27 @@ input, select, textarea {
   @include flex(0 1 auto);
 }
 
+.flex-item-push {
+  @include flex(1);
+}
+
+.mobile-stretch-page {
+  @extend .flex-container;
+}
+
+.mobile-stretch-wrapper {
+  @extend .flex-item;
+  max-height: 100vh;
+}
+
+.mobile-stretch-content {
+  @extend .no-margin;
+  @extend .flex-item;
+}
+
+.cover-mobile-landing {
+  @include background-image(image-url('mobile/background-landing.jpg'));
+}
 
 .page-1 {
   background: #0ac2d2;

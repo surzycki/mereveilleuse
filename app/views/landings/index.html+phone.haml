@@ -1,37 +1,44 @@
 .page-transition#page-transition-pages
-  .page-transition-page.page-1.page-transition-page-current{ data: { animation: 'flipLeft' } }
-    %section.cover
-      .container
-        .jumbotron-transparent.text-center.no-top-padding  
-          .row
-            .col-sm-12
-              %h1
-                Les bons plans santé 
-                entre mamans
-              %p
-                The only club where you get personalized word of mouth recommendations from trusted mothers in your area .
+  .page-transition-page.page-transition-page-current{ data: { animation: 'flipLeft' } }
+    %section.cover.cover-mobile-landing.text-center
+      .mobile-stretch-page  
+        .height-15-vh
         
-              %p
-                = link_to 'Start', '#', class: 'btn btn-primary btn-block', id: 'registration-start'
-
-              .small
-                2090 mamans a déja like Mereveilleuse
-  .page-transition-page.page-2{ data: { animation: 'flipLeft' } }
-    %section.cover.text-center
-      .container
-        .row
-          .col-sm-6
-            = link_to 'Go', new_registration_path, class: 'btn btn-primary', id: 'registration-influencer'
-            %h3
-              I am an influencer
-            %p
-              I already know a good practitioner that I am ready to share with the Club
+        %header.color-light.flex-item-push
+          = image_tag 'mobile/logo-badge.jpg', width: '72px', height: '72px'
+          %h1.color-light
+            Les bons plans santé 
+            entre mamans
           
-      
-          .col-sm-6
-            = link_to 'Go', registration_invite_path, class: 'btn btn-primary', id: 'registration-know-influencer'
-            
-            %h3
-              I know influencers
-            %p
-              I know people who seems to always have the good addresses and are interested in sharing their knowledge
+          %h4.color-light
+            The only club where you get personalized word of mouth recommendations from trusted mothers in your area .
+  
+        %footer
+          = link_to 'Start', '#', class: 'btn btn-primary btn-block btn-outline ', id: 'registration-start'
+          .space-xs-10
+          %small.color-light
+            2090 mamans a déja like Mereveilleuse
+          
+
+  .page-transition-page{ data: { animation: 'flipLeft' } }
+    %section.cover.text-center
+      .mobile-stretch-page 
+        .mobile-stretch-content.page-2.height-50-percent
+          .flex-container
+            .flex-item
+              = link_to 'Go', new_registration_path, class: 'btn btn-primary', id: 'registration-influencer'
+              %h3
+                I am an influencer
+              %p
+                I already know a good practitioner that I am ready to share with the Club
+        
+    
+        .mobile-stretch-content.page-3.height-50-percent
+          .flex-container
+            .flex-item
+              = link_to 'Go', registration_invite_path, class: 'btn btn-primary', id: 'registration-know-influencer'
+          
+              %h3
+                I know influencers
+              %p
+                I know people who seems to always have the good addresses and are interested in sharing their knowledge

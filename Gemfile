@@ -38,7 +38,7 @@ gem 'omniauth-facebook'                                   # Facebook OAuth2 Stra
 gem 'unicode_utils'
 
 
-gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'react-rails',    '~> 1.0'
 gem 'activeadmin',                 github: 'activeadmin'
 gem 'canonical-rails',             github: 'jumph4x/canonical-rails'
 

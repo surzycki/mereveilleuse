@@ -1,6 +1,6 @@
-= form_for(@form, url: registrations_path, method: :post,  html: { class: 'cover' }) do |f| 
+%form.cover#recommendation_form{ method: :post, 'accept-charset' => 'UTF-8', 'data-action' => registration_path }
   .page-transition#page-transition-pages
-    .page-transition-page.page-3{ data: { animation: 'pushBottomPullTop' } }
+    .page-transition-page.page-3.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center
         .container
           .row
@@ -15,57 +15,42 @@
               %p
                 = link_to 'Go Back', root_path, class: 'btn btn-primary', id: 'registration-back'
 
-    .page-transition-page.page-4.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center    
+        
+        = react_component('RecommendationFormStep', { patient_types: PatientType.order(id: :asc).map {|p| [ p.name, p.id ] }.to_json }, { class: 'mobile-stretch-page' })
+       
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center
-        .container.flex-container
-          .flex-container.flex-item{ style: 'max-height: 480px'}
-            
-            .form-group.flex-item.no-margin  
-              = f.label :patient_type_id, t('recommendation.form.patient_type.label')
-              = f.collection_select(:patient_type_id, PatientType.order(id: :asc), :id, :name, { include_blank: t('recommendation.form.patient_type.placeholder') }, class: 'form-control' )
+        .mobile-stretch-page
+          %p= render 'recommendations/rating_buttons', item: 'wait_time'          
+
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .mobile-stretch-page
+          %p= render 'recommendations/rating_buttons', item: 'availability'
+
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .flex-container
+          %p= render 'recommendations/rating_buttons', item: 'bedside_manner'    
+
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .mobile-stretch-page
+          %p= render 'recommendations/rating_buttons', item: 'efficacy'
+
+
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
+      %section.cover.text-center
+        .mobile-stretch-page
+          %label{for: 'recommendation_form_comment'} 
+            = t('rating.form.comments.label')    
           
-            .form-group.flex-item.no-margin 
-              = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
-              = react_component( 'PractitionerAutocomplete', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder') ))
-  
-            .form-group.flex-item.no-margin  
-              = f.label :profession_name, t('recommendation.form.profession.label')
-              = react_component( 'ProfessionAutocomplete', field: f.text_field(:profession_name, class: 'form-control', placeholder: t('recommendation.form.profession.placeholder')) )
-      
-            .form-group.flex-item.no-margin  
-              = f.label :address, t('recommendation.form.address.label')
-              = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('recommendation.form.address.placeholder')))
-  
-            %p.flex-item.no-margin= link_to 'Go', '#', class: 'btn btn-primary', id: 'registration-influencer-next'
-    
-    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
-      %section.cover.text-center
-        .flex-container
-          %p= render 'recommendations/rating_buttons', f: f, item: 'wait_time'          
-
-    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
-      %section.cover.text-center
-        .flex-container
-          %p= render 'recommendations/rating_buttons', f: f, item: 'availability'
-
-    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
-      %section.cover.text-center
-        .flex-container
-          %p= render 'recommendations/rating_buttons', f: f, item: 'bedside_manner'    
-
-    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
-      %section.cover.text-center
-        .flex-container
-          %p= render 'recommendations/rating_buttons', f: f, item: 'efficacy'
+          .mobile-stretch-wrapper
+            = text_area_tag 'recommendation_form_comment', nil, class: 'form-control', style: 'height: 60vh;'
+            = link_to 'Next', '#', class: 'btn btn-primary btn-block', id: 'recommendation-commit'  
 
 
-    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
-      %section.cover.text-center
-        .container.flex-container
-          = f.label :comment, t('rating.form.comments.label')    
-          
-          .flex-container.flex-item{ style: 'max-height: 420px'}
-            = f.text_area :comment, class: 'form-control', style: 'height: 60vh;'
-            = f.submit 'Next', class: 'btn btn-primary btn-block', id: 'commit'  
 
 

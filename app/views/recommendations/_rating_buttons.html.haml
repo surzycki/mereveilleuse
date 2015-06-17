@@ -1,10 +1,12 @@
-.text-center= f.label item, t("rating.form.#{item}.label")
+.text-center
+  %label{for: item}
+    = t("rating.form.#{item}.label")
 
-.flex-container.flex-item{ style: 'max-height: 420px'}
+.mobile-stretch-wrapper
   - (0..4).each do |value|
-    .rating-input.needsclick.flex-item
-      = f.radio_button item, value, class: 'needsclick'
-      %label{ for: "#{f.object_name}_#{item}_#{value}", class: 'needsclick'}
-        %span{ class: "rating-#{value} needsclick"}
+    .rating-input.mobile-stretch-content
+      = radio_button_tag "recommendation_form[#{item}]", value, false
+      %label{ for: "recommendation_form_#{item}_#{value}" }
+        %span{ class: "rating-#{value}"}
 
 

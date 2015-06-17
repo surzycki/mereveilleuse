@@ -1,0 +1,46 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,800);
+
+/*doc
+---
+title: Headings
+name: typography-1
+category: typography
+---
+
+The symantic tags are for seo purposes only, use classes for actual styling of the text
+
+```haml_example
+.h1 Heading 1
+.h2 Heading 2
+.h3 Heading 3
+.h4 Heading 4
+.h5 Heading 5
+```
+*/
+
+h1, h2, h3, h4, h5 {
+  font-weight: 300;
+  font-family: $font-family-sans-serif !important;
+  margin: 0;
+  padding: 0;
+  color: $heading-color;
+  line-height: 1;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+small, .small {
+  font-size: 12px !important; 
+  line-height: 18px !important; 
+  margin-bottom: 2px;
+}

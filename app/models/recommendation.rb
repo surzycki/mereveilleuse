@@ -51,7 +51,7 @@ class Recommendation < ActiveRecord::Base
   end
 
   def should_index?
-    state == 'completed'
+    recommender.present?
   end
 
   def patient_type_name

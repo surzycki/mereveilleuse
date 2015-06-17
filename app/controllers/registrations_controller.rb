@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
   around_action :catch_exceptions, unless: 'Rails.env.development?'
 
-  # GET registrations/new
+  # GET registration/new
   def new
     @form = RecommendationForm.new
 
@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  # GET registrations/invite
+  # GET registration/invite
   def invite
     respond_to do |format|
       format.html do |html|
@@ -23,16 +23,50 @@ class RegistrationsController < ApplicationController
     end
   end 
 
-  # POST recommendations
+  # POST /registration
   def create
-    byebug
-    @form = RecommendationForm.new recommendation_params
+    @form = RecommendationForm.new registration_params
+
+    # recommendations (practitioners) are not geocoded by default to lessen
+    # the burden on the system, practitioners are geocoded only when a
+    # new recommendation is made.
+    recommendation_service.subscribe( 
+      GeocodeListener.new,
+      on: :recommendation_created,
+      with: :recommendation 
+    )
+
+    recommendation_service.on :recommendation_created do |recommendation|
+      session[:recommendation_id] = recommendation.id
+      redirect_to registration_identity_path
+    end
+
+    recommendation_service.on :recommendation_create_fail do |errors|
+      flash.now[:alert] = errors.full_messages.join(', ')
+      render :new
+    end
+
+    recommendation_service.create
+  end
+
+  # GET /registration/identity
+  def identity
+    # are we registering by recommending or by inviting
+    set_registration_type
   end
 
   private
-  def recommendation_params
+  def registration_params
     params.require(:recommendation_form)
       .permit(:practitioner_name, :patient_type_id, :profession_name, :address, :wait_time, :availability, :bedside_manner, :efficacy, :comment )
+  end
+
+  def recommendation_service
+    @recommendation_service ||= RecommendationService.new(@form)
+  end
+
+  def set_registration_type
+    @registration_type ||= params[:registration_type] || 'recommendation'
   end
 
   def catch_exceptions

@@ -6,7 +6,7 @@ class TrackError
       parameters: {},
       rack_env: env
     )
- 
+    
     Rails.logger.error("EXCEPTION CAUGHT: #{exception}")
   end
 end

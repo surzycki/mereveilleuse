@@ -10,10 +10,14 @@ $ ->
     e.preventDefault()
   
   # setup clicks to change pages
-  $('body').on 'click', '#registration-start, #registration-influencer-next, .rating-input label', (e) ->
+  $('body').on 'click', '#registration-start, .rating-input label, #search-start, #registration-influencer-next', (e) ->
     $('#page-transition-pages').pageTransitions()
     $('#page-transition-pages').pageTransitions('nextPage')
 
+  # setup form submission for reccomendation
+  $('body').on 'click', '#recommendation-commit', (e) ->
+    $('#recommendation_form').attr('action',$('#recommendation_form').data('action'))
+    $('#recommendation_form').submit()
 
   # allow smooth transitions between page loads
   $('#main').smoothState(
@@ -41,9 +45,9 @@ $ ->
     onAfter: (container, newContent) ->
       # clean up and re-init
       container.removeClass('scaleUp')
-      $('#new_recommendation_form').swipe swipe: (event, direction, distance, duration, fingerCount, fingerData) ->
-        if (direction == 'up')
-          $('#page-transition-pages').pageTransitions('previousPage')
+      #$('#new_recommendation_form').swipe swipe: (event, direction, distance, duration, fingerCount, fingerData) ->
+      #  if (direction == 'up')
+      #    $('#page-transition-pages').pageTransitions('previousPage')
   )
 
   

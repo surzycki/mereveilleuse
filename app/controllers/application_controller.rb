@@ -20,7 +20,11 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticated?
-    redirect_to new_registration_path unless warden.authenticated?(:user) 
+    redirect_to root_path unless warden.authenticated?(:user) 
+  end
+
+  def redirect_authenticated_user_to_search!
+    redirect_to new_search_path if current_user
   end
 
   def token_authentication!

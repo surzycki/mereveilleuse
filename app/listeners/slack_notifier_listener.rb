@@ -18,7 +18,7 @@ class SlackNotifierListener
   end
 
   def recommendation_created(recommendation)
-    return if recommendation.nil?
+    return if recommendation.nil? || recommendation.recommender.nil?
 
     recommender  = recommendation.recommender
     practitioner = recommendation.practitioner

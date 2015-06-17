@@ -132,7 +132,6 @@ unless Rails.env.production?
     practitioner = Practitioner.joins(:location).where("unparsed_address LIKE '%Paris'").sample
 
     form = RecommendationForm.new({
-      user_id:            User.all.sample.id,
       practitioner_name:  practitioner.fullname,
       patient_type_id:    PatientType.all.sample.id,
       profession_name:    practitioner.primary_occupation.name,
@@ -144,6 +143,7 @@ unless Rails.env.production?
       comment:            Forgery(:lorem_ipsum).words(rand(5..10))
     })
 
+    form.recommendation.user_id = User.all.sample.id
     form.process
 
     GeocodePractitionerJob.perform_later practitioner

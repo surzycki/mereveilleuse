@@ -1,0 +1,13 @@
+.page-transition#page-transition-pages
+  .page-transition-page.page-3.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+    %section.cover.text-center
+      .container
+        .row
+          .col-sm-12
+            %h2
+              Sorry you must accept the permissions to sign
+           
+            %p
+              = link_to 'Sign', registration_identity_path, class: 'btn btn-primary'
+  
+            
