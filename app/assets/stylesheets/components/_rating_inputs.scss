@@ -14,7 +14,7 @@ parent: components
 */
 .rating-input {
   margin:5px rem(12px) 0 0;
-  display: inline-block;
+  display: block;
 
   input[type="radio"] {
     visibility: hidden;
@@ -27,13 +27,14 @@ parent: components
   
   input[type="radio"] + label span {
     display:inline-block;
-    width: 54px;
-    height: 54px;
+    width: 56px;
+    height: 56px;
     margin: 0px 4px 0 0;
     vertical-align:middle;
     cursor:pointer;
     -moz-border-radius:  50%;
     border-radius:  50%;
+    background-size: contain;
   }
   
   @mixin rating-values() {
@@ -42,18 +43,24 @@ parent: components
       input[type="radio"] + label .rating-#{$i} {
         @include background-image(image-url('#{$i}-rating.png')); 
       }
+
+      input[type="radio"] + label .rating-#{$i}-preload {
+        @include background-image(image-url('#{$i}-rating-checked.png')); 
+        display: none;
+      }
       
       input[type="radio"]:checked + label .rating-#{$i} {
         @include background-image(image-url('#{$i}-rating-checked.png'));
       }
 
-      input[type="radio"]:hover:checked + label .rating-#{$i} {
-        @include background-image(image-url('#{$i}-rating-checked.png'));
-      }
 
-      input[type="radio"]:hover + label .rating-#{$i} {
-        @include background-image(image-url('#{$i}-rating-hover.png'));
-      }
+      //input[type="radio"]:hover:checked + label .rating-#{$i} {
+      //  @include background-image(image-url('#{$i}-rating-checked.png'));
+      //}
+      //
+      //input[type="radio"]:hover + label .rating-#{$i} {
+      //  @include background-image(image-url('#{$i}-rating-hover.png'));
+      //}
 
       //.space-#{$prefix}-#{$i * 10} { height: #{$i * 10}px; }
     }

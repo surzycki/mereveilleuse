@@ -48,26 +48,18 @@ input, select, textarea {
   @include align-items(stretch);
   @include align-content(center);
   @include justify-content(space-around);
+}
 
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  align-items: stretch;
+.container-center {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
-  -moz-box-align: center;
-  -ms-flex-align: center;
-  
-  -webkit-box-pack: justify;
-  -moz-box-pack: justify;
-  -ms-flex-pack: justify;
-  
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
+.container-narrow {
+  padding: 0 10px;
 }
 
 .flex-item {
@@ -84,7 +76,7 @@ input, select, textarea {
 
 .mobile-stretch-wrapper {
   @extend .flex-item;
-  max-height: 100vh;
+  height: 100%;
 }
 
 .mobile-stretch-content {
@@ -92,8 +84,28 @@ input, select, textarea {
   @extend .flex-item;
 }
 
+.mobile-stretch-form {
+  height: 100%;
+  
+  @include display(flex);
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include align-items(stretch);
+  @include align-content(center);
+  @include justify-content(space-between);
+}
+
+.mobile-stretch-form-field {
+  @include flex(0 1 auto);
+  height: auto;
+}
+
 .cover-mobile-landing {
   @include background-image(image-url('mobile/background-landing.jpg'));
+}
+
+.cover-mobile-recommendation {
+  @include background-image(image-url('mobile/background-recommendation.jpg')); 
 }
 
 .page-1 {
@@ -109,7 +121,7 @@ input, select, textarea {
 }
 
 .page-4 {
-  background: #fdc162;
+  background: #16A2DF;
 }
 
 .page-5 {

@@ -2,43 +2,46 @@
   .page-transition-page.page-transition-page-current{ data: { animation: 'flipLeft' } }
     %section.cover.cover-mobile-landing.text-center
       .mobile-stretch-page  
-        .height-15-vh
+        .height-15-percent
         
         %header.color-light.flex-item-push
-          = image_tag 'mobile/logo-badge.jpg', width: '72px', height: '72px'
-          %h1.color-light
-            Les bons plans santé 
-            entre mamans
-          
-          %h4.color-light
-            The only club where you get personalized word of mouth recommendations from trusted mothers in your area .
+          .container
+            = image_tag 'mobile/logo-badge.jpg', width: '72px', height: '72px'
+            %h1.color-light
+              Les bons plans santé 
+              entre mamans
+            
+            %h4.color-light
+              The only club where you get personalized word of mouth recommendations from trusted mothers in your area .
   
         %footer
-          = link_to 'Start', '#', class: 'btn btn-primary btn-block btn-outline ', id: 'registration-start'
-          .space-xs-10
-          %small.color-light
-            2090 mamans a déja like Mereveilleuse
+          .container
+            = link_to 'Start', '#', class: 'btn btn-primary btn-block btn-outline ', id: 'registration-start'
+            %small.color-light
+              2090 mamans a déja like Mereveilleuse
           
 
   .page-transition-page{ data: { animation: 'flipLeft' } }
     %section.cover.text-center
       .mobile-stretch-page 
-        .mobile-stretch-content.page-2.height-50-percent
-          .flex-container
-            .flex-item
-              = link_to 'Go', new_registration_path, class: 'btn btn-primary', id: 'registration-influencer'
+        .mobile-stretch-content.height-50-percent.background-secondary-background
+          .container-center
+            .container
+              = link_to new_registration_path, class: 'btn btn-primary btn-round', id: 'registration-influencer' do
+                = image_tag 'mobile/icon-join-influencer.png', width: '100px', height: '100px'
               %h3
                 I am an influencer
               %p
                 I already know a good practitioner that I am ready to share with the Club
         
-    
-        .mobile-stretch-content.page-3.height-50-percent
-          .flex-container
-            .flex-item
-              = link_to 'Go', registration_invite_path, class: 'btn btn-primary', id: 'registration-know-influencer'
+  
+        .mobile-stretch-content.height-50-percent.background-light
+          .container-center
+            .container
+              = link_to registration_invite_path, class: 'btn btn-primary btn-round', id: 'registration-know-influencer' do
+                = image_tag 'mobile/icon-join-known-influencer.png', width: '100px', height: '100px'
           
               %h3
                 I know influencers
               %p
-                I know people who seems to always have the good addresses and are interested in sharing their knowledge
+                I know people who seems to always have the good addresses and are 

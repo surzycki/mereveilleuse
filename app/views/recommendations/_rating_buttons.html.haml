@@ -1,12 +1,16 @@
-.text-center
-  %label{for: item}
-    = t("rating.form.#{item}.label")
+.mobile-stretch-form
+  .form-group.no-margin.mobile-stretch-form-field
+    %br
+    %h3.color-light
+      = t("rating.form.#{item}.label")
 
-.mobile-stretch-wrapper
+
   - (0..4).each do |value|
-    .rating-input.mobile-stretch-content
+    .rating-input.mobile-stretch-form-field.form-group.no-margin
       = radio_button_tag "recommendation_form[#{item}]", value, false
       %label{ for: "recommendation_form_#{item}_#{value}" }
         %span{ class: "rating-#{value}"}
+        %span{ class: "rating-#{value}-preload"}
 
-
+  .form-group.no-margin.mobile-stretch-form-field.height-10-percent
+    &nbsp;

@@ -33,14 +33,46 @@ h1 {
   line-height: 1.2;
 }
 
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 6px;
+}
+
 h4 {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
 }
 
+p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.attention {
+  padding-left: 14px;
+  padding-right: 14px;
+  text-align: left;
+}
+
+.attention-header {
+  padding: 4px 10px;
+  background-color: rgba(47, 193, 248, .7);
+  display: inline-block;
+  color: $light-color;
+}
+
+.attention-body {
+  padding: 10px 10px;
+  background-color: rgba(0, 0, 0, .7);
+  font-size: 16px;
+  line-height: 32px;
+}
+
 small, .small {
   font-size: 12px !important; 
-  line-height: 18px !important; 
-  margin-bottom: 2px;
+  line-height: 24px !important; 
 }

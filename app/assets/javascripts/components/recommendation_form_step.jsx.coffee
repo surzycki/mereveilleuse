@@ -28,28 +28,29 @@ root.RecommendationFormStep = React.createClass(
     cx  = React.addons.classSet
     
     patient_type_classes = cx(
-      'form-group': true
-      'mobile-stretch-content': true
+      'form-group no-margin': true
+      'mobile-stretch-form-field': true
       'validation-error': @state.error_patient_type)
 
     practitioner_classes = cx(
-      'form-group': true
-      'mobile-stretch-content': true
+      'form-group no-margin': true
+      'mobile-stretch-form-field': true
       'validation-error': @state.error_practitioner)
 
     profession_classes = cx(
-      'form-group': true
-      'mobile-stretch-content': true
+      'form-group no-margin': true
+      'mobile-stretch-form-field': true
       'validation-error': @state.error_profession)
 
     address_classes = cx(
-      'form-group': true
-      'mobile-stretch-content': true
+      'form-group no-margin': true
+      'mobile-stretch-form-field': true
       'validation-error': @state.error_address)
 
-    `<div className='mobile-stretch-wrapper'>
-      <div className='mobile-stretch-content'>
-        <h3>Do recommendation</h3>
+    `<div className='mobile-stretch-form'>
+      <div className='form-group no-margin mobile-stretch-form-field'>
+        <br/>
+        <h3 className='color-light'>Do recommendation</h3>
       </div>
 
       <div className={patient_type_classes}>
@@ -68,8 +69,9 @@ root.RecommendationFormStep = React.createClass(
         <AddressAutocomplete ref='address' className='form-control' name='recommendation_form[address]' id='recommendation_form_address' placeholder="Renseignez l'adresse"></AddressAutocomplete>
       </div>
       
-      <div className='form-group mobile-stretch-content'>
-        <a className='btn btn-primary' onClick={this.handleClick}>Go</a>
+      <div className='form-group no-margin mobile-stretch-form-field'>
+        <a className='btn btn-primary btn-block btn-outline' onClick={this.handleClick}>Go</a>
+        <br/>
       </div>
     </div>` 
 

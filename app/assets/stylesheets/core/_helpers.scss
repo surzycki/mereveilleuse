@@ -184,7 +184,13 @@ Available helpers for: `mobile` `tablet` `devices` `desktop`
 
 @include padding-helper();
 
+@mixin horizontal-padding-helper() {
+  @for $i from 1 through 20 {
+    .padding-horizontal-#{$i} { padding-left: #{$i}px; padding-right: #{$i}px; }
+  }
+}
 
+@include horizontal-padding-helper();
 
 @mixin height-vh-helper() {
   @for $i from 1 through 40 {
@@ -196,7 +202,7 @@ Available helpers for: `mobile` `tablet` `devices` `desktop`
 
 
 @mixin height-percent-helper() {
-  @for $i from 1 through 40 {
+  @for $i from 1 through 20 {
     .height-#{$i * 5}-percent { height: #{$i * 5%}; }
   }
 }

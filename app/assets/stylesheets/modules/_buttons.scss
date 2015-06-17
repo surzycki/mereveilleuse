@@ -121,3 +121,25 @@ parent: button
     border-color: $light-color;
   }
 }
+
+.btn-round {
+  @include border-radius(50%);
+  border: 6px solid $muted-color;
+  background-color: $light-color;
+  padding: 0;
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  position: relative;
+
+  &:focus, &:hover, &:active, &:active:focus {
+    background-color: $light-color;
+    border-color: $primary-color;
+  }
+
+  img {
+    position: absolute;
+    top: 0px;
+    left: -2px;
+  }
+}
