@@ -1,1 +1,97 @@
-Hello desktop
+%section.cover.cover-landing 
+  .container
+    .jumbotron-transparent.text-center.no-top-padding  
+      = render 'navs/main'
+      
+      .space-sm-50
+  
+      .row
+        .col-sm-10.col-sm-offset-1
+          %h2= t('header.registrations.title_html') 
+          %p.normal= t('header.registrations.subtitle')
+  
+      .space-xs-30
+  
+      .row
+        .col-sm-5.col-sm-offset-1
+          = link_to 'Rejoindre la communauté', new_recommendation_path, class: 'btn btn-primary btn-block'
+          
+          %br
+        .col-sm-5
+          = link_to t('registrations.action.secondary'), '#', class: 'btn btn-secondary btn-block', id: 'x-learn-more'
+          %br
+
+      .space-xs-40
+
+%section.text-center.background-secondary-background#learn-more-section
+  .container
+    .jumbotron.jumbotron-transparent
+      .space-xs-10
+  
+      %h1= t('registrations.how.title').html_safe  
+  
+      .space-xs-40
+  
+      .row
+        .col-sm-4
+          .showcase
+            = image_tag ('icon-authenticate.png')
+            %dl
+              %dt= t('registrations.how.showcase.one.title')
+              %dd= t('registrations.how.showcase.one.content').html_safe
+  
+        .col-sm-4
+          .showcase
+            = image_tag ('icon-recommend.png')
+            %dl
+              %dt= t('registrations.how.showcase.two.title')
+              %dd= t('registrations.how.showcase.two.content').html_safe
+  
+        .col-sm-4
+          .showcase
+            = image_tag ('icon-search.png')
+            %dl
+              %dt= t('registrations.how.showcase.three.title')
+              %dd= t('registrations.how.showcase.three.content').html_safe
+      
+      .space-xs-10        
+
+%section.text-center
+  .jumbotron
+    .container
+      %h1.no-margin= t('registrations.example.title')
+      %h5.no-margin= t('registrations.example.subtitle')
+      
+      .space-xs-20
+
+      .row
+        .col-sm-8.col-sm-offset-2
+          .browser-mockup.browser-mockup-with-url
+            %ul#slider
+              %li
+                = link_to '#slide1' do
+                  = image_tag 'slide-1.jpg', alt: 'Marie valide sa recherche en sollicitant les avis de la communauté'
+              %li
+                = link_to '#slide2' do
+                  = image_tag 'slide-2.jpg', alt: 'Marie reçoit les recommandations de ses amies inscrites et des mamans du quartier et découvre les fiches spécialistes :'
+          .browser-mockup-captions 
+
+%section.text-center
+  .jumbotron.jumbotron-primary
+    .container
+      .space-xs-20
+  
+      .row
+        .col-sm-8.col-sm-offset-2
+          %h1= t('registrations.join_now.title')
+      .row
+        .col-sm-10.col-sm-offset-1
+          %p= t('registrations.join_now.content')
+      
+      .space-xs-30
+  
+      .row
+        .col-sm-6.col-sm-offset-3
+          = link_to 'Rejoindre la communauté', new_recommendation_path, class: 'btn btn-primary btn-block btn-outline'
+
+      .space-xs-60  

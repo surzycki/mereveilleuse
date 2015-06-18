@@ -10,7 +10,7 @@ $ ->
     e.preventDefault()
   
   # setup clicks to change pages
-  $('body').on 'click', '#registration-start, .rating-input label, #search-start, #registration-influencer-next', (e) ->
+  $('body').on 'click', '#registration-start, .rating-input label, #search-start, #registration-influencer', (e) ->
     $('#page-transition-pages').pageTransitions()
     $('#page-transition-pages').pageTransitions('nextPage')
 
@@ -22,7 +22,7 @@ $ ->
   # allow smooth transitions between page loads
   $('#main').smoothState(
     prefetch: false
-    anchors: '#registration-influencer, #registration-know-influencer, #registration-back, #search-commit'
+    anchors: '#registration-know-influencer, #registration-back, #search-commit, #new_registration'
 
     onStart: 
       duration: 700

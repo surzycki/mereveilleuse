@@ -16,41 +16,33 @@
               santé entre maman
             
             %h4.color-light{ style: 'padding-top: 8px'}
-              The only club where you get personalized word of mouth recommendations from trusted mothers in your area .
-        
+              Le bouche à oreille entre femmes de confiance
+              
   
         %footer
           .container
-            = link_to 'Rejoindre le Club', '#', class: 'btn btn-primary btn-block btn-outline', id: 'registration-start'
+            = link_to 'I want to know more', '#', class: 'btn btn-primary btn-block btn-outline', id: 'registration-start'
             %small.color-light
-              3005 mamans a déja like Mereveilleuse
+              3005 mamans ont déja liké Mèreveilleuse
           
 
   .page-transition-page{ data: { animation: 'flipLeft' } }
-    %section.cover.text-center
-      .mobile-stretch-page 
-        .mobile-stretch-content.height-50-percent.background-secondary-background
-          .container-center
-            .container
-              = link_to new_registration_path, class: 'btn btn-primary btn-round', id: 'registration-influencer' do
-                = image_tag 'mobile/icon-join-influencer.png', width: '100px', height: '100px'
-              %h3
-                J'ai une recommandation
-              %p
-                Je connais un bon professionnel 
-                %br 
-                je partage mon avis
+    %section.cover.text-center.cover-mobile-recommendation
+      .mobile-stretch-page  
+        .height-10-percent
+        %header.color-light.flex-item-push
+          .attention
+            %h1.attention-header
+              Aide une maman et 
+            %h1.attention-header
+              une maman t'aidera
+            
+            .attention-body
+              En laissant une recommandation ou invitez others, vous accédez à l'ensemble du club et vous aidez les mamans
         
-  
-        .mobile-stretch-content.height-50-percent.background-light
-          .container-center
-            .container
-              = link_to registration_invite_path, class: 'btn btn-primary btn-round', id: 'registration-know-influencer' do
-                = image_tag 'mobile/icon-join-known-influencer.png', width: '100px', height: '100px'
-          
-              %h3
-                J'invite une maman
-              %p
-                Je connais des mamans qui seront
-                %br
-                intéressées par MèreVeilleuse
+        %footer
+          .container  
+            = link_to 'Je suis prête à aider', new_registration_path, class: 'btn btn-primary btn-block', id: 'new_registration'
+            %br
+
+    

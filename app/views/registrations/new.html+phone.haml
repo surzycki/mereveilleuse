@@ -1,24 +1,33 @@
 %form.cover#recommendation_form{ method: :post, 'accept-charset' => 'UTF-8', 'data-action' => registration_path }
   .page-transition#page-transition-pages
     .page-transition-page.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
-      %section.cover.text-center.cover-mobile-recommendation
-        .mobile-stretch-page  
-          .height-10-percent
-          %header.color-light.flex-item-push
-            .attention
-              %h1.attention-header
-                Aide une maman et 
-              %h1.attention-header
-                une maman t'aidera
-              
-              .attention-body
-                En laissant une recommandation, vous accédez à l'ensemble du club et vous aidez les mamans
-          
-          %footer
-            .container  
-              = link_to 'Je suis prête à aider', '#', class: 'btn btn-primary btn-block', id: 'registration-influencer-next'
-            %small.color-light
-              = link_to 'Non, pas encore. Invitez une maman', registration_invite_path, id: 'registration-back'
+      %section.cover.text-center
+        .mobile-stretch-page 
+          .mobile-stretch-content.height-50-percent.background-secondary-background
+            .container-center
+              .container
+                = link_to '#', class: 'btn btn-primary btn-round', id: 'registration-influencer' do
+                  = image_tag 'mobile/icon-join-influencer.png', width: '100px', height: '100px'
+                %h3
+                  J'ai une recommandation
+                %p
+                  Je connais un bon professionnel 
+                  %br 
+                  je partage mon avis
+        
+  
+          .mobile-stretch-content.height-50-percent.background-light
+            .container-center
+              .container
+                = link_to registration_invite_path, class: 'btn btn-primary btn-round', id: 'registration-know-influencer' do
+                  = image_tag 'mobile/icon-join-known-influencer.png', width: '100px', height: '100px'
+            
+                %h3
+                  J'invite une maman
+                %p
+                  Je connais des mamans qui seront
+                  %br
+                  intéressées par MèreVeilleuse
 
     .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center    
