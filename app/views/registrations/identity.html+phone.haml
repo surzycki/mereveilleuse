@@ -3,16 +3,17 @@
     %section.cover.text-center.background-light
       .mobile-stretch-page 
         .height-20-percent
-        .flex-item-push
-          %h2 Identity
-          %p
-            Loreum ipsum blurg domimsum et alimu
+        .flex-item-push.container
+          %h2 Certificate of Authenticity
+          %p{style: 'padding: 14px 14px'}
+            By connecting with facebook we can ensure you are real person leaving a real review.  We work hard to ensure the highest quality of recommedations for our club memebers.
+          
         .container.height-30-percent
           = link_to "/auth/facebook?registration_type=#{@registration_type}", class: 'btn btn-social btn-facebook', id: 'registration-signature' do
             %i.icon-facebook  
-            Identity with Facebook
+            Facebook Connect
           %div
             %small
-              We don't do sketchy shit
+              We only use facebook to verify your identity
           
             

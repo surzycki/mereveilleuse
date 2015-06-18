@@ -1,3 +1,6 @@
+= content_for :marketing_pixels do
+  = render 'marketing_pixels/facebook_landing'
+
 .page-transition#page-transition-pages
   .page-transition-page.page-transition-page-current{ data: { animation: 'flipLeft' } }
     %section.cover.cover-mobile-landing.text-center
@@ -12,8 +15,9 @@
               %br
               santé entre maman
             
-            %h4.color-light
+            %h4.color-light{ style: 'padding-top: 8px'}
               The only club where you get personalized word of mouth recommendations from trusted mothers in your area .
+        
   
         %footer
           .container

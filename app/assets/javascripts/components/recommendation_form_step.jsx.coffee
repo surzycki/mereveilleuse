@@ -50,7 +50,7 @@ root.RecommendationFormStep = React.createClass(
     `<div className='mobile-stretch-form'>
       <div className='form-group no-margin mobile-stretch-form-field'>
         <br/>
-        <h3 className='color-light'>Do recommendation</h3>
+        <h3 className='color-light'>Practitioner Information</h3>
       </div>
 
       <div className={patient_type_classes}>
@@ -70,7 +70,7 @@ root.RecommendationFormStep = React.createClass(
       </div>
       
       <div className='form-group no-margin mobile-stretch-form-field'>
-        <a className='btn btn-primary btn-block' onClick={this.handleClick}>Go</a>
+        <a className='btn btn-primary btn-block' onClick={this.handleClick}>Review</a>
         <br/>
       </div>
     </div>` 

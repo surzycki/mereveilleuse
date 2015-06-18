@@ -1,3 +1,6 @@
+= content_for :marketing_pixels do
+  = render 'marketing_pixels/facebook_registration'
+
 = form_for(@form, url: search_path, method: :post, html: { class: 'cover' }) do |f|
   .page-transition#page-transition-pages
     .page-transition-page.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
@@ -9,13 +12,13 @@
             .container
               = image_tag 'mobile/logo-badge.jpg', width: '72px', height: '72px'
               %h1.color-light
-                Search for practitioners
-              %h4.color-light
-                Our recomendations are based on blah blah blah
+                Trouver un praticien
+              %h4.color-light{ style: 'padding-top: 8px'}
+                La communauté MèreVeilleuse est basée sur la réciprocité et l’entraide entre mamans.
 
           %footer
             .container
-              = link_to 'Start Searching', '#', class: 'btn btn-primary btn-block btn-outline', id: 'search-start'
+              = link_to 'Effectuez une recherche', '#', class: 'btn btn-primary btn-block btn-outline', id: 'search-start'
               %small.color-light
                 = "#{Recommendation.count} qualified reviews"
          
@@ -26,7 +29,7 @@
             .form-group.no-margin.mobile-stretch-form-field
               %br
               %h3.color-light
-                Do a search
+                Trouver un praticien
   
             .form-group.no-margin.mobile-stretch-form-field
               = f.collection_select(:profession_id, Profession.indexed.order(name: :asc), :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
