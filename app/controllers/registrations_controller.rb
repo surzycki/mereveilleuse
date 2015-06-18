@@ -1,6 +1,8 @@
 class RegistrationsController < ApplicationController
   around_action :catch_exceptions, unless: 'Rails.env.development?'
 
+  
+
   # GET registration/new
   def new
     @form = RecommendationForm.new

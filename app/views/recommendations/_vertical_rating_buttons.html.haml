@@ -5,7 +5,7 @@
       = t("rating.form.#{item}.label")
     %br
 
-  - (0..4).each do |value|
+  - 4.downto(0).each do |value|
     .rating-input.mobile-stretch-form-field.form-group.no-margin
       = radio_button_tag "recommendation_form[#{item}]", value, false
       %label{ for: "recommendation_form_#{item}_#{value}" }

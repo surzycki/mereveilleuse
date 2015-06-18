@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   
   mount Sidekiq::Web, at: '/admin/sidekiq'
   
+  # unbounce landing page
+  get 'sinscrire',                      to: 'landings#unbounce'
+
   # registrations
   get 'registration/invite',            to: 'registrations#invite',       as: 'registration_invite' 
   get 'registration/identity',          to: 'registrations#identity',     as: 'registration_identity'

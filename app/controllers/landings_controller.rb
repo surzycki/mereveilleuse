@@ -2,6 +2,10 @@ class LandingsController < ApplicationController
   around_action :catch_exceptions, unless: 'Rails.env.development?'
   before_action :redirect_authenticated_user_to_search!
 
+  # GET /sinscrire
+  def unbounce
+  end
+
   # GET /
   def index
     respond_to do |format|
