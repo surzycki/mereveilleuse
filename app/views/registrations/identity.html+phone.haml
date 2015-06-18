@@ -2,18 +2,25 @@
   .page-transition-page.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
     %section.cover.text-center.background-light
       .mobile-stretch-page 
-        .height-20-percent
+        .height-15-percent
         .flex-item-push.container
-          %h2 Certificate of Authenticity
-          %p{style: 'padding: 14px 14px'}
-            By connecting with facebook we can ensure you are real person leaving a real review.  We work hard to ensure the highest quality of recommedations for our club memebers.
+          %h2 
+            Garantie 100% 
+            %br
+            vraies mamans
           
+          %h4{style: 'padding: 14px 10px; font-weight: 300; line-height: 1.4'}
+            Grace à l'utilisation de Facebook, Méreveilleuse peux vour garantir que les mamans qui participent à notre site sont de vraies mamans. 
+            %br
+            %br
+            Connectez-vous avec Facebook
+            
         .container.height-30-percent
           = link_to "/auth/facebook?registration_type=#{@registration_type}", class: 'btn btn-social btn-facebook', id: 'registration-signature' do
             %i.icon-facebook  
             Facebook Connect
           %div
-            %small
-              We only use facebook to verify your identity
+            %small{ style: 'line-height: 14px !important'}
+              Nous n'utiliserons aucunes de vos données personnelles. 
           
             

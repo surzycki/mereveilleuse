@@ -4,11 +4,11 @@
     .panel-body
       .form-group.has-feedback
         = f.label :practitioner_name, t('recommendation.form.practitioner_name.label')
-        = react_component( 'PractitionerAutocomplete', field: f.text_field(:practitioner_name, class: 'form-control', placeholder: t('recommendation.form.practitioner_name.placeholder')) )
+        = react_component( 'PractitionerAutocomplete', className: 'form-control', name: 'recommendation_form[practitioner_name]', id: 'recommendation_form_practitioner_name', placeholder: 'Nom du professionnel')
         
       .form-group.has-feedback
         = f.label :profession_name, t('recommendation.form.profession.label')
-        = react_component( 'ProfessionAutocomplete', field: f.text_field(:profession_name, class: 'form-control', placeholder: t('recommendation.form.profession.placeholder')) )
+        = react_component( 'ProfessionAutocomplete', className: 'form-control', name: 'recommendation_form[profession_name]', id: 'recommendation_form_profession_name', placeholder: 'La profession')
            
       .form-group.has-feedback
         = f.label :patient_type_id, t('recommendation.form.patient_type.label')
@@ -17,7 +17,7 @@
 
       .form-group.has-feedback
         = f.label :address, t('recommendation.form.address.label')
-        = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('recommendation.form.address.placeholder')))
+        = react_component( 'AddressAutocomplete', className: 'form-control', name: 'recommendation_form[address]', id: 'recommendation_form_address', placeholder: "Renseignez l'adresse")
     
   .panel.panel-default  
     .panel-body

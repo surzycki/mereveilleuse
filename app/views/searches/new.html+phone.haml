@@ -12,7 +12,9 @@
             .container
               = image_tag 'mobile/logo-badge.jpg', width: '72px', height: '72px'
               %h1.color-light
-                Trouver un praticien
+                Trouver 
+                %br
+                un praticien
               %h4.color-light{ style: 'padding-top: 8px'}
                 La communauté MèreVeilleuse est basée sur la réciprocité et l’entraide entre mamans.
 
@@ -20,7 +22,7 @@
             .container
               = link_to 'Effectuez une recherche', '#', class: 'btn btn-primary btn-block btn-outline', id: 'search-start'
               %small.color-light
-                = "#{Recommendation.count} qualified reviews"
+                = "#{Recommendation.count} recommandations"
          
     .page-transition-page.page-1{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center
@@ -29,16 +31,16 @@
             .form-group.no-margin.mobile-stretch-form-field
               %br
               %h3.color-light
-                Trouver un praticien
+                Trouvez un praticien
   
             .form-group.no-margin.mobile-stretch-form-field
-              = f.collection_select(:profession_id, Profession.indexed.order(name: :asc), :id, :name, { include_blank: t('search.form.profession.placeholder') }, class: 'form-control' )
+              = f.collection_select(:profession_id, Profession.indexed.order(name: :asc), :id, :name, { include_blank: 'Spécialité' }, class: 'form-control' )
             
             .form-group.no-margin.mobile-stretch-form-field 
-              = f.collection_select(:patient_type_id, PatientType.order(id: :asc), :id, :name, { include_blank: t('search.form.patient_type.placeholder') }, class: 'form-control' )
+              = f.collection_select(:patient_type_id, PatientType.order(id: :asc), :id, :name, { include_blank: 'Pour maman ? Pour bébé ?' }, class: 'form-control' )
             
             .form-group.no-margin.mobile-stretch-form-field
-              = react_component('AddressAutocomplete', className: 'form-control', name: 'search_form[address]', id: 'search_form_address', placeholder: t('search.form.address.placeholder') )
+              = react_component('AddressAutocomplete', className: 'form-control', name: 'search_form[address]', id: 'search_form_address', placeholder: 'Adresse' )
             
             .form-group.no-margin.mobile-stretch-form-field
               = f.submit t('search.form.submit'), class: 'btn btn-primary btn-block', id: 'search-commit'

@@ -50,27 +50,27 @@ root.RecommendationFormStep = React.createClass(
     `<div className='mobile-stretch-form'>
       <div className='form-group no-margin mobile-stretch-form-field'>
         <br/>
-        <h3 className='color-light'>Practitioner Information</h3>
+        <h3 className='color-light'>Praticien de santé</h3>
       </div>
 
       <div className={patient_type_classes}>
-        <PatientTypeSelect ref='patient_type' className='form-control' name='recommendation_form[patient_type_id]' id='recommendation_form_patient_type_id' placeholder='Précisez pour qui'>{this.props.patient_types}</PatientTypeSelect>
+        <PatientTypeSelect ref='patient_type' className='form-control' name='recommendation_form[patient_type_id]' id='recommendation_form_patient_type_id' placeholder='Pour maman ? Pour bébé ?'>{this.props.patient_types}</PatientTypeSelect>
       </div>
 
       <div className={practitioner_classes}>
-        <PractitionerAutocomplete ref='practitioner' className='form-control' name='recommendation_form[practitioner_name]' id='recommendation_form_practitioner_name' placeholder='Nom du professionnel'></PractitionerAutocomplete>
+        <PractitionerAutocomplete ref='practitioner' className='form-control' name='recommendation_form[practitioner_name]' id='recommendation_form_practitioner_name' placeholder='Nom du praticien'></PractitionerAutocomplete>
       </div>
 
       <div className={profession_classes}>
-        <ProfessionAutocomplete ref='profession' className='form-control' name='recommendation_form[profession_name]' id='recommendation_form_profession_name' placeholder='La profession'></ProfessionAutocomplete>
+        <ProfessionAutocomplete ref='profession' className='form-control' name='recommendation_form[profession_name]' id='recommendation_form_profession_name' placeholder='Spécialité'></ProfessionAutocomplete>
       </div>
 
       <div className={address_classes}>
-        <AddressAutocomplete ref='address' className='form-control' name='recommendation_form[address]' id='recommendation_form_address' placeholder="Renseignez l'adresse"></AddressAutocomplete>
+        <AddressAutocomplete ref='address' className='form-control' name='recommendation_form[address]' id='recommendation_form_address' placeholder="Adresse"></AddressAutocomplete>
       </div>
       
       <div className='form-group no-margin mobile-stretch-form-field'>
-        <a className='btn btn-primary btn-block' onClick={this.handleClick}>Review</a>
+        <a className='btn btn-primary btn-block' onClick={this.handleClick}>Donner mon avis</a>
         <br/>
       </div>
     </div>` 
