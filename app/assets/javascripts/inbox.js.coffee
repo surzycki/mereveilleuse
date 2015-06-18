@@ -16,8 +16,10 @@ $ ->
 
   # setup form submission for reccomendation
   $('body').on 'click', '#recommendation-commit', (e) ->
+    PubSub.publish( 'mixpanel:sdk:track:event', 'activation:recommend' )
     $('#recommendation_form').attr('action',$('#recommendation_form').data('action'))
     $('#recommendation_form').submit()
+
 
   # allow smooth transitions between page loads
   $('#main').smoothState(
@@ -45,9 +47,6 @@ $ ->
     onAfter: (container, newContent) ->
       # clean up and re-init
       container.removeClass('scaleUp')
-      #$('#new_recommendation_form').swipe swipe: (event, direction, distance, duration, fingerCount, fingerData) ->
-      #  if (direction == 'up')
-      #    $('#page-transition-pages').pageTransitions('previousPage')
   )
 
   

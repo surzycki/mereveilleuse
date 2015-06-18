@@ -6,9 +6,11 @@ class IdentitiesController < ApplicationController
     
     @form = RegistrationForm.new registration_params
   
+
     registration_service.on :user_created do |user, registration_type|
       # has user signed up by recommending or by inviting
-      if registration_type == 'recommendation'
+      
+      if (registration_type == 'recommendation') || recommendation
         user.recommendations << recommendation
       else
         user.update(has_invited: true)
@@ -43,7 +45,7 @@ class IdentitiesController < ApplicationController
   end
 
   def registration_type
-    request.env['omniauth.params']['type']
+    request.env['omniauth.params']['registration_type']
   end
 
   def registration_service
