@@ -4,7 +4,7 @@ class LandingsController < ApplicationController
 
   # POST /
   def canvas
-    redirect_to root_path
+    render :index, layout: 'application_only_footer'
   end
 
   # GET /sinscrire
