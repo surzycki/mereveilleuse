@@ -4,7 +4,7 @@ class LandingsController < ApplicationController
 
   # POST /
   def canvas
-    render :index
+    redirect_to root_path
   end
 
   # GET /sinscrire
