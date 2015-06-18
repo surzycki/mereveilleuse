@@ -47,8 +47,11 @@ Rails.application.routes.draw do
   match '/500', to: 'errors#internal_server_error', via: :all, as: :internal_server_error
 
   # ping for capistrano deploy
-  get 'ping', to: proc { [200, {}, []] }
+  get 'ping',   to: proc { [200, {}, []] }
 
+  # post for canvas
+  post '/',     to: 'landings#canvas'
+  
   root 'landings#index'
 end
 
