@@ -23,7 +23,7 @@ root.MixpanelAPI = React.createClass(
     PubSub.subscribe( 'facebook:sdk:status:changed', this._handleStatusChanged )
     PubSub.subscribe( 'facebook:sdk:status:login', this._handleStatusLogin )
     PubSub.subscribe( 'mixpanel:sdk:track:event', this._handleMixpanelEvents )
-    mixpanel.track_forms('#new_recommendation_form', 'activation:recommend')
+    mixpanel.track_forms('#recommendation_form', 'activation:recommend')
     mixpanel.track_forms('#new_search_form','activation:search')
 
 

@@ -20,8 +20,8 @@
           
               .form-group
                 = f.label :address, t('search.form.address.label')
-                = react_component( 'AddressAutocomplete', field: f.text_field(:address, class: 'form-control', placeholder: t('search.form.address.placeholder')))
-               
+                = react_component( 'AddressAutocomplete', className: 'form-control', name: 'search_form[address]', id: 'search_form_address', placeholder: "Renseignez l'adresse")
+                
               .form-group
                 = f.label :information, t('search.form.information.label')
                 = f.text_area :information, class: 'form-control', rows: 8

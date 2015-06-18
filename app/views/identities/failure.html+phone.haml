@@ -1,13 +1,25 @@
 .page-transition#page-transition-pages
-  .page-transition-page.page-3.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
-    %section.cover.text-center
-      .container
-        .row
-          .col-sm-12
-            %h2
-              Sorry you must accept the permissions to sign
-           
-            %p
-              = link_to 'Sign', registration_identity_path, class: 'btn btn-primary'
-  
-            
+  .page-transition-page.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+    %section.cover.text-center.background-light
+      .mobile-stretch-page 
+        .height-15-percent
+        .flex-item-push.container
+          %h2 
+            Garantie 100% 
+            %br
+            vraies mamans   
+
+          %h4{style: 'padding: 14px 10px; font-weight: 300; line-height: 1.4'}
+            Grace à l'utilisation de Facebook, Méreveilleuse peux vous garantir que les mamans qui participent à notre site sont de vraies mamans. 
+            %br
+            %br
+            %b
+              Rien n’apparaitra pas sur votre mur personnel  
+
+        .container.height-30-percent
+          = link_to "/auth/facebook?registration_type=#{@registration_type}", class: 'btn btn-social btn-facebook', id: 'registration-signature' do
+            %i.icon-facebook  
+            Facebook Connect
+          %div
+            %small{ style: 'line-height: 14px !important; font-weight: 800'}
+              Nous n'utiliserons aucune de vos données personnelles.        

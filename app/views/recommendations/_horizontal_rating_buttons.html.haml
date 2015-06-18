@@ -1,0 +1,9 @@
+.text-left= f.label item, t("rating.form.#{item}.label")
+
+- (0..4).each do |value|
+  .rating-input.rating-input-horizontal
+    = f.radio_button item, value
+    %label{ for: "#{f.object_name}_#{item}_#{value}"}
+      %span{ class: "rating-#{value}"}
+
+.space-xs-10

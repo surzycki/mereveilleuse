@@ -68,3 +68,7 @@ parent: components
 
   @include rating-values();
 }
+
+.rating-input-horizontal {
+  display: inline-block;
+}

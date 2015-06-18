@@ -1,0 +1,26 @@
+%section
+  = render 'navs/submenu', active: 'recommendation'
+
+  .container-fluid
+    .row  
+      .col-sm-8.col-sm-offset-2
+        .space-sm-40
+
+        .panel.panel-default
+          .panel-body
+            %h3 
+              Garantie 100% vraies mamans
+            %h4
+              Grace à l'utilisation de Facebook, Méreveilleuse peux vous garantir que les mamans qui participent à notre site sont de vraies mamans. 
+              %br
+              %br
+              %b
+                Rien n’apparaitra pas sur votre mur personnel
+
+            %br
+            = link_to "/auth/facebook?registration_type=#{@registration_type}", class: 'btn btn-social btn-facebook', id: 'registration-signature' do
+              %i.icon-facebook  
+              Facebook Connect
+            %div
+              %small{ style: 'line-height: 14px !important; font-weight: 800'}
+                Nous n'utiliserons aucune de vos données personnelles.

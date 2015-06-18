@@ -27,6 +27,7 @@ class RegistrationsController < ApplicationController
 
   # POST /registration
   def create
+    
     @form = RecommendationForm.new registration_params
 
     # recommendations (practitioners) are not geocoded by default to lessen
