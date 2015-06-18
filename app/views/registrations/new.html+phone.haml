@@ -7,18 +7,18 @@
           %header.color-light.flex-item-push
             .attention
               %h1.attention-header
-                Aide une maman 
+                Aide une maman et 
               %h1.attention-header
-                une maman t'adiera
+                une maman t'aidera
               
               .attention-body
-                Who better than a mother that can recommend the good addresses in the neighboorhood
+                En laissant une recommandation, vous accédez à l'ensemble du club et vous aidez les mamans
           
           %footer
             .container  
-              = link_to 'Go', '#', class: 'btn btn-primary btn-block', id: 'registration-influencer-next'
+              = link_to 'Je suis prête à aider', '#', class: 'btn btn-primary btn-block', id: 'registration-influencer-next'
             %small.color-light
-              = link_to 'Go Back', root_path, id: 'registration-back'
+              = link_to 'Non, pas encore. Invitez une maman', registration_invite_path, id: 'registration-back'
 
     .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center    

@@ -6,22 +6,24 @@
         %header.color-light.flex-item-push
           .attention
             %h1.attention-header
-              Je connais mamans 
+              Mes amies  
             %h1.attention-header
-              ont des plans
+              auraient besoin de
+            %h1.attention-header
+              MèreVeilleuse
             .attention-body
-              Mary had a little lamb little lamb little lamb
+              J'aide mes amies à trouver les meilleures adresses santé en leur faisant connaître MèreVeilleuse
 
         %footer
           .container 
             = react_component('FacebookInviteButton', 
                 app_id: ENV['FACEBOOK_APP_ID'],
-                value: 'Invite bitch',
-                message: 'Hello come',
+                value: 'Invitez une maman',
+                message: "J'aide mes amies à trouver les meilleures adresses santé en leur faisant connaître MèreVeilleuse",
                 class: 'btn btn-primary btn-block',
                 redirect: registration_identity_path(registration_type: 'invite'))
 
           %small.color-light
-            = link_to 'Go Back', root_path, id: 'registration-back'
+            = link_to "Non, pas encore. J'ai une recommandation", new_registration_path, id: 'registration-back'
 
     

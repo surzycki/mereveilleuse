@@ -8,18 +8,18 @@
           .container
             = image_tag 'mobile/logo-badge.jpg', width: '72px', height: '72px'
             %h1.color-light
-              Les bons plans santé 
+              Les bonnes adresses 
               %br
-              entre mamans
+              santé entre maman
             
             %h4.color-light
               The only club where you get personalized word of mouth recommendations from trusted mothers in your area .
   
         %footer
           .container
-            = link_to 'Start', '#', class: 'btn btn-primary btn-block btn-outline', id: 'registration-start'
+            = link_to 'Rejoindre le Club', '#', class: 'btn btn-primary btn-block btn-outline', id: 'registration-start'
             %small.color-light
-              2090 mamans a déja like Mereveilleuse
+              3005 mamans a déja like Mereveilleuse
           
 
   .page-transition-page{ data: { animation: 'flipLeft' } }
@@ -31,9 +31,11 @@
               = link_to new_registration_path, class: 'btn btn-primary btn-round', id: 'registration-influencer' do
                 = image_tag 'mobile/icon-join-influencer.png', width: '100px', height: '100px'
               %h3
-                I am an influencer
+                J'ai une recommandation
               %p
-                I already know a good practitioner that I am ready to share with the Club
+                Je connais un bon professionnel 
+                %br 
+                je partage mon avis
         
   
         .mobile-stretch-content.height-50-percent.background-light
@@ -43,6 +45,8 @@
                 = image_tag 'mobile/icon-join-known-influencer.png', width: '100px', height: '100px'
           
               %h3
-                I know influencers
+                J'invite une maman
               %p
-                I know people who seems to always have the good addresses and are 
+                Je connais des mamans qui seront
+                %br
+                intéressées par MèreVeilleuse
