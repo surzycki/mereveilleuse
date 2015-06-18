@@ -70,7 +70,7 @@ root.RecommendationFormStep = React.createClass(
       </div>
       
       <div className='form-group no-margin mobile-stretch-form-field'>
-        <a className='btn btn-primary btn-block btn-outline' onClick={this.handleClick}>Go</a>
+        <a className='btn btn-primary btn-block' onClick={this.handleClick}>Go</a>
         <br/>
       </div>
     </div>` 

@@ -1,19 +1,27 @@
 .page-transition#page-transition-pages
-  .page-transition-page.page-5.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
-    %section.cover.text-center
-      .container
-        .row
-          .col-sm-12
-            %h2
-              Je connais mamans qui on des bons plans
-            %p
-              Invite
+  .page-transition-page.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+    %section.cover.text-center.cover-mobile-invite
+      .mobile-stretch-page  
+        .height-10-percent
+        %header.color-light.flex-item-push
+          .attention
+            %h1.attention-header
+              Je connais mamans 
+            %h1.attention-header
+              ont des plans
+            .attention-body
+              Mary had a little lamb little lamb little lamb
+
+        %footer
+          .container 
             = react_component('FacebookInviteButton', 
                 app_id: ENV['FACEBOOK_APP_ID'],
                 value: 'Invite bitch',
                 message: 'Hello come',
-                class: 'btn btn-primary',
+                class: 'btn btn-primary btn-block',
                 redirect: registration_identity_path(registration_type: 'invite'))
-            
-            %p
-              = link_to 'Go Back', root_path, class: 'btn btn-primary', id: 'registration-back'
+
+          %small.color-light
+            = link_to 'Go Back', root_path, id: 'registration-back'
+
+    

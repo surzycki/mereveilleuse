@@ -20,6 +20,10 @@ input, select, textarea {
   }
 }
 
+i {
+  font-style: normal;
+}
+
 .container {
   padding: 0 6px;
 }
@@ -106,6 +110,14 @@ input, select, textarea {
 
 .cover-mobile-recommendation {
   @include background-image(image-url('mobile/background-recommendation.jpg')); 
+}
+
+.cover-mobile-invite {
+  @include background-image(image-url('mobile/background-invite.jpg')); 
+}
+
+.cover-mobile-search {
+  @include background-image(image-url('mobile/background-search.jpg')); 
 }
 
 .page-1 {

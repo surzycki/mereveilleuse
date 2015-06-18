@@ -3,7 +3,7 @@
     %br
     %h3.color-light
       = t("rating.form.#{item}.label")
-
+    %br
 
   - (0..4).each do |value|
     .rating-input.mobile-stretch-form-field.form-group.no-margin
@@ -12,5 +12,5 @@
         %span{ class: "rating-#{value}"}
         %span{ class: "rating-#{value}-preload"}
 
-  .form-group.no-margin.mobile-stretch-form-field.height-10-percent
+  .form-group.no-margin.mobile-stretch-form-field.height-5-percent
     &nbsp;

@@ -1,13 +1,17 @@
 .page-transition#page-transition-pages
   .page-transition-page.page-3.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
     %section.cover.text-center
-      .container
-        .row
-          .col-sm-12
-            %h2
-              Results
-            %p 
-              blah bla
+      .mobile-stretch-page 
+        .height-20-percent
+        .flex-item-push
+          %h2.color-light 
+            Results Sent
+          %p.color-light
+            Loreum ipsum blurg domimsum et alimu
 
-            %p
-              = link_to 'Do another search', new_search_path, class: 'btn btn-primary'
+        .container.height-30-percent
+          = link_to 'Do another search', new_search_path, class: 'btn btn-primary', id: 'search-commit'
+          %div
+            %small.color-light
+              We don't do sketchy shit
+        

@@ -6,20 +6,13 @@ class RegistrationForm
   validates :provider, :uid, :info, presence: true 
 
   def user
-    @user ||= User.new({
-      facebook_id:   uid,
-      firstname:     info.try(:first_name),
-      lastname:      info.try(:last_name),
-      email:         info.try(:email),
-      profile_image: info.try(:image),
-      verified:      info.try(:verified),
-      friend_count:  friend_count
-    })
+    @user ||= User.find_by(facebook_id: uid) || create_user
   end
   
   def process   
     if self.valid?
-      update_address
+      update_user_data
+      user.registered!
       user.save
     else
       false
@@ -32,10 +25,24 @@ class RegistrationForm
 
   private
   # isolate update of address in case address not found error.  
-  def update_address
+  def update_user_data
     user.update(
-      address: info.location
+      address: info.location,
+      profile_image: info.try(:image),
+      friend_count:  friend_count
     )
   rescue NameError => error
+  end
+
+  def create_user
+    User.new({
+      facebook_id:   uid,
+      firstname:     info.try(:first_name),
+      lastname:      info.try(:last_name),
+      email:         info.try(:email),
+      profile_image: info.try(:image),
+      verified:      info.try(:verified),
+      friend_count:  friend_count
+    })
   end
 end

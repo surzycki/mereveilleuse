@@ -22,7 +22,7 @@ $ ->
   # allow smooth transitions between page loads
   $('#main').smoothState(
     prefetch: false
-    anchors: '#registration-influencer, #registration-know-influencer, #registration-back'
+    anchors: '#registration-influencer, #registration-know-influencer, #registration-back, #search-commit'
 
     onStart: 
       duration: 700

@@ -1,6 +1,6 @@
 %form.cover#recommendation_form{ method: :post, 'accept-charset' => 'UTF-8', 'data-action' => registration_path }
   .page-transition#page-transition-pages
-    .page-transition-page{ data: { animation: 'pushBottomPullTop' } }
+    .page-transition-page.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center.cover-mobile-recommendation
         .mobile-stretch-page  
           .height-10-percent
@@ -24,7 +24,7 @@
       %section.cover.text-center    
         = react_component('RecommendationFormStep', { patient_types: PatientType.order(id: :asc).map {|p| [ p.name, p.id ] }.to_json }, { class: 'container height-100-percent' })
          
-    .page-transition-page.page-6{ data: { animation: 'pushBottomPullTop' } }
+    .page-transition-page.page-3{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center
         = render 'recommendations/rating_buttons', item: 'wait_time'          
 
@@ -36,25 +36,26 @@
       %section.cover.text-center
         = render 'recommendations/rating_buttons', item: 'bedside_manner'    
 
-    .page-transition-page.page-3{ data: { animation: 'pushBottomPullTop' } }
+    .page-transition-page.page-6{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center
         = render 'recommendations/rating_buttons', item: 'efficacy'
 
-    .page-transition-page.page-4.page-transition-page-current{ data: { animation: 'pushBottomPullTop' } }
+    .page-transition-page.page-4{ data: { animation: 'pushBottomPullTop' } }
       %section.cover.text-center
-        .container
-          .mobile-stretch-form
-            .mobile-stretch-form-field.form-group.no-margin
-              %br
-              %h3.color-light
-                = t('rating.form.comments.label')    
+        .container.height-100-percent
+          .mobile-stretch-page 
+            %br
+            %h3.color-light= t('rating.form.comments.label')
+            %br
             
-            .mobile-stretch-form-field.form-group.no-margin
-              = text_area_tag 'recommendation_form_comment', nil, class: 'form-control', style: 'height: 60vh;'
-            
-            .mobile-stretch-form-field.form-group.no-margin
+            .flex-item-push.form-group.no-margin.height-100-percent
+              = text_area_tag 'recommendation_form_comment', nil, class: 'form-control height-70-percent', rows: '8'
+              
+            .form-group.no-margin
               = link_to 'Next', '#', class: 'btn btn-primary btn-block', id: 'recommendation-commit'  
+              %br
 
+             
 
 
 

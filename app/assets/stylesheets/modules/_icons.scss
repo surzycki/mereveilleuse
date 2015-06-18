@@ -135,3 +135,11 @@ category: icons
   }  
 }
 
+.icon-facebook {
+  @extend %icon-fontawesome;
+  
+  &:before {
+    content: '\f09a';
+  }
+}
+

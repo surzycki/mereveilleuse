@@ -203,7 +203,7 @@ Available helpers for: `mobile` `tablet` `devices` `desktop`
 
 @mixin height-percent-helper() {
   @for $i from 1 through 20 {
-    .height-#{$i * 5}-percent { height: #{$i * 5%}; }
+    .height-#{$i * 5}-percent { height: #{$i * 5%} !important; }
   }
 }
 
