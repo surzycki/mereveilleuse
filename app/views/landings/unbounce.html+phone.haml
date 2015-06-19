@@ -4,21 +4,23 @@
       .height-10-percent
       %header.color-light.flex-item-push
         .attention
-          %h1.attention-header
-            Aidez une maman
-          %h1.attention-header
-            et une maman
-          %h1.attention-header
-            vous aidera
+          %h1.attention-header.text-center{style: 'font-size: 20px'}
+            Accédez aux avis, notes et coordonnées 
+            de plus de 3000 professionnels de santé
+            recommandés par des mamans 
+
           
-          .attention-body
-            En laissant une recommandation ou en invitant
-            une autre maman, vous accéderez à l’ensemble
-            des services de la communauté et vous aidez
-            toutes les autres maman du Club ;-)
-            
-      
+          .attention-body.text-center{style: 'font-size: 12px; line-height: 18px;'}
+            Inscrivez vous gratuitement 
+            en partageant l’adresse
+            de votre professionnel de santé préféré 
+            (médecin, dentiste, gynéco, pédiatre, ostéo…)
+            %br
+            OU
+            %br
+            Invitez une amie
+
       %footer
         .container  
-          = link_to 'Je suis prête à aider', new_registration_path, class: 'btn btn-primary btn-block', id: 'new_registration'
+          = link_to "S’inscrire", new_registration_path, class: 'btn btn-primary btn-block', id: 'new_registration'
           %br

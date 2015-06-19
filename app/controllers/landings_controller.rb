@@ -9,6 +9,12 @@ class LandingsController < ApplicationController
 
   # GET /sinscrire
   def unbounce
+    respond_to do |format|
+      format.html do |html|
+        html.any    { render :index, layout: 'application_only_footer' }
+        html.phone  { render layout: 'application' } 
+      end
+    end
   end
 
   # GET /
