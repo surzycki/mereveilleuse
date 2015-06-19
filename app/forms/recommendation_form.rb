@@ -43,6 +43,7 @@ class RecommendationForm
 
   private
   def update_practitioner
+    
     # TODO add hash property to practitioner
     input_practitioner  = Digest::MD5.hexdigest("#{practitioner_name}-#{profession.id}-#{address}") 
     actual_practitioner = Digest::MD5.hexdigest("#{practitioner.fullname}-#{practitioner.primary_occupation.profession_id}-#{practitioner.address}")

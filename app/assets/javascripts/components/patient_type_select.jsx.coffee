@@ -2,15 +2,24 @@ root = exports ? this
 
 root.PatientTypeSelect = React.createClass(
   getInitialState: ->
-    value: ''
+    value: null
 
   handleChange: (event) ->
     this.setState(
       value: event.target.value
     )
 
+    this.props.className = this.props.className + ' ' + 'black'
+
   render: ->
-    `<select className={ this.props.className } name={ this.props.name } id={ this.props.id } onChange={this.handleChange} value={this.state.value}>
+    cx  = React.addons.classSet
+    classes = cx(
+      'form-control': true
+      'black': @state.value
+    )
+
+
+    `<select className={classes} name={ this.props.name } id={ this.props.id } onChange={this.handleChange} value={this.state.value}>
       <option value="">{this.props.placeholder}</option>
       {this.options()}
     </select>`

@@ -24,6 +24,8 @@
     - unless Rails.env.test?
       = react_component( 'FacebookSDK', app_id: ENV['FACEBOOK_APP_ID'] )
       = react_component( 'FacebookCanvasLogin', facebook_canvas: ENV['FACEBOOK_CANVAS'], facebook_permissions_dialog: @requesting_authentication )
+    
+    - if Rails.env.production?  
       = react_component( 'MixpanelAPI' )
     
     = render 'shared/flash'

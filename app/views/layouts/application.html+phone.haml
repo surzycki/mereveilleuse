@@ -18,7 +18,7 @@
     = render 'shared/analytics' 
     
   %body
-    - unless Rails.env.test?
+    - if Rails.env.production?
       = react_component( 'MixpanelAPI' )
       
     #main

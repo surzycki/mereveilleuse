@@ -6,6 +6,15 @@ html, body, #main {
 select {
   font-size: 20px !important;
   -webkit-appearance: none;
+
+}
+
+select.form-control {
+  color: $muted-color  !important;
+}
+
+select.form-control.black {
+  color: $dark-color !important;
 }
 
 textarea {
@@ -33,9 +42,10 @@ i {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: $muted-color !important;
+  color: $dark-color !important;
   @include transition(none)
   
+ 
 }
 
 .form-group.validation-error input, .form-group.validation-error select {
