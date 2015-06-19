@@ -3,13 +3,10 @@ class IdentitiesController < ApplicationController
   
   # GET /auth/:provider/callback
   def create
-    
     @form = RegistrationForm.new registration_params
   
-
     registration_service.on :user_created do |user, registration_type|
       # has user signed up by recommending or by inviting
-      
       if (registration_type == 'recommendation') || recommendation
         user.recommendations << recommendation
       else

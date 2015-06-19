@@ -18,16 +18,11 @@ class SlackNotifierListener
   end
 
   def recommendation_created(recommendation)
-    return if recommendation.nil? || recommendation.recommender.nil?
+    return if recommendation.nil?
 
-    recommender  = recommendation.recommender
     practitioner = recommendation.practitioner
     
-    message = if recommender.recommendations.count <= 1
-      "*#{recommender.fullname} signed up* by recommending *#{practitioner.fullname}*"
-    else
-      "*#{recommender.fullname}* recommended *#{practitioner.fullname}*"
-    end
+    message = "*#{practitioner.fullname}* has been recommended"
 
     send_notification message
   end
@@ -36,6 +31,22 @@ class SlackNotifierListener
     return if errors.nil?
 
     send_notification(errors.full_messages.join(', '))
+  end
+
+  def user_created(user, registration_type)
+    return if user.nil?
+
+    message = "*#{user.fullname}* has signed up"
+
+    send_notification message
+  end
+
+  def user_create_fail(errors)
+    return if errors.nil?
+
+    message = "user create failed #{errors.full_messages.join(', ')}"
+
+    send_notification(message)
   end
 
   def search_success(results, search)
