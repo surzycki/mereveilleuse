@@ -27,6 +27,7 @@ root.FacebookInviteButton = React.createClass(
   _onResponse: (response) ->
     if response.request
       PubSub.publish( 'mixpanel:sdk:track:event', 'recommendation:invite:sent' )
+      ga('send', 'event', 'activation', 'invite')
 
     # if we sent items AND there is a redirect url, lets go!
     if this.props.redirect && response.request
