@@ -1,5 +1,3 @@
-= yield :marketing_pixels
-
 - if Rails.env.production?
   :javascript
     <!-- start Mixpanel -->
@@ -38,4 +36,5 @@
     if (window.attachEvent) window.attachEvent('onload', __ldinsp);
     else window.addEventListener('load', __ldinsp, false);
     })();
-    
+
+= yield :marketing_pixels   
